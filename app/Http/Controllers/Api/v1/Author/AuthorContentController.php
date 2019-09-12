@@ -48,14 +48,7 @@ class AuthorContentController extends Controller
         $filename = $file_base .'.'.$ext;
         $path = $request->file('file')->storeAs('uploads', $filename, 'tmpStorage');
      
-        // if job fails, remove the content
-        if(setting('site.encode_videos')){
-            ConvertVideoForStreaming::dispatch($content, $filename);
-        } else {
-            UploadVideo::dispatch($filename);
-            //$this->dispatch(new UploadVideo($filename));
-        }
-
+        
         $content = $this->contents->createVideoContent([
             'content_type' => 'video',
             'video_filename' => $filename,
@@ -64,6 +57,13 @@ class AuthorContentController extends Controller
             'video_src' => 'upload',
             'video_storage' => config('site_settings.video_upload_location')   
         ], $id);
+
+        // if job fails, remove the content
+        if(setting('site.encode_videos')){
+            ConvertVideoForStreaming::dispatch($content);
+        } else {
+            UploadVideo::dispatch($filename);
+        }
         
         return new ContentResource($content);
         

@@ -18,17 +18,17 @@ class ConvertVideoForStreaming implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $filename;
-    public $content;
+    //public $filename;
+    public $video;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Content $content, $filename)
+    public function __construct(Content $content)
     {
-        $this->content = $content;
-        $this->filename = $filename;
+        $this->video = $content;
+        //$this->filename = $filename; // eg 
     }
 
     /**
@@ -38,30 +38,33 @@ class ConvertVideoForStreaming implements ShouldQueue
      */
     public function handle()
     {
+        $disk = setting('site.video_upload_location') == 'local' ? 'server' : $storage_location; // either local server or s3 or other cloud;
+        $tmp_file = storage_path() . '/uploads/' . $this->video->video_filename;
+        $tmp_disk = 'tmpVideo';
         // create a video format...
         $lowBitrateFormat = (new X264('libmp3lame', 'libx264'))->setKiloBitrate(500);
-        $converted_name = $this->getCleanFileName($this->video->path);
+        $converted_name = $this->getCleanFileName($this->video->video_filename);
+
 
         // open the uploaded video from the right disk...
-        FFMpeg::fromDisk($this->video->disk)
-            ->open($this->video->path)
+        FFMpeg::fromDisk($tmp_disk)
+            ->open($this->video->video_filename)
             // add the 'resize' filter...
             ->addFilter(function ($filters) {
                 $filters->resize(new Dimension(960, 540));
             })
-            // call the 'export' method...
             ->export()
             // tell the MediaExporter to which disk and in which format we want to export...
-            ->toDisk('public')
+            ->toDisk($disk)
             ->inFormat($lowBitrateFormat)
-            // call the 'save' method with a filename...
-            ->save($converted_name);
+            ->save('videos/'.$converted_name);
+
         // update the database so we know the convertion is done!
-        $this->video->update([
-            'converted_for_streaming_at' => Carbon::now(),
-            'processed' => true,
-            'stream_path' => $converted_name
-        ]);
+        // $this->video->update([
+        //     'converted_for_streaming_at' => Carbon::now(),
+        //     'processed' => true,
+        //     'stream_path' => $converted_name
+        // ]);
     }
 
 

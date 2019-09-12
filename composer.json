@@ -30,6 +30,7 @@
         "nfunwigabga/laravel-eloquent-join": "dev-master",
         "orangehill/iseed": "^2.6",
         "paypal/rest-api-sdk-php": "^1.14",
+        "pbmedia/laravel-ffmpeg": "^5.0",
         "razorpay/razorpay": "2.*",
         "spatie/laravel-html": "^2.22",
         "spatie/laravel-permission": "^3.0",
