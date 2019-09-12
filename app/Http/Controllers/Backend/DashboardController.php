@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Illuminate\Http\Request;
+use App\Utilities\Updater;
 use App\Http\Controllers\Controller;
 
 /**
@@ -14,6 +16,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('backend.dashboard');
+        //dd(request_ip());
+        $currentVersion = Updater::checkLatestVersion();
+        return view('backend.dashboard', compact('currentVersion'));
     }
+    
 }

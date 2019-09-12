@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use Validator;
 use Carbon\Carbon;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -57,6 +60,8 @@ class AppServiceProvider extends ServiceProvider
             }
         }
 
+        Schema::defaultStringLength(191);
+
         // Force SSL in production
         /*if ($this->app->environment() === 'production') {
             URL::forceScheme('https');
@@ -82,6 +87,21 @@ class AppServiceProvider extends ServiceProvider
          */
         Blade::if('langrtl', function ($session_identifier = 'lang-rtl') {
             return session()->has($session_identifier);
+        });
+
+        Validator::extend('payment_can_be_refunded', function($attribute, $value, $parameters, $validator){
+            $payment = Payment::where('uuid', $value)->first();
+            return $payment->refund_deadline >= Carbon::now('UTC');
+        });
+        Validator::extend('refund_request_does_not_yet_exist', function($attribute, $value, $parameters, $validator){
+            if(!auth()->check()) return false;
+            $payment = Payment::where('uuid', $value)->first();
+            $course = $payment->course;
+            return (bool)auth()->user()->refunds()->where('status', 'open')->where('course_id', $course->id)->count() == 0;
+        });
+        
+        Validator::extend('youtube', function ($attribute, $value, $parameters, $validator) {
+            return (bool) preg_match('/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/',$value);
         });
     }
 }

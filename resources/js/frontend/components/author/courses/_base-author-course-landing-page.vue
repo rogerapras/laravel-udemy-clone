@@ -1,0 +1,181 @@
+<template>
+    <div class="setting-body white-bg-color">
+        <form @submit.prevent="save" @keydown="form.onKeydown($event)">
+            <div class="form-group">
+                <label>{{ trans('strings.course_title') }}</label>
+                <input type="text" v-model="form.title" :class="{ 'is-invalid': form.errors.has('title') }" class="form-control rounded-0 font-14 fw-300 form-control-lg">
+                <has-error :form="form" field="title"/>
+            </div>
+                
+            <div class="form-group">
+                <label>{{ trans('strings.course_subtitle') }}</label>
+                <input type="text" v-model="form.subtitle" :class="{ 'is-invalid': form.errors.has('subtitle') }" class="form-control rounded-0 font-14 fw-300 form-control-lg">
+                <has-error :form="form" field="subtitle"/>
+            </div>
+            
+            <div class="form-group">
+                <label>{{ trans('strings.course_description') }}</label>
+                <quill-editor :content="form.description"
+                    :options="editorOption"
+                    @change="onEditorChange($event)">
+                </quill-editor>
+                <has-error :form="form" field="description"/>
+            </div>
+            
+                    
+            <div class="form-row mb-1">
+                <div class="col-md-6">
+                    <label>{{ trans('strings.category') }}</label>
+                    <select class="form-control" v-model="form.category">
+                        <optgroup v-for="category in categories" :key="category.uuid" :label="category.name">
+                            <option v-for="child in category.children" :key="child.uuid" :value="child.id">{{ child.name }}</option>
+                        </optgroup>
+                    </select>
+                    <has-error :form="form" field="category"/>
+                </div>
+                
+                <div class="col-md-6">
+                    <label>{{ trans('strings.level') }}</label>
+                    <select class="form-control"
+                        v-model="form.level">
+                        <option value="all">{{ trans('strings.all') }}</option>
+                        <option value="beginner">{{ trans('strings.beginner') }}</option>
+                        <option value="intermediate">{{ trans('strings.intermediate') }}</option>
+                        <option value="advanced">{{ trans('strings.advanced') }}</option>
+                    </select>
+
+                    <has-error :form="form" field="level"/>
+                </div>
+                
+            </div>
+            
+            <div class="form-row mb-4">
+                <div class="col-md-6">
+                    <label>{{ trans('strings.language') }}</label>
+                    <select class="form-control"
+                        v-model="form.language">
+                        <option value="english">English</option>
+                        <option value="french">French</option>
+                        <option value="spanish">Spanish</option>
+                    </select>
+                    <has-error :form="form" field="language"/>
+                </div>
+                
+                <div class="col-md-6">
+                    <label>{{ trans('strings.topics') }}</label>
+                    <vue-tags-input 
+                        v-model="topic"
+                        :tags="topics"
+                        :max-tags="4"
+                        placeholder="choose topic"
+                        @tags-changed="topicChanged" />
+                </div>
+            </div>
+            
+            <div class="form-group text-right">
+                <base-button :loading="form.busy" class="btn btn-lg btn-danger font-16 fw-500">
+                    {{ trans('strings.save') }}
+                </base-button>
+            </div>
+        </form>
+        
+        
+        <hr />
+
+        <div class="row" v-if="course">
+            <div class="col-md-12">
+                <div class="font-16 fw-600 mb-4">
+                    <h3>{{ trans('strings.course_image') }}</h3>
+                </div>
+            </div>
+            
+            <div class="col-md-5">
+                <inc-course-image-upload :course="course"></inc-course-image-upload>
+            </div>
+            <div class="col-md-7">
+                <p>
+                    {{ trans('strings.image_description') }}
+                </p>
+            </div>
+        </div>
+
+    </div>
+</template>
+
+<script>
+import Form from 'vform'
+import VueTagsInput from '@johmun/vue-tags-input';
+import IncCourseImageUpload from './imports/_course_image_upload'
+export default {
+    props: ['course', 'categories'],
+    components:{
+        IncCourseImageUpload,
+        VueTagsInput
+    },
+    data(){
+        return {
+            uuid: '',
+            loading: true,
+            editorOption: {
+              modules: {
+                toolbar: [
+                  ['bold', 'italic', 'underline'],
+                  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                ],
+                syntax: {
+                  highlight: text => hljs.highlightAuto(text).value
+                }
+              }
+            },
+            topic: '',
+            topics: [],
+            form: new Form({
+                id: '',
+                title: '',
+                subtitle: '',
+                description: '',
+                category: '',
+                level: '',
+                language: '',
+                topics: []
+            })
+        }
+    },
+
+    methods: {
+        onEditorChange({ editor, html, text }) {
+            this.form.description = html
+        },
+
+        topicChanged(topics){
+            this.topics = topics
+            this.form.topics = topics.map(t => t.text)
+        },
+
+        save(){
+            this.form.put(`/api/courses/${this.course.id}`)
+                .then(() => {
+                    console.log("Updated")
+                })
+        }
+    },
+
+    beforeMount(){
+        this.form.keys().forEach(key => {
+            this.form[key] = this.course[key]
+        })
+        this.form.category = this.course.category_id
+        this.topics = this.course.tags.map(t => {
+            return {
+                text: t.name.en,
+                tiClasses:["ti-valid"]
+            }
+        })
+    }
+
+}
+</script>
+
+<style>
+    
+</style>

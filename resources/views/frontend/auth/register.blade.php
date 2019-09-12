@@ -1,114 +1,75 @@
 @extends('frontend.layouts.app')
 
-@section('title', app_name() . ' | ' . __('labels.frontend.auth.register_box_title'))
+@section('title', __('labels.frontend.auth.register_box_title') . ' | ' . app_name())
 
 @section('content')
-    <div class="row justify-content-center align-items-center">
-        <div class="col col-sm-8 align-self-center">
-            <div class="card">
-                <div class="card-header">
-                    <strong>
-                        @lang('labels.frontend.auth.register_box_title')
-                    </strong>
-                </div><!--card-header-->
+<section class="h-75 py-4 my-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-5 mx-auto">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h4 class="text-uppercase fw-500 text-center font-22 mb-4">
+                                @lang('labels.frontend.auth.register_box_title')
+                            </h4>
 
-                <div class="card-body">
-                    {{ html()->form('POST', route('frontend.auth.register.post'))->open() }}
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.first_name'))->for('first_name') }}
+                            <div class="px-4">
+                                {{ html()->form('POST', route('frontend.auth.register.post'))->open() }}
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="username" autocomplete="off" required name="username"
+                                            class="form-control font-16 py-4 form-control-lg" type="text" placeholder=" ">
+                                        <label for="username">@lang('validation.attributes.frontend.username')</label>
+                                    </div>
 
-                                    {{ html()->text('first_name')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.first_name'))
-                                        ->attribute('maxlength', 191)
-                                        ->required()}}
-                                </div><!--col-->
-                            </div><!--row-->
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="first_name" autocomplete="off" required name="first_name"
+                                            class="form-control font-16 py-4 form-control-lg" type="text" placeholder=" ">
+                                        <label for="first_name">@lang('validation.attributes.frontend.first_name')</label>
+                                    </div>
 
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.last_name'))->for('last_name') }}
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="last_name" autocomplete="off" required name="last_name"
+                                            class="form-control font-16 py-4 form-control-lg" type="text" placeholder=" ">
+                                        <label for="last_name">@lang('validation.attributes.frontend.last_name')</label>
+                                    </div>
 
-                                    {{ html()->text('last_name')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.last_name'))
-                                        ->attribute('maxlength', 191)
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="email" autocomplete="off" required name="email"
+                                            class="form-control font-16 py-4 form-control-lg" type="text" placeholder=" ">
+                                        <label for="email">@lang('validation.attributes.frontend.email')</label>
+                                    </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="password" type="password" required name="password" autocomplete="off" required
+                                            class="form-control font-16 py-4 form-control-lg" placeholder=" ">
+                                        <label for="password">@lang('validation.attributes.frontend.password')</label>
+                                    </div>
 
-                                    {{ html()->email('email')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.email'))
-                                        ->attribute('maxlength', 191)
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="password_confirmation" type="password" required name="password_confirmation" autocomplete="off" required name="password_confirmation"
+                                            class="form-control font-16 py-4 form-control-lg" placeholder=" ">
+                                        <label for="email">@lang('validation.attributes.frontend.password_confirmation')</label>
+                                    </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password'))->for('password') }}
+                                    @if(config('access.captcha.registration'))
+                                        <div class="form-label-groupx mb-3 floating-label">
+                                            @captcha
+                                            {{ html()->hidden('captcha_status', 'true') }}
+                                        </div>
+                                    @endif
 
-                                    {{ html()->password('password')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password'))
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password_confirmation'))->for('password_confirmation') }}
-
-                                    {{ html()->password('password_confirmation')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password_confirmation'))
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        @if(config('access.captcha.registration'))
-                            <div class="row">
-                                <div class="col">
-                                    @captcha
-                                    {{ html()->hidden('captcha_status', 'true') }}
-                                </div><!--col-->
-                            </div><!--row-->
-                        @endif
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group mb-0 clearfix">
-                                    {{ form_submit(__('labels.frontend.auth.register_button')) }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-                    {{ html()->form()->close() }}
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="text-center">
-                                @include('frontend.auth.includes.socialite')
+                                    <button type="submit" class="btn btn-primary primery-bg-color btn-block font-16 fw-500 text-uppercase">
+                                        @lang('labels.frontend.auth.register_button')
+                                    </button>
+                                {{ html()->form()->close() }}
                             </div>
-                        </div><!--/ .col -->
-                    </div><!-- / .row -->
-                </div><!-- card-body -->
-            </div><!-- card -->
-        </div><!-- col-md-8 -->
-    </div><!-- row -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
 
 @push('after-scripts')

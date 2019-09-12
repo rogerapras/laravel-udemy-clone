@@ -24,6 +24,9 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         // \App\Http\Middleware\SecureHeaders::class,
+
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
     ];
 
     /**
@@ -42,6 +45,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\LocaleMiddleware::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\ToBeLoggedOut::class,
+            'site.settings'
         ],
 
         'api' => [
@@ -76,6 +80,10 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'site.settings' => \App\Http\Middleware\LoadSettings::class,
+        'is_course_author' => \App\Http\Middleware\CheckIfUserIsAuthor::class,
+        'is_installed' => \App\Http\Middleware\RedirectIfInstalled::class,
+        'is_not_installed' => \App\Http\Middleware\RedirectIfNotInstalled::class,
     ];
 
     /**

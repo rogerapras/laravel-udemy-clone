@@ -1,78 +1,54 @@
 @extends('frontend.layouts.app')
 
-@section('title', app_name() . ' | ' . __('labels.frontend.passwords.reset_password_box_title'))
+@section('title', __('labels.frontend.passwords.reset_password_box_title') . ' | ' . app_name())
 
 @section('content')
-    <div class="row justify-content-center align-items-center">
-        <div class="col col-sm-6 align-self-center">
-            <div class="card">
-                <div class="card-header">
-                    <strong>
-                        @lang('labels.frontend.passwords.reset_password_box_title')
-                    </strong>
-                </div><!--card-header-->
+    <section class="h-75 py-4 my-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-5 mx-auto">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h4 class="text-uppercase fw-500 text-center font-22 mb-4">
+                                @lang('labels.frontend.passwords.reset_password_box_title')
+                            </h4>
 
-                <div class="card-body">
+                            <div class="px-4">
+                                @if(session('status'))
+                                    <div class="alert alert-success">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+                                {{ html()->form('POST', route('frontend.auth.password.reset'))->class('form-horizontal')->open() }}
+                                    {{ html()->hidden('token', $token) }}
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="email" autocomplete="off" required name="email"
+                                            class="form-control font-16 py-4 form-control-lg" type="text" placeholder=" ">
+                                        <label for="email">@lang('validation.attributes.frontend.email')</label>
+                                    </div>
 
-                    @if(session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="password" type="password" required name="password" autocomplete="off" required
+                                            class="form-control font-16 py-4 form-control-lg" placeholder=" ">
+                                        <label for="password">@lang('validation.attributes.frontend.password')</label>
+                                    </div>
+
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="password_confirmation" type="password" required name="password_confirmation" autocomplete="off" required
+                                            class="form-control font-16 py-4 form-control-lg" placeholder=" ">
+                                        <label for="password_confirmation">@lang('validation.attributes.frontend.password_confirmation')</label>
+                                    </div>
+
+                                        
+                                    <button type="submit" class="btn btn-primary primery-bg-color btn-block font-16 fw-500 text-uppercase">
+                                        @lang('labels.frontend.passwords.reset_password_button')
+                                    </button>
+                                {{ html()->form()->close() }}
+                            </div>
                         </div>
-                    @endif
-
-                    {{ html()->form('POST', route('frontend.auth.password.reset'))->class('form-horizontal')->open() }}
-                        {{ html()->hidden('token', $token) }}
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
-
-                                    {{ html()->email('email')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.email'))
-                                        ->attribute('maxlength', 191)
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password'))->for('password') }}
-
-                                    {{ html()->password('password')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password'))
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password_confirmation'))->for('password_confirmation') }}
-
-                                    {{ html()->password('password_confirmation')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password_confirmation'))
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group mb-0 clearfix">
-                                    {{ form_submit(__('labels.frontend.passwords.reset_password_button')) }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-                    {{ html()->form()->close() }}
-                </div><!-- card-body -->
-            </div><!-- card -->
-        </div><!-- col-6 -->
-    </div><!-- row -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

@@ -26,21 +26,38 @@
         @include('includes.partials.read-only')
 
         <div id="app">
-            @include('includes.partials.logged-in-as')
-            @include('frontend.includes.nav')
+            <div id="wrapper" class="d-flex flex-column">
+                <main role="main" class="flex-grow-1 wrapper-inner">
 
-            <div class="container">
-                @include('includes.partials.messages')
-                @yield('content')
-            </div><!-- container -->
+                    @include('includes.partials.logged-in-as')
+                    <section class="desktop__nav d-none d-lg-block">
+                        @include('frontend.includes.nav')
+                    </section>
+                    <section class="mobile__nav d-block d-lg-none">
+                        @include('frontend.includes.nav_mobile')
+                    </section>
+                    
+                    @include('includes.partials.messages')
+                    @yield('content')
+
+                </div>
+
+                <!-- <footer class="gabs__footer mt-auto py-3 bg-dark text-white">
+                    <div class="container">
+                        <span class="text-mutedx">Place sticky footer content here.</span>
+                    </div>
+                </footer> -->
+
+            </div>
         </div><!-- #app -->
 
         <!-- Scripts -->
+  
         @stack('before-scripts')
-        {!! script(mix('js/manifest.js')) !!}
-        {!! script(mix('js/vendor.js')) !!}
+        <script src="/js/lang.js"></script>
         {!! script(mix('js/frontend.js')) !!}
         @stack('after-scripts')
+  
 
         @include('includes.partials.ga')
     </body>

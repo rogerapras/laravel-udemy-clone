@@ -1,48 +1,92 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-    <a href="{{ route('frontend.index') }}" class="navbar-brand">{{ app_name() }}</a>
+<nav class="navbar navbar-expand-lg navbar-light p-0 gabs__main_nav">
+    <div class="nav_inner">
+        <!-- LOGO -->
+        <div class="nav__logo">
+            <a href="{{ route('frontend.index') }}" class="navbar-brand logo__wrap">
+                <img src="https://www.udemy.com/staticx/udemy/images/v6/logo-coral.svg" class=img-responsive />
+            </a>
+        </div>
 
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="@lang('labels.general.toggle_navigation')">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <!-- Left Side { categories, search bar } -->
+        <div class="nav__left_container">
+            <div class="gabs__dropdown dropdown--on-hover dropdown--topics">
+                <a href="javascript:void(0)" class="gabs__dropdown-toggle" role="button">
+                    <span class="fa fa-th gicon"></span>
+                    <span>
+                        @lang('strings.categories')
+                    </span>
+                </a>
+                <base-nav-category-dropdown :categories="{{ json_encode($gcategories) }}"></base-nav-category-dropdown>
+            </div>
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-            @if(config('locale.status') && count(config('locale.languages')) > 1)
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownLanguageLink" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">@lang('menus.language-picker.language') ({{ strtoupper(app()->getLocale()) }})</a>
+            <!-- Search bar -->
+            <div class="nav__search_wrapper">
+                <div class="nav__search">
+                    <div class="nav__quick_search_form pos-r">
+                        <div class="gabs__dropdown">
+                            <base-nav-search></base-nav-search>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    @include('includes.partials.lang')
-                </li>
-            @endif
+        <!-- Right Side -->
+        <div class="nav__right_container">
+            <!-- @if(config('locale.status') && count(config('locale.languages')) > 1)
+                <div class="nav__instructor_dropdown visible-lg-block">
+                    <div class="gabs__dropdown dropdown--on-hover dropdown_icon">
+                        <a href="#" class="gabs__dropdown-toggle gabs__hover_grey" role="button">
+                            @lang('menus.language-picker.language') ({{ strtoupper(app()->getLocale()) }})
+                        </a>
 
+                        @include('includes.partials.lang')
+                    </div>
+                </div>
+            @endif -->
             @auth
-                <li class="nav-item"><a href="{{route('frontend.user.dashboard')}}" class="nav-link {{ active_class(Route::is('frontend.user.dashboard')) }}">@lang('navs.frontend.dashboard')</a></li>
+                <div class="nav__instructor_dropdown visible-lg-block">
+                    <div class="gabs__dropdown dropdown--on-hover dropdown--instructor zero-state">
+                        <a href="/home/instructor/overview" class="gabs__dropdown-toggle gabs__hover_grey" role="button">
+                            @lang('strings.instructor')
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav__instructor_dropdown visible-lg-block">
+                    <div class="gabs__dropdown dropdown--on-hover dropdown--instructor zero-state">
+                        <a class="gabs__dropdown-toggle gabs__hover_grey" role="button" href="/home/my-courses/learning">
+                            @lang('strings.my_courses')
+                        </a>
+                    </div>
+                </div>
+
+                <base-nav-cart></base-nav-cart>
+
+                <!-- User -->
+                <base-nav-user-dropdown :user="{{ json_encode($logged_in_user) }}" :isAdmin="false"></base-nav-user-dropdown>
             @endauth
 
-            @guest
-                <li class="nav-item"><a href="{{route('frontend.auth.login')}}" class="nav-link {{ active_class(Route::is('frontend.auth.login')) }}">@lang('navs.frontend.login')</a></li>
-
-                @if(config('access.registration'))
-                    <li class="nav-item"><a href="{{route('frontend.auth.register')}}" class="nav-link {{ active_class(Route::is('frontend.auth.register')) }}">@lang('navs.frontend.register')</a></li>
-                @endif
-            @else
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuUser" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">{{ $logged_in_user->name }}</a>
-
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuUser">
-                        @can('view backend')
-                            <a href="{{ route('admin.dashboard') }}" class="dropdown-item">@lang('navs.frontend.user.administration')</a>
-                        @endcan
-
-                        <a href="{{ route('frontend.user.account') }}" class="dropdown-item {{ active_class(Route::is('frontend.user.account')) }}">@lang('navs.frontend.user.account')</a>
-                        <a href="{{ route('frontend.auth.logout') }}" class="dropdown-item">@lang('navs.general.logout')</a>
+            @guest 
+                <base-nav-cart></base-nav-cart>
+                <div class="nav__instructor_dropdown visible-lg-block ml-3">
+                    <div class="gabs__dropdown dropdown--on-hover dropdown--instructor zero-state">
+                        <a href="/login" class="border gabs__dropdown-toggle gabs__hover_grey font-16">
+                            @lang('strings.login')
+                        </a>
                     </div>
-                </li>
+                </div>
+                
+                <div class="nav__instructor_dropdown visible-lg-block ml-2">
+                    <div class="gabs__dropdown dropdown--on-hover dropdown--instructor zero-state">
+                        <a href="/register" class="border btn-danger gabs__dropdown-toggle gabs__hover_grey text-white danger-hover-dark font-16">
+                            @lang('strings.register') 
+                        </a>
+                    </div>
+                </div>
             @endguest
+        </div>
 
-            <li class="nav-item"><a href="{{route('frontend.contact')}}" class="nav-link {{ active_class(Route::is('frontend.contact')) }}">@lang('navs.frontend.contact')</a></li>
-        </ul>
+
     </div>
 </nav>

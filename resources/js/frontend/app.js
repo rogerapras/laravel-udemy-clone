@@ -1,35 +1,52 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 import '../bootstrap';
 import '../plugins';
 import Vue from 'vue';
+import store from '../store'
+// dynamically load components
+import './components/index';
+import '../components';
+import '../mixins';
 
 window.Vue = Vue;
+window.webuiPopover =  require('webui-popover')
+window.moment = require('moment')
+//window.Mmenu = require('mmenu-js')
+Vue.prototype.$moment = require('moment')
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+import { DatePicker, Switch, Checkbox } from 'element-ui'
+import lang from 'element-ui/lib/locale/lang/en'
+import locale from 'element-ui/lib/locale'
+import 'element-ui/lib/theme-chalk/index.css'
+locale.use(lang)
+Vue.use(DatePicker)
+Vue.use(Switch)
+Vue.use(Checkbox)
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// import ElementUI from 'element-ui';
+// import 'element-ui/lib/theme-chalk/index.css';
+// Vue.use(ElementUI);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+
+
+// credit: https://medium.com/@serhii.matrunchyk/using-laravel-localization-with-javascript-and-vuejs-23064d0c210e
+
+//window.$trans = (string) => _.get(window.i18n, string);
+
+// console.log(trans('auth.unknown'))
+// Vue.prototype.trans = string => _.get(window.i18n, string);
+Vue.prototype.trans = (string, args) => {
+    let value = _.get(window.i18n, string);
+    _.eachRight(args, (paramVal, paramKey) => {
+        value = _.replace(value, `:${paramKey}`, paramVal);
+    });
+    return value;
+};
+
+
 
 const app = new Vue({
     el: '#app',
+    store
 });
+

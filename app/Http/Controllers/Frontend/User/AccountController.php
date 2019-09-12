@@ -14,6 +14,30 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('frontend.user.account');
+        return view('frontend.user.account.BasicInformation');
+    }
+
+    public function basicInformation()
+    {
+        $user = auth()->user();
+        //return view('frontend.user.account.BasicInformation', compact('user'));
+    }
+    
+    public function changePassword()
+    {
+        $user = auth()->user();
+        return view('frontend.user.account.ChangePassword', compact('user'));
+    }
+    
+    public function privacySettings()
+    {
+        $user = auth()->user();
+        return view('frontend.user.account.PrivacySettings', compact('user'));
+    }
+    
+    public function payoutSettings()
+    {
+        $user = auth()->user();
+        return view('frontend.user.account.PayoutSettings', compact('user'));
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Events\Frontend\Auth;
 
-use App\Models\Auth\User;
+use App\Models\User;
 use Illuminate\Queue\SerializesModels;
 
 /**

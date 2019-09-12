@@ -201,6 +201,11 @@ return [
         App\Providers\HelperServiceProvider::class,
         App\Providers\ObserverServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Musonza\Chat\ChatServiceProvider::class,
+
+        App\Providers\SettingsServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
     ],
 
     /*
@@ -250,5 +255,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Chat' => Musonza\Chat\Facades\ChatFacade::class
     ],
 ];

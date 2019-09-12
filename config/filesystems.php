@@ -53,6 +53,24 @@ return [
             'visibility' => 'public',
         ],
 
+        'server' => [
+            'driver' => 'local',
+            'root' => public_path('uploads'),
+            'visibility' => 'public'
+        ],
+
+        'installPath' => [
+            'driver' => 'local',
+            'root' => storage_path(),
+            'visibility' => 'public'
+        ],
+        
+        'tmpStorage' => [
+            'driver' => 'local',
+            'root' => storage_path(),
+            'visibility' => 'public'
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -60,6 +78,13 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
+        ],
+
+        'avatars' => [
+            'driver' => 'local',
+            'root' => public_path('avatars'),
+            'url' => env('APP_URL').'/avatars',
+            'visibility' => 'public',
         ],
     ],
 ];

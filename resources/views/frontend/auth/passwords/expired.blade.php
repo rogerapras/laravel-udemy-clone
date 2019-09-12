@@ -1,70 +1,49 @@
 @extends('frontend.layouts.app')
 
-@section('title', app_name() . ' | ' . __('labels.frontend.passwords.expired_password_box_title'))
+
+@section('title', __('labels.frontend.passwords.expired_password_box_title') . ' | ' . app_name())
+
 
 @section('content')
-    <div class="row justify-content-center align-items-center">
-        <div class="col col-sm-6 align-self-center">
-            <div class="card">
-                <div class="card-header">
-                    <strong>
-                        @lang('labels.frontend.passwords.expired_password_box_title')
-                    </strong>
-                </div><!--card-header-->
+    <section class="h-75 py-4 my-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-5 mx-auto">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h4 class="text-uppercase fw-500 text-center font-22 mb-4">
+                                @lang('labels.frontend.passwords.expired_password_box_title')
+                            </h4>
 
-                <div class="card-body">
-                    {{ html()->form('PATCH', route('frontend.auth.password.expired.update'))->class('form-horizontal')->open() }}
+                            <div class="px-4">
+                                {{ html()->form('PATCH', route('frontend.auth.password.expired.update'))->class('form-horizontal')->open() }}
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="old_password" autofocus autocomplete="off" required name="old_password"
+                                            class="form-control font-16 py-4 form-control-lg" type="password" placeholder=" ">
+                                        <label for="email">@lang('validation.attributes.frontend.old_password')</label>
+                                    </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.old_password'))->for('old_password') }}
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="password" autofocus autocomplete="off" required name="password"
+                                            class="form-control font-16 py-4 form-control-lg" type="password" placeholder=" ">
+                                        <label for="email">@lang('validation.attributes.frontend.password')</label>
+                                    </div>
 
-                                    {{ html()->password('old_password')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.old_password'))
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="password_confirmation" autofocus autocomplete="off" required name="password_confirmation"
+                                            class="form-control font-16 py-4 form-control-lg" type="password" placeholder=" ">
+                                        <label for="email">@lang('validation.attributes.frontend.password_confirmation')</label>
+                                    </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password'))->for('password') }}
-
-                                    {{ html()->password('password')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password'))
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password_confirmation'))->for('password_confirmation') }}
-
-                                    {{ html()->password('password_confirmation')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password_confirmation'))
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group mb-0 clearfix">
-                                    {{ form_submit(__('labels.frontend.passwords.update_password_button')) }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                    {{ html()->form()->close() }}
-                </div><!-- card-body -->
-            </div><!-- card -->
-        </div><!-- col-6 -->
-    </div><!-- row -->
+                                    <button type="submit" class="btn btn-primary primery-bg-color btn-block font-16 fw-500 text-uppercase">
+                                        @lang('labels.frontend.passwords.update_password_button')
+                                    </button>
+                                {{ html()->form()->close() }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

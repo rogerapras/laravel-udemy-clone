@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Auth\User;
 
-use App\Models\Auth\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Events\Backend\Auth\User\UserDeleted;
 use App\Repositories\Backend\Auth\RoleRepository;

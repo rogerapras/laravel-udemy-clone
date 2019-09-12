@@ -16,8 +16,6 @@ class DatabaseSeeder extends Seeder
 
         $this->truncateMultiple([
             'cache',
-            'failed_jobs',
-            'ledgers',
             'jobs',
             'sessions',
         ]);
@@ -25,5 +23,17 @@ class DatabaseSeeder extends Seeder
         $this->call(AuthTableSeeder::class);
 
         Model::reguard();
+        $this->call(CategoriesTableSeeder::class);
+        $this->call(CoursesTableSeeder::class);
+        $this->call(CouponsTableSeeder::class);
+        $this->call(CourseTargetsTableSeeder::class);
+        $this->call(SectionsTableSeeder::class);
+        $this->call(LessonsTableSeeder::class);
+        $this->call(ContentsTableSeeder::class);
+        $this->call(CountrySeeder::class);
+        $this->call(PeriodsTableSeeder::class);
+        $this->call(ReviewsTableSeeder::class);
+        $this->call(CurrenciesTableSeeder::class);
+        $this->call(SettingsTableSeeder::class);
     }
 }

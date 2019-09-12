@@ -85,4 +85,34 @@ trait UserAttribute
 
         return 'N/A';
     }
+
+    public function getTotalReviewsAttribute()
+    {
+        return $this->course_reviews->count();
+    }
+
+    public function getAverageReviewAttribute()
+    {
+        return $this->course_reviews->avg('rating');
+    }
+
+    public function getTotalStudentsAttribute()
+    {
+        return $this->students()->count();
+    }
+
+    public function getTotalCoursesAttribute()
+    {
+        return $this->authored_courses->count();
+    }
+
+    public function getHasPurchasesAttribute()
+    {
+        return $this->purchases->count() > 0;
+    }
+
+    public function getHasRefundsAttribute()
+    {
+        return $this->refunds->count() > 0;
+    }
 }

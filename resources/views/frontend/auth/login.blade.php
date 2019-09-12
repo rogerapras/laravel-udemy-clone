@@ -1,97 +1,56 @@
 @extends('frontend.layouts.app')
 
-@section('title', app_name() . ' | ' . __('labels.frontend.auth.login_box_title'))
+@section('title', __('labels.frontend.auth.login_box_title') . ' | ' . app_name())
 
 @section('content')
-    <div class="row justify-content-center align-items-center">
-        <div class="col col-sm-8 align-self-center">
-            <div class="card">
-                <div class="card-header">
-                    <strong>
-                        @lang('labels.frontend.auth.login_box_title')
-                    </strong>
-                </div><!--card-header-->
 
-                <div class="card-body">
-                    {{ html()->form('POST', route('frontend.auth.login.post'))->open() }}
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.email'))->for('email') }}
+    <section class="h-75 py-4 my-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-5 mx-auto">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h4 class="text-uppercase fw-500 text-center font-22 mb-4">
+                                @lang('labels.frontend.auth.login_box_title')
+                            </h4>
 
-                                    {{ html()->email('email')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.email'))
-                                        ->attribute('maxlength', 191)
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    {{ html()->label(__('validation.attributes.frontend.password'))->for('password') }}
-
-                                    {{ html()->password('password')
-                                        ->class('form-control')
-                                        ->placeholder(__('validation.attributes.frontend.password'))
-                                        ->required() }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        {{ html()->label(html()->checkbox('remember', true, 1) . ' ' . __('labels.frontend.auth.remember_me'))->for('remember') }}
+                            <div class="px-4">
+                                {{ html()->form('POST', route('frontend.auth.login.post'))->open() }}
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="email" autocomplete="off" required name="email"
+                                            class="form-control font-16 py-4 form-control-lg" type="text" placeholder=" ">
+                                        <label for="email">@lang('validation.attributes.frontend.email')</label>
                                     </div>
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group clearfix">
-                                    {{ form_submit(__('labels.frontend.auth.login_button')) }}
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
+                                    <div class="form-label-groupx mb-3 floating-label">
+                                        <input id="password" type="password" required name="password" autocomplete="off" required
+                                            class="form-control font-16 py-4 form-control-lg" placeholder=" ">
+                                        <label for="password">@lang('validation.attributes.frontend.password')</label>
+                                    </div>
 
-                        @if(config('access.captcha.login'))
-                            <div class="row">
-                                <div class="col">
-                                    @captcha
-                                    {{ html()->hidden('captcha_status', 'true') }}
-                                </div><!--col-->
-                            </div><!--row-->
-                        @endif
+                                    <div class="mt-2 mb-2 clearfix">
+                                        <div class="custom-control custom-checkbox mr-sm-2 font-14 fw-300 mb-3">
+                                            <input id="remember" name="remember" value="1" class="custom-control-input rounded-0" type="checkbox">
+                                            <label class="custom-control-label" for="remember">
+                                                @lang('labels.frontend.auth.remember_me')
+                                            </label>
+                                        </div>
+                                        <a href="{{ route('frontend.auth.password.reset') }}" class="forgot-pass color-blue font-14 fw-400">
+                                            @lang('labels.frontend.passwords.forgot_password')
+                                        </a>
+                                    </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group text-right">
-                                    <a href="{{ route('frontend.auth.password.reset') }}">@lang('labels.frontend.passwords.forgot_password')</a>
-                                </div><!--form-group-->
-                            </div><!--col-->
-                        </div><!--row-->
-                    {{ html()->form()->close() }}
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="text-center">
-                                @include('frontend.auth.includes.socialite')
+                                    <button type="submit" class="btn btn-primary primery-bg-color btn-block font-16 fw-500 text-uppercase">
+                                        @lang('labels.frontend.auth.login_button')
+                                    </button>
+                                {{ html()->form()->close() }}
                             </div>
-                        </div><!--col-->
-                    </div><!--row-->
-                </div><!--card body-->
-            </div><!--card-->
-        </div><!-- col-md-8 -->
-    </div><!-- row -->
-@endsection
 
-@push('after-scripts')
-    @if(config('access.captcha.login'))
-        @captchaScripts
-    @endif
-@endpush
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+@endsection

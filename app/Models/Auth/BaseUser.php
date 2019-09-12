@@ -35,7 +35,16 @@ abstract class BaseUser extends Authenticatable implements Recordable
     protected $fillable = [
         'first_name',
         'last_name',
+        'username',
         'email',
+        'tagline',
+        'bio',
+        'twitter',
+        'linkedin',
+        'facebook',
+        'github',
+        'youtube',
+        'website',
         'avatar_type',
         'avatar_location',
         'password',
@@ -55,6 +64,14 @@ abstract class BaseUser extends Authenticatable implements Recordable
      */
     protected $appends = [
         'full_name',
+        'picture',
+        'total_reviews',
+        'average_review',
+        'total_students',
+        'total_courses',
+        'has_purchases',
+        'has_refunds',
+        'roles_label'
     ];
 
     /**

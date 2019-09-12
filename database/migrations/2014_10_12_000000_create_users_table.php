@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->uuid('uuid');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
+            $table->string('username')->unique()->index();
             $table->string('email')->unique();
             $table->string('avatar_type')->default('gravatar');
             $table->string('avatar_location')->nullable();
@@ -31,6 +32,14 @@ class CreateUsersTable extends Migration
             $table->timestamp('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
             $table->boolean('to_be_logged_out')->default(false);
+            $table->string('tagline')->nullable();
+            $table->text('bio')->nullable();
+            $table->string('website')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('github')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

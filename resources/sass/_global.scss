@@ -11,3 +11,52 @@
   margin: 0 !important;
   border-radius: 0 !important;
 }
+
+.btn.active,
+.btn:active,
+button:active,
+button:focus,
+button:hover,
+input:active,
+input:focus,
+input:hover,
+label:focus,
+textarea:active,
+textarea:focus,
+textarea:hover,
+.custom-select:focus,
+.custom-control-label::before{
+  outline: 0!important;
+  -webkit-box-shadow: none!important;
+  box-shadow: none!important;
+}
+
+button{
+  cursor: pointer;
+}
+
+
+.VueTables__table thead{
+  background-color: #f0f3f5 !important;
+}
+
+.VueTables__child-row-toggler {
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+.VueTables__child-row-toggler--closed::before {
+  font-weight: 900; 
+  content: "\f055";
+  font-family: "Font Awesome 5 Free";
+}
+
+.VueTables__child-row-toggler--open::before {
+  font-weight: 900; 
+  content: "\f146";
+  font-family: "Font Awesome 5 Free";
+}

@@ -8,26 +8,32 @@ import Swal from 'sweetalert2';
 import $ from 'jquery';
 import 'popper.js'; // Required for BS4
 import 'bootstrap';
-
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
-
 window.$ = window.jQuery = $;
 window.Swal = Swal;
 window._ = _; // Lodash
-
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+const token = document.head.querySelector('meta[name="csrf-token"]');
+
+if (token) {
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
+
+$(window).scroll(function(){
+    if ($(this).scrollTop() > 130) {
+        $('.course_details__preview').addClass('fixed');
+        $('.clp-component-render').addClass('d-none');
+        $('.fullwidth__fixed').removeClass('d-none');
+    } else {
+        $('.course_details__preview').removeClass('fixed');
+        $('.clp-component-render').removeClass('d-none');
+        $('.fullwidth__fixed').addClass('d-none');
+    }
+});
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

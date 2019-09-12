@@ -25,6 +25,10 @@ class ComposerServiceProvider extends ServiceProvider
         );
 
         // Frontend
+        View::composer(
+            ['frontend.includes.nav', 'frontend.includes.nav_mobile'], 
+            'App\Http\Composers\CategoriesComposer'
+        );
 
         // Backend
         View::composer(

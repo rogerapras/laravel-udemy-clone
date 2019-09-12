@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Frontend\Auth;
 
-use App\Models\Auth\User;
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use App\Models\Auth\SocialAccount;
 use Illuminate\Support\Facades\DB;

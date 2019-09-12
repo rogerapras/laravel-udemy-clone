@@ -14,6 +14,7 @@ class LanguageController extends Controller
      */
     public function swap($locale)
     {
+        \Cache::forget('lang.js');
         if (array_key_exists($locale, config('locale.languages'))) {
             session()->put('locale', $locale);
         }
