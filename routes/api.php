@@ -218,6 +218,7 @@ Route::group(['namespace' => 'Api\v1'], function () {
             // Announcements
             Route::get('author_announcements', 'AuthorAnnouncementController@fetchAuthorAnnouncements');
             Route::post('announcements', 'AuthorAnnouncementController@storeAnnouncement');
+            Route::put('announcements/{id}/update', 'AuthorAnnouncementController@updateAnnouncement');
             Route::delete('announcements/{uuid}', 'AuthorAnnouncementController@destroyAnnouncement');
             
         });

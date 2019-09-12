@@ -34,6 +34,17 @@ class AuthorAnnouncementController extends Controller
         $announcement = $this->announcements->storeAnnouncement($request->all());
         return new AnnouncementResource($announcement);
     }
+
+    public function updateAnnouncement(Request $request, $id)
+    {
+        $this->validate($request, [
+            'title' => 'required|max:50',
+            'body' => 'required',
+            'courses' => 'required'
+        ]);
+        $announcement = $this->announcements->updateAnnouncement($request->all(), $id);
+        return new AnnouncementResource($announcement);
+    }
     
     public function destroyAnnouncement($uuid)
     {

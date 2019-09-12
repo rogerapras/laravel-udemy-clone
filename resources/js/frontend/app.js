@@ -10,27 +10,25 @@ import '../mixins';
 window.Vue = Vue;
 window.webuiPopover =  require('webui-popover')
 window.moment = require('moment')
-//window.Mmenu = require('mmenu-js')
 Vue.prototype.$moment = require('moment')
 
-import { DatePicker, Switch, Checkbox } from 'element-ui'
+import { DatePicker, Switch, Checkbox, Select, Option, OptionGroup } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
-import 'element-ui/lib/theme-chalk/index.css'
 locale.use(lang)
+import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(DatePicker)
 Vue.use(Switch)
 Vue.use(Checkbox)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(OptionGroup)
 
-
-// import ElementUI from 'element-ui';
-// import 'element-ui/lib/theme-chalk/index.css';
-// Vue.use(ElementUI);
-
+// import { TablePlugin } from 'bootstrap-vue'
+// Vue.use(TablePlugin)
 
 
 // credit: https://medium.com/@serhii.matrunchyk/using-laravel-localization-with-javascript-and-vuejs-23064d0c210e
-
 //window.$trans = (string) => _.get(window.i18n, string);
 
 // console.log(trans('auth.unknown'))

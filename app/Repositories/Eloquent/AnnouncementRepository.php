@@ -60,6 +60,16 @@ class AnnouncementRepository extends RepositoryAbstract implements IAnnouncement
         
         return $announcement;
     }
+
+    public function updateAnnouncement(array $data, $id)
+    {
+        $announcement = Announcement::find($id);
+        $announcement->update([
+            'title' => $data['title'],
+            'body' => $data['body']
+        ]);
+        $announcement->courses()->sync($data['courses']);
+    }
     
     public function destroyAnnouncement($uuid)
     {
