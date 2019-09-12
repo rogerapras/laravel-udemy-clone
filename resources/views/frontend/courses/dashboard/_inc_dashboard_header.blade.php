@@ -12,28 +12,28 @@
             <ul class="search-filter active-state hover-state list-color font-16 fw-400">
                 <li class="m-none">
                     <a href="{{ route('frontend.course.dashboard.overview', $course->slug) }}" 
-                        class="p-3 {{ active_class( if_route('frontend.course.dashboard.overview') )  }}" >
+                        class="p-3 {{ active_class( Route::is('frontend.course.dashboard.overview') )  }}" >
                         @lang('strings.overview')
                     </a>
                 </li>
                 
                 <li class="m-none">
                     <a href="{{ route('frontend.course.dashboard.content', $course->slug) }}" 
-                        class="p-3 {{ active_class( if_route('frontend.course.dashboard.content') )  }}">
+                        class="p-3 {{ active_class( Route::is('frontend.course.dashboard.content') )  }}">
                         @lang('strings.course_content')
                     </a>
                 </li>
                 
                 <li class="m-none">
                     <a href="{{ route('frontend.course.dashboard.questions', $course->slug) }}" 
-                        class="p-3 {{ active_class( if_route('frontend.course.dashboard.questions') || if_route('frontend.course.dashboard.questions.show') )  }}">
+                        class="p-3 {{ active_class( Route::is('frontend.course.dashboard.questions') || Route::is('frontend.course.dashboard.questions.show') )  }}">
                         @lang('strings.q_and_a')
                     </a>
                 </li>
                 
                 <li class="m-none">
                     <a href="{{ route('frontend.course.dashboard.announcements', $course->slug) }}" 
-                        class="p-3 {{ active_class( if_route('frontend.course.dashboard.announcements') )  }}">
+                        class="p-3 {{ active_class( Route::is('frontend.course.dashboard.announcements') )  }}">
                         @lang('strings.announcements')
                     </a>
                 </li>

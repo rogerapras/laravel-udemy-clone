@@ -15,20 +15,20 @@
             <ul class="search-filter active-state hover-state list-color font-16 fw-400 author-dashboard">
                 <!-- <li>
                     <a href="{{ route('frontend.author.dashboard.overview') }}" 
-                        class="p-3 {{ active_class( if_route('frontend.author.dashboard.overview') )  }}" >
+                        class="p-3 {{ active_class( Route::is('frontend.author.dashboard.overview') )  }}" >
                         @lang('strings.overview')
                     </a>
                 </li> -->
                 <li>
                     <a href="{{ route('frontend.author.dashboard.courses') }}" 
-                        class="p-3 {{ active_class( if_route('frontend.author.dashboard.courses') )  }}" >
+                        class="p-3 {{ active_class( Route::is('frontend.author.dashboard.courses') )  }}" >
                         @lang('strings.courses')
                     </a>
                 </li>
                 
                 <li>
                     <a href="{{ route('frontend.author.dashboard.revenue') }}" 
-                        class="p-3 {{ active_class( if_route('frontend.author.dashboard.revenue') || if_route('frontend.author.dashboard.revenue.statement'))  }}" >
+                        class="p-3 {{ active_class( Route::is('frontend.author.dashboard.revenue') || Route::is('frontend.author.dashboard.revenue.statement'))  }}" >
                         @lang('strings.revenue_report')
                     </a>
                 </li>
@@ -37,21 +37,21 @@
 
                 <li>
                     <a href="{{ route('frontend.author.dashboard.qna') }}" 
-                        class="p-3 {{ active_class( if_route('frontend.author.dashboard.qna') )  }}" >
+                        class="p-3 {{ active_class( Route::is('frontend.author.dashboard.qna') )  }}" >
                         @lang('strings.q_and_a')
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('frontend.author.dashboard.reviews') }}" 
-                        class="p-3 {{ active_class( if_route('frontend.author.dashboard.reviews') )  }}" >
+                        class="p-3 {{ active_class( Route::is('frontend.author.dashboard.reviews') )  }}" >
                         @lang('strings.reviews')
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('frontend.author.dashboard.announcements') }}" 
-                        class="p-3 {{ active_class( if_route('frontend.author.dashboard.announcements') )  }}" >
+                        class="p-3 {{ active_class( Route::is('frontend.author.dashboard.announcements') )  }}" >
                         @lang('strings.announcements')
                     </a>
                 </li>

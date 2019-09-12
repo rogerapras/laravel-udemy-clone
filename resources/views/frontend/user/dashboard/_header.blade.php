@@ -31,14 +31,14 @@
                 <ul class="search-filter active-state hover-state list-color font-16 fw-400 author-dashboard">
                     <li>
                         <a href="{{ route('frontend.user.dashboard.courses') }}" 
-                            class="p-3 {{ active_class( if_route('frontend.user.dashboard.courses') )  }}" >
+                            class="p-3 {{ active_class( Route::is('frontend.user.dashboard.courses') )  }}" >
                             @lang('strings.all_courses')
                         </a>
                     </li>
 
                     <li>
                         <a href="{{ route('frontend.user.dashboard.purchases') }}" 
-                            class="p-3 {{ active_class( if_route('frontend.user.dashboard.purchases') )  }}" >
+                            class="p-3 {{ active_class( Route::is('frontend.user.dashboard.purchases') )  }}" >
                             @lang('strings.purchase_history')
                         </a>
                     </li>

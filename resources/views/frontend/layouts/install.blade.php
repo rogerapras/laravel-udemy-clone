@@ -81,11 +81,11 @@
                             <h1 class="h3">Place logo image {{ session('install_step', 0) }}</h1>
                             <div class="bg-white">
                                 <ul class="progressbar">
-                                    <li class="{{ active_class(if_route('frontend.installer.index')) }}">Start</li>
-                                    <li class="{{ active_class(if_route('frontend.installer.requirements')) }}">Requirements</li>
-                                    <li class="{{ active_class(if_route('frontend.installer.database')) }}">Database</li>
-                                    <li class="{{ active_class(if_route('frontend.installer.settings')) }}">Settings</li>
-                                    <li class="{{ active_class(if_route('frontend.installer.finish')) }}">Finish</li>
+                                    <li class="{{ active_class(Route::is('frontend.installer.index')) }}">Start</li>
+                                    <li class="{{ active_class(Route::is('frontend.installer.requirements')) }}">Requirements</li>
+                                    <li class="{{ active_class(Route::is('frontend.installer.database')) }}">Database</li>
+                                    <li class="{{ active_class(Route::is('frontend.installer.settings')) }}">Settings</li>
+                                    <li class="{{ active_class(Route::is('frontend.installer.finish')) }}">Finish</li>
                                 </ul>
                             </div>
                         </div>
