@@ -25,7 +25,7 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
             'title' => $data['title'],
         	'subtitle' => $data['subtitle'],
         	'category_id' => $data['category'],
-        	'slug' => str_slug($data['title'])
+        	'slug' => \Str::slug($data['title'])
         ]);
         
         
@@ -61,7 +61,7 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
             'title' => $data['title'],
         	'subtitle' => $data['subtitle'],
         	'category_id' => $data['category'],
-        	'slug' => str_slug($data['title']),
+        	'slug' => \Str::slug($data['title']),
         	'description' => $data['description'],
         	'level' => $data['level'],
         	'language' => $data['language']

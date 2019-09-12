@@ -18,15 +18,15 @@ class UserTableSeeder extends Seeder
         $this->disableForeignKeys();
 
         // Add the master administrator, user id of 1
-        // User::create([
-        //     'first_name' => 'Admin',
-        //     'last_name' => 'Istrator',
-        //     'username' => 'admin',
-        //     'email' => 'admin@admin.com',
-        //     'password' => 'secret',
-        //     'confirmation_code' => md5(uniqid(mt_rand(), true)),
-        //     'confirmed' => true,
-        // ]);
+        User::create([
+            'first_name' => 'Admin',
+            'last_name' => 'Istrator',
+            'username' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'secret',
+            'confirmation_code' => md5(uniqid(mt_rand(), true)),
+            'confirmed' => true,
+        ]);
         
         User::create([
             'first_name' => 'John',

@@ -206,6 +206,8 @@ return [
         App\Providers\SettingsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
+
+        Hassansin\DBCart\CartServiceProvider::class,
     ],
 
     /*

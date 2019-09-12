@@ -205,7 +205,7 @@ class Course extends Model
     
     public function getShortDescriptionAttribute()
     {
-        return $this->description ? str_limit(strip_tags($this->description),250) : null;
+        return $this->description ? \Str::limit(strip_tags($this->description),250) : null;
     }
     
     public function getTotalHoursAttribute()

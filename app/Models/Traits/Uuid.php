@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models\Traits;
-
+use Fico7489\Laravel\EloquentJoin\Traits\EloquentJoin;
 use Ramsey\Uuid\Uuid as PackageUuid;
 
 /**
@@ -9,6 +9,7 @@ use Ramsey\Uuid\Uuid as PackageUuid;
  */
 trait Uuid
 {
+    use EloquentJoin;
     /**
      * @param $query
      * @param $uuid

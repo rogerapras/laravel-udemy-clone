@@ -48,7 +48,7 @@
 <body class="app header-fixed sidebar-fixed aside-menu-off-canvas sidebar-lg-show">
     @include('backend.includes.header')
 
-    <div class="app-body">
+    <div id="app" class="app-body">
         @include('backend.includes.sidebar')
 
         <main class="main">
@@ -76,8 +76,6 @@
     <!-- Scripts -->
     @stack('before-scripts')
     <script src="/js/lang.js"></script>
-    {!! script(mix('js/manifest.js')) !!}
-    {!! script(mix('js/vendor.js')) !!}
     {!! script(mix('js/backend.js')) !!}
     @stack('after-scripts')
 </body>

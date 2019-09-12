@@ -15,6 +15,7 @@
         "altek/accountant": "^1.2",
         "altek/eventually": "^1.0",
         "arcanedev/log-viewer": "^5.0",
+        "hassansin/dbcart": "dev-master",
         "creativeorange/gravatar": "~1.0",
         "davejamesmiller/laravel-breadcrumbs": "^5.0",
         "fideloper/proxy": "^4.0",
@@ -26,6 +27,7 @@
         "laravel/framework": "^6.0",
         "laravel/socialite": "^4.1",
         "musonza/chat": "^3.5",
+        "nfunwigabga/laravel-eloquent-join": "dev-master",
         "orangehill/iseed": "^2.6",
         "paypal/rest-api-sdk-php": "^1.14",
         "razorpay/razorpay": "2.*",
@@ -35,6 +37,16 @@
         "stripe/stripe-php": "^7.0",
         "torann/geoip": "^1.0"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/costeirs/dbcart"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/nfunwigabga/laravel-eloquent-join"
+        }
+    ],
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
         "barryvdh/laravel-ide-helper": "^2.6",

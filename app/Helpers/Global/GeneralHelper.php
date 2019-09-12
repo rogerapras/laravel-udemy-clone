@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\Lesson;
 if (! function_exists('app_name')) {
     /**
      * Helper to grab the application name.
@@ -126,5 +126,47 @@ if (! function_exists('camelcase_to_word')) {
         | (?<=[A-Z])
           (?=[A-Z][a-z])
         /x', $str));
+    }
+}
+
+
+if( !function_exists('convert_minutes_to_duration'))
+{
+    function convert_minutes_to_duration($total_minutes, $format = '%02d:%02d:%02d')
+    {
+        if ($total_minutes < 0.0 || ! $total_minutes) {
+            return '00:00:00';
+        }
+        
+        $hours = floor($total_minutes / 60);
+        $minutes = ($total_minutes % 60);
+        $seconds = ($total_minutes*60) % 60;
+        
+        return sprintf($format, $hours, $minutes, $seconds);
+    }
+    
+}
+
+if (! function_exists('get_first_lesson')) {
+    function get_first_lesson($course){
+        $first_lesson = Lesson::where('lessons.course_id', $course->id)
+            ->join('sections', 'sections.id', 'lessons.section_id')
+            ->orderBy('sections.sortOrder')
+            ->orderBy('lessons.sortOrder')
+            //->join('items', 'items.id', '=', 'user_items.item_id')
+            //->orderBy('items.type')
+            ->first();
+        
+        if(auth()->check()){
+            $lessons = $course->lessons()->pluck('id');
+            $last_watched = auth()->user()->completions()->latest()
+                                ->whereIn('lessons.id', $lessons)->first();
+                                
+            if(!is_null($last_watched)){
+                $first_lesson = $last_watched;
+            }
+        }
+        
+        return $first_lesson;
     }
 }

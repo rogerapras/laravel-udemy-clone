@@ -44,7 +44,7 @@ class AuthorContentController extends Controller
             $this->contents->destroy($lesson->content->id);
             $this->contents->deleteVideo($currentVideo);
         }
-        $file_base = time() . '-' . substr(str_slug($originalFileName), 0, -3);
+        $file_base = time() . '-' . substr(\Str::slug($originalFileName), 0, -3);
         $filename = $file_base .'.'.$ext;
         $path = $request->file('file')->storeAs('uploads', $filename, 'tmpStorage');
         

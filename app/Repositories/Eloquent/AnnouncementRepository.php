@@ -53,7 +53,7 @@ class AnnouncementRepository extends RepositoryAbstract implements IAnnouncement
                             'title' => $data['title'],
                             'body' => $data['body'],
                             'user_id' => auth()->id(),
-                            'slug' => time() . '-' . str_slug($data['title'])
+                            'slug' => time() . '-' . \Str::slug($data['title'])
                         ]);
 
         $announcement->courses()->attach($data['courses']);

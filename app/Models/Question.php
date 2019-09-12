@@ -16,7 +16,7 @@ class Question extends Model
     
     public function getShortBodyAttribute()
     {
-        return $this->body ? str_limit(strip_tags($this->body),100) : null;
+        return $this->body ? \Str::limit(strip_tags($this->body),100) : null;
     }
     
     public function getTotalAnswersAttribute()

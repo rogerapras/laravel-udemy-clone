@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cbbe449e68a40419f7a37145abe49357",
+    "content-hash": "2fe05e1ab5c129bd1b5d9c11ea09a360",
     "packages": [
         {
             "name": "akaunting/setting",
@@ -1316,6 +1316,62 @@
             "time": "2019-07-01T23:21:34+00:00"
         },
         {
+            "name": "hassansin/dbcart",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/costeirs/dbcart.git",
+                "reference": "e5ac7ff08f4b72dc15933c30249ad6c59bdf7fa3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/costeirs/dbcart/zipball/e5ac7ff08f4b72dc15933c30249ad6c59bdf7fa3",
+                "reference": "e5ac7ff08f4b72dc15933c30249ad6c59bdf7fa3",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "^6.0",
+                "illuminate/support": "^6.0",
+                "php": ">=7.1.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Hassansin\\DBCart\\CartServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Hassansin\\DBCart": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "hassansin",
+                    "email": "mhkr63@gmail.com"
+                }
+            ],
+            "description": "Shopping Cart library for Laravel 5 that uses Database instead of Sessions",
+            "homepage": "https://github.com/hassansin/dbcart",
+            "keywords": [
+                "cart",
+                "database",
+                "ecommerce",
+                "laravel",
+                "laravel5",
+                "shopping-cart"
+            ],
+            "support": {
+                "source": "https://github.com/costeirs/dbcart/tree/master"
+            },
+            "time": "2019-09-05T14:39:57+00:00"
+        },
+        {
             "name": "intervention/image",
             "version": "2.5.0",
             "source": {
@@ -1560,16 +1616,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v6.0.1",
+            "version": "v6.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f38711564c642ee88a58bf180010a0c7a7ab062e"
+                "reference": "56789e9dec750e0fbe8e9e6ae90a01a4e6887902"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f38711564c642ee88a58bf180010a0c7a7ab062e",
-                "reference": "f38711564c642ee88a58bf180010a0c7a7ab062e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/56789e9dec750e0fbe8e9e6ae90a01a4e6887902",
+                "reference": "56789e9dec750e0fbe8e9e6ae90a01a4e6887902",
                 "shasum": ""
             },
             "require": {
@@ -1701,7 +1757,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-09-05T20:31:10+00:00"
+            "time": "2019-09-10T18:46:24+00:00"
         },
         {
             "name": "laravel/socialite",
@@ -1892,9 +1948,9 @@
             "authors": [
                 {
                     "name": "Ben Corlett",
+                    "role": "Developer",
                     "email": "bencorlett@me.com",
-                    "homepage": "http://www.webcomm.com.au",
-                    "role": "Developer"
+                    "homepage": "http://www.webcomm.com.au"
                 }
             ],
             "description": "OAuth 1.0 Client Library",
@@ -2121,6 +2177,64 @@
                 "time"
             ],
             "time": "2019-08-31T16:37:55+00:00"
+        },
+        {
+            "name": "nfunwigabga/laravel-eloquent-join",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nfunwigabga/laravel-eloquent-join.git",
+                "reference": "b74a5f30819d1f114b5ea8f2f746e0750cf26e23"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nfunwigabga/laravel-eloquent-join/zipball/b74a5f30819d1f114b5ea8f2f746e0750cf26e23",
+                "reference": "b74a5f30819d1f114b5ea8f2f746e0750cf26e23",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "6.*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "2.*",
+                "orchestra/testbench": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Fico7489\\Laravel\\EloquentJoin\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Fico7489\\Laravel\\EloquentJoin\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Filip Horvat",
+                    "email": "filip.horvat@am2studio.hr",
+                    "homepage": "http://am2studio.hr",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This package introduces the join magic for eloquent models and relations.",
+            "homepage": "https://github.com/fico7489/laravel-eloquent-join",
+            "keywords": [
+                "laravel eloquent join",
+                "laravel join",
+                "laravel join relation",
+                "laravel sort join",
+                "laravel where join"
+            ],
+            "support": {
+                "issues": "https://github.com/fico7489/laravel-eloquent-join/issues",
+                "source": "https://github.com/fico7489/laravel-eloquent-join"
+            },
+            "time": "2019-09-12T10:14:30+00:00"
         },
         {
             "name": "nyholm/psr7",
@@ -2473,16 +2587,16 @@
         },
         {
             "name": "paragonie/sodium_compat",
-            "version": "v1.10.1",
+            "version": "v1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/sodium_compat.git",
-                "reference": "5115fa44886d1c2785d2f135ef4626db868eac4b"
+                "reference": "fee1b6ea9c83dac7b4a17febf58fb712ada7dd6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/5115fa44886d1c2785d2f135ef4626db868eac4b",
-                "reference": "5115fa44886d1c2785d2f135ef4626db868eac4b",
+                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/fee1b6ea9c83dac7b4a17febf58fb712ada7dd6e",
+                "reference": "fee1b6ea9c83dac7b4a17febf58fb712ada7dd6e",
                 "shasum": ""
             },
             "require": {
@@ -2551,7 +2665,7 @@
                 "secret-key cryptography",
                 "side-channel resistant"
             ],
-            "time": "2019-07-12T16:36:59+00:00"
+            "time": "2019-09-11T23:58:35+00:00"
         },
         {
             "name": "paypal/rest-api-sdk-php",
@@ -5204,16 +5318,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v3.5.0",
+            "version": "v3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222"
+                "reference": "1bdf24f065975594f6a117f0f1f6cabf1333b156"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222",
-                "reference": "95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/1bdf24f065975594f6a117f0f1f6cabf1333b156",
+                "reference": "1bdf24f065975594f6a117f0f1f6cabf1333b156",
                 "shasum": ""
             },
             "require": {
@@ -5222,12 +5336,12 @@
                 "symfony/polyfill-ctype": "^1.9"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0"
+                "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0 || ^7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.5-dev"
+                    "dev-master": "3.6-dev"
                 }
             },
             "autoload": {
@@ -5257,7 +5371,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-08-27T17:00:38+00:00"
+            "time": "2019-09-10T21:37:39+00:00"
         }
     ],
     "packages-dev": [
@@ -6250,16 +6364,16 @@
         },
         {
             "name": "facade/flare-client-php",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/flare-client-php.git",
-                "reference": "a276603dbb7b9b35636d573d5709df5816dd4d2b"
+                "reference": "7128b251b48f24ef64e5cddd7f8d40cc3a06fd3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/a276603dbb7b9b35636d573d5709df5816dd4d2b",
-                "reference": "a276603dbb7b9b35636d573d5709df5816dd4d2b",
+                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/7128b251b48f24ef64e5cddd7f8d40cc3a06fd3e",
+                "reference": "7128b251b48f24ef64e5cddd7f8d40cc3a06fd3e",
                 "shasum": ""
             },
             "require": {
@@ -6300,26 +6414,26 @@
                 "flare",
                 "reporting"
             ],
-            "time": "2019-09-05T20:24:51+00:00"
+            "time": "2019-09-11T14:19:56+00:00"
         },
         {
             "name": "facade/ignition",
-            "version": "1.6.0",
+            "version": "1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "36a1e4ca0973ac8e5c8289ee31956bbaf8e6bb67"
+                "reference": "6d0f5a2ef475bee5851f9919d1b5665368550128"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/36a1e4ca0973ac8e5c8289ee31956bbaf8e6bb67",
-                "reference": "36a1e4ca0973ac8e5c8289ee31956bbaf8e6bb67",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/6d0f5a2ef475bee5851f9919d1b5665368550128",
+                "reference": "6d0f5a2ef475bee5851f9919d1b5665368550128",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "facade/flare-client-php": "^1.0",
+                "facade/flare-client-php": "^1.0.4",
                 "facade/ignition-contracts": "^1.0",
                 "filp/whoops": "^2.4",
                 "illuminate/support": "~5.5.0 || ~5.6.0 || ~5.7.0 || ~5.8.0 || ^6.0",
@@ -6368,7 +6482,7 @@
                 "laravel",
                 "page"
             ],
-            "time": "2019-09-09T14:06:15+00:00"
+            "time": "2019-09-12T09:25:07+00:00"
         },
         {
             "name": "filp/whoops",
@@ -6415,8 +6529,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "role": "Developer",
-                    "homepage": "https://github.com/filp"
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
                 }
             ],
             "description": "php error handling for cool kids",
@@ -7485,8 +7599,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
@@ -7757,8 +7871,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "The PHP Unit Testing framework.",
@@ -7978,8 +8092,8 @@
             "authors": [
                 {
                     "name": "Marco Pivetta",
-                    "email": "ocramius@gmail.com",
-                    "role": "maintainer"
+                    "role": "maintainer",
+                    "email": "ocramius@gmail.com"
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
@@ -9065,8 +9179,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
@@ -9126,6 +9240,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "hassansin/dbcart": 20,
+        "nfunwigabga/laravel-eloquent-join": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,

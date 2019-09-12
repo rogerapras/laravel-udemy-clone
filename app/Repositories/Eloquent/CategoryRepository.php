@@ -38,7 +38,7 @@ class CategoryRepository extends RepositoryAbstract implements ICategory
         $category = Category::find($id)
                         ->update([
                             'name' => $data['name'],
-                            'slug' => str_slug($data['name']),
+                            'slug' => \Str::slug($data['name']),
                             'image' => $data['icon']
                         ]);
 
@@ -51,7 +51,7 @@ class CategoryRepository extends RepositoryAbstract implements ICategory
         $max_sort = Category::max('sortOrder');
         $category = Category::create([
                         'name' => $data['name'],
-                        'slug' => str_slug($data['name']),
+                        'slug' => \Str::slug($data['name']),
                         'sortOrder' => $max_sort+1,
                         'parent_id' => $data['parent'],
                         'image' => $data['icon']
