@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="action=='edit' ? update() : create()" @keydown="form.onKeydown($event)">
+    <form @submit.prevent="create()" @keydown="form.onKeydown($event)">
         <div class="form-row mb-2">
             <div class="col-md-8">
                 <label>{{ trans('strings.youtube_video_url') }}</label>
@@ -49,14 +49,6 @@
                     })
             },
             
-            update(){
-                this.form.lesson = this.lesson.id
-                this.form.put(`/api/contents/${this.content.id}?type=youtube`)
-                    .then(response => {
-                        this.form.reset()
-                        this.$bus.$emit('upload:complete', this.lesson.id)
-                    })
-            },
             
             cancel(){
                 this.form.reset()
@@ -67,8 +59,8 @@
         
         mounted(){
             if(this.action=='edit'){
-                this.form.url = this.content.video_path
-                this.form.duration = this.content.video_duration
+                this.form.url = this.lesson.video.youtube_link
+                this.form.duration = this.lesson.duration
             }
         }
         

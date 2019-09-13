@@ -20,7 +20,7 @@
                         v-for="(lesson, index) in lessons" 
                         :key="lesson.id" 
                         :index="index" 
-                        :lesson="lesson"
+                        :prop_lesson="lesson"
                         :section="section"
                         v-bind="{ findLessonsBySection }"/>
                 </draggable>

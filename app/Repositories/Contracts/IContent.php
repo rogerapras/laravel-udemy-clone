@@ -9,7 +9,7 @@ interface IContent extends IRepository
     public function destroyVideo($lessonId);
     public function createYoutube(array $data);
     public function updateDuration($id, $duration);
-    public function updateArticle(array $data, $id);
+    public function updateArticle(array $data);
     public function createVideoContent(array $data, $lessonId);
     
 

@@ -22,6 +22,7 @@ class LessonResource extends JsonResource
             'description' => $this->description,
             'durationHMS' => $this->durationHMS,
             'image' => $this->image,
+            'duration' => $this->duration,
             'lesson_type' => $this->lesson_type,
             'minutes_seconds' => $this->minutes_seconds,
             'preview' => $this->preview,
@@ -32,7 +33,9 @@ class LessonResource extends JsonResource
             'uuid' => $this->uuid,
             'video_link' => $this->video_link,
             'video_provider' => $this->video_provider,
-            'type' => $this->content_type == 'video' ? 'video/'.$this->video_provider : null
+            'type' => $this->content_type == 'video' ? 'video/'.$this->video_provider : null,
+            'video' => new VideoResource($this->video),
+            'has_content' => ! is_null($this->content_type)
         ];
     }
 }

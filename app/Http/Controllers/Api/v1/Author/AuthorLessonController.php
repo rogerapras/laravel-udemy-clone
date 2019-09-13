@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\ILesson;
 use App\Repositories\Contracts\IContent;
+use App\Http\Resources\LessonResource;
 
 class AuthorLessonController extends Controller
 {
@@ -18,17 +19,7 @@ class AuthorLessonController extends Controller
         $this->lessons = $lessons;
         $this->contents = $contents;
     }
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-    
+
     public function findByCourse($id)
     {
         return $this->lessons->findByCourse($id);
@@ -45,14 +36,6 @@ class AuthorLessonController extends Controller
         return $this->lessons->updateDraggable($request->all());
     }
     
-    
-    
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
          $this->validate($request, [
@@ -63,15 +46,9 @@ class AuthorLessonController extends Controller
         return $this->lessons->create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return new LessonResource($this->lessons->findById($id));
     }
 
     /**

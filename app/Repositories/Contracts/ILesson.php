@@ -10,6 +10,7 @@ interface ILesson extends IRepository
     public function update(array $data, $id);
     public function findByUuid($uuid);
     public function markAsComplete($id);
+    public function findById($id);
 
 
 }

@@ -195,11 +195,11 @@ Route::group(['namespace' => 'Api\v1'], function () {
             Route::put('lessons/save-draggable', 'AuthorLessonController@updateDraggable');
             Route::get('lessons/findByCourse/{id}', 'AuthorLessonController@findByCourse');
             Route::get('lessons/findBySection/{id}', 'AuthorLessonController@findBySection');
-            Route::resource('lessons', 'AuthorLessonController');
+            Route::resource('lessons', 'AuthorLessonController')->except(['index', 'show']);
             
             // Content
             Route::get('contents/findByLesson/{id}', 'AuthorContentController@findByLesson');
-            Route::resource('contents', 'AuthorContentController');
+            Route::resource('contents', 'AuthorContentController')->only(['store']);
             
             // pricing and coupon
             Route::put('coupons/{id}/activate', 'AuthorCouponController@activate');

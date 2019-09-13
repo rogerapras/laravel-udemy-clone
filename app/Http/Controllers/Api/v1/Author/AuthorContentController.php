@@ -26,7 +26,6 @@ class AuthorContentController extends Controller
     public function findByLesson($id)
     {
         $content = $this->contents->findByLesson($id);
-        
         return new ContentResource($content);
     }
     
@@ -57,7 +56,7 @@ class AuthorContentController extends Controller
         //     'video_src' => 'upload',
         //     'video_storage' => config('site_settings.video_upload_location')   
         // ], $id);
-
+        
         $video = $this->contents->createVideo([
             'encoded' => false,
             'streamable_sm' => null,
@@ -75,26 +74,10 @@ class AuthorContentController extends Controller
             UploadVideo::dispatch($video);
         }
         
-        return new ContentResource($video);
+        return response()->json(null, 200);
         
     }
     
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         if($request->type=='youtube'){
@@ -106,60 +89,13 @@ class AuthorContentController extends Controller
             return $this->contents->createYoutube($request->all());
         }
         
+        // store article
         $this->validate($request, [
             'content' => 'required|string',
         ]);
         
-        return $this->contents->createArticle($request->all());
+        return $this->contents->updateArticle($request->all());
         
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        if($request->type=='youtube'){
-            $this->validate($request, [
-                'url' => 'required|url|youtube',
-                'duration' => 'required|numeric|min:1'
-            ]);
-            
-            return $this->contents->updateYoutube($request->all(), $id);
-        }
-        
-        $this->validate($request, [
-            'content' => 'required|string',
-        ]);
-        
-        return $this->contents->updateArticle([
-            'content' => $request->content
-        ], $id);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

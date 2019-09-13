@@ -6,7 +6,7 @@
             </h3>
         </div>
         
-        <form @submit.prevent="action=='edit' ? update() : create()" @keydown="form.onKeydown($event)">
+        <form @submit.prevent="create()" @keydown="form.onKeydown($event)">
             <div class="form-group mb-4">
                 <quill-editor :content="form.content"
                     :options="editorOption"
@@ -61,16 +61,6 @@
                         this.$bus.$emit('upload:complete', this.lesson.id)
                     })
             },
-            
-            update(){
-                this.form.lesson = this.lesson.id
-                this.form.put(`/api/contents/${this.content.id}`)
-                    .then(response => {
-                        this.form.reset()
-                        this.$bus.$emit('upload:complete', this.lesson.id)
-                    })
-            },
-            
             cancel(){
                 this.form.reset()
                 this.$bus.$emit('upload:cancelled', this.lesson.id)
@@ -80,7 +70,7 @@
         
         mounted(){
             if(this.action=='edit'){
-                this.form.content = this.content.article_body
+                this.form.content = this.lesson.article_body
             }
         }
         

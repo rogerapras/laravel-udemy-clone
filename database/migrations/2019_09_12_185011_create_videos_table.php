@@ -25,7 +25,6 @@ class CreateVideosTable extends Migration
             $table->datetime('converted_for_streaming_at')->nullable();
             $table->string('original_filename')->nullable();
             $table->string('youtube_link')->nullable();
-            
             $table->timestamps();
 
             $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');

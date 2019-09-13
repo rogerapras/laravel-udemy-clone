@@ -76,8 +76,8 @@ class Lesson extends Model
     public function getDurationHMSAttribute()
     {
         
-        if($this->content){
-            return convert_minutes_to_duration($this->content->video_duration);
+        if($this->duration){
+            return convert_minutes_to_duration($this->duration);
         }
         
         return '00:00:00';

@@ -16,6 +16,11 @@ class LessonRepository extends RepositoryAbstract implements ILesson
         return Lesson::class;
     }
     
+
+    public function findById($id)
+    {
+        return Lesson::find($id);
+    }
     
     public function updateDraggable(array $data)
     {

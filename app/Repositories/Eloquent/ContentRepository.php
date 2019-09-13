@@ -72,7 +72,8 @@ class ContentRepository extends RepositoryAbstract implements IContent
             ['lesson_id' => $data['lesson']],
             [
                 'disk' => 'youtube',
-                'youtube_link' => $data['url']
+                'youtube_link' => $data['url'],
+                'is_processed' => true
             ]
         );
 
@@ -82,9 +83,9 @@ class ContentRepository extends RepositoryAbstract implements IContent
         return $lesson;
     }
     
-    public function updateArticle(array $data, $id) // check that ID is actually lesson ID
+    public function updateArticle(array $data) // check that ID is actually lesson ID
     {
-        $lesson = Lesson::find($id);
+        $lesson = Lesson::find($data['lesson']);
         $lesson->update([
            'content_type' => 'article',
            'article_body' => $data['content'],

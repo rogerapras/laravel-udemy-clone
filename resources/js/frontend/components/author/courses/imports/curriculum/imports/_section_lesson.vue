@@ -7,9 +7,9 @@
                 <i class="fa fa-check-circle text-success" v-if="hasContent"></i>
                 <i class="fa fa-check-circle" v-else></i>
                 {{ trans('strings.lesson') }} {{ lesson.sortOrder }}:
-                <span class="fa fa-play-circle" v-if="hasContent && content.content_type=='video' && content.video_src=='upload'"></span> 
-                <span class="fa fa-youtube text-danger" v-if="hasContent && content.content_type=='video' && content.video_src=='embed'"></span> 
-                <span class="fa fa-file-text-o" v-if="hasContent && content.content_type=='article'"></span> 
+                <span class="fa fa-play-circle" v-if="hasContent && lesson.content_type=='video'"></span> 
+                <span class="fa fa-youtube text-danger" v-if="hasContent && lesson.content_type=='youtube'"></span> 
+                <span class="fa fa-file-text-o" v-if="hasContent && lesson.content_type=='article'"></span> 
                 {{ lesson.title }}
             </a>
             <span class="actions d-none pull-right mr-4">
@@ -17,7 +17,6 @@
                 <a href="#" @click.prevent="EditLesson(lesson.uuid)">
                     <i class="fas fa-pencil-alt mr-3"></i>
                 </a>
-                
                 <a href="#" @click.prevent="destroy()">
                     <i class="fas fa-trash"></i>
                 </a>
@@ -26,7 +25,6 @@
 
         <div :id="`lessoncollapse-${lesson.uuid}`" class="panel-collapse collapse" aria-expanded="false">
             <div class="acdn-body">
-                
                 <div class="row mb-3" v-if="ShowLessonEdit">
                     <div class="col-md-12">
                         <EditLessonForm :lesson="lesson" />
@@ -34,7 +32,6 @@
                 </div>
                 
                 <div class="row" v-else>
-                    
                     <div class="col-md-12" v-if="!action && !hasContent">
                         <div class="btn-group d-flex justify-content-center" role="group" aria-label="Action Buttons">
                             <button type="button" class="btn btn-light flex-fillx mr-2" @click="SetAddContent('video', 'new')">
@@ -52,29 +49,31 @@
                         </div>
                     </div>
                     
-                    
+                    <!-- CHECK THIS AND PASS THE CORRECT DATA -->
                     <div class="col-md-12" v-if="action">
                         <ContentVideoUpload :lesson="lesson" v-if="action=='NewVideoUpload'" />
+
+
                         <ContentCreateYoutubeForm :lesson="lesson" v-if="action=='NewYoutubeVideo'" />
-                        <ContentCreateYoutubeForm :lesson="lesson" action="edit" :content="content" v-if="action=='EditYoutubeVideo'" />
+                        <ContentCreateYoutubeForm :lesson="lesson" action="edit" v-if="action=='EditYoutubeVideo'" />
+
                         <ContentCreateArticleForm :lesson="lesson" v-if="action=='NewArticle'" />
-                        <ContentCreateArticleForm :lesson="lesson" action="edit" :content="content" v-if="action=='EditArticle'" />
+                        <ContentCreateArticleForm :lesson="lesson" action="edit" v-if="action=='EditArticle'" />
                     </div>
                     
-                    <div class="col-md-12 d-flex" v-if="!action && content && content.length != 0">
-                        
+                    <div class="col-md-12 d-flex" v-if="!action && hasContent">
                         <!-- Uploaded Video -->
-                        <div class="d-flex" v-if="content.content_type=='video' && content.video_src=='upload'">
+                        <div class="d-flex" v-if="lesson.content_type=='video'">
                             <div class="p-3 border rounded bg-secondary mr-2">
                                 <i class="fa fa-play-circle fa-2x text-white"></i>    
                             </div>
                             <div class="d-flex flex-column">
                                 <div>
                                     <h4 class="text-secondary">
-                                        {{ content.video_filename }}
+                                        {{ lesson.video.original_filename }}
                                     </h4>
                                 </div>
-                                <div class="mt-1">{{ content.video_duration }} min</div>
+                                <div class="mt-1">{{ lesson.durationHMS }} min</div>
                                 <div class="mt-1">
                                     <a href="#" @click.prevent="SetAddContent('video', 'edit')">
                                         <i class="fas fa-pencil-alt"></i> {{ trans('strings.edit_content') }}
@@ -84,17 +83,17 @@
                         </div>
                         
                         <!-- Youtube Video -->
-                        <div class="d-flex" v-if="content.content_type=='video' && content.video_src=='embed'">
+                        <div class="d-flex" v-if="lesson.content_type=='youtube'">
                             <div class="p-3 border rounded bg-danger mr-2">
                                 <i class="fab fa-youtube fa-2x text-white"></i>    
                             </div>
                             <div class="d-flex flex-column">
                                 <div>
                                     <h4 class="text-secondary">
-                                        {{ content.video_path }}
+                                        {{ lesson.video.youtube_link }}
                                     </h4>
                                 </div>
-                                <div class="mt-1">{{ content.video_duration }}</div>
+                                <div class="mt-1">{{ lesson.durationHMS }}</div>
                                 <div class="mt-1">
                                     <a href="#" @click.prevent="SetAddContent('youtube', 'edit')">
                                         <i class="fas fa-pencil-alt"></i> {{ trans('strings.edit_content') }}
@@ -104,7 +103,7 @@
                         </div>
                         
                         <!-- Article -->
-                        <div class="d-flex" v-if="content.content_type=='article'">
+                        <div class="d-flex" v-if="lesson.content_type=='article'">
                             <div class="p-3 border rounded bg-secondary mr-2">
                                 <i class="fa fa-file-alt fa-2x text-white"></i>    
                             </div>
@@ -150,10 +149,11 @@
             ContentCreateArticleForm
         },
         
-        props: ['index', 'lesson', 'section', 'findLessonsBySection'],
+        props: ['index', 'prop_lesson', 'section', 'findLessonsBySection'],
         
         data(){
             return {
+                lesson: {},
                 action: null,
                 hasContent: false,
                 content: [],
@@ -163,12 +163,10 @@
         
         methods: {
             findLessonContent(){
-                axios.get(`/api/contents/findByLesson/${this.lesson.id}`)
+                axios.get(`/api/lessons/${this.prop_lesson.id}`)
                     .then(response => {
-                        this.content = response.data.data
-                        if(this.content.length != 0){
-                            this.hasContent = true
-                        }
+                        this.lesson = response.data.data
+                        this.hasContent = response.data.data.has_content
                     })
             },
             
@@ -229,7 +227,7 @@
                 this.$dialog.confirm({title: 'confirm_delete', 
                     body: 'confirm_lesson_delete'}, {animation: 'fade', loader: true})
                     .then(dialog => {
-                        axios.delete(`/api/lessons/${this.lesson.id}`)
+                        axios.delete(`/api/lessons/${this.prop_lesson.id}`)
                             .then(() => {
                                 dialog.close()
                                 this.findLessonsBySection()
@@ -248,19 +246,19 @@
         mounted(){
             
             this.$bus.$on('upload:cancelled', data => {
-                if(data == this.lesson.id){
+                if(data == this.prop_lesson.id){
                     this.action = null
                 }
             })
             .$on('upload:complete', data => {
-                if(data == this.lesson.id){
+                if(data == this.prop_lesson.id){
                     this.action = null
                     this.hasContent = true
                     this.findLessonContent()
                 }
             })
             .$on('lesson.editEnd', data => {
-                if(data ==  this.lesson.id){
+                if(data ==  this.prop_lesson.id){
                     this.ShowLessonEdit = false
                     this.findLessonsBySection()
                 }
