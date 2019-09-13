@@ -21,6 +21,10 @@ class CreateLessonsTable extends Migration
             $table->string('lesson_type')->default('lecture');
             $table->string('title');
             $table->text('description')->nullable();
+
+            $table->enum('content_type', ['video', 'youtube', 'article', 'quiz'])->nullable();
+            $table->decimal('duration')->default(0);
+            $table->text('article_body')->nullable();
             $table->boolean('preview')->default(false);
             $table->integer('sortOrder');
             $table->timestamps();

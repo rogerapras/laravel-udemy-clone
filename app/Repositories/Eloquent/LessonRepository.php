@@ -53,7 +53,7 @@ class LessonRepository extends RepositoryAbstract implements ILesson
             'title' => $data['title'],
             'description' => $data['description'],
         	'sortOrder' => $maxSort+1,
-        	'lesson_type' => $data['lesson_type']
+            'lesson_type' => $data['lesson_type'],
         ]);
         
         return $lesson;

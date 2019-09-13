@@ -10,21 +10,23 @@ class Lesson extends Model
     use Uuid;
     
     protected $fillable = [
-        'uuid',
         'section_id', 
         'course_id',
         'title', 
-        'uid', 
+        'content_type', 
+        'uuid',
+        'duration',
+        'article_body',
         'description', 
         'preview', 
         'sortOrder'
     ];
     
-    protected $appends=[ 'content_type', 
+    protected $appends=[ //'content_type', 
                             'durationHMS', 
                             'video_provider', 
                             'video_link', 
-                            'article_body', 
+                            //'article_body', 
                             'minutes_seconds', 
                             'image',
                             'user_has_completed'
@@ -36,6 +38,11 @@ class Lesson extends Model
         return $this->belongsTo(Section::class);
     }
     
+    public function video()
+    {
+        return $this->hasOne(Video::class);
+    }
+
     public function content()
     {
         return $this->hasOne(Content::class);
@@ -46,10 +53,10 @@ class Lesson extends Model
         return $this->belongsToMany(User::class, 'completions', 'lesson_id', 'user_id')->withTimestamps();
     }
     
-    public function getContentTypeAttribute()
-    {
-        return $this->content ? $this->content->content_type : null;
-    }
+    // public function getContentTypeAttribute()
+    // {
+    //     return $this->content ? $this->content->content_type : null;
+    // }
     
     public function course()
     {
@@ -115,14 +122,14 @@ class Lesson extends Model
         }
     }
     
-    public function getArticleBodyAttribute()
-    {
-        if($this->content && $this->content->content_type == 'article'){
-            return $this->content->article_body;
-        } else {
-            return null;
-        }
-    }
+    // public function getArticleBodyAttribute()
+    // {
+    //     if($this->content && $this->content->content_type == 'article'){
+    //         return $this->content->article_body;
+    //     } else {
+    //         return null;
+    //     }
+    // }
     
     
 }
