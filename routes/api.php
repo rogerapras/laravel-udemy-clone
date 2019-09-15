@@ -15,6 +15,11 @@ Route::group(['namespace' => 'Api\v1'], function () {
         Route::post('installer/update', 'UpdateController@updateToLatest');
     });
 
+    // Languages
+    Route::get('/languages', function(){
+        return response()->json(config('languages'), 200);
+    }); 
+
     /*----------------------------------------------------------------
     | AUTHENTICATION ROUTES (NAMESPACED)
     |----------------------------------------------------------------*/

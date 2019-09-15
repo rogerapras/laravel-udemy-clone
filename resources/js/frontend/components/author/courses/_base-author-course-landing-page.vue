@@ -52,16 +52,13 @@
             <div class="form-row mb-4">
                 <div class="col-md-6">
                     <label>{{ trans('strings.language') }}</label>
-                    <select class="form-control"
-                        v-model="form.language">
-                        <option value="english">English</option>
-                        <option value="french">French</option>
-                        <option value="spanish">Spanish</option>
+                    <select class="form-control" v-model="form.language">
+                        <option v-for="(item,key) in languages" :value="item" :key="key">{{ item }}</option>
                     </select>
                     <has-error :form="form" field="language"/>
                 </div>
                 
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <label>{{ trans('strings.topics') }}</label>
                     <vue-tags-input 
                         v-model="topic"
@@ -69,11 +66,12 @@
                         :max-tags="4"
                         placeholder="choose topic"
                         @tags-changed="topicChanged" />
-                </div>
+                </div> -->
             </div>
             
             <div class="form-group text-right">
                 <base-button :loading="form.busy" class="btn btn-lg btn-danger font-16 fw-500">
+                    <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                     {{ trans('strings.save') }}
                 </base-button>
             </div>
@@ -116,6 +114,7 @@ export default {
         return {
             uuid: '',
             loading: true,
+            languages: [],
             editorOption: {
               modules: {
                 toolbar: [
@@ -152,15 +151,25 @@ export default {
             this.form.topics = topics.map(t => t.text)
         },
 
-        save(){
-            this.form.put(`/api/courses/${this.course.id}`)
+        getLanguages(){
+            axios.get('/api/languages')
+                .then(response => {
+                    this.languages = response.data
+                })
+        },
+
+        async save(){
+            this.form.topics = await []
+            await this.form.put(`/api/courses/${this.course.id}`)
                 .then(() => {
-                    console.log("Updated")
+                    //console.log("Updated")
                 })
         }
     },
 
     beforeMount(){
+        this.getLanguages()
+
         this.form.keys().forEach(key => {
             this.form[key] = this.course[key]
         })

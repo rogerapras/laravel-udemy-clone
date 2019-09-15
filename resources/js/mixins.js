@@ -3,6 +3,8 @@ import { mapGetters } from 'vuex'
 Vue.mixin({
     methods:{
         formatCurrency(amount){
+            if(amount == 0) return this.trans('strings.free')
+            
             const price = (amount * this.conversion_rate).toFixed(2)
             const selected_currency = this.currencies.filter(c => c.code == this.currency)[0]
             if(selected_currency && selected_currency !== undefined){

@@ -11,22 +11,29 @@
                     <p class="mb-1">
                         {{ trans('strings.select_price_tier') }}
                     </p>
-                    <form @submit.prevent="UpdatePrice" @keydown="form.onKeydown($event)">
+                    <form @submit.prevent="UpdatePrice" @keydown="priceForm.onKeydown($event)">
                         <div class="form-row mb-4">
                             <div class="col-md-5">
-                                <select v-model="priceForm.price" class="form-control rounded-0">
+                                <!-- <select v-model="priceForm.price" class="form-control rounded-0">
                                     <option value="0">{{ trans('strings.free') }}</option>
                                     <option value="19.99">{{ formatCurrency(19.99) }}</option>
                                     <option value="24.99">{{ formatCurrency(24.99) }}</option>
                                     <option value="29.99">{{ formatCurrency(29.99) }}</option>
-                                </select>
+                                </select> -->
+                                <input class="form-control rounded-0" type="number" step="0.01" v-model="priceForm.price">
                                 <has-error :form="priceForm" field="price"/>
                             </div>
                             
                             <div class="col-md-6">
-                                <base-button :loading="priceForm.busy" class="btn rounded-0 btn-danger">
-                                    {{ trans('strings.save') }}
-                                </base-button>
+                                <div class="d-flex align-items-center">
+                                    <base-button :loading="priceForm.busy" class="btn rounded-0 btn-danger">
+                                        <i class="fas fa-spinner fa-spin" v-if="priceForm.busy"></i>
+                                        {{ trans('strings.save') }}
+                                    </base-button>
+                                    <div class="font-weight-bold ml-3 border border-secondary p-2">
+                                        {{ formatCurrency(priceForm.price) }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>

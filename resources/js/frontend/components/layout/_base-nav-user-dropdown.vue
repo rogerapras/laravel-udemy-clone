@@ -51,9 +51,7 @@
                     </a>
                 </li>
                 
-                
-                
-                <li role="presentation" class="menu__link">
+                <li role="presentation" class="menu__link" v-if="isadmin">
                     <a href="/admin/dashboard" role="menuitem">
                         <span>{{ trans('strings.admnin_dashboard') }}</span>
                     </a>
@@ -72,7 +70,7 @@
 <script>
     
     export default {
-        props: ['user'],
+        props: ['user', 'isadmin'],
         
         methods:{
             
