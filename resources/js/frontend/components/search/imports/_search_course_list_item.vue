@@ -2,14 +2,14 @@
     <div class="row mb-3">
         <div class="col-md-12 has-popover">
             <a :href="`/course/${course.slug}`">
-                <div class="course__list_item p-1">
+                <div class="course__list_item p-2">
                     <div class="row">
                         <div class="col-md-3">
                             <img :src="course.images.thumbnail" width="100%" />
                         </div>
                         
                         <div class="col-md-6 d-flex flex-column">
-                            <div class="pop__course_title mb-1 mx-0 font-20 text-dark">
+                            <div class="pop__course_title mb-1 mt-0 mb-1 font-18 text-dark">
                                 {{ course.title }}
                             </div>
                             <div class="pop__category_sm mb-2 pop__stats">

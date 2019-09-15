@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue-element-loading :active="loading" :is-full-screen="false" spinner="bar-fade-scale"/>
+        <vue-element-loading :active="loading" :is-full-screen="false" spinner="bar-fade-scale" background-color="rgba(255,255,255,1)"/>
         
         <template v-if="!loading">
             <div v-if="courses.length > 0">
