@@ -28,8 +28,8 @@
         @include('includes.partials.read-only')
 
         <div id="app">
-            <div id="wrapper" class="d-flex flex-column">
-                <main role="main" class="flex-grow-1 wrapper-inner">
+            <div id="wrapper" class="" style="height: 100vh !important;">
+                <div class="wrapper-inner">
 
                     @include('includes.partials.logged-in-as')
                     <section class="desktop__nav d-none d-lg-block">
@@ -44,11 +44,11 @@
 
                 </div>
 
-                <!-- <footer class="gabs__footer mt-auto py-3 bg-dark text-white">
+                <footer class="gabs__footer mt-autox py-3 bg-dark text-white" style="height: 200px;">
                     <div class="container">
                         <span class="text-mutedx">Place sticky footer content here.</span>
                     </div>
-                </footer> -->
+                </footer>
 
             </div>
         </div><!-- #app -->
