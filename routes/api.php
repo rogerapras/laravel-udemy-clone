@@ -195,7 +195,7 @@ Route::group(['namespace' => 'Api\v1'], function () {
             Route::put('lessons/save-draggable', 'AuthorLessonController@updateDraggable');
             Route::get('lessons/findByCourse/{id}', 'AuthorLessonController@findByCourse');
             Route::get('lessons/findBySection/{id}', 'AuthorLessonController@findBySection');
-            Route::resource('lessons', 'AuthorLessonController')->except(['index', 'show']);
+            Route::resource('lessons', 'AuthorLessonController')->except(['index']);
             
             // Content
             Route::get('contents/findByLesson/{id}', 'AuthorContentController@findByLesson');

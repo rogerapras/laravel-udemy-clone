@@ -52,11 +52,8 @@
                     <!-- CHECK THIS AND PASS THE CORRECT DATA -->
                     <div class="col-md-12" v-if="action">
                         <ContentVideoUpload :lesson="lesson" v-if="action=='NewVideoUpload'" />
-
-
                         <ContentCreateYoutubeForm :lesson="lesson" v-if="action=='NewYoutubeVideo'" />
                         <ContentCreateYoutubeForm :lesson="lesson" action="edit" v-if="action=='EditYoutubeVideo'" />
-
                         <ContentCreateArticleForm :lesson="lesson" v-if="action=='NewArticle'" />
                         <ContentCreateArticleForm :lesson="lesson" action="edit" v-if="action=='EditArticle'" />
                     </div>
@@ -74,11 +71,24 @@
                                     </h4>
                                 </div>
                                 <div class="mt-1">{{ lesson.durationHMS }} min</div>
+                                
                                 <div class="mt-1">
-                                    <a href="#" @click.prevent="SetAddContent('video', 'edit')">
-                                        <i class="fas fa-pencil-alt"></i> {{ trans('strings.edit_content') }}
-                                    </a>
+                                    <template v-if="lesson.video.is_processed && lesson.video.processing_succeeded">
+                                        <a href="#" @click.prevent="SetAddContent('video', 'edit')">
+                                            <i class="fas fa-pencil-alt"></i> {{ trans('strings.edit_content') }}
+                                        </a>
+                                    </template>
+                                    <template v-if="lesson.video.is_processed && !lesson.video.processing_succeeded">
+                                        <span class="badge badge-danger">{{ trans('strings.video_processing_failed') }}</span>
+                                        <a href="#" @click.prevent="SetAddContent('video', 'edit')">
+                                            <i class="fas fa-pencil-alt"></i> {{ trans('strings.edit_content') }}
+                                        </a>
+                                    </template>
+                                    <template v-if="!lesson.video.is_processed">
+                                        <span class="badge badge-warning">{{ trans('strings.video_processing') }}</span>
+                                    </template>
                                 </div>
+                                
                             </div>
                         </div>
                         

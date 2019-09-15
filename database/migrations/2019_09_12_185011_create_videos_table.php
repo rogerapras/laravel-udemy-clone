@@ -19,6 +19,7 @@ class CreateVideosTable extends Migration
             $table->integer('lesson_id')->unsigned();
             $table->boolean('is_processed')->default(false);
             $table->boolean('encoded')->default(false);
+            $table->boolean('processing_succeeded')->nullable();
             $table->string('disk')->default('server');
             $table->string('streamable_sm')->nullable();
             $table->string('streamable_lg')->nullable();

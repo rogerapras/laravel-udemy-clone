@@ -2,8 +2,10 @@
 
 namespace App\Jobs;
 
+use File;
 use FFMpeg;
 use Carbon\Carbon;
+use App\Models\Video;
 use App\Models\Content;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Format\Video\X264;
@@ -13,22 +15,21 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use App\Repositories\Contracts\IContent;
 
 class ConvertVideoForStreaming implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    //public $filename;
-    public $video;
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct(Content $content)
+    public $tries = 3;
+
+    protected $video;
+    protected $contents;
+    
+    public function __construct(Video $video, IContent $contents)
     {
-        $this->video = $content;
-        //$this->filename = $filename; // eg 
+        $this->video = $video;
+        $this->contents = $contents;
     }
 
     /**
@@ -38,37 +39,65 @@ class ConvertVideoForStreaming implements ShouldQueue
      */
     public function handle()
     {
-        $disk = setting('site.video_upload_location') == 'local' ? 'server' : $storage_location; // either local server or s3 or other cloud;
-        $tmp_file = storage_path() . '/uploads/' . $this->video->video_filename;
+        $disk = $this->video->disk == 'local' ? 'server' : $this->video->disk; // either local server or s3 or other cloud;
+        $tmp_file = storage_path() . '/uploads/' . $this->video->original_filename;
         $tmp_disk = 'tmpVideo';
         // create a video format...
         $lowBitrateFormat = (new X264('libmp3lame', 'libx264'))->setKiloBitrate(500);
-        $converted_name = $this->getCleanFileName($this->video->video_filename);
+        $converted_name = $this->getCleanFileName($this->video->original_filename);
 
-
-        // open the uploaded video from the right disk...
-        FFMpeg::fromDisk($tmp_disk)
-            ->open($this->video->video_filename)
-            // add the 'resize' filter...
-            ->addFilter(function ($filters) {
-                $filters->resize(new Dimension(960, 540));
-            })
-            ->export()
-            // tell the MediaExporter to which disk and in which format we want to export...
-            ->toDisk($disk)
-            ->inFormat($lowBitrateFormat)
-            ->save('videos/'.$converted_name);
-
-        // update the database so we know the convertion is done!
-        // $this->video->update([
-        //     'converted_for_streaming_at' => Carbon::now(),
-        //     'processed' => true,
-        //     'stream_path' => $converted_name
-        // ]);
+        try{
+            // MP4
+            FFMpeg::fromDisk($tmp_disk)
+                ->open($this->video->original_filename)
+                ->addFilter(function ($filters) {
+                    $filters->resize(new Dimension(1280, 720));
+                })
+                ->export()
+                ->toDisk($disk)
+                ->inFormat($lowBitrateFormat)
+                ->save('videos/720_'.$converted_name)
+                ->addFilter(function ($filters) {
+                    $filters->resize(new Dimension(640, 360));
+                })
+                ->export()
+                ->toDisk($disk)
+                ->inFormat($lowBitrateFormat)
+                ->save('videos/360_'.$converted_name);
+                
+                // ->getFrameFromSeconds(10)
+                // ->export()
+                // ->toDisk($disk)
+                // ->save('FrameAt10sec.png');
+                
+            
+            $this->updateRecord(true, [
+                'streamable_sm' => '360_' . $converted_name,
+                'streamable_lg' => '720_' . $converted_name,
+            ]);
+            File::delete($tmp_file);
+        } catch(\Exception $e){
+            \Log::error($e->getMessage());
+            $this->updateRecord(false);
+        }
+        
     }
 
 
-    private function getCleanFileName($filename){
-        return preg_replace('/\\.[^.\\s]{3,4}$/', '', $filename) . '.mp4';
+    private function getCleanFileName($filename, $extension='.mp4'){
+        return preg_replace('/\\.[^.\\s]{3,4}$/', '', $filename) . $extension;
+    }
+
+    private function updateRecord($success, $data = [])
+    {
+        $this->contents->createVideoContent([
+            'encoded' => false,
+            'streamable_sm' => !empty($data) ? $data['streamable_sm'] : null,
+            'streamable_lg' => !empty($data) ? $data['streamable_lg'] : null,
+            'converted_for_streaming_at' => Carbon::now('UTC'),
+            'processing_succeeded' => $success,
+            'duration' => $this->video->lesson->duration,
+            'is_processed' => true
+        ], $this->video->lesson->id);
     }
 }

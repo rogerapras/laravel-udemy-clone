@@ -671,5 +671,7 @@ return [
     "running_wait" => "Running. Wait...",
     "version_available" => "Version <span class=\"badge badge-warning\">:version</span> is available.",
     "created_by" => "Created by",
-    "last_updated" => "Last updated"
+    "last_updated" => "Last updated",
+    "video_processing" => "Video processing",
+    "video_processing_failed" => "Video processing failed"
 ];

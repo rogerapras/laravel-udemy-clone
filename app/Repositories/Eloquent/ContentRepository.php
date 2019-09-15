@@ -37,30 +37,21 @@ class ContentRepository extends RepositoryAbstract implements IContent
 
     public function destroyVideo($id)
     {
-        return Video::find('id')->delete();
+        $video = Video::find($id);
+        if($video) return $video->delete();
     }
     
     public function createVideoContent(array $data, $lessonId)
     {
         $lesson = Lesson::find($lessonId);
-        Video::updateOrCreate(
+        $video = Video::updateOrCreate(
             ['lesson_id' => $lessonId],
-            [
-                'disk' => setting('site.video_upload_location'),
-                'encoded' => $data['encoded'],
-                'streamable_sm' => $data['streamable_sm'],
-                'streamable_lg' => $data['streamable_lg'],
-                'converted_for_streaming_at' => $data['converted_for_streaming_at'],
-                'original_filename' => $data['original_filename'],
-                'is_processed' => $data['is_processed']
-            ]
+            $data
         );
         $lesson->duration = $data['duration'];
         $lesson->content_type = 'video';
         $lesson->save();
-        
-
-        return $content;
+        return $video;
     }
    
     
