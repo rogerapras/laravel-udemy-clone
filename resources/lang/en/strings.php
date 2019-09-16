@@ -673,5 +673,19 @@ return [
     "created_by" => "Created by",
     "last_updated" => "Last updated",
     "video_processing" => "Video processing",
-    "video_processing_failed" => "Video processing failed"
+    "video_processing_failed" => "Video processing failed",
+    "enable_video_encoding" => "Enable video encoding?",
+    "enable_video_encoding_explanation" => "If enabled, videos will be encoded using FFMpeg. For this to work, please ensure that you have FFMpeg running on your server and that is is exported to PATH",
+    "important" => "Important!",
+    "redirect_https" => "Redirect to HTTPS",
+    "redirect_https_explanation" => "You must have SSL set up on your server for this to work.",
+    "site_url" => "Site URL",
+    "choose_logo" => "Choose Logo",
+    "choose_icon" => "Choose Favicon",
+    "choose_homepage_image" => "Choose Homepage Banner Image",
+    "s3_url" => 'AWS URL',
+    "s3_bucket" => "AWS Bucket",
+    "s3_default_region" => "AWS Default Region",
+    "s3_secret_access_key" => "AWS Secret Access Key",
+    "s3_access_id" => "AWS Access ID"
 ];

@@ -3,7 +3,7 @@
         <!-- LOGO -->
         <div class="nav__logo">
             <a href="{{ route('frontend.index') }}" class="navbar-brand logo__wrap">
-                <img src="https://www.udemy.com/staticx/udemy/images/v6/logo-coral.svg" class=img-responsive />
+                <img src="{{ setting('site.logo') }}" class=img-responsive />
             </a>
         </div>
 

@@ -8,6 +8,7 @@
                             <div class="d-flex justify-content-center mb-3">
                                 <img :src="user.picture" width="120" height="120" class="rounded-circle" />
                             </div>
+                            
                             <template v-if="auth_user && auth_user.id !== user.id">
                                 <button class="btn btn-danger rounded-0 btn-lg mb-3" 
                                     v-if="!messaging" @click="messaging = true">

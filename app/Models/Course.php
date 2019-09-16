@@ -319,5 +319,10 @@ class Course extends Model
             return 'draft';
         }
     }
+
+    public function isLive()
+    {
+        return $this->approved && $this->published;
+    }
    
 }

@@ -42,9 +42,14 @@ class CourseController extends Controller
         if(! $course){
             return redirect()->route('frontend.404');
         }
+        // check if course is live
+        if(!$course->isLive()){
+            return redirect()->back();
+        }
         if(auth()->check() && auth()->user()->canAccessCourse($course)){
             return redirect()->route('frontend.course.dashboard.overview', ['slug' => $course->slug]);
         }
+        
         
         return view('frontend.courses.Show')
                     ->with(['course' => new CourseResource($course)]);
@@ -89,8 +94,22 @@ class CourseController extends Controller
     
     public function Play($slug, $uuid)
     {
+
         $course = $this->courses->findBySlug($slug);
+        if(! $course){
+            return redirect()->route('frontend.404');
+        }
+        
+        if(!auth()->user()->canAccessCourse($course)){
+            return redirect()->route('frontend.course.show', ['slug' => $course->slug]);
+        }
+
+        if(!$course->isLive()){
+            return redirect()->back();
+        }
+
         $data = $this->lessons->findByUuid($uuid);
+
         return view('frontend.courses.player.Play')
             ->with([
                 'course' => new CourseResource($course),

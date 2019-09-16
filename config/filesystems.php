@@ -53,6 +53,12 @@ return [
             'visibility' => 'public',
         ],
 
+        'icons' => [
+            'driver' => 'local',
+            'root' => public_path(),
+            'visibility' => 'public'
+        ],
+
         'server' => [
             'driver' => 'local',
             'root' => public_path('uploads'),

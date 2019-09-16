@@ -82,6 +82,14 @@ class AdminSettingsController extends Controller
             }
 
         }
+
+        $this->validate($request, [
+            's3_access_id' => 'required_if:video_upload_location,s3',
+            's3_secret_access_key' => 'required_if:video_upload_location,s3',
+            's3_default_region' => 'required_if:video_upload_location,s3',
+            's3_bucket' => 'required_if:video_upload_location,s3'
+            //'s3_url' => 'required_if: video_upload_location:s3'
+        ]);
         
 
         $data = $request->all();
@@ -105,5 +113,17 @@ class AdminSettingsController extends Controller
         return response()->json(setting()->all(), 200);
     }
 
+    public function uploadLogo(Request $request)
+    {
+        $file = $request->file('photo');
+        $path = $file->storeAs('images', $file->getClientOriginalName(), 'icons'); // folder, filename, disk
+        
+        if($path){
+            setting(["site.{$request->icon_type}" => '/'.$path]);
+            setting()->save();
+        }
+        
+        return response()->json(setting()->all(), 200);
+    }
 
 }

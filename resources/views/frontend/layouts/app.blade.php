@@ -10,6 +10,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
         <title>@yield('title', app_name())</title>
+        <link rel="icon" href="{{ setting('site.favicon') }}">
         <meta name="description" content="@yield('meta_description', 'Laravel Boilerplate')">
         <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
         @yield('meta')
@@ -28,8 +29,8 @@
         @include('includes.partials.read-only')
 
         <div id="app">
-            <div id="wrapper" class="" style="height: 100vh !important;">
-                <div class="wrapper-inner">
+            <div id="wrapper" class="" style="min-height: 100%; margin-bottom: -100px;">
+                <div class="wrapper-inner h-100">
 
                     @include('includes.partials.logged-in-as')
                     <section class="desktop__nav d-none d-lg-block">
@@ -41,14 +42,14 @@
                     
                     @include('includes.partials.messages')
                     @yield('content')
-
+                    <!-- <div class="push" style="height: 203px;"></div> -->
                 </div>
 
-                <footer class="gabs__footer mt-autox py-3 bg-dark text-white" style="height: 200px;">
+                <!-- <footer class="gabs__footer mt-autox py-3 bg-dark text-white" style="height: 203px;">
                     <div class="container">
                         <span class="text-mutedx">Place sticky footer content here.</span>
                     </div>
-                </footer>
+                </footer> -->
 
             </div>
         </div><!-- #app -->

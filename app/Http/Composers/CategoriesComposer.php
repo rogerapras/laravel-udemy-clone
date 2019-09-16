@@ -18,7 +18,7 @@ class CategoriesComposer
     
     public function compose(View $view)
     {
-        $categories = $this->categories->fetchAll();
+        $categories = $this->categories->fetchAllWithCourses();
         $view->with('gcategories', CategoryResource::collection($categories));
     }
     

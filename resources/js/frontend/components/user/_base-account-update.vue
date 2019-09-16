@@ -195,7 +195,6 @@
                 this.form.put(`/api/settings/profile`)
             },
             handleUploaded(resp) {
-                console.log(resp)
                 this.picture = resp.picture
                 this.isLoading = false
             },

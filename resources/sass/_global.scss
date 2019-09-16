@@ -12,6 +12,12 @@
   border-radius: 0 !important;
 }
 
+@for $i from 8 through 40{
+  .font-#{$i}{
+      font-size: #{$i}px !important;
+  }
+}
+
 .btn.active,
 .btn:active,
 button:active,

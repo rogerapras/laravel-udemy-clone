@@ -16,7 +16,12 @@
         </div>
     </section>
 
+    @auth
     <base-user-show 
         :user="{{ json_encode($user) }}" 
-        :auth_user="{{ auth()->user() }}"></base-user-show>
+        :auth_user="{{ json_encode(auth()->user()) }}"></base-user-show>
+    @else 
+        <base-user-show 
+            :user="{{ json_encode($user) }}"></base-user-show>
+    @endauth
 @endsection

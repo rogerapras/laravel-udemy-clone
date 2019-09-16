@@ -15,6 +15,25 @@ class CategoryRepository extends RepositoryAbstract implements ICategory
         return Category::class;
     }
     
+    public function fetchAllWithCourses()
+    {
+        $categories = Category::parents()
+                        ->whereHas('children', function($q) {
+                            $q->whereHas('courses', function($c) {
+                                $c->where('published', true)
+                                    ->where('approved', true);
+                            });
+                        })
+                        ->with(['children' => function($children){
+                            $children->has('courses')
+                                ->ordered();
+                        }])
+                        ->ordered()
+                        ->get();
+        
+        return $categories;
+    }
+
     public function fetchAll()
     {
         $categories = Category::parents()

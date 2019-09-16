@@ -2,6 +2,23 @@
 
 @section('title', app_name() . ' | ' . __('navs.general.home'))
 
+@push('after-styles')
+    <style>
+        .homepage .hero:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image: url("{{ setting('site.homepage_image') }}") !important; 
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.9;
+            background-size: cover;
+        }
+    </style>
+@endpush
+
 @section('content')
 <section class="homepage">
     <section class="hero d-flex flex-row align-items-center text-center bg-secondary text-white">

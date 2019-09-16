@@ -300,6 +300,9 @@ Route::group(['namespace' => 'Api\v1'], function () {
         Route::post('settings/mail', 'AdminSettingsController@save_mail_settings');
         Route::get('settings', 'AdminSettingsController@fetchSettings');
 
+        // Logos
+        Route::post('settings/upload', 'AdminSettingsController@uploadLogo');
+
 
     });
 
