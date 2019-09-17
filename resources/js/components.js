@@ -62,6 +62,10 @@ Vue.use(ClientTable, {
       dropdown: false,
       edge: false
   },
+  texts:{
+      filter: "",
+      limit: ""
+  },
   perPage:10,
   perPageValues:[5,10,25,50,100],
   footerHeadings: false,

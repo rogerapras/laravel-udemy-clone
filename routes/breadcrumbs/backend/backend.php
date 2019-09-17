@@ -37,6 +37,7 @@ Breadcrumbs::for('admin.finances.payout.periods', function ($trail) {
     $trail->push(__('strings.payouts'), route('admin.finances.payout.periods'));
 });
 
+
 Breadcrumbs::for('admin.finances.refunds', function ($trail) {
     $trail->push(__('strings.refunds'), route('admin.finances.refunds'));
 });
@@ -44,6 +45,17 @@ Breadcrumbs::for('admin.finances.refunds', function ($trail) {
 
 Breadcrumbs::for('admin.settings', function ($trail) {
     $trail->push(__('strings.settings'), route('admin.settings'));
+});
+
+Breadcrumbs::for('admin.locales', function ($trail) {
+    $trail->push(__('strings.locale_manager'), route('admin.locales'));
+});
+
+Breadcrumbs::for('admin.locales.index', function ($trail) {
+    $trail->push(__('strings.locale_manager'), route('admin.locales.index'));
+});
+Breadcrumbs::for('admin.locales.view', function ($trail) {
+    $trail->push(__('strings.locale_manager'), route('admin.locales.view'));
 });
 
 require __DIR__.'/auth.php';

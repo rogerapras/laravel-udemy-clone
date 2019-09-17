@@ -304,6 +304,11 @@ Route::group(['namespace' => 'Api\v1'], function () {
         Route::post('settings/upload', 'AdminSettingsController@uploadLogo');
 
 
+        // Translations
+        Route::get('locales/{group}/{locale}', 'AdminLocaleController@fetchTranslations');
+        Route::post('locales/{group}/{locale}', 'AdminLocaleController@fetchTranslations');
+
+
     });
 
 });
