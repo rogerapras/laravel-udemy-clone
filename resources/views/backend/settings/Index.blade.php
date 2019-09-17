@@ -11,6 +11,10 @@
                     <i class="fas fa-cogs"></i>
                     @lang('strings.site_settings')
                 </a>
+                <a class="list-group-item list-group-item-action" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-video" role="tab" aria-controls="v-pills-video" aria-selected="false">
+                    <i class="fas fa-video"></i>
+                    @lang('strings.video_settings')
+                </a>
                 <a class="list-group-item list-group-item-action" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
                     <i class="fas fa-coins"></i>
                     @lang('strings.currency_settings')
@@ -27,6 +31,10 @@
                     <i class="fas fa-comments"></i>
                     @lang('strings.language_settings')
                 </a>
+                <a class="list-group-item list-group-item-action" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-license" role="tab" aria-controls="v-pills-license" aria-selected="false">
+                    <i class="fas fa-id-card"></i>
+                    @lang('strings.license_information')
+                </a>
             </div>
         </div><!--col-->
 
@@ -34,6 +42,10 @@
             <div class="tab-content card-min-height" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                     <base-site-settings></base-site-settings>
+                </div>
+
+                <div class="tab-pane fade show" id="v-pills-video" role="tabpanel" aria-labelledby="v-pills-video-tab">
+                    <base-video-settings></base-video-settings>
                 </div>
 
                 <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
@@ -49,6 +61,9 @@
                 </div>
                 <div class="tab-pane fade" id="v-pills-language" role="tabpanel" aria-labelledby="v-pills-language-tab">
                     <base-language-settings></base-language-settings>
+                </div>
+                <div class="tab-pane fade" id="v-pills-license" role="tabpanel" aria-labelledby="v-pills-license-tab">
+                    <base-license-information></base-license-information>
                 </div>
             </div>
             

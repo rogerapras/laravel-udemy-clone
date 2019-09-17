@@ -22,10 +22,13 @@
     </section>
 
     <section class="course__list py-4 bg-white">
-        <base-cart-checkout :payment_settings="{{ json_encode(setting('payments')) }}"></base-cart-checkout>
+        <base-cart-checkout :payment_settings="{{ json_encode(setting('payments')) }}"
+            site_name="{{ setting('site.site_name') }}" 
+            site_currency="{{ setting('site.site_currency') ?? 'USD' }}"></base-cart-checkout>
     </section>
 @endsection
 
 @push('after-scripts')
+    <script type="text/javascript" src="https://checkout.razorpay.com/v1/razorpay.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
 @endpush

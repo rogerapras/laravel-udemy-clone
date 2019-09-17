@@ -203,7 +203,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         Musonza\Chat\ChatServiceProvider::class,
 
-        App\Providers\SettingsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
 

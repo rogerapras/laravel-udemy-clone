@@ -26,8 +26,7 @@ class StripePaymentController extends Controller
         } else {
             \Stripe\Stripe::setApiKey(setting('payments.stripe_sandbox_secret_key'));
         }
-        //\Stripe\Stripe::setApiKey(config('services.stripe.secret'));
-        
+                
         $charge = \Stripe\Charge::create(array(
             "amount" => $request->purchase_price * 100,
             "currency" => setting('site.site_currency') ?? 'USD',

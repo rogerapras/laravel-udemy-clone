@@ -37,9 +37,9 @@ class PaymentRepository extends RepositoryAbstract implements IPayment
         $courses = $this->courses->findWhereIn('id', $data['courses']);
         
         $cart = Cart::find($data['cart']);
-        $organicPercent = config('site_settings.earning_organic_sales_percentage')/100;
-        $promoPercent = config('site_settings.earning_promo_sales_percentage')/100;
-        $affiliatePercent = config('site_settings.earning_affiliate_sales_percentage')/100;
+        $organicPercent = (setting('site.earning_organic_sales_percentage') ?? 40) / 100;
+        $promoPercent = (setting('site.earning_promo_sales_percentage') ?? 75) / 100;
+        $affiliatePercent = (setting('site.earning_affiliate_sales_percentage') ?? 20) / 100;
         
         
         // insert payments for each course
@@ -54,7 +54,7 @@ class PaymentRepository extends RepositoryAbstract implements IPayment
                 $coupon = null;
             }
             /**************** Calculate Earnings **********/
-            if(!is_null($referee) && config('site_settings.site_enable_affiliate') == 1){
+            if(!is_null($referee) && setting('site.enable_affiliate') ==1){
                 $affiliateEarning = $amount*$affiliatePercent;
                 $amountLeft = $amount - $affiliateEarning;
                 if($cartItem->coupon_id && $coupon->sitewide == false){
@@ -76,7 +76,7 @@ class PaymentRepository extends RepositoryAbstract implements IPayment
             $payment->course_id = $course->id;
             $payment->payer_id = $payer->id;
             
-            if(!is_null($referee) && config('site_settings.site_enable_affiliate') == 1){
+            if(!is_null($referee) && setting('site.enable_affiliate') == 1){
                 $payment->referred_by = $referee->id;
             }
             $payment->payment_method = $gateway;

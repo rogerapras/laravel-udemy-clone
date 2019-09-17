@@ -1,49 +1,55 @@
 <template>
     <form @submit.prevent="submit">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <!-- Gateways -->
                 <fieldset>
                     <legend class="scheduler-border">{{ trans('strings.payment_gateways') }}</legend>
                     <div class="form-group row mb-1">
                         <label class="col-md-5 form-control-label">{{ trans('strings.enable_paypal_payment') }}</label>
                         <div class="col-md-7">
-                            <el-switch
-                                style="display: block"
-                                v-model="form.enable_paypal"
-                                active-color="#13ce66"
-                                inactive-color="#ff4949"
-                                :active-text="trans('strings.yes')"
-                                :inactive-text="trans('strings.no')">
-                            </el-switch>
+                            <div class="form-group rowx mb-1">
+                                <div class="custom-control custom-checkbox mr-sm-2 font-14 fw-300 mb-0">
+                                    <input id="enable_paypal" name="enable_paypal" :value="true" v-model="form.enable_paypal" 
+                                        class="custom-control-input rounded-0" 
+                                        type="checkbox">
+                                    <label class="custom-control-label" for="enable_paypal">
+                                        {{ trans('strings.yes') }}
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
+                    
                     <div class="form-group row mb-1">
                         <label class="col-md-5 form-control-label">{{ trans('strings.enable_credit_card') }}</label>
                         <div class="col-md-7">
-                            <el-switch
-                                style="display: block"
-                                v-model="form.enable_credit_card"
-                                active-color="#13ce66"
-                                inactive-color="#ff4949"
-                                :active-text="trans('strings.yes')"
-                                :inactive-text="trans('strings.no')">
-                            </el-switch>
+                            <div class="form-group rowx mb-1">
+                                <div class="custom-control custom-checkbox mr-sm-2 font-14 fw-300 mb-0">
+                                    <input id="enable_credit_card" name="enable_credit_card" :value="true" v-model="form.enable_credit_card" 
+                                        class="custom-control-input rounded-0" 
+                                        type="checkbox">
+                                    <label class="custom-control-label" for="enable_credit_card">
+                                        {{ trans('strings.yes') }}
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group row mb-1">
-                        <label class="col-md-5 form-control-label">{{ trans('strings.credit_card_processor') }}</label>
-                        <div class="col-md-7">
-                            <select v-model="form.credit_card_processor" class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('credit_card_processor') }">
-                                <option value="stripe">Stripe</option>
-                                <option value="razorpay">RazorPay</option>
-                            </select>
-                            <has-error :form="form" field="credit_card_processor"></has-error>
+                    <template v-if="form.enable_credit_card">
+                        <div class="form-group row mb-1">
+                            <label class="col-md-5 form-control-label">{{ trans('strings.credit_card_processor') }}</label>
+                            <div class="col-md-7">
+                                <select v-model="form.credit_card_processor" class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has('credit_card_processor') }">
+                                    <option value="stripe">Stripe</option>
+                                    <option value="razorpay">RazorPay</option>
+                                </select>
+                                <has-error :form="form" field="credit_card_processor"></has-error>
+                            </div>
                         </div>
-                    </div>
+                    </template>
                 </fieldset>
 
                 <!-- PAYPAL SETTINGS -->
@@ -67,179 +73,167 @@
                         </div>
                         <div class="form-group row mb-1">
                             <label class="col-md-5 form-control-label">
-                                {{ trans('strings.paypal_sandbox_api_username') }}
+                                {{ trans('strings.paypal_sandbox_client_id') }}
                             </label>
                             <div class="col-md-7">
-                                <input type="text" v-model="form.paypal_sandbox_api_username" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('paypal_sandbox_api_username') }">
-                                <has-error :form="form" field="paypal_sandbox_api_username"></has-error>
+                                <input type="text" v-model="form.paypal_sandbox_client_id" class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has('paypal_sandbox_client_id') }">
+                                <has-error :form="form" field="paypal_sandbox_client_id"></has-error>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-1">
+                            <label class="col-md-5 form-control-label">
+                                {{ trans('strings.paypal_sandbox_secret') }}
+                            </label>
+                            <div class="col-md-7">
+                                <input type="text" v-model="form.paypal_sandbox_secret" class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has('paypal_sandbox_secret') }">
+                                <has-error :form="form" field="paypal_sandbox_secret"></has-error>
                             </div>
                         </div>
 
-                        <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.paypal_sandbox_api_password') }}</label>
-                            <div class="col-md-7">
-                                <input type="text" v-model="form.paypal_sandbox_api_password" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('paypal_sandbox_api_password') }">
-                                <has-error :form="form" field="paypal_sandbox_api_password"></has-error>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.paypal_sandbox_api_secret') }}</label>
-                            <div class="col-md-7">
-                                <input type="text" v-model="form.paypal_sandbox_api_secret" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('paypal_sandbox_api_secret') }">
-                                <has-error :form="form" field="paypal_sandbox_api_secret"></has-error>
-                            </div>
-                        </div>
 
                         <hr />
                         <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.paypal_live_api_username') }}</label>
+                            <label class="col-md-5 form-control-label">
+                                {{ trans('strings.paypal_live_client_id') }}
+                            </label>
                             <div class="col-md-7">
-                                <input type="text" v-model="form.paypal_live_api_username" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('paypal_live_api_username') }">
-                                <has-error :form="form" field="paypal_live_api_username"></has-error>
+                                <input type="text" v-model="form.paypal_live_client_id" class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has('paypal_live_client_id') }">
+                                <has-error :form="form" field="paypal_live_client_id"></has-error>
                             </div>
                         </div>
-
                         <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.paypal_live_api_password') }}</label>
+                            <label class="col-md-5 form-control-label">
+                                {{ trans('strings.paypal_live_secret') }}
+                            </label>
                             <div class="col-md-7">
-                                <input type="text" v-model="form.paypal_live_api_password" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('paypal_live_api_password') }">
-                                <has-error :form="form" field="paypal_live_api_password"></has-error>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.paypal_live_api_secret') }}</label>
-                            <div class="col-md-7">
-                                <input type="text" v-model="form.paypal_live_api_secret" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('paypal_live_api_secret') }">
-                                <has-error :form="form" field="paypal_live_api_secret"></has-error>
+                                <input type="text" v-model="form.paypal_live_secret" class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has('paypal_live_secret') }">
+                                <has-error :form="form" field="paypal_live_secret"></has-error>
                             </div>
                         </div>
                     </fieldset>
                 </template>
 
-                <!-- Stripe Settings -->
-                <template v-if="form.credit_card_processor == 'stripe'">
-                    <fieldset>
-                        <legend class="scheduler-border">{{ trans('strings.stripe_settings') }}</legend>
-                        <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.stripe_mode') }}</label>
-                            <div class="col-md-7">
-                                <el-switch
-                                    style="display: block"
-                                    v-model="form.stripe_mode"
-                                    active-color="#13ce66"
-                                    inactive-color="#ff4949"
-                                    :active-text="trans('strings.live')"
-                                    :inactive-text="trans('strings.sandbox')"
-                                    active-value="live"
-                                    inactive-value="sandbox">
-                                </el-switch>
+                <template v-if="form.enable_credit_card">
+                    <!-- Stripe Settings -->
+                    <template v-if="form.credit_card_processor == 'stripe'">
+                        <fieldset>
+                            <legend class="scheduler-border">{{ trans('strings.stripe_settings') }}</legend>
+                            <div class="form-group row mb-1">
+                                <label class="col-md-5 form-control-label">{{ trans('strings.stripe_mode') }}</label>
+                                <div class="col-md-7">
+                                    <el-switch
+                                        style="display: block"
+                                        v-model="form.stripe_mode"
+                                        active-color="#13ce66"
+                                        inactive-color="#ff4949"
+                                        :active-text="trans('strings.live')"
+                                        :inactive-text="trans('strings.sandbox')"
+                                        active-value="live"
+                                        inactive-value="sandbox">
+                                    </el-switch>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.stripe_sandbox_public_key') }}</label>
-                            <div class="col-md-7">
-                                <input type="text" v-model="form.stripe_sandbox_public_key" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('stripe_sandbox_public_key') }">
-                                <has-error :form="form" field="stripe_sandbox_public_key"></has-error>
+                            <div class="form-group row mb-1">
+                                <label class="col-md-5 form-control-label">{{ trans('strings.stripe_sandbox_public_key') }}</label>
+                                <div class="col-md-7">
+                                    <input type="text" v-model="form.stripe_sandbox_public_key" class="form-control"
+                                        :class="{ 'is-invalid': form.errors.has('stripe_sandbox_public_key') }">
+                                    <has-error :form="form" field="stripe_sandbox_public_key"></has-error>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.stripe_sandbox_secret_key') }}</label>
-                            <div class="col-md-7">
-                                <input type="text" v-model="form.stripe_sandbox_secret_key" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('stripe_sandbox_secret_key') }">
-                                <has-error :form="form" field="stripe_sandbox_secret_key"></has-error>
+                            <div class="form-group row mb-1">
+                                <label class="col-md-5 form-control-label">{{ trans('strings.stripe_sandbox_secret_key') }}</label>
+                                <div class="col-md-7">
+                                    <input type="text" v-model="form.stripe_sandbox_secret_key" class="form-control"
+                                        :class="{ 'is-invalid': form.errors.has('stripe_sandbox_secret_key') }">
+                                    <has-error :form="form" field="stripe_sandbox_secret_key"></has-error>
+                                </div>
                             </div>
-                        </div>
 
-                        <hr />
-                        <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.stripe_live_public_key') }}</label>
-                            <div class="col-md-7">
-                                <input type="text" v-model="form.stripe_live_public_key" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('stripe_live_public_key') }">
-                                <has-error :form="form" field="stripe_live_public_key"></has-error>
+                            <hr />
+                            <div class="form-group row mb-1">
+                                <label class="col-md-5 form-control-label">{{ trans('strings.stripe_live_public_key') }}</label>
+                                <div class="col-md-7">
+                                    <input type="text" v-model="form.stripe_live_public_key" class="form-control"
+                                        :class="{ 'is-invalid': form.errors.has('stripe_live_public_key') }">
+                                    <has-error :form="form" field="stripe_live_public_key"></has-error>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.stripe_live_secret_key') }}</label>
-                            <div class="col-md-7">
-                                <input type="text" v-model="form.stripe_live_secret_key" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('stripe_live_secret_key') }">
-                                <has-error :form="form" field="stripe_live_secret_key"></has-error>
+                            <div class="form-group row mb-1">
+                                <label class="col-md-5 form-control-label">{{ trans('strings.stripe_live_secret_key') }}</label>
+                                <div class="col-md-7">
+                                    <input type="text" v-model="form.stripe_live_secret_key" class="form-control"
+                                        :class="{ 'is-invalid': form.errors.has('stripe_live_secret_key') }">
+                                    <has-error :form="form" field="stripe_live_secret_key"></has-error>
+                                </div>
                             </div>
-                        </div>
-                    </fieldset>
+                        </fieldset>
+                    </template>
+
+                    <template v-if="form.credit_card_processor == 'razorpay'">
+                        <!-- Razorpay Settings -->
+                        <fieldset>
+                            <legend class="scheduler-border">{{ trans('strings.razorpay_settings') }}</legend>
+                            <div class="form-group row mb-1">
+                                <label class="col-md-5 form-control-label">{{ trans('strings.razorpay_mode') }}</label>
+                                <div class="col-md-7">
+                                    <el-switch
+                                        style="display: block"
+                                        v-model="form.razorpay_mode"
+                                        active-color="#13ce66"
+                                        inactive-color="#ff4949"
+                                        :active-text="trans('strings.live')"
+                                        :inactive-text="trans('strings.sandbox')"
+                                        active-value="live"
+                                        inactive-value="sandbox">
+                                    </el-switch>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-1">
+                                <label class="col-md-5 form-control-label">{{ trans('strings.razorpay_sandbox_public_key') }}</label>
+                                <div class="col-md-7">
+                                    <input type="text" v-model="form.razorpay_sandbox_public_key" class="form-control"
+                                        :class="{ 'is-invalid': form.errors.has('razorpay_sandbox_public_key') }">
+                                    <has-error :form="form" field="razorpay_sandbox_public_key"></has-error>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-1">
+                                <label class="col-md-5 form-control-label">{{ trans('strings.razorpay_sandbox_secret_key') }}</label>
+                                <div class="col-md-7">
+                                    <input type="text" v-model="form.razorpay_sandbox_secret_key" class="form-control"
+                                        :class="{ 'is-invalid': form.errors.has('razorpay_sandbox_secret_key') }">
+                                    <has-error :form="form" field="razorpay_sandbox_secret_key"></has-error>
+                                </div>
+                            </div>
+
+                            <hr />
+                            <div class="form-group row mb-1">
+                                <label class="col-md-5 form-control-label">{{ trans('strings.razorpay_live_public_key') }}</label>
+                                <div class="col-md-7">
+                                    <input type="text" v-model="form.razorpay_live_public_key" class="form-control"
+                                        :class="{ 'is-invalid': form.errors.has('razorpay_live_public_key') }">
+                                    <has-error :form="form" field="razorpay_live_public_key"></has-error>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-1">
+                                <label class="col-md-5 form-control-label">{{ trans('strings.razorpay_live_secret_key') }}</label>
+                                <div class="col-md-7">
+                                    <input type="text" v-model="form.razorpay_live_secret_key" class="form-control"
+                                        :class="{ 'is-invalid': form.errors.has('razorpay_live_secret_key') }">
+                                    <has-error :form="form" field="razorpay_live_secret_key"></has-error>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </template>
                 </template>
-
-                <template v-if="form.credit_card_processor == 'razorpay'">
-                    <!-- Razorpay Settings -->
-                    <fieldset>
-                        <legend class="scheduler-border">{{ trans('strings.razorpay_settings') }}</legend>
-                        <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.razorpay_mode') }}</label>
-                            <div class="col-md-7">
-                                <el-switch
-                                    style="display: block"
-                                    v-model="form.razorpay_mode"
-                                    active-color="#13ce66"
-                                    inactive-color="#ff4949"
-                                    :active-text="trans('strings.live')"
-                                    :inactive-text="trans('strings.sandbox')"
-                                    active-value="live"
-                                    inactive-value="sandbox">
-                                </el-switch>
-                            </div>
-                        </div>
-                        <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.razorpay_sandbox_public_key') }}</label>
-                            <div class="col-md-7">
-                                <input type="text" v-model="form.razorpay_sandbox_public_key" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('razorpay_sandbox_public_key') }">
-                                <has-error :form="form" field="razorpay_sandbox_public_key"></has-error>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.razorpay_sandbox_secret_key') }}</label>
-                            <div class="col-md-7">
-                                <input type="text" v-model="form.razorpay_sandbox_secret_key" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('razorpay_sandbox_secret_key') }">
-                                <has-error :form="form" field="razorpay_sandbox_secret_key"></has-error>
-                            </div>
-                        </div>
-
-                        <hr />
-                        <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.razorpay_live_public_key') }}</label>
-                            <div class="col-md-7">
-                                <input type="text" v-model="form.razorpay_live_public_key" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('razorpay_live_public_key') }">
-                                <has-error :form="form" field="razorpay_live_public_key"></has-error>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-1">
-                            <label class="col-md-5 form-control-label">{{ trans('strings.razorpay_live_secret_key') }}</label>
-                            <div class="col-md-7">
-                                <input type="text" v-model="form.razorpay_live_secret_key" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('razorpay_live_secret_key') }">
-                                <has-error :form="form" field="razorpay_live_secret_key"></has-error>
-                            </div>
-                        </div>
-                    </fieldset>
-                </template>
-                    
 
             </div>
 
@@ -265,18 +259,19 @@ export default {
                 enable_paypal: false,
                 enable_credit_card: false,
                 credit_card_processor: 'stripe',
+
                 paypal_mode: 'sandbox',
-                paypal_sandbox_api_username: '',
-                paypal_sandbox_api_password: '',
-                paypal_sandbox_api_secret: '',
-                paypal_live_api_username: '',
-                paypal_live_api_password: '',
-                paypal_live_api_secret: '',
+                paypal_sandbox_client_id: '',
+                paypal_sandbox_secret: '',
+                paypal_live_client_id: '',
+                paypal_live_secret: '',
+                
                 stripe_mode: 'sandbox',
                 stripe_sandbox_public_key: '',
                 stripe_sandbox_secret_key: '',
                 stripe_live_public_key: '',
                 stripe_live_secret_key: '',
+
                 razorpay_mode: 'sandbox',
                 razorpay_sandbox_public_key: '',
                 razorpay_sandbox_secret_key: '',

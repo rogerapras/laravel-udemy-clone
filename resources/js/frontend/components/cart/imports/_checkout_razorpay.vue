@@ -34,7 +34,9 @@
         
         props:{
             type: { type: String, default: 'cart' },
-            course: { type: [Array, Object] }
+            course: { type: [Array, Object] },
+            api_key: { type: String, required: true },
+            currency: { type: String, required: true }
         },
         
         computed: {
@@ -57,7 +59,7 @@
             },
             
             handler(response){
-                console.log(response)
+                //console.log(response)
                 this.form.razorpay_payment_id = response.razorpay_payment_id
                 this.form.courses = this.cartItems.map(item => item.product.id)
                 this.form.coupons = this.cartItems.filter(item => {
@@ -68,16 +70,17 @@
                 this.form.purchase_price = this.cart.total_purchase_price
                 this.form.post(`/api/cart/payment/razorpay/process`)
                     .then(response => {
-                        console.log(response)
+                        //console.log(response)
                         //window.location.href="/"
                     })
             }
-            
-          
         },
         
         
-        mounted(){
+        beforeMount(){
+            this.options.key = this.api_key
+            this.options.name = this.site_name
+            this.options.currency = this.currency
             /*
             setTimeout(() => {
                 this.options.amount = this.cart.total_purchase_price*100

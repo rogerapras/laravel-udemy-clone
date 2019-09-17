@@ -26,7 +26,7 @@ class CreateSettingsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index()->nullable();
             $table->string($this->key)->index();
-            $table->text($this->value);
+            $table->text($this->value)->nullable();
 
             $table->unique(['user_id', 'key']);
         });

@@ -44,7 +44,7 @@ class PayPalController extends Controller
             // $config['currency'] = settings('site.default_currency');
             // $this->provider->setApiCredentials($config);
 
-            $response = $this->provider->setCurrency(config('site_settings.site_currency_code'))->setExpressCheckout($cart);
+            $response = $this->provider->setCurrency( setting('site.site_currency') ?? 'USD')->setExpressCheckout($cart);
             return redirect($response['paypal_link']);
         } catch (\Exception $e) {
             session()->put(['code' => 'danger', 'message' => "Error processing PayPal payment"]);

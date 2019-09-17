@@ -44,12 +44,10 @@ class AdminSettingsController extends Controller
         });
 
         $this->validate($request, [
-            'paypal_sandbox_api_username' => $paypal_sandbox_rule,
-            'paypal_sandbox_api_password' => $paypal_sandbox_rule,
-            'paypal_sandbox_api_secret' => $paypal_sandbox_rule,
-            'paypal_live_api_username' => $paypal_live_rule,
-            'paypal_live_api_password' => $paypal_live_rule,
-            'paypal_live_api_secret' => $paypal_live_rule,
+            'paypal_sandbox_secret' => $paypal_sandbox_rule,
+            'paypal_sandbox_client_id' => $paypal_sandbox_rule,
+            'paypal_live_secret' => $paypal_live_rule,
+            'paypal_live_client_id' => $paypal_live_rule,
 
             'stripe_sandbox_public_key' => $stripe_sandbox_rule,
             'stripe_sandbox_secret_key' => $stripe_sandbox_rule,
@@ -80,7 +78,6 @@ class AdminSettingsController extends Controller
             if( ! $currency->is_primary){
                 $this->currencies->markAsPrimary($currency->id);
             }
-
         }
 
         $this->validate($request, [
@@ -88,7 +85,6 @@ class AdminSettingsController extends Controller
             's3_secret_access_key' => 'required_if:video_upload_location,s3',
             's3_default_region' => 'required_if:video_upload_location,s3',
             's3_bucket' => 'required_if:video_upload_location,s3'
-            //'s3_url' => 'required_if: video_upload_location:s3'
         ]);
         
 

@@ -47,18 +47,21 @@ class ConvertVideoForStreaming implements ShouldQueue
         $converted_name = $this->getCleanFileName($this->video->original_filename);
 
         try{
+            $hd = setting('site.video_hd_dimension') ?? '1280, 720';
+            $sd = setting('site.video_sd_dimension') ?? '640, 360'; // NULL coalesce
+
             // MP4
             FFMpeg::fromDisk($tmp_disk)
                 ->open($this->video->original_filename)
                 ->addFilter(function ($filters) {
-                    $filters->resize(new Dimension(1280, 720));
+                    $filters->resize(new Dimension($hd));
                 })
                 ->export()
                 ->toDisk($disk)
                 ->inFormat($lowBitrateFormat)
                 ->save('videos/720_'.$converted_name)
                 ->addFilter(function ($filters) {
-                    $filters->resize(new Dimension(640, 360));
+                    $filters->resize(new Dimension($sd));
                 })
                 ->export()
                 ->toDisk($disk)

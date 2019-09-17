@@ -65,6 +65,7 @@ return [
     */
     'override' => [
         'app.name' => 'site.site_name',
+        'app.read_only' => 'site.demo',
         'mail.driver' => 'mail.diver',
         'mail.host' => 'mail.smtp_host',
         'mail.port' => 'mail.smtp_port',
@@ -82,13 +83,18 @@ return [
         'services.ses.region' => 'mail.ses_region',
         'services.sparkpost.secret' => 'mail.sparkpost_secret',
 
-        'access.registration' => 'access.allow_registration',
-        'access.users.confirm_email' => 'access.confirm_user_email',
-        'access.users.change_email' => 'access.user_can_change_email',
-        'access.users.requires_approval' => 'access.user_requires_approval',
-        'access.users.password_expires_days' => 'access.password_expires_days',
-
         'analytics.google-analytics' => 'site.site_google_analytics',
+
+        'filesystems.disks.s3.key' => 'site.s3_access_id',
+        'filesystems.disks.s3.secret' => 'site.s3_secret_access_key',
+        'filesystems.disks.s3.region' => 'site.s3_default_region',
+        'filesystems.disks.s3.bucket' => 'site.s3_bucket',
+        'filesystems.disks.s3.url' => 'site.s3_url',
+
+        'queue.default' => 'site.queue_connection',
+
+        'paypal.settings.mode' => 'payments.paypal_mode'
+
 
     ],
 

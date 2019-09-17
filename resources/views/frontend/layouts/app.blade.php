@@ -11,8 +11,8 @@
         
         <title>@yield('title', app_name())</title>
         <link rel="icon" href="{{ setting('site.favicon') }}">
-        <meta name="description" content="@yield('meta_description', 'Laravel Boilerplate')">
-        <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
+        <meta name="description" content="@yield('meta_description', setting('site.site_description'))">
+        <meta name="author" content="@yield('meta_author', 'ArcInspire')">
         @yield('meta')
 
         {{-- See https://laravel.com/docs/5.5/blade#stacks for usage --}}

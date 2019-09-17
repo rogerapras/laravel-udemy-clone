@@ -3,36 +3,36 @@
         <div class="row">
             <div class="col-md-6">
                 <fieldset>
-                    <legend class="scheduler-border">{{ trans('strings.site') }}</legend>
+                    <legend class="scheduler-border">{{ trans('strings.site_mode') }}</legend>
                     <div class="form-group row mb-1">
                         <label class="col-md-4 form-control-label">{{ trans('strings.site_mode') }}</label>
-                        <div class="col-md-8 ">
-                            <el-switch
-                                style="display: block"
-                                v-model="form.site_mode"
-                                active-color="#13ce66"
-                                inactive-color="#ff4949"
-                                :active-text="trans('strings.live')"
-                                :inactive-text="trans('strings.demo')"
-                                active-value="live"
-                                inactive-value="demo">
-                            </el-switch>
+                        <div class="col-md-8">
+                            <div class="form-group rowx mb-1">
+                                <div class="custom-control custom-checkbox mr-sm-2 font-14 fw-300 mb-0">
+                                    <input id="enable_demo_mode" name="enable_demo_mode" :value="true" v-model="form.enable_demo_mode" 
+                                        class="custom-control-input rounded-0" 
+                                        type="checkbox">
+                                    <label class="custom-control-label" for="enable_demo_mode">
+                                        {{ trans('strings.enable_demo_mode') }}
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row mb-1">
                         <label class="col-md-4 form-control-label">{{ trans('strings.redirect_https') }}</label>
                         <div class="col-md-8 ">
-                            <el-switch
-                                style="display: block"
-                                v-model="form.redirect_https"
-                                active-color="#13ce66"
-                                inactive-color="#ff4949"
-                                :active-text="trans('strings.yes')"
-                                :inactive-text="trans('strings.no')"
-                                :active-value="true"
-                                :inactive-value="false">
-                            </el-switch>
-                            <p class="text-muted mt-2 mb-2">{{ trans('strings.redirect_https_explanation') }}</p>
+                            <div class="form-group rowx mb-1">
+                                <div class="custom-control custom-checkbox mr-sm-2 font-14 fw-300 mb-0">
+                                    <input id="redirect_https" name="redirect_https" :value="true" v-model="form.redirect_https" 
+                                        class="custom-control-input rounded-0" 
+                                        type="checkbox">
+                                    <label class="custom-control-label" for="redirect_https">
+                                        {{ trans('strings.redirect_https') }}
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="text-muted mt-0 mb-2">{{ trans('strings.redirect_https_explanation') }}</p>
                         </div>
                     </div>
 
@@ -53,8 +53,6 @@
                                 <has-error :form="form" field="site_name"></has-error>
                         </div>
                     </div>
-
-                    
 
                     <div class="form-group row mb-1">
                         <label class="col-md-4 form-control-label">{{ trans('strings.site_description') }}</label>
@@ -117,128 +115,7 @@
                     </div>
                 </fieldset>
 
-                <fieldset>
-                    <legend class="scheduler-border">{{ trans('strings.license_information') }}</legend>
-                    <div class="form-group row mb-1">
-                        <label class="col-md-4 form-control-label">{{ trans('strings.purchase_code') }}</label>
-                        <div class="col-md-8">
-                            <input type="text" v-model="form.purchase_code" class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('purchase_code') }">
-                            <has-error :form="form" field="purchase_code"></has-error>
-                        </div>
-                    </div>
-                    <div class="form-group row mb-1">
-                        <label class="col-md-4 form-control-label">{{ trans('strings.envato_username') }}</label>
-                        <div class="col-md-8">
-                            <input type="text" v-model="form.envato_username" class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('envato_username') }">
-                            <has-error :form="form" field="envato_username"></has-error>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend class="scheduler-border">{{ trans('strings.video_settings') }}</legend>
-                    <div class="form-group row mb-1">
-                        <label class="col-md-4 form-control-label">{{ trans('strings.video_providers') }}</label>
-                        <div class="col-md-8">
-                            <select v-model="form.video_providers" class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('video_providers') }">
-                                <option value="upload">{{ trans('strings.upload_only') }}</option>
-                                <option value="youtube">{{ trans('strings.youtube_only') }}</option>
-                                <option value="both">{{ trans('strings.both') }}</option>
-                            </select>
-                            <has-error :form="form" field="video_providers"></has-error>
-                        </div>
-                    </div>
-
-                    <template v-if="form.video_providers !== 'youtube'">
-                        <div class="form-group rowx mb-1">
-                            <div class="custom-control custom-checkbox mr-sm-2 font-14 fw-300 mb-0">
-                                <input id="remember" name="remember" :value="true" v-model="form.encode_videos" 
-                                    class="custom-control-input rounded-0" 
-                                    type="checkbox">
-                                <label class="custom-control-label" for="remember">
-                                {{ trans('strings.enable_video_encoding') }}
-                                </label>
-                            </div>
-                            <div class="alert alert-warning p-2">
-                                <h4 class="text-darkx mb-0 font-weight-light">{{ trans('strings.important') }}</h4>
-                                <p class="font-13 text-darkx mb-0">{{ trans('strings.enable_video_encoding_explanation') }}</p>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-1">
-                            <label class="col-md-4 form-control-label">{{ trans('strings.video_max_size_mb') }}</label>
-                            <div class="col-md-8">
-                                <input type="text" v-model="form.video_max_size_mb" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('video_max_size_mb') }">
-                                <has-error :form="form" field="video_max_size_mb"></has-error>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-1">
-                            <label class="col-md-4 form-control-label">{{ trans('strings.video_upload_location') }}</label>
-                            <div class="col-md-8">
-                                <select v-model="form.video_upload_location" class="form-control"
-                                    :class="{ 'is-invalid': form.errors.has('video_upload_location') }">
-                                    <option value="s3">{{ trans('strings.amazon_s3_bucket') }}</option>
-                                    <option value="local">{{ trans('strings.local_server') }}</option>
-                                </select>
-                                <has-error :form="form" field="video_upload_location"></has-error>
-                            </div>
-                        </div>
-
-                        <template v-if="form.video_upload_location == 's3'">
-                            <div class="form-group row mb-1">
-                                <label class="col-md-4 form-control-label">{{ trans('strings.s3_access_id') }}</label>
-                                <div class="col-md-8">
-                                    <input type="text" v-model="form.s3_access_id" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('s3_access_id') }">
-                                    <has-error :form="form" field="s3_access_id"></has-error>
-                                </div>
-                            </div>
-
-                            <div class="form-group row mb-1">
-                                <label class="col-md-4 form-control-label">{{ trans('strings.s3_secret_access_key') }}</label>
-                                <div class="col-md-8">
-                                    <input type="text" v-model="form.s3_secret_access_key" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('s3_secret_access_key') }">
-                                    <has-error :form="form" field="s3_secret_access_key"></has-error>
-                                </div>
-                            </div>
-
-                            <div class="form-group row mb-1">
-                                <label class="col-md-4 form-control-label">{{ trans('strings.s3_default_region') }}</label>
-                                <div class="col-md-8">
-                                    <input type="text" v-model="form.s3_default_region" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('s3_default_region') }">
-                                    <has-error :form="form" field="s3_default_region"></has-error>
-                                </div>
-                            </div>
-
-                            <div class="form-group row mb-1">
-                                <label class="col-md-4 form-control-label">{{ trans('strings.s3_bucket') }}</label>
-                                <div class="col-md-8">
-                                    <input type="text" v-model="form.s3_bucket" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('s3_bucket') }">
-                                    <has-error :form="form" field="s3_bucket"></has-error>
-                                </div>
-                            </div>
-
-                            <div class="form-group row mb-1">
-                                <label class="col-md-4 form-control-label">{{ trans('strings.s3_url') }}</label>
-                                <div class="col-md-8">
-                                    <input type="text" v-model="form.s3_url" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('s3_url') }">
-                                    <has-error :form="form" field="s3_url"></has-error>
-                                </div>
-                            </div>
-                        </template>
-
-                        
-                    </template>
-                </fieldset>
+                
 
                 <fieldset>
                     <legend class="scheduler-border">{{ trans('strings.images') }}</legend>
@@ -348,7 +225,7 @@ export default {
             },
             form: new Form({
                 encode_videos: false,
-                site_mode: 'demo',
+                enable_demo_mode: false,
                 site_url: '',
                 redirect_https: false,
                 site_name: '',
@@ -358,8 +235,6 @@ export default {
                 site_google_analytics: '',
                 earning_organic_sales_percentage: '',
                 earning_promo_sales_percentage: '',
-                purchase_code: '',
-                envato_username: '',
                 video_upload_location: 'local',
                 video_max_size_mb: 20,
                 video_providers: 'both',
@@ -385,8 +260,9 @@ export default {
                     const settings = await res.data.site
                     if(settings !== undefined){
                         for(const key of this.form.keys()){
-                            //if(settings[key] && parseInt(settings[key])==1) settings[key] = await true
-                            //if(settings[key] && parseInt(settings[key])==0) settings[key] = await false
+                            if(settings[key] && parseInt(settings[key])==1) settings[key] = await true
+                            if(settings[key] && parseInt(settings[key])==0) settings[key] = await false
+
                             this.form[key] = await settings[key] || this.form[key]
                         }
                     }

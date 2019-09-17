@@ -89,7 +89,8 @@
 
                                     <template v-if="payment_settings.credit_card_processor === 'razorpay'">
                                         <checkout-razorpay 
-                                            :api_key="payment_settings.razorpay_mode === 'live' ? payment_settings.razorpay_live_public_key : payment_settings.razorpay_sandbox_public_key" />
+                                            :api_key="payment_settings.razorpay_mode === 'live' ? payment_settings.razorpay_live_public_key : payment_settings.razorpay_sandbox_public_key"
+                                            :site_name="site_name" :currency="site_currency" />
                                     </template>
                                     <hr />
                                 </div>
@@ -135,10 +136,10 @@
     export default {
         components:{
             CheckoutStripe,
-            // CheckoutRazorpay
+            CheckoutRazorpay
         },
 
-        props: ['payment_settings'],
+        props: ['payment_settings', 'site_name', 'site_currency'],
         
         data(){
             return {

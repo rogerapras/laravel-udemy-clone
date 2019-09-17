@@ -37,7 +37,11 @@ class PayPalCheckoutController extends Controller
         $this->carts = $carts;
 
         $paypal_conf = \Config::get('paypal');
-        $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
+
+        $client_id = setting('payments.paypal_mode') == 'live' ? setting('payments.paypal_live_client_id') : setting('payments.paypal_sandbox_client_id');
+        $secret = setting('payments.paypal_mode') == 'live' ? setting('payments.paypal_live_secret') : setting('payments.paypal_sandbox_secret');
+
+        $this->_api_context = new ApiContext(new OAuthTokenCredential($client_id, $secret));
         $this->_api_context->setConfig($paypal_conf['settings']);
     }
 
@@ -49,13 +53,14 @@ class PayPalCheckoutController extends Controller
         $total = (float)$data['cart']->total_purchase_price;
         $courses = $data['items']->pluck('product_id')->toArray();
         $mycart = $data['cart']->id;
+        $cur = setting('site.site_currency') ?? 'USD';
         
         $items = [];
         foreach($data['items'] as $item){
             $course = $item->product;
             $line = new Item();
             $line->setName($course->title)
-                ->setCurrency('USD')
+                ->setCurrency($cur)
                 ->setQuantity(1)
                 ->setPrice((float)$item->purchase_price);
             array_push($items, $line);
@@ -64,7 +69,7 @@ class PayPalCheckoutController extends Controller
         $item_list->setItems($items);
 
         $amount = new Amount();
-        $amount->setCurrency('USD')
+        $amount->setCurrency($cur)
             ->setTotal($total);
 
         $transaction = new Transaction();

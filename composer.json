@@ -10,7 +10,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
-        "akaunting/setting": "^1.0",
         "albertcht/invisible-recaptcha": "^1.9",
         "altek/accountant": "^1.2",
         "altek/eventually": "^1.0",
@@ -28,6 +27,7 @@
         "laravel/socialite": "^4.1",
         "musonza/chat": "^3.5",
         "nfunwigabga/laravel-eloquent-join": "dev-master",
+        "nfunwigabga/setting": "dev-master",
         "orangehill/iseed": "^2.6",
         "paypal/rest-api-sdk-php": "^1.14",
         "pbmedia/laravel-ffmpeg": "^5.0",
@@ -46,6 +46,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/nfunwigabga/laravel-eloquent-join"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/nfunwigabga/setting"
         }
     ],
     "require-dev": {
