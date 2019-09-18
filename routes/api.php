@@ -306,7 +306,7 @@ Route::group(['namespace' => 'Api\v1'], function () {
 
         // Translations
         Route::get('locales/{group}/{locale}', 'AdminLocaleController@fetchTranslations');
-        Route::post('locales/{group}/{locale}', 'AdminLocaleController@fetchTranslations');
+        Route::post('locales/{id}/update', 'AdminLocaleController@updateTranslation');
 
 
     });

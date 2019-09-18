@@ -30,26 +30,16 @@ class AdminLocaleController extends Controller
         ], 200);
     }
 
-    public function update(Request $request)
+    public function updateTranslation(Request $request, $id)
     {
-        dd($request);
-
         $group = $request->group;
-        $locale = $request->locale;
-
         if(!in_array($group, $this->manager->getConfig('exclude_groups'))) {
-            $name = request()->get('name');
             $value = request()->get('value');
-            list($locale, $key) = explode('|', $name, 2);
-            $translation = Translation::firstOrNew([
-                'locale' => $locale,
-                'group' => $group,
-                'key' => $key,
-            ]);
+            $translation = Translation::find($id);
             $translation->value = (string) $value ?: null;
             $translation->status = Translation::STATUS_CHANGED;
             $translation->save();
-            return array('status' => 'ok');
+            return response()->json(null, 200);
         }
     }
 

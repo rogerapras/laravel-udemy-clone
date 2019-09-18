@@ -14,6 +14,6 @@ $factory->define(Model::class, function (Faker $faker) {
         'user_id' => '', // make this a relationship
         'uuid' => (string)\Str::uuid(),
         'title' => title_case($faker->unique()->sentence),
-        ''
+        
     ];
 });

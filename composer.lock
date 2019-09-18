@@ -2063,9 +2063,9 @@
             "authors": [
                 {
                     "name": "Ben Corlett",
-                    "role": "Developer",
                     "email": "bencorlett@me.com",
-                    "homepage": "http://www.webcomm.com.au"
+                    "homepage": "http://www.webcomm.com.au",
+                    "role": "Developer"
                 }
             ],
             "description": "OAuth 1.0 Client Library",
@@ -4243,16 +4243,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v7.1.1",
+            "version": "v7.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "879cdb817117994c59a964242347143f528f75df"
+                "reference": "b635034520a5a48b3c38335a363e6757cd31ddbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/879cdb817117994c59a964242347143f528f75df",
-                "reference": "879cdb817117994c59a964242347143f528f75df",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/b635034520a5a48b3c38335a363e6757cd31ddbe",
+                "reference": "b635034520a5a48b3c38335a363e6757cd31ddbe",
                 "shasum": ""
             },
             "require": {
@@ -4296,7 +4296,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2019-09-16T16:38:41+00:00"
+            "time": "2019-09-17T17:12:59+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -7027,8 +7027,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "homepage": "https://github.com/filp",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "homepage": "https://github.com/filp"
                 }
             ],
             "description": "php error handling for cool kids",
@@ -9410,8 +9410,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",

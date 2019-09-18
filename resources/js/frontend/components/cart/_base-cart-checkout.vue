@@ -129,7 +129,7 @@
 
 <script>
     import CheckoutStripe from './imports/_checkout_stripe'
-    //import CheckoutRazorpay from './imports/_checkout_razorpay'
+    import CheckoutRazorpay from './imports/_checkout_razorpay'
     import { mapGetters } from 'vuex'
     import Form from 'vform'
     

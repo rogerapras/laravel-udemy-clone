@@ -67,6 +67,7 @@
     "dependencies": {
         "@johmun/vue-tags-input": "^2.1.0",
         "@onekiloparsec/vue-xeditable": "^1.2.2",
+        "@syncfusion/ej2-vue-grids": "^17.2.51",
         "@tkrotoff/bootstrap-floating-label": "^0.1.0",
         "@ttskch/select2-bootstrap4-theme": "^1.2.3",
         "bootstrap-editable": "^1.0.1",
