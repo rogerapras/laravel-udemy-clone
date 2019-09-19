@@ -6,11 +6,16 @@ use App\Models\Course;
 use Faker\Generator as Faker;
 
 $factory->define(Course::class, function (Faker $faker) {
+    //$image_download = $faker->image(public_path('uploads/images/course/thumbnails'), 750, 422);
+    //$image_path = explode('\\', $image_download);
+    //$image_name = end($image_path);
+
     $title = \Str::title($faker->unique()->sentence);
     $childrenCategories = \App\Models\Category::whereNotNull('parent_id')->pluck('id');
     return [
         'user_id' => $faker->randomElement([2,3,4,5,6,7,8]), // make this a relationship
         'category_id' => $faker->randomElement($childrenCategories),
+        'image' => $faker->image('public/uploads/images/course/thumbnails',250,140, null, false),
         'uuid' => (string)\Str::uuid(),
         'title' => $title,
         'subtitle' => \Str::title($faker->unique()->sentence),
