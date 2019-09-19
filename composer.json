@@ -26,6 +26,7 @@
         "langleyfoxall/laravel-nist-password-rules": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/socialite": "^4.1",
+        "laravel/tinker": "^1.0",
         "musonza/chat": "^3.5",
         "nfunwigabga/laravel-eloquent-join": "dev-master",
         "nfunwigabga/setting": "dev-master",
