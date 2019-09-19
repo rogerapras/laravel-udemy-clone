@@ -32,6 +32,7 @@ class AdminLocaleController extends Controller
 
     public function updateTranslation(Request $request, $id)
     {
+   
         $group = $request->group;
         if(!in_array($group, $this->manager->getConfig('exclude_groups'))) {
             $value = request()->get('value');
