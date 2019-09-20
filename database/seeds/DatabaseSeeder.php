@@ -35,5 +35,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ReviewsTableSeeder::class);
         $this->call(CurrenciesTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
+        $this->call(LanguageSeeder::class);
     }
 }

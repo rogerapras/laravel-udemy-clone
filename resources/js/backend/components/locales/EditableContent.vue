@@ -1,8 +1,9 @@
 <template>
     <div>
         <span v-if="!editing" @click="startEditing"
-            class="text-primary" style="cursor: pointer; text-decoration: underline; text-decoration-style: dashed;">
-            {{ form.value }}
+            class="text-primary" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">
+            <span v-if="form.value">{{ form.value }}</span>
+            <span v-else class="font-italic text-danger">Empty</span>
         </span>
         <div v-if="editing">
             <div class="d-flex">
@@ -19,49 +20,67 @@
 <script>
 import Form from 'vform'
 export default {
-    props: ['value', 'url', 'group'],
-
+    props: ['data'],
     data(){
         return {
             editing: false,
             old_val: '',
             form: new Form({
                 value: '',
-                group: ''
+                group: '',
+                locale: '',
+                key: ''
             })
         }
     },
 
-    // watch: {
-    //     value(newVal){
-    //         this.form.value = newVal
-    //     }
-    // },
+    watch: {
+        data(newVal){
+            this.form.value = newVal.value
+            this.form.group = newVal.group
+            this.form.locale = newVal.locale
+            this.form.key = newVal.key
+        }
+    },
 
     methods: {
-        save(){
-            this.form.put(this.url)
-                .then(response => {
-                    this.editing = false
-                })
+        async save(){
+            if(this.data.id){
+                this.form.put(`/api/admin/locales/${this.data.id}/update`)
+                    .then(response => {
+                        this.editing = false
+                    })
+            } else {
+                this.form.post(`/api/admin/locales`)
+                    .then(response => {
+                        this.editing = false
+                    })
+            }
         },
 
         cancelled(){
             this.form.value = this.old_val
             this.editing = false 
-
-            //this.$emit('translation-cancelled')
         },
 
         async startEditing(){
             this.old_val = await this.form.value
             this.editing = await true
+            if(!this.data.value){
+                await axios.get(`/api/admin/locale/get_default/${this.data.key}`)
+                    .then(response => {
+                        this.form.value = response.data.value
+                    })
+            }
+            
         }
     },
 
-    mounted(){
-        this.form.value = this.value
-        this.form.group = this.group
+    beforeMount(){
+        this.form.value = this.data.value
+        this.form.group = this.data.group
+        this.form.locale = this.data.locale
+        this.form.key = this.data.key
     }
 }
 </script>

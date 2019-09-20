@@ -700,5 +700,11 @@ return [
     "license_information_explanation" => "Please provide your envato Purchase Code and Username here. We use this to continue to provide you with updates to the script and for continuous support.",
     "locale_manager" => "Locale Manager",
     "key" => "Key",
-    "value" => "Value"
+    "value" => "Value",
+    "carbon_code" => "Carbon Code",
+    "php_code" => "PHP Code",
+    "is_rtl" => "Is RTL",
+    "is_default" => "Is Default",
+    "is_active" => "Is Active",
+    "no_languages" => "No Languages"
 ];

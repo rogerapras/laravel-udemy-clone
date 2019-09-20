@@ -1,52 +1,73 @@
 <template>
     <div class="row">
-        <div class="col-md-3">
-            <div class="card card-body">
-                <select class="form-control" v-model="selected_language" @change="fetchTranslationsForLocale()">
-                    <option v-for="locale in locales" :key="locale" :value="locale">
-                        {{ locale }}
-                    </option>
-                </select>
-            </div>
-        </div>
+        <div class="col-md-12">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a href="#languages" class="nav-link" data-toggle="tab" role="tab" aria-controls="languages">
+                        <i class="fas fa-check-circle"></i> 
+                        Languages
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#translations" class="nav-link active" data-toggle="tab" role="tab" aria-controls="translations">
+                        <i class="fas fa-info-circle"></i> 
+                        Translations
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content card-min-height">
+                <div class="tab-pane" id="languages" role="tabpanel">
+                    <language-list></language-list>
+                </div>
 
-        <div class="col-md-9">
-            <div class="card">
-                <div class="card-header">
-                    <strong>Languages</strong>
-                </div><!--card-header-->
-                <div class="card-body card-min-height">
+                <div class="tab-pane active" id="translations" role="tabpanel">
                     <vue-element-loading :active="loading" background-color="rgba(255,255,255,.9)"  :is-full-screen="false" spinner="bar-fade-scale"/>
-
                     <v-client-table
                         name="localeTable"
                         :data="translations"
                         :columns="columns" 
                         ref="datatable"
                         :options="options">
+                        <div slot="afterFilter" class="mr-2 d-flex ml-2">
+                            <div class="mr-3 form-group">
+                                <div class="row">
+                                    <label class="col-md-6 pr-0 text-right">Language: </label>
+                                    <div class="col-md-6 pl-0">
+                                        <select class="form-control text-capitalize" v-model="selected_language" @change="fetchTranslationsForLocale()">
+                                            <option v-for="locale in activeLanguages" :key="locale.id" :value="locale.carbon_code">
+                                                {{ locale.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <template slot="value" slot-scope="props">
+                            <div class="mr-3 form-group">
+                                <div class="row">
+                                    <label class="col-md-8 pr-0 text-right">Translation Group: </label>
+                                    <div class="col-md-4 pl-0">
+                                        <select class="form-control text-capitalize" v-model="selected_group" @change="fetchTranslationsForLocale()">
+                                            <option v-for="group in groups" :key="group" :value="group">
+                                                {{ group.charAt(0).toUpperCase() + group.slice(1)  }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <template slot="value" slot-scope="props">
                             <x-editable 
                                 :value="props.row.value"
                                 @translation-cancelled="fetchTranslationsForLocale"
                                 :url="`/api/admin/locales/${props.row.id}/update`"
                                 group="strings"
                                 type="textarea"></x-editable>
-
-                            <!-- <a href="#" class="editable" 
-                                data-type="textarea"
-                                :data-id="props.row.id"
-                                :data-pk="props.row.id"
-                                data-name="strings"
-                                data-title="Enter translation"
-                                :data-url="`/api/admin/locales/${props.row.id}/update`">{{ props.row.value }}</a> -->
-                        </template>
+                        </template> -->
                     </v-client-table>
-
-                </div><!--card-body-->
-            </div><!--card-->
+                </div>
+            </div>
         </div>
-        
     </div>
 </template>
 
@@ -54,23 +75,34 @@
 
 import editable from '../../plugins/bootstrap-editable'
 
+import LanguageList from './LanguageList.vue'
 import XEditable from './EditableContent.vue'
 
 export default {
-    props: ['locales'],
     components: {
-        XEditable
+        //XEditable,
+        LanguageList
     },
-
+    
     data(){
         return {
             loading: false,
             selected_language: 'en',
+            selected_group: 'strings',
+            groups: {},
+            languages: [],
             translations: [],
 
             columns: ['key', 'value'],
                 
             options: {
+                columnsClasses: {
+                    value: 'w-75',
+                    key: 'w-25'
+                },
+                templates: {
+                    value: XEditable
+                },
                 perPage: 15,
                 perPageValues:[15, 30, 50,100],
                 highlightMatches: true,
@@ -91,25 +123,45 @@ export default {
         }
     },
 
+    computed:{
+        activeLanguages(){
+            return this.languages.filter(l => l.is_active == 1);
+        }
+    },
+
     methods: {
-        async fetchTranslationsForLocale(){
-            this.loading = await true
-            await axios.get(`/api/admin/locales/strings/${this.selected_language}`)
+        fetchLanguages(){
+            axios.get('/api/admin/languages?activeOnly=true')
                 .then(response => {
-                    this.translations = response.data.translations
-                }).finally(() => this.loading = false)
+                    this.languages = response.data
+                })
         },
 
-        reinitializeEditable(){
-            const vm = this
-            //$.fn.editable.defaults.mode = 'inline';
-            $('.editable').editable({send: 'always'})
-                .on('hidden', function(e, reason){
-                    if(reason == 'save'){
-                        
+        async fetchTranslationsForLocale(){
+            this.loading = await true
+            this.translations = []
+            await axios.get(`/api/admin/locales/${this.selected_group}/${this.selected_language}`)
+                .then(async response => {
+                    this.groups = await response.data.groups
+                    const difference = await response.data.difference
+                    let translations = await response.data.translations 
+
+                    for (const d of difference) {
+                        await translations.push({
+                            key: d,
+                            value: null,
+                            locale: this.selected_language,
+                            group: this.selected_group
+                        })
                     }
-                })
+                    this.translations = await translations
+                    //this.translations = response.data.translations
+                }).finally(() => this.loading = false)
         }
+    },
+
+    created(){
+        this.fetchLanguages()
     },
 
     beforeMount(){
@@ -117,14 +169,13 @@ export default {
     },
 
     mounted(){
-        setTimeout(() =>{
-            this.reinitializeEditable()
-        }, 2000)
-        
+        this.$bus.$on('language:updated', () => {
+            this.fetchLanguages()
+        })
     }
 }
 </script>
 
 <style>
-@import '~bootstrap-editable/css/bootstrap-editable.css'
+    /* @import '~bootstrap-editable/css/bootstrap-editable.css'; */
 </style>

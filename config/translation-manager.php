@@ -45,7 +45,7 @@ return [
         'install',
         'exceptions',
         'buttons',
-        'auth',
+        //'auth',
         'http',
         'passwords',
         'vendor/lang',

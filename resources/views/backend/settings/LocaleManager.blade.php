@@ -5,9 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <base-locale-manager 
-                :locales="{{ json_encode($locales) }}"
-                :translations="{{ json_encode($translations) }}"></base-locale-manager>
+            <base-locale-manager></base-locale-manager>
         </div><!--col-->
     </div><!--row-->
 @endsection
