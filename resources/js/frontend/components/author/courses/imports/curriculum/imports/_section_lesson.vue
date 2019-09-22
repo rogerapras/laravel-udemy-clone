@@ -12,7 +12,7 @@
                 <span class="fa fa-file-text-o" v-if="hasContent && lesson.content_type=='article'"></span> 
                 {{ lesson.title }}
             </a>
-            <span class="actions d-none pull-right mr-4">
+            <span class="actions d-none pull-right mr-0">
                 <i class="fas fa-arrows-alt reorder-icon mr-3 handle"></i>
                 <a href="#" @click.prevent="EditLesson(lesson.uuid)">
                     <i class="fas fa-pencil-alt mr-3"></i>
@@ -34,11 +34,12 @@
                 <div class="row" v-else>
                     <div class="col-md-12" v-if="!action && !hasContent">
                         <div class="btn-group d-flex justify-content-center" role="group" aria-label="Action Buttons">
-                            <button type="button" class="btn btn-light flex-fillx mr-2" @click="SetAddContent('video', 'new')">
+
+                            <button v-if="source == 'both' || source == 'upload'" type="button" class="btn btn-light flex-fillx mr-2" @click="SetAddContent('video', 'new')">
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 {{ trans('strings.upload_video') }}
                             </button>
-                            <button type="button" class="btn btn-light flex-fillx mr-2" @click="SetAddContent('youtube', 'new')">
+                            <button v-if="source == 'both' || source == 'youtube'" type="button" class="btn btn-light flex-fillx mr-2" @click="SetAddContent('youtube', 'new')">
                                 <i class="fab fa-youtube"></i>
                                 {{ trans('strings.youtube_video') }}
                             </button>
@@ -163,6 +164,7 @@
         
         data(){
             return {
+                source: '',
                 lesson: {},
                 action: null,
                 hasContent: false,
@@ -234,8 +236,8 @@
             },
             
             destroy(){
-                this.$dialog.confirm({title: 'confirm_delete', 
-                    body: 'confirm_lesson_delete'}, {animation: 'fade', loader: true})
+                this.$dialog.confirm({title: this.trans('strings.confirm_delete'), 
+                    body: this.trans('strings.confirm_lesson_delete')}, {animation: 'fade', loader: true})
                     .then(dialog => {
                         axios.delete(`/api/lessons/${this.prop_lesson.id}`)
                             .then(() => {
@@ -251,6 +253,10 @@
         
         created(){
             this.findLessonContent()
+        },
+
+        async beforeMount(){
+            this.source = await window.config.source
         },
         
         mounted(){
@@ -285,3 +291,10 @@
         
     }
 </script>
+
+<style scoped>
+.tc-accordion .acdn-title a:after,
+.tc-accordion .acdn-title a.collapsed:after{
+    content: ''
+}
+</style>

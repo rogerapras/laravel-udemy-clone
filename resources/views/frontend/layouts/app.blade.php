@@ -2,7 +2,8 @@
     $config = [
         'appName' => config('app.name'),
         'max_size' => setting('site.video_max_size_mb') ? (int)setting('site.video_max_size_mb') : 10,
-        'default_currency' => setting('site.site_currency') ? setting('site.site_currency') : 'USD'
+        'default_currency' => setting('site.site_currency') ? setting('site.site_currency') : 'USD',
+        'source' => setting('site.video_providers') ? setting('site.video_providers') : 'both'
     ];
 @endphp
 
@@ -40,7 +41,7 @@
 
         <div id="app">
             <div id="wrapper">
-                <div class="wrapper-inner">
+                <div class="wrapper-inner" style="min-height: 100%;margin-bottom: -200px;">
 
                     @include('includes.partials.logged-in-as')
                     <section class="desktop__nav d-none d-lg-block">
@@ -52,13 +53,15 @@
                     
                     @include('includes.partials.messages')
                     @yield('content')
+
+                    <div class="push" style="height: 203px;"></div>
                 </div>
 
-                <!-- <footer class="gabs__footer mt-autox py-3 bg-dark text-white" style="height: 203px;">
+                <footer class="gabs__footer mt-autox py-3 bg-dark text-white" style="height: 203px;">
                     <div class="container">
                         <span class="text-mutedx">Place sticky footer content here.</span>
                     </div>
-                </footer> -->
+                </footer>
 
             </div>
         </div><!-- #app -->

@@ -5,7 +5,7 @@ namespace App\Models;
 use Spatie\Tags\HasTags;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
+
 
 class Course extends Model
 {

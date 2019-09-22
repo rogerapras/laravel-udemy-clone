@@ -27,7 +27,7 @@
                 <div class="col-md-6">
                     <label>{{ trans('strings.category') }}</label>
                     <select class="form-control" v-model="form.category">
-                        <optgroup v-for="category in categories" :key="category.uuid" :label="category.name">
+                        <optgroup v-for="category in categories_with_children" :key="category.uuid" :label="category.name">
                             <option v-for="child in category.children" :key="child.uuid" :value="child.id">{{ child.name }}</option>
                         </optgroup>
                     </select>
@@ -140,7 +140,11 @@ export default {
             })
         }
     },
-
+    computed:{
+        categories_with_children(){
+            return this.categories.filter(c => c.children.length > 0)
+        }
+    },
     methods: {
         onEditorChange({ editor, html, text }) {
             this.form.description = html
