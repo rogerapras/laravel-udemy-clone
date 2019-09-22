@@ -26,7 +26,8 @@ use App\Repositories\Eloquent\{
     PayoutRepository,
     RefundRepository,
     AnnouncementRepository,
-    CurrencyRepository
+    CurrencyRepository,
+    PageRepository
 };
 
 use App\Repositories\Contracts\{
@@ -51,7 +52,8 @@ use App\Repositories\Contracts\{
     IPayout,
     IRefund,
     IAnnouncement,
-    ICurrency
+    ICurrency,
+    IPage
 };
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -82,6 +84,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IRefund::class, RefundRepository::class);
         $this->app->bind(IAnnouncement::class, AnnouncementRepository::class);
         $this->app->bind(ICurrency::class, CurrencyRepository::class);
+        $this->app->bind(IPage::class, PageRepository::class);
         
     }
 }

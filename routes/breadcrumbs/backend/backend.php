@@ -51,6 +51,19 @@ Breadcrumbs::for('admin.locales', function ($trail) {
     $trail->push(__('strings.locale_manager'), route('admin.locales'));
 });
 
+Breadcrumbs::for('admin.pages', function ($trail) {
+    $trail->push(__('strings.pages'), route('admin.pages'));
+});
+
+Breadcrumbs::for('admin.pages.edit', function ($trail, $uuid) {
+    $trail->parent('admin.pages');
+    $trail->push(__('strings.edit'), route('admin.pages.edit', $uuid));
+});
+Breadcrumbs::for('admin.pages.create', function ($trail) {
+    $trail->parent('admin.pages');
+    $trail->push(__('strings.create'), route('admin.pages.create'));
+});
+
 Breadcrumbs::for('admin.locales.index', function ($trail) {
     $trail->push(__('strings.locale_manager'), route('admin.locales.index'));
 });

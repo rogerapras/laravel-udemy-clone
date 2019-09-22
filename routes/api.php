@@ -315,6 +315,16 @@ Route::group(['namespace' => 'Api\v1'], function () {
         Route::post('locale/{group}/publish', 'AdminLocaleController@publish');
 
 
+        // Site pages
+        Route::get('pages', 'AdminPagesController@fetchAll');
+        Route::get('page/{uuid}', 'AdminPagesController@getByUuid');
+        Route::get('page/{uuid}/locale/{locale}', 'AdminPagesController@fetchPageForLocale');
+        Route::post('pages', 'AdminPagesController@store');
+        Route::put('page/{uuid}', 'AdminPagesController@update');
+        Route::put('page/{id}/update_slug', 'AdminPagesController@updateSlug');
+        Route::put('page/{id}/toggle_publish', 'AdminPagesController@togglePublish');
+        Route::delete('pages/{id}', 'AdminPagesController@destroy');
+
     });
 
 });

@@ -1,3 +1,9 @@
+@php
+    $config = [
+        'url' => setting('site.site_url') ? (int)setting('site.site_url') : url('/'),
+        'locale' => app()->getLocale()
+    ];
+@endphp
 <!DOCTYPE html>
 @langrtl
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
@@ -13,6 +19,8 @@
     <meta name="description" content="@yield('meta_description', setting('site.site_description'))">
     <meta name="author" content="@yield('meta_author', 'ArcInspire')">
     @yield('meta')
+
+    <script>window.config = @json($config);</script>
 
     {{-- See https://laravel.com/docs/5.5/blade#stacks for usage --}}
     @stack('before-styles')

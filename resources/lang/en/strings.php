@@ -711,6 +711,12 @@ return [
     "translation_group" => "Translation Group",
     "publish" => "Publish",
     "languages" => "Languages",
-    "publishing" => "Publishing..."
+    "publishing" => "Publishing...",
+    "unpublish" => "Unpublish",
+    "unpublishing" => "Unpublishing...",
+
+    "pages" => "Pages",
+    "slug" => "Slug",
+    "body" => "Body"
     
 ];

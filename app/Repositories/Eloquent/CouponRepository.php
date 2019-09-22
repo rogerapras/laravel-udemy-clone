@@ -32,10 +32,7 @@ class CouponRepository  extends RepositoryAbstract implements ICoupon
            'active' => true,
            'sitewide' => $data['sitewide']
         ]);
-        
-        
         return $coupon;
-        
     }
     
     public function activate($id)

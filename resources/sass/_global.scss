@@ -41,6 +41,10 @@ textarea:hover,
   // border: 1px solid #ccc !important;
 }
 
+.quill-editor ~ .invalid-feedback{
+  display: block !important;
+}
+
 button{
   cursor: pointer;
 }

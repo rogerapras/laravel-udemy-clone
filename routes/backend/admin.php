@@ -23,6 +23,11 @@ Route::get('refunds', 'AdminRefundController@index')->name('finances.refunds');
 // Settings
 Route::get('settings', 'AdminSettingsController@index')->name('settings');
 
+// site pages
+Route::get('pages', 'AdminPagesController@index')->name('pages');
+Route::get('page/new', 'AdminPagesController@create')->name('pages.create');
+Route::get('pages/{uuid}', 'AdminPagesController@edit')->name('pages.edit');
+
 
 /******** LOCALES *************** */
 //Route::get('locales', 'AdminLocaleManager@index')->name('locales');

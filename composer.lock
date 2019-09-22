@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9744df973821e35e4cc23ccd56185ae2",
+    "content-hash": "8c7647fac645b22dc7400abe1c7ae366",
     "packages": [
         {
             "name": "albertcht/invisible-recaptcha",
@@ -383,6 +383,55 @@
                 "translator"
             ],
             "time": "2019-09-11T07:31:15+00:00"
+        },
+        {
+            "name": "codezero/laravel-unique-translation",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codezero-be/laravel-unique-translation.git",
+                "reference": "01c59e462ac081fbb5ef11133001b4b3c01d08e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codezero-be/laravel-unique-translation/zipball/01c59e462ac081fbb5ef11133001b4b3c01d08e7",
+                "reference": "01c59e462ac081fbb5ef11133001b4b3c01d08e7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "~1.4",
+                "mockery/mockery": "0.9.*",
+                "orchestra/testbench": "~3.5.0",
+                "phpunit/phpunit": "~6.0",
+                "spatie/laravel-translatable": "^2.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "CodeZero\\UniqueTranslation\\UniqueTranslationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CodeZero\\UniqueTranslation\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Vermeyen",
+                    "email": "ivan@codezero.be"
+                }
+            ],
+            "time": "2019-05-01T11:07:31+00:00"
         },
         {
             "name": "creativeorange/gravatar",

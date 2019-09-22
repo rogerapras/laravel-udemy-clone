@@ -70,7 +70,7 @@ Vue.use(ClientTable, {
   perPageValues:[5,10,25,50,100],
   footerHeadings: false,
   columnsDropdown: false,
-  skin: 'table table-responsive-sm table-stripedx table-outline table-md',
+  skin: 'table table-responsive-sm table-stripedx table-outline table-sm',
 }, false, 'bootstrap4', 'default')
 
 
@@ -111,7 +111,7 @@ Vue.use(ServerTable, {
   //perPageValues:[5,10,25,50,100],
   footerHeadings: false,
   columnsDropdown: false,
-  skin: 'table table-responsive-sm table-bordered table-outline table-md',
+  skin: 'table table-responsive-sm table-sm table-bordered table-outline',
   requestAdapter(data) {
     return {
         page: data.page,

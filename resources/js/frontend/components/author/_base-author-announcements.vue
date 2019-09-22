@@ -111,7 +111,7 @@
             },
 
             destroy(uuid){
-                this.$dialog.confirm({ title: 'confirm_delete' }, {animation: 'fade'})
+                this.$dialog.confirm({ title: this.trans('strings.confirm_delete') }, {animation: 'fade'})
                     .then(dialog => {
                         axios.delete(`/api/announcements/${uuid}`)
                             .then(() => this.$refs.datatable.refresh())        
