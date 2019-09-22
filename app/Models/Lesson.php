@@ -43,26 +43,35 @@ class Lesson extends Model
         return $this->hasOne(Video::class);
     }
 
-    public function content()
-    {
-        return $this->hasOne(Content::class);
-    }
-    
     public function completions()
     {
         return $this->belongsToMany(User::class, 'completions', 'lesson_id', 'user_id')->withTimestamps();
     }
     
-    // public function getContentTypeAttribute()
-    // {
-    //     return $this->content ? $this->content->content_type : null;
-    // }
-    
+
     public function course()
     {
         return $this->belongsTo(Lesson::class, 'course_id');
     }
     
+    /********* SCOPE  ************************/
+    public function scopeHasContent(Builder $builder)
+    {
+        return $builder->orWhere(function($q){
+                $q->where('content_type', 'article')
+                    ->whereNotNull('article_body');
+            })
+            ->orWhere(function($q){
+                $q->where('content_type', 'video')
+                    ->whereHas('video', function($v){
+                        $v->whereNotNull('streamable_sm')
+                            ->where('is_processed', true)
+                            ->where('processing_succeeded', true);
+                    });
+            });
+    }
+
+    /*********** APPENDS ****************************/
     public function getUserHasCompletedAttribute()
     {
         if(! auth()->check()){
@@ -87,12 +96,10 @@ class Lesson extends Model
     public function getVideoProviderAttribute()
     {
         
-        if($this->content && $this->content->content_type == 'video'){
-            if($this->content->video_provider){
-                return $this->content->video_provider;
-            } else {
-                return 'mp4';
-            }
+        if($this->content_type == 'video'){
+            return 'mp4';
+        }elseif($this->content_type == 'youtube'){
+            return 'youtube';
         } else {
             return null;
         }
@@ -106,8 +113,10 @@ class Lesson extends Model
     
     public function getVideoLinkAttribute()
     {
-        if($this->content && $this->content->content_type == 'video'){
-            return $this->content->video_path;
+        if($this->content_type == 'video'){
+            return $this->video->streamable_sm;
+        } elseif($this->content_type == 'youtube'){
+            return $this->video->youtube_link;
         } else {
             return null;
         }
@@ -115,21 +124,9 @@ class Lesson extends Model
     
     public function getMinutesSecondsAttribute()
     {
-        if($this->content && $this->content->content_type == 'video' && $this->content->video_duration > 0){
-            return gmdate("H:i:s", ($this->content->video_duration*60));
-        } else {
-            return null;
-        }
+        return gmdate("H:i:s", ($this->duration*60));
     }
     
-    // public function getArticleBodyAttribute()
-    // {
-    //     if($this->content && $this->content->content_type == 'article'){
-    //         return $this->content->article_body;
-    //     } else {
-    //         return null;
-    //     }
-    // }
     
     
 }

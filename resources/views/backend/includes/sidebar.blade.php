@@ -87,6 +87,14 @@
                         @lang('strings.settings')
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{active_class(Route::is('admin/locales')) }}" 
+                        href="{{ route('admin.locales.index') }}">
+                        <i class="nav-icon fas fa-cogs"></i>
+                        @lang('strings.languages')
+                    </a>
+                </li>
                 <!-- <li class="nav-item nav-dropdown {{
                     active_class(Route::is('admin/auth*'), 'open')
                 }}">

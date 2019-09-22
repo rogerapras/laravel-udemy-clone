@@ -121,8 +121,16 @@ class AdminLocaleController extends Controller
             $translation->save();
             return response()->json(null, 200);
         }
+    }
 
-
+    public function publish($group)
+    {
+        $json = false;
+        if($group === '_json'){
+            $json = true;
+        }
+        $this->manager->exportTranslations($group, $json);
+        return response()->json(null, 200);
     }
 
 }

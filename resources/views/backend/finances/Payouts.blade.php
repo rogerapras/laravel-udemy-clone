@@ -6,9 +6,6 @@
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-header">
-                    <strong>@lang('strings.backend.dashboard.welcome') {{ $logged_in_user->name }}!</strong>
-                </div><!--card-header-->
                 <div class="card-body card-min-height">
                     <base-admin-payouts></base-admin-payouts>
                 </div><!--card-body-->

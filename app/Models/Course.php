@@ -5,6 +5,7 @@ namespace App\Models;
 use Spatie\Tags\HasTags;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Course extends Model
 {
@@ -117,6 +118,8 @@ class Course extends Model
         return $this->belongsToMany(Announcement::class);
     }
     
+    
+
     /********* APPENDS **********************/
     public function getPriceAttribute($value)
     {
@@ -161,7 +164,7 @@ class Course extends Model
         return Lesson::whereHas('section', function($q){
             $q->where('course_id', $this->id);
         })
-        ->has('content')
+        ->hasContent()
         ->count();
     }
     
@@ -212,10 +215,10 @@ class Course extends Model
     {
         $q = \DB::table('sections')
             ->join('lessons', 'sections.id', '=', 'lessons.section_id')
-            ->join('contents', 'lessons.id', '=', 'contents.lesson_id')
-            ->where('contents.content_type', '=', 'video')
+            ->whereIn('lessons.content_type', ['video', 'article', 'youtube'])
             ->where('sections.course_id', '=', $this->id)
-            ->sum('contents.video_duration');
+            ->sum('lessons.duration');
+
         $duration = round( $q/60, 1);    
         
         return $duration;
@@ -225,8 +228,7 @@ class Course extends Model
     {
         $q = \DB::table('sections')
             ->join('lessons', 'sections.id', '=', 'lessons.section_id')
-            ->join('contents', 'lessons.id', '=', 'contents.lesson_id')
-            ->where('contents.content_type', '=', 'quiz')
+            ->where('lessons.content_type', '=', 'quiz')
             ->where('sections.course_id', '=', $this->id)
             ->count();
         
@@ -237,8 +239,7 @@ class Course extends Model
     {
         $q = \DB::table('sections')
             ->join('lessons', 'sections.id', '=', 'lessons.section_id')
-            ->join('contents', 'lessons.id', '=', 'contents.lesson_id')
-            ->where('contents.content_type', '=', 'article')
+            ->where('lessons.content_type', '=', 'article')
             ->where('sections.course_id', '=', $this->id)
             ->count();
         
@@ -249,10 +250,9 @@ class Course extends Model
     {
         $q = \DB::table('sections')
             ->join('lessons', 'sections.id', '=', 'lessons.section_id')
-            ->join('contents', 'lessons.id', '=', 'contents.lesson_id')
-            ->where('contents.content_type', '=', 'video')
+            ->whereIn('lessons.content_type', ['video', 'youtube'])
             ->where('sections.course_id', '=', $this->id)
-            ->sum('contents.video_duration');
+            ->sum('lessons.duration');
         $time = round($q/60,1);
         return $time;
     }
@@ -261,9 +261,8 @@ class Course extends Model
     {
         $q = \DB::table('sections')
             ->join('lessons', 'sections.id', '=', 'lessons.section_id')
-            ->join('contents', 'lessons.id', '=', 'contents.lesson_id')
             ->where('sections.course_id', '=', $this->id)
-            ->sum('contents.video_duration');
+            ->sum('lessons.duration');
 
         return $q;
     }
@@ -276,7 +275,10 @@ class Course extends Model
     public function getCoverImageAttribute()
     {
         if($this->image){
-            return '/uploads/images/course/'.$this->image;
+            if(\Storage::disk('server')->exists('images/course/'.$this->image)){
+                return '/uploads/images/course/'.$this->image;
+            }
+            return '/uploads/images/defaults/cover.jpg';
         } else {
             return '/uploads/images/defaults/cover.jpg';
         }
@@ -285,7 +287,10 @@ class Course extends Model
     public function getThumbnailAttribute()
     {
         if($this->image){
-            return '/uploads/images/course/thumbnails/'.$this->image;
+            if(\Storage::disk('server')->exists('images/course/'.$this->image)){
+                return '/uploads/images/course/thumbnails/'.$this->image;
+            }
+            return '/uploads/images/defaults/cover.jpg';
         } else {
             return '/uploads/images/defaults/cover.jpg';
         }

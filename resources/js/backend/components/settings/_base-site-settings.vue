@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="submit">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <fieldset>
                     <legend class="scheduler-border">{{ trans('strings.site_mode') }}</legend>
                     <div class="form-group row mb-1">
@@ -194,7 +194,7 @@
             </div>
 
             <!-- RIGHT -->
-            <div class="col-md-6"></div>
+            <div class="col-md-4"></div>
 
 
             <div class="col-md-12">

@@ -27,9 +27,8 @@ class Section extends Model
     public function getTotalMinutesAttribute()
     {
         $minutes = $this->join('lessons', 'sections.id', '=', 'lessons.section_id')
-                        ->join('contents', 'lessons.id', '=', 'contents.lesson_id')
                         ->where('sections.id', $this->id)
-                        ->sum('contents.video_duration');
+                        ->sum('lessons.duration');
                         
         return $minutes;
     }

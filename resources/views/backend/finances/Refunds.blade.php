@@ -6,9 +6,6 @@
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-header">
-                    <strong>@lang('strings.refunds')</strong>
-                </div><!--card-header-->
                 <div class="card-body card-min-height">
                     <base-admin-refunds></base-admin-refunds>
                 </div><!--card-body-->

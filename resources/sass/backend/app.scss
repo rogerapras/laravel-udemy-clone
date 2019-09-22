@@ -6,6 +6,10 @@
 // Import styles
 @import "~@coreui/coreui/scss/coreui";
 
+body{
+    background-color: #ebeef5 !important;
+}
+
 [v-cloak]{
     display: none;
 }
@@ -18,6 +22,7 @@
 
 .card-min-height{
     min-height: calc(100vh - 250px) !important;
+    margin-bottom: 25px;
 }
 
 .app-header{

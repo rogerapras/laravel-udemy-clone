@@ -26,6 +26,10 @@ body, html, #app, #wrapper, .mm-page {
     height: 100% !important;
 }
 
+.setting-body{
+    min-height: 500px;
+}
+
 .homepage {
     .hero {
 		position: relative;

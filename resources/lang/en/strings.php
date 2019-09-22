@@ -706,5 +706,11 @@ return [
     "is_rtl" => "Is RTL",
     "is_default" => "Is Default",
     "is_active" => "Is Active",
-    "no_languages" => "No Languages"
+    "no_languages" => "No Languages",
+    "translations" => "Translations",
+    "translation_group" => "Translation Group",
+    "publish" => "Publish",
+    "languages" => "Languages",
+    "publishing" => "Publishing..."
+    
 ];

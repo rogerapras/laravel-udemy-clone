@@ -1,6 +1,6 @@
 <template>
     <div class="setting-body white-bg-color">
-        <vue-element-loading :active="loading" :is-full-screen="false"></vue-element-loading>
+        <vue-element-loading :active="loading" background-color="#ffffff" :is-full-screen="false"></vue-element-loading>
         <div class="tc-tabs-style6">
             <ul class="nav nav-tabs mb-2" role="tablist">
                 <li class="nav-item mr-2">
@@ -118,7 +118,10 @@
                 axios.get(`/api/sections/findByCourse/${this.course.id}`)
                     .then(response => {
                         this.sections = response.data.data
-                        this.loading = false
+                        setTimeout(() => {
+                            this.loading = false
+                        }, 2000)
+                        
                     })
             },
             

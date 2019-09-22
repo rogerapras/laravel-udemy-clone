@@ -19,10 +19,10 @@
                 }),
                 
                 options: {
-                    key: process.env.MIX_RAZORPAY_KEY,
+                    key: '',
                     amount: 1000,
-                    name: process.env.MIX_APP_NAME,
-                    //currency: 'USD',
+                    name: '',
+                    currency: 'USD',
                     handler: this.handler,
                     theme: {
                         color: "#168AFA"
@@ -35,8 +35,7 @@
         props:{
             type: { type: String, default: 'cart' },
             course: { type: [Array, Object] },
-            api_key: { type: String, required: true },
-            currency: { type: String, required: true }
+            api_key: { type: String, required: true }
         },
         
         computed: {
@@ -59,7 +58,6 @@
             },
             
             handler(response){
-                //console.log(response)
                 this.form.razorpay_payment_id = response.razorpay_payment_id
                 this.form.courses = this.cartItems.map(item => item.product.id)
                 this.form.coupons = this.cartItems.filter(item => {
@@ -79,8 +77,8 @@
         
         beforeMount(){
             this.options.key = this.api_key
-            this.options.name = this.site_name
-            this.options.currency = this.currency
+            this.options.name = window.config.appName
+            this.options.currency = window.config.default_currency
             /*
             setTimeout(() => {
                 this.options.amount = this.cart.total_purchase_price*100

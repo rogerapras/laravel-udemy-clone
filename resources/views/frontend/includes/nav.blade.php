@@ -33,17 +33,6 @@
 
         <!-- Right Side -->
         <div class="nav__right_container">
-            <!-- @if(config('locale.status') && count(config('locale.languages')) > 1)
-                <div class="nav__instructor_dropdown visible-lg-block">
-                    <div class="gabs__dropdown dropdown--on-hover dropdown_icon">
-                        <a href="#" class="gabs__dropdown-toggle gabs__hover_grey" role="button">
-                            @lang('menus.language-picker.language') ({{ strtoupper(app()->getLocale()) }})
-                        </a>
-
-                        @include('includes.partials.lang')
-                    </div>
-                </div>
-            @endif -->
             @auth
                 <div class="nav__instructor_dropdown visible-lg-block">
                     <div class="gabs__dropdown dropdown--on-hover dropdown--instructor zero-state">

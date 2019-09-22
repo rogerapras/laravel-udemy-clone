@@ -312,6 +312,7 @@ Route::group(['namespace' => 'Api\v1'], function () {
         Route::get('locale/get_default/{key}', 'AdminLocaleController@getDefaultValue');
         Route::put('locales/{id}/update', 'AdminLocaleController@updateTranslation');
         Route::post('locales', 'AdminLocaleController@saveTranslation');
+        Route::post('locale/{group}/publish', 'AdminLocaleController@publish');
 
 
     });

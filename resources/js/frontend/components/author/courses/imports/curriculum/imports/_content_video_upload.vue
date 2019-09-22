@@ -2,10 +2,13 @@
     <div>
         <div class="row">
             <div class="col-md-12">
+                <div class="text-danger mb-2" v-if="error">{{ error }}</div>
                 <file-upload 
                     ref="uploader"
                     :url='url'
+                    :max-size="max_size" 
                     :accept="accept"
+                    @error="handleError"
                     @success="fileSuccess"
                     @progress="fileProgress"
                     @change="onFileChange"></file-upload>
@@ -30,6 +33,8 @@
         name: 'ContentVideoUpload',
         data(){
             return {
+                max_size: 10000000,
+                error: '',
                 url: `/api/lessons/${this.lesson.id}/video/upload`,
                 //headers: {'access-token': '<your-token>'},
                 filesUploaded: [],
@@ -56,8 +61,16 @@
             
             onFileChange(file){
                 this.fileUploaded = file
+            },
+
+            handleError(e){
+                this.error = e.message
             }
             
+        },
+
+        beforeMount(){
+            this.max_size = window.config.max_size * 1000000
         }
         
     }

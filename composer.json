@@ -37,6 +37,7 @@
         "spatie/laravel-html": "^2.22",
         "spatie/laravel-permission": "^3.0",
         "spatie/laravel-tags": "^2.5",
+        "stichoza/google-translate-php": "^4.0",
         "stripe/stripe-php": "^7.0",
         "torann/geoip": "^1.0"
     },

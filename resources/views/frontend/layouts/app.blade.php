@@ -1,3 +1,11 @@
+@php
+    $config = [
+        'appName' => config('app.name'),
+        'max_size' => setting('site.video_max_size_mb') ? (int)setting('site.video_max_size_mb') : 10,
+        'default_currency' => setting('site.site_currency') ? setting('site.site_currency') : 'USD'
+    ];
+@endphp
+
 <!DOCTYPE html>
 @langrtl
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
@@ -15,6 +23,8 @@
         <meta name="author" content="@yield('meta_author', 'ArcInspire')">
         @yield('meta')
 
+        <script>window.config = @json($config);</script>
+
         {{-- See https://laravel.com/docs/5.5/blade#stacks for usage --}}
         @stack('before-styles')
 
@@ -29,8 +39,8 @@
         @include('includes.partials.read-only')
 
         <div id="app">
-            <div id="wrapper" class="" style="min-height: 100%; margin-bottom: -100px;">
-                <div class="wrapper-inner h-100">
+            <div id="wrapper">
+                <div class="wrapper-inner">
 
                     @include('includes.partials.logged-in-as')
                     <section class="desktop__nav d-none d-lg-block">
@@ -42,7 +52,6 @@
                     
                     @include('includes.partials.messages')
                     @yield('content')
-                    <!-- <div class="push" style="height: 203px;"></div> -->
                 </div>
 
                 <!-- <footer class="gabs__footer mt-autox py-3 bg-dark text-white" style="height: 203px;">

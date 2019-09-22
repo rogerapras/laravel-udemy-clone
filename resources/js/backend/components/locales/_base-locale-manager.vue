@@ -4,14 +4,14 @@
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
                     <a href="#languages" class="nav-link" data-toggle="tab" role="tab" aria-controls="languages">
-                        <i class="fas fa-check-circle"></i> 
-                        Languages
+                        <i class="fas fa-globe"></i> 
+                        {{ trans('strings.languages') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#translations" class="nav-link active" data-toggle="tab" role="tab" aria-controls="translations">
-                        <i class="fas fa-info-circle"></i> 
-                        Translations
+                        <i class="fas fa-comments"></i> 
+                        {{ trans('strings.translations') }}
                     </a>
                 </li>
             </ul>
@@ -31,7 +31,7 @@
                         <div slot="afterFilter" class="mr-2 d-flex ml-2">
                             <div class="mr-3 form-group">
                                 <div class="row">
-                                    <label class="col-md-6 pr-0 text-right">Language: </label>
+                                    <label class="col-md-6 pr-0 text-right">{{ trans('strings.language') }}: </label>
                                     <div class="col-md-6 pl-0">
                                         <select class="form-control text-capitalize" v-model="selected_language" @change="fetchTranslationsForLocale()">
                                             <option v-for="locale in activeLanguages" :key="locale.id" :value="locale.carbon_code">
@@ -44,7 +44,7 @@
 
                             <div class="mr-3 form-group">
                                 <div class="row">
-                                    <label class="col-md-8 pr-0 text-right">Translation Group: </label>
+                                    <label class="col-md-8 pr-0 text-right">{{ trans('strings.translation_group') }}: </label>
                                     <div class="col-md-4 pl-0">
                                         <select class="form-control text-capitalize" v-model="selected_group" @change="fetchTranslationsForLocale()">
                                             <option v-for="group in groups" :key="group" :value="group">
@@ -56,14 +56,15 @@
                             </div>
                         </div>
 
-                        <!-- <template slot="value" slot-scope="props">
-                            <x-editable 
-                                :value="props.row.value"
-                                @translation-cancelled="fetchTranslationsForLocale"
-                                :url="`/api/admin/locales/${props.row.id}/update`"
-                                group="strings"
-                                type="textarea"></x-editable>
-                        </template> -->
+                        <div slot="beforeLimit" class="mr-2 d-flex ml-2">
+                            <button :busy="publishing" class="btn btn-success btn-md" @click="publish()">
+                                <span v-if="!publishing">{{ trans('strings.publish') }}</span>
+                                <span v-else>
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    {{ trans('strings.publishing') }}
+                                </span>
+                            </button>
+                        </div>
                     </v-client-table>
                 </div>
             </div>
@@ -74,7 +75,7 @@
 <script>
 
 import editable from '../../plugins/bootstrap-editable'
-
+import Cookies from 'js-cookie'
 import LanguageList from './LanguageList.vue'
 import XEditable from './EditableContent.vue'
 
@@ -86,6 +87,7 @@ export default {
     
     data(){
         return {
+            publishing: false,
             loading: false,
             selected_language: 'en',
             selected_group: 'strings',
@@ -125,11 +127,32 @@ export default {
 
     computed:{
         activeLanguages(){
-            return this.languages.filter(l => l.is_active == 1);
+            if(this.languages.length)return this.languages.filter(l => l.is_active == 1);
+        }
+    },
+
+    watch:{
+        selected_language(lang){
+            Cookies.set('selected_language', lang, { expires: 365 })
+        },
+
+        selected_group(group){
+            Cookies.set('selected_group', group, { expires: 365 })
         }
     },
 
     methods: {
+        async publish(){
+            this.publishing = await true
+            setTimeout(() => {
+                axios.post(`/api/admin/locale/${this.selected_group}/publish`)
+                    .then(response => {
+
+                    }).finally(() => this.publishing = false)
+            }, 1000)
+            
+        },
+
         fetchLanguages(){
             axios.get('/api/admin/languages?activeOnly=true')
                 .then(response => {
@@ -155,12 +178,13 @@ export default {
                         })
                     }
                     this.translations = await translations
-                    //this.translations = response.data.translations
                 }).finally(() => this.loading = false)
         }
     },
 
     created(){
+        this.selected_language = Cookies.get('selected_language') || 'en'
+        this.selected_group = Cookies.get('selected_group') || 'strings'
         this.fetchLanguages()
     },
 

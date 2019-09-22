@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="submit">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <fieldset>
                     <div class="alert alert-warning p-2">
                         <h4 class="text-darkx mb-0 font-weight-light">{{ trans('strings.important') }}</h4>
@@ -29,7 +29,7 @@
             </div>
 
             <!-- RIGHT -->
-            <div class="col-md-6"></div>
+            <div class="col-md-4"></div>
 
             <div class="col-md-12">
                 <base-button :loading="form.busy" class="btn btn-lg rounded-0 btn-success">
