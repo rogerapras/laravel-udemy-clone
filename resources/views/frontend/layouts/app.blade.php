@@ -5,6 +5,8 @@
         'default_currency' => setting('site.site_currency') ? setting('site.site_currency') : 'USD',
         'source' => setting('site.video_providers') ? setting('site.video_providers') : 'both'
     ];
+
+    $pages = \App\Models\Page::where('published', true)->get();
 @endphp
 
 <!DOCTYPE html>
@@ -41,7 +43,7 @@
 
         <div id="app">
             <div id="wrapper">
-                <div class="wrapper-inner" style="min-height: 100%;margin-bottom: -200px;">
+                <div class="wrapper-inner" style="min-height: 100%;margin-bottom: -100px;">
 
                     @include('includes.partials.logged-in-as')
                     <section class="desktop__nav d-none d-lg-block">
@@ -54,12 +56,52 @@
                     @include('includes.partials.messages')
                     @yield('content')
 
-                    <div class="push" style="height: 203px;"></div>
+                    <div class="push" style="height: 103px;"></div>
                 </div>
 
-                <footer class="gabs__footer mt-autox py-3 bg-dark text-white" style="height: 203px;">
-                    <div class="container">
-                        <span class="text-mutedx">Place sticky footer content here.</span>
+                <footer class="gabs__footer mt-autox py-3 bg-dark text-white" style="height: 103px;">
+                    <div class="container py-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-inline">
+                                    @foreach($pages as $page)
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center" href="{{ route('frontend.page', $page->slug) }}"> 
+                                                {{ $page->title }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+
+
+                            
+                            <div class="col-md-6 text-right">
+                                <div class="d-flex align-items-center justify-content-end">
+                                    <!-- CURRENCY -->
+                                    <div class="mr-3">
+                                        <base-currency-switcher></base-currency-switcher>
+                                    </div>
+
+                                    <!-- LANGUAGE -->
+                                    <div class="dropup">
+                                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-globe"></i>
+                                            <span class="text-uppercase">{{ app()->getLocale() }}</span>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="about-us">
+                                            @foreach(\App\Models\Language::where('is_active', true)->get() as $lang)
+                                                @if($lang->carbon_code != app()->getLocale())
+                                                    <a class="dropdown-item" href="{{ '/lang/'.$lang->carbon_code }}">
+                                                        @lang('menus.language-picker.langs.'.$lang->carbon_code)
+                                                    </a>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </footer>
 

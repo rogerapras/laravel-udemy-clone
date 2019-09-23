@@ -114,9 +114,9 @@ class Lesson extends Model
     
     public function getVideoLinkAttribute()
     {
-        if($this->content_type == 'video'){
+        if($this->content_type == 'video' && $this->video){
             return $this->video->streamable_sm;
-        } elseif($this->content_type == 'youtube'){
+        } elseif($this->content_type == 'youtube' && $this->video){
             return $this->video->youtube_link;
         } else {
             return null;

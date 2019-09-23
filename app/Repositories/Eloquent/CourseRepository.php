@@ -228,7 +228,7 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
         
         $course = Course::where('slug', $slug)->with([
             'sections', 'sections.lessons', 
-            'sections.lessons.content', 'author', 
+            'sections.lessons.video', 'author', 
             'what_to_learn', 'requirements', 'target_students'
         ])->first();
         

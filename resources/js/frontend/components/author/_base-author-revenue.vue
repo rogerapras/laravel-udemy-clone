@@ -36,7 +36,10 @@
                     ref="datatable"
                     :options="options">
                     <template slot="period" slot-scope="props">
-                        <a :href="props.row.report_url">{{ props.row.start_string }}</a>   
+                        <a :href="props.row.report_url" v-if="props.row.total_revenue > 0">
+                            {{ props.row.start_string }}
+                        </a>   
+                        <span v-else>{{ props.row.start_string }}</span>
                     </template>
                     <template slot="comment" slot-scope="props">
                         {{ props.row.status == 'open' ? trans('strings.total_not_yet_finalized') : '' }}  
@@ -93,7 +96,7 @@
                     sortable:[],
                     templates: {
                         total_revenue(h, row) {
-                            return this.formatCurrency(row.total_revenue)
+                            return this.formatCurrency(row.total_revenue, false)
                         }
                     }
                 }

@@ -20,7 +20,6 @@ export const getters = {
 // mutations
 export const mutations = {
   SET_CURRENCY (state, currency) {
-    console.log(currency)
     state.currency = currency
     let conversion_rate = state.currencies.filter(c => c.code.toUpperCase() == currency.toUpperCase())[0].conversion_rate
     state.conversion_rate = conversion_rate

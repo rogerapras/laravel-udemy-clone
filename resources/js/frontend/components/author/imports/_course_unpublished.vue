@@ -15,11 +15,8 @@
                                 <div class="d-flex justify-content-between mt-auto">
                                     <span class="fw-600 font-13">{{ trans(`strings.${course.status_code}`) }}</span>
                                     <span class="fw-300 font-13">
-                                        <span v-if="course.price > 0">
+                                        <span>
                                             {{ formatCurrency(course.price) }}
-                                        </span> 
-                                        <span v-else>
-                                            {{ trans('strings.free') }}    
                                         </span>
                                         <!-- - {{ trans('strings.public') }} -->
                                     </span>

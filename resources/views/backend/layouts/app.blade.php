@@ -1,6 +1,6 @@
 @php
     $config = [
-        'url' => setting('site.site_url') ? (int)setting('site.site_url') : url('/'),
+        'url' => setting('site.site_url') ? setting('site.site_url') : url('/'),
         'locale' => app()->getLocale()
     ];
 @endphp

@@ -53,7 +53,7 @@
                 <base-nav-cart></base-nav-cart>
 
                 <!-- User -->
-                <base-nav-user-dropdown :user="{{ json_encode($logged_in_user) }}" :isAdmin="{{ $logged_in_user->isAdmin() }}"></base-nav-user-dropdown>
+                <base-nav-user-dropdown :user="{{ json_encode($logged_in_user) }}" isAdmin="{{ $logged_in_user->isAdmin() }}"></base-nav-user-dropdown>
             @endauth
 
             @guest 

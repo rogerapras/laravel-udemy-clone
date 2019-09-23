@@ -193,8 +193,32 @@ Vue.component(AlertSuccess.name, AlertSuccess)
 import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
+// import 'quill/dist/quill.bubble.css'
 Vue.use(VueQuillEditor)
+
+
+
+/************* USED EDITOR ************** */
+// import VueEditor from "vue2-editor";
+// Vue.use(VueEditor);
+
+import wysiwyg from "vue-wysiwyg";
+Vue.use(wysiwyg, {
+  hideModules: { 
+    "image": true,
+    "table": true,
+    "link": true
+  },
+  // if the image option is not set, images are inserted as base64
+  // image: {
+  //   uploadURL: "/api/myEndpoint",
+  //   dropzoneOptions: {}
+  // },
+  forcePlainTextOnPaste: true
+}); // config is optional. more below
+import "vue-wysiwyg/dist/vueWysiwyg.css"
+
+
 
 const bus = {}
 bus.install = function (Vue) {

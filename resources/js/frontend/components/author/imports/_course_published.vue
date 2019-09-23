@@ -16,11 +16,8 @@
                                 <div class="d-flex justify-content-between mt-auto">
                                     <span class="fw-600 font-13 text-success">{{ trans(`strings.${course.status_code}`) }}</span>
                                     <span class="fw-300 font-13">
-                                        <span v-if="course.price > 0">
+                                        <span>
                                             {{ formatCurrency(course.price) }}
-                                        </span> 
-                                        <span v-else>
-                                            {{ trans('strings.free') }}
                                         </span> 
                                         <!-- - {{ trans('strings.public') }}    -->
                                     </span>
@@ -37,14 +34,14 @@
                                     {{ trans('strings.earned_this_month') }}
                                 </div>
                                 <div class="h5">
-                                    {{ formatCurrency(course.sales_this_month) }}
+                                    {{ formatCurrency(course.sales_this_month, false) }}
                                 </div>
                                 
                                 <div class="small text-muted mb-1">
                                     {{ trans('strings.total_earned') }}
                                 </div>
                                 <div class="h5">
-                                    {{ formatCurrency(course.total_sales) }}
+                                    {{ formatCurrency(course.total_sales, false) }}
                                 </div>
                             </div> 
                         </div>

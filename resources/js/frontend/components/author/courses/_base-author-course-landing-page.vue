@@ -15,10 +15,7 @@
             
             <div class="form-group">
                 <label>{{ trans('strings.course_description') }}</label>
-                <quill-editor :content="form.description"
-                    :options="editorOption"
-                    @change="onEditorChange($event)">
-                </quill-editor>
+                <wysiwyg v-model="form.description" />
                 <has-error :form="form" field="description"/>
             </div>
             
@@ -190,5 +187,11 @@ export default {
 </script>
 
 <style>
-    
+    .editr pre {
+        background: #ededed;
+        font-family: monospace;
+        padding: 2px;
+        color: red;
+    }
+
 </style>
