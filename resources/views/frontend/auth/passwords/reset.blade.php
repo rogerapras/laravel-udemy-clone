@@ -14,6 +14,7 @@
                             </h4>
 
                             <div class="px-4">
+                                @include('includes.partials.messages')
                                 @if(session('status'))
                                     <div class="alert alert-success">
                                         {{ session('status') }}

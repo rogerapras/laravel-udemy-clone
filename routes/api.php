@@ -101,6 +101,7 @@ Route::group(['namespace' => 'Api\v1'], function () {
             
             // User profile update
             Route::put('settings/profile', 'Settings\ProfileController@update');
+            Route::put('settings/payout', 'Settings\ProfileController@updatePayoutSettings');
             Route::put('settings/password', 'Settings\PasswordController@update');
             
             

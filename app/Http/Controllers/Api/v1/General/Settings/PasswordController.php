@@ -1,25 +1,28 @@
 <?php
 namespace App\Http\Controllers\Api\v1\General\Settings;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+use App\Repositories\Frontend\Auth\UserRepository;
+use LangleyFoxall\LaravelNISTPasswordRules\PasswordRules;
+use App\Rules\Auth\MatchOldPassword;
+
 class PasswordController extends Controller
 {
-    /**
-     * Update the user's password.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+    protected $userRepository;
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function update(Request $request)
     {
+    
         $this->validate($request, [
-            'old_password' => 'required|old_password:' . auth()->user()->password,
-            'password' => 'required|confirmed|min:6',
+            'old_password' => ['required', new MatchOldPassword],
+            'password' => 'required|string|min:6|confirmed'
         ]);
-        $request->user()->update([
-            'password' => Hash::make($request->password)
-            //'password' => bcrypt($request->password),
-        ]);
+        $this->userRepository->updatePassword($request->only('old_password', 'password'));
+        return response()->json(null, 200);
     }
 }

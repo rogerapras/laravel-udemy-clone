@@ -44,7 +44,6 @@
         <div id="app">
             <div id="wrapper">
                 <div class="wrapper-inner" style="min-height: 100%;margin-bottom: -100px;">
-
                     @include('includes.partials.logged-in-as')
                     <section class="desktop__nav d-none d-lg-block">
                         @include('frontend.includes.nav')
@@ -53,7 +52,7 @@
                         @include('frontend.includes.nav_mobile')
                     </section>
                     
-                    @include('includes.partials.messages')
+                    <!-- @include('includes.partials.messages') -->
                     @yield('content')
 
                     <div class="push" style="height: 103px;"></div>

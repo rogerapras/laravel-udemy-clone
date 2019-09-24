@@ -15,6 +15,7 @@
                             </h4>
 
                             <div class="px-4">
+                                @include('includes.partials.messages')
                                 {{ html()->form('POST', route('frontend.auth.login.post'))->open() }}
                                     <div class="form-label-groupx mb-3 floating-label">
                                         <input id="email" autocomplete="off" required name="email"

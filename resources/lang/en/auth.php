@@ -15,6 +15,7 @@ return [
     'failed' => 'These credentials do not match our records.',
     'general_error' => 'You do not have access to do that.',
     'password_used' => 'You can not set a password that you have previously used.',
+    'wrong_old_password' => 'The Old Password provided is wrong',
     'socialite' => [
         'unacceptable' => ':provider is not an acceptable login type.',
     ],

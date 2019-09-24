@@ -19,6 +19,7 @@
         "creativeorange/gravatar": "~1.0",
         "davejamesmiller/laravel-breadcrumbs": "^5.0",
         "fideloper/proxy": "^4.0",
+        "glorand/laravel-model-settings": "^3.4",
         "guzzlehttp/guzzle": "^6.3",
         "hassansin/dbcart": "dev-master",
         "intervention/image": "^2.5",

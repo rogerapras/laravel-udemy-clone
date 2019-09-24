@@ -22,7 +22,7 @@
 
 
         <form @submit.prevent="update" @keydown="form.onKeydown($event)">
-            <alert-success :form="form" :message="'info_updated'"/>
+            <alert-success :form="form" :message="trans('strings.info_updated')"/>
             <div class="row">
                 <div class="col-md-6">
                     <!-- UName -->

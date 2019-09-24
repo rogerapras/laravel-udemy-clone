@@ -31,13 +31,13 @@ class AccountController extends Controller
     
     public function privacySettings()
     {
-        $user = auth()->user();
-        return view('frontend.user.account.PrivacySettings', compact('user'));
+        $settings = auth()->user()->settings()->getMultiple(['payouts.email', 'payouts.method']);
+        return view('frontend.user.account.PrivacySettings', compact('settings'));
     }
     
     public function payoutSettings()
     {
-        $user = auth()->user();
-        return view('frontend.user.account.PayoutSettings', compact('user'));
+        $settings = auth()->user()->settings()->getMultiple(['paypal_email', 'payout_method']);
+        return view('frontend.user.account.PayoutSettings', compact('settings'));
     }
 }

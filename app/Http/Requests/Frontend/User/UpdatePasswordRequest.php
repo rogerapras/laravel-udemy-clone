@@ -28,17 +28,10 @@ class UpdatePasswordRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'old_password' => ['required'],
-            'password' => array_merge(
-                [
-                    new UnusedPassword($this->user()),
-                ],
-                PasswordRules::changePassword(
-                    $this->email,
-                    config('access.users.password_history') ? 'old_password' : null
-                )
-            ),
+            'password' => PasswordRules::changePassword($this->user()->email, 'old_password')
         ];
     }
 }

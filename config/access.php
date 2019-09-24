@@ -53,7 +53,7 @@ return [
          * The number of most recent previous passwords to check against when changing/resetting a password
          * false is off which doesn't log password changes or check against them
          */
-        'password_history' => env('PASSWORD_HISTORY', 3),
+        'password_history' => env('PASSWORD_HISTORY', false),
     ],
 
     // Configuration for roles

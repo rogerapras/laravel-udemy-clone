@@ -11,11 +11,11 @@
         @lang('strings.change_password')
     </a>
 
-    <a href="{{ route('frontend.user.account.privacy') }}" 
+    <!-- <a href="{{ route('frontend.user.account.privacy') }}" 
         class="list-group-item list-group-item-action nav-link {{ active_class(Route::is('frontend.user.account.privacy')) }}" >
         <span class="sl sl-icon-check"></span>
         @lang('strings.privacy_settings')
-    </a>
+    </a> -->
 
     <a href="{{ route('frontend.user.account.payout') }}" 
         class="list-group-item list-group-item-action nav-link {{ active_class(Route::is('frontend.user.account.payout')) }}" >

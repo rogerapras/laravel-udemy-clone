@@ -16,6 +16,7 @@
                             </h4>
 
                             <div class="px-4">
+                                @include('includes.partials.messages')
                                 {{ html()->form('PATCH', route('frontend.auth.password.expired.update'))->class('form-horizontal')->open() }}
                                     <div class="form-label-groupx mb-3 floating-label">
                                         <input id="old_password" autofocus autocomplete="off" required name="old_password"

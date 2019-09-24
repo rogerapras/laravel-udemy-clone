@@ -717,6 +717,8 @@ return [
 
     "pages" => "Pages",
     "slug" => "Slug",
-    "body" => "Body"
+    "body" => "Body",
+    "paypal_email" => "PayPal Email",
+    "payout_explanation" => "Your payments will be processed through PayPal. Please provide your PayPal email else your payouts will not be processed."
     
 ];

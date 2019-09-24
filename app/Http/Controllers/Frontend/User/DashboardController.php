@@ -22,7 +22,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('frontend.user.dashboard');
+        return redirect(route('frontend.user.account'));
     }
 
     public function courses()

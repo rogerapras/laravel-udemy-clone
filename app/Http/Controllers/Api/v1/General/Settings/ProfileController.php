@@ -39,9 +39,17 @@ class ProfileController extends Controller
         return $user;
     }
 
-    public function save_user_settings()
+    public function updatePayoutSettings(Request $request)
     {
+        $this->validate($request, [
+            'paypal_email' => 'required|email'
+        ]);
 
+        $user = auth()->user();
+        $user->settings()->setMultiple([
+            'payout_method' => $request->payout_method,
+            'paypal_email' => $request->paypal_email
+        ]);
     }
     
 

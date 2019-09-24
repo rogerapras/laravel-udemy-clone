@@ -14,11 +14,12 @@
                             </h4>
 
                             <div class="px-4">
+                                @include('includes.partials.messages')
                                 {{ html()->form('POST', route('frontend.auth.register.post'))->open() }}
                                     <div class="form-label-groupx mb-3 floating-label">
                                         <input id="username" autocomplete="off" required name="username"
                                             class="form-control font-16 py-4 form-control-lg" type="text" placeholder=" ">
-                                        <label for="username">@lang('validation.attributes.frontend.username')</label>
+                                        <label for="username">@lang('strings.username')</label>
                                     </div>
 
                                     <div class="form-label-groupx mb-3 floating-label">

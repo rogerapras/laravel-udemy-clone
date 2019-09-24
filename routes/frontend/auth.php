@@ -19,10 +19,9 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
         Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
         // These routes can not be hit if the password is expired
-        Route::group(['middleware' => 'password_expires'], function () {
-            // Change Password Routes
-            Route::patch('password/update', [UpdatePasswordController::class, 'update'])->name('password.update');
-        });
+        // Route::group(['middleware' => 'password_expires'], function () {
+        // Route::patch('password/update', [UpdatePasswordController::class, 'update'])->name('password.update');
+        //});
 
         // Password expired routes
         Route::get('password/expired', [PasswordExpiredController::class, 'expired'])->name('password.expired');

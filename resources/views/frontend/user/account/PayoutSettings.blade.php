@@ -15,7 +15,7 @@
                         </div>
                         
                         <div class="setting-body white-bg-color">
-                            Place content
+                            <base-payout-settings :settings="{{ json_encode($settings) }}"></base-payout-settings>
                         </div>
                     </div> 
                 </div>
