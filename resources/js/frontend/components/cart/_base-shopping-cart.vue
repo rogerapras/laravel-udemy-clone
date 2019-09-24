@@ -7,6 +7,7 @@
                 <!-- LEFT SIDE -->
                 <div class="col-md-8">
                     <div class="h5">
+
                         {{ cart.item_count }} 
                         {{ cart.item_count | pluralize(trans('course')) }} 
                         {{ trans('strings.in_cart') }}
@@ -117,11 +118,6 @@
             <!-- CART IS EMPTY -->
             <div class="row" v-else>
                 <div class="col-md-12">
-                    <div class="h5">
-                        {{ cart.item_count }} 
-                        {{ cart.item_count | pluralize('course') }} 
-                        {{ trans('strings.in_cart') }}
-                    </div>
                     <div class="card">
                         <div class="card-body d-flex flex-column justify-content-center align-items-center">
                             <i class="fa fa-shopping-cart fa-4x text-muted pt-4 mt-4"></i>
@@ -175,7 +171,6 @@
             async applyCoupon(){
                 this.form.cart = await this.cart.id
                 await this.$store.dispatch('cart/applyCoupon', this.form)
-                //this.form.reset()
             },
             
             async removeCoupon(itemId){
@@ -189,9 +184,11 @@
             setTimeout(() => {
                 if(this.sitewideCoupon){
                     this.form.code = this.sitewideCoupon.code
-                    this.applyCoupon()
+                    if(this.form.code){
+                        this.applyCoupon()
+                    }
                 }
-            }, 500)
+            }, 2000)
         }
 
     }

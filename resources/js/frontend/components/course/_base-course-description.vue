@@ -4,7 +4,7 @@
             <div class="course__content py-2 d-flex justify-content-between">
                 <base-heading :text="trans('strings.course_description')"></base-heading>
             </div>
-            <div v-html="course.description"></div>
+            <p v-html="course.description"></p>
         </div>
     </div>
     

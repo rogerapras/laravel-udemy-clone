@@ -16,5 +16,4 @@ class CourseTarget extends Model
         return $this->belongsTo(Course::class);
     }
 
-    
 }

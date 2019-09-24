@@ -51,7 +51,9 @@
                 if(this.sitewideCoupon){
                     this.couponForm.code = await this.sitewideCoupon.code
                     this.couponForm.cart = await this.cart.id
-                    await this.$store.dispatch('cart/applyCoupon', this.couponForm)
+                    if(this.couponForm.code){
+                        await this.$store.dispatch('cart/applyCoupon', this.couponForm)
+                    }
                 }
                 await this.$store.dispatch('cart/fetchCartItems')
                 this.is_in_cart = await true

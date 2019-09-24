@@ -47,7 +47,7 @@ class AuthorContentController extends Controller
         $path = $request->file('file')->storeAs('uploads', $filename, 'tmpStorage');
         
         $video = $this->contents->createVideoContent([
-            'disk' => setting('site.video_upload_location'),
+            'disk' => setting('site.video_upload_location'), // local, s3, youtube
             'original_filename' => $filename,
             'is_processed' => false,
             'duration' => $duration_in_seconds/60

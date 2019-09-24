@@ -4,9 +4,9 @@
             <a href="javascript:void(0)" class="gabs__dropdown-toggle gabs__hover_grey" role="button">
                 <div class="fx pos-r text-center">
                     <span class="fa fa-shopping-cart dropdown__main_icon gicon"></span>
-                    <span class="badge bg-transparent text-secondary" v-if="loading">
+                    <!-- <span class="badge bg-transparent text-secondary" v-if="loading">
                         <span class="fa fa-circle-o-notch font-10 fa-spin"></span>
-                    </span>
+                    </span> -->
                     <template v-if="!loading && cart.item_count > 0">
                         <span class="badge">
                             {{ cart.item_count > 9 ? '9+' : cart.item_count }}
@@ -98,6 +98,7 @@
 
 <script>
     import { mapGetters } from 'vuex'
+    import Cookie from 'js-cookie'
     
     export default{
         
@@ -112,8 +113,8 @@
             }),
         },
         
-        beforeMount(){
-            this.$store.dispatch('cart/fetchCartItems')
+        async beforeMount(){
+            await this.$store.dispatch('cart/fetchCartItems')
         },
 
         mounted(){

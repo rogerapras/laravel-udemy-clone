@@ -61,3 +61,4 @@ $factory->state(User::class, 'softDeleted', function () {
         'deleted_at' => now(),
     ];
 });
+

@@ -1,4 +1,5 @@
 import * as types from './mutation-types'
+import Cookie from 'js-cookie'
 import axios from 'axios'
 // state
 export const state = () => {
