@@ -67,7 +67,7 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
         	'language' => $data['language']
         ]);
 
-        $course->syncTags($data['topics']);
+        //$course->syncTags($data['topics']);
         
     }
     
@@ -190,7 +190,7 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
             
         }
         
-        $courses = $builder->with('what_to_learn', 'author')->get();
+        $courses = $builder->with(['category', 'what_to_learn', 'sections', 'sections.lessons', 'author'])->get();
         
         foreach($courses as $course){
             $course->first_lesson = get_first_lesson($course);

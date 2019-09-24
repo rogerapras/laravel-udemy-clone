@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Spatie\Tags\HasTags;
+// use Spatie\Tags\HasTags;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
 
 class Course extends Model
 {
-    use Uuid, HasTags;
+    //use Uuid, HasTags;
+    use Uuid;
 
     protected $fillable = [
     	'user_id', 
@@ -40,11 +41,11 @@ class Course extends Model
         'short_description',
         'is_in_cart',
         'status_code',
-        'sales_this_month',
-        'total_sales',
+        //'sales_this_month',
+        //'total_sales',
         'total_hours',
         'total_lessons',
-        'total_quizzes',
+        //'total_quizzes',
         'total_published_lessons',
         'total_students',
         'enrolled_this_month',
@@ -224,16 +225,16 @@ class Course extends Model
         return $duration;
     }
     
-    public function getTotalQuizzesAttribute()
-    {
-        $q = \DB::table('sections')
-            ->join('lessons', 'sections.id', '=', 'lessons.section_id')
-            ->where('lessons.content_type', '=', 'quiz')
-            ->where('sections.course_id', '=', $this->id)
-            ->count();
+    // public function getTotalQuizzesAttribute()
+    // {
+    //     $q = \DB::table('sections')
+    //         ->join('lessons', 'sections.id', '=', 'lessons.section_id')
+    //         ->where('lessons.content_type', '=', 'quiz')
+    //         ->where('sections.course_id', '=', $this->id)
+    //         ->count();
         
-        return $q;
-    }
+    //     return $q;
+    // }
     
     public function getTotalArticlesAttribute()
     {
@@ -296,7 +297,18 @@ class Course extends Model
         }
     }
     
-    public function getSalesThisMonthAttribute()
+    // public function getSalesThisMonthAttribute()
+    // {
+ 
+    //     $now = \Carbon\Carbon::now();
+    //     $sales_earnings_this_month = Payment::where('course_id', $this->id)
+    //                                     ->whereBetween('created_at', [$now->startOfMonth() , $now->copy()->endOfMonth()])
+    //                                     ->sum('author_earning');
+                                        
+    //     return $sales_earnings_this_month;
+    // }
+
+    public function get_sales_this_month()
     {
  
         $now = \Carbon\Carbon::now();
@@ -307,7 +319,11 @@ class Course extends Model
         return $sales_earnings_this_month;
     }
     
-    public function getTotalSalesAttribute()
+    // public function getTotalSalesAttribute()
+    // {
+    //     return Payment::where('course_id', $this->id)->sum('author_earning');
+    // }
+    public function get_total_sales()
     {
         return Payment::where('course_id', $this->id)->sum('author_earning');
     }

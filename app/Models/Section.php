@@ -11,7 +11,7 @@ class Section extends Model
     
     protected $fillable=['uuid', 'title', 'objective', 'uuid', 'course_id', 'sortOrder'];
     
-    protected $appends=['total_minutes', 'durationHMS'];
+    //protected $appends=['total_minutes', 'durationHMS'];
     
     public function course()
     {
@@ -24,19 +24,19 @@ class Section extends Model
     }
     
     
-    public function getTotalMinutesAttribute()
-    {
-        $minutes = $this->join('lessons', 'sections.id', '=', 'lessons.section_id')
-                        ->where('sections.id', $this->id)
-                        ->sum('lessons.duration');
+    // public function getTotalMinutesAttribute()
+    // {
+    //     $minutes = $this->join('lessons', 'sections.id', '=', 'lessons.section_id')
+    //                     ->where('sections.id', $this->id)
+    //                     ->sum('lessons.duration');
                         
-        return $minutes;
-    }
+    //     return $minutes;
+    // }
     
-    public function getDurationHMSAttribute()
-    {
-        return convert_minutes_to_duration($this->total_minutes);
-    } 
+    // public function getDurationHMSAttribute()
+    // {
+    //     return convert_minutes_to_duration($this->total_minutes);
+    // } 
 
     
 }

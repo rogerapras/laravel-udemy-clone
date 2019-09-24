@@ -34,33 +34,5 @@ class Category extends Model
         return $this->hasMany(Course::class);
     }
     
-    /*********** Appends **************/
-    protected $appends= [
-        'course_count', 
-        'url'
-    ];
-    
-    public function getUrlAttribute()
-    {
-        return null;
-        /*if(!$this->hasChildren()){
-            $parent = Category::find($this->parent_id);
-            return route('frontend.category', ['category' => $parent->slug, 'subcategory' => $this->slug]);
-        }
-        return route('frontend.category', ['category' => $this->slug]);*/
-        
-        
-    }
-    
-    public function getCourseCountAttribute()
-    {
-        if($this->hasChildren()){
-            $children = $this->children->pluck('id');
-            $courses = Course::whereIn('category_id', $children)->count();
-            return $courses;
-        }
-        return $this->courses->count();
-    }
-    
     
 }

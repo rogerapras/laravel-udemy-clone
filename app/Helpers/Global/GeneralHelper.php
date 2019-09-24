@@ -153,8 +153,6 @@ if (! function_exists('get_first_lesson')) {
             ->join('sections', 'sections.id', 'lessons.section_id')
             ->orderBy('sections.sortOrder')
             ->orderBy('lessons.sortOrder')
-            //->join('items', 'items.id', '=', 'user_items.item_id')
-            //->orderBy('items.type')
             ->first();
         
         if(auth()->check()){
