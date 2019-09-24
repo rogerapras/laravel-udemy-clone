@@ -2,41 +2,56 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Filesystem\Filesystem;
 
 class DatabaseSeeder extends Seeder
 {
-    use TruncateTable;
+    use TruncateTable, DisableForeignKeys;
 
     /**
      * Seed the application's database.
      */
     public function run()
     {
-        Model::unguard();
+        //Model::unguard();
+        $file = new Filesystem;
+        $file->cleanDirectory(public_path('uploads/images/course/thumbnails'));
 
-        // $this->truncateMultiple([
-        //     'cache',
-        //     'jobs',
-        //     'sessions',
-        // ]);
+        $this->disableForeignKeys();
+        $this->truncateMultiple([
+            'cache',
+            'jobs',
+            'sessions',
+            'countries',
+            'languages',
+            'categories',
+            'periods',
+            'currencies',
+            config('permission.table_names.model_has_permissions'),
+            config('permission.table_names.model_has_roles'),
+            config('permission.table_names.role_has_permissions'),
+            config('permission.table_names.permissions'),
+            config('permission.table_names.roles'),
+            'users',
+            'password_histories',
+            'password_resets',
+            'social_accounts',
+            'course_targets',
+            'videos',
+            'lessons',
+            'sections',
+            'courses'
+        ]);
 
-        // $this->call(AuthTableSeeder::class);
-
-        // Model::reguard();
-        // $this->call(CategoriesTableSeeder::class);
-        // $this->call(CoursesTableSeeder::class);
-        // $this->call(CouponsTableSeeder::class);
-        // $this->call(CourseTargetsTableSeeder::class);
-        // $this->call(SectionsTableSeeder::class);
-        // $this->call(LessonsTableSeeder::class);
-        // $this->call(ContentsTableSeeder::class);
-        // $this->call(CountrySeeder::class);
-        // $this->call(PeriodsTableSeeder::class);
-        // $this->call(ReviewsTableSeeder::class);
-        // $this->call(CurrenciesTableSeeder::class);
-        // $this->call(SettingsTableSeeder::class);
-        // $this->call(LanguageSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
+        $this->call(CountrySeeder::class);
+        $this->call(PeriodsTableSeeder::class);
+        $this->call(CurrenciesTableSeeder::class);
+        $this->call(SettingsTableSeeder::class);
+        $this->call(LanguageSeeder::class);
         $this->call(AuthTableSeeder::class);
-        Model::reguard();
+
+        $this->enableForeignKeys();
+       // Model::reguard();
     }
 }

@@ -287,7 +287,7 @@ class Course extends Model
     public function getThumbnailAttribute()
     {
         if($this->image){
-            if(\Storage::disk('server')->exists('images/course/'.$this->image)){
+            if(\Storage::disk('server')->exists('images/course/thumbnails/'.$this->image)){
                 return '/uploads/images/course/thumbnails/'.$this->image;
             }
             return '/uploads/images/defaults/cover.jpg';

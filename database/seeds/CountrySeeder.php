@@ -17,7 +17,6 @@ class CountrySeeder extends Seeder
     public function countries()
     {
         $countries = json_decode(\File::get(self::CountriesJSON), true);
-
         return collect($countries);
     }
 }

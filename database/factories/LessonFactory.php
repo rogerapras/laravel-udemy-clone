@@ -10,7 +10,6 @@ $factory->define(Lesson::class, function (Faker $faker, $course_id) {
     $max = Lesson::max('id');
     return [
         'course_id' => $course_id,
-        //'section_id' => 1,
         'uuid' => (string)\Str::uuid(),
         'lesson_type' => 'lecture',
         'title' => \Str::title($faker->unique()->sentence),

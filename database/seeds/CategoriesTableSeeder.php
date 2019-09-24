@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 
 class CategoriesTableSeeder extends Seeder
 {
-
+    use DisableForeignKeys, TruncateTable;
     /**
      * Auto generated seed file
      *
@@ -12,7 +12,10 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        
+        // $this->disableForeignKeys();
+        // $this->truncateMultiple([
+        //     'categories'
+        // ]);
 
         \DB::table('categories')->delete();
         
@@ -385,6 +388,7 @@ class CategoriesTableSeeder extends Seeder
             ),
         ));
         
+        //$this->enableForeignKeys();
         
     }
 }

@@ -4,13 +4,8 @@
 
 use App\Models\Course;
 use Faker\Generator as Faker;
-use Illuminate\Filesystem\Filesystem;
 
 $factory->define(Course::class, function (Faker $faker, $user_id) {
-
-    $file = new Filesystem;
-    $file->cleanDirectory(public_path('uploads/images/course/thumbnails'));
-    
     $title = \Str::title($faker->unique()->sentence);
     $childrenCategories = \App\Models\Category::whereNotNull('parent_id')->pluck('id');
     return [

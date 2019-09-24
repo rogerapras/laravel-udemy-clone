@@ -9,14 +9,17 @@
                         </div>
                         
                         <div class="col-md-6 d-flex flex-column">
-                            <div class="pop__course_title mb-1 mt-0 mb-1 font-18 text-dark">
-                                {{ course.title }}
+                            <div class="pop__course_title mb-1 mt-0 mb-2 font-16 text-dark">
+                                {{ course.title | truncate(40) }}
                             </div>
                             <div class="pop__category_sm mb-2 pop__stats">
                                 <base-course-stats class="text-dark" :course="course" />
                             </div>
+                            <div class="pop__course_description font-13 mb-2">
+                                <span>{{ course.subtitle | truncate(50) }}</span>
+                            </div>
                             <div class="pop__course_description font-13">
-                                {{ course.subtitle | truncate(120) }} | {{ trans('strings.by') }} {{ course.author.full_name }}
+                                <span class=" text-muted">{{ trans('strings.by') }} {{ course.author.full_name }}</span>
                             </div>
                         </div>
                         
@@ -62,7 +65,7 @@
                         <li class="mb-2" v-for="goal in course.what_to_learn" :key="goal.uuid">
                             <span class="fa-li"></span> 
                             <i class="fa fa-circle font-8"></i>
-                            {{ goal.text }}
+                            {{ goal.text | truncate(24) }}
                         </li>
                     </ul>
                 </div>

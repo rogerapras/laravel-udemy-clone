@@ -27,26 +27,6 @@ class UserTableSeeder extends Seeder
             'confirmation_code' => md5(uniqid(mt_rand(), true)),
             'confirmed' => true,
         ]);
-        
-        User::create([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'username' => 'johndoe',
-            'email' => 'john@john.com',
-            'password' => 'secret',
-            'confirmation_code' => md5(uniqid(mt_rand(), true)),
-            'confirmed' => true,
-        ]);
-
-        User::create([
-            'first_name' => 'Mary',
-            'last_name' => 'Johnson',
-            'username' => 'maryjohnson',
-            'email' => 'mary@mary.com',
-            'password' => 'secret',
-            'confirmation_code' => md5(uniqid(mt_rand(), true)),
-            'confirmed' => true,
-        ]);
 
         $this->enableForeignKeys();
     }
