@@ -20,8 +20,11 @@ class LocaleMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $locales = \App\Models\Language::where('is_active', true)->get();
-        
+        $locales = \Cache::rememberForever('locales', function(){
+            return \App\Models\Language::where('is_active', true)->get();
+        });
+
+        // $locales = \App\Models\Language::where('is_active', true)->get();
         $keys = $locales->pluck('carbon_code', 'carbon_code')->toArray();
 
         // Locale is enabled and allowed to be changed

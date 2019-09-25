@@ -20,11 +20,9 @@ class CourseResource extends JsonResource
             'approved' => $this->approved,
             'status_code' => $this->status_code,
             'author' => new UserResource($this->author),
-            'average_review' => $this->average_review,
             //'category' => new CategoryResource($this->category),
             'description' => $this->description,
-            'durationHMS' => $this->durationHMS,
-            'enrolled_this_month' => $this->enrolled_this_month,
+            
             'featured' => $this->featured,
             'is_in_cart' => $this->is_in_cart,
             'images' => [
@@ -37,21 +35,31 @@ class CourseResource extends JsonResource
             'price' => $this->price,
             'price_discounted' => $this->price_discounted,
             'published' => $this->published,
-            'sales_this_month' => $this->sales_this_month,
+
+            // AUTHOR ONLY
+            'total_sales' => $this->settings()->get('total_sales', 0),
+            'sales_this_month' => $this->settings()->get('sales_this_month', 0),
+            'enrolled_this_month' => $this->settings()->get('enrolled_this_month', 0),
+            'durationHMS' => $this->settings()->get('durationHMS', 0),
+
             'short_description' => $this->short_description,
             'slug' => $this->slug,
             'title' => $this->title,
             'subtitle' => $this->subtitle,
-            'total_articles' => $this->total_articles,
-            'total_hours' => $this->total_hours,
-            'total_lessons' => $this->total_lessons,
-            'total_minutes' => +$this->total_minutes,
-            'total_published_lessons' => $this->total_published_lessons,
-            //'total_quizzes' => $this->total_quizzes,
-            'total_reviews' => $this->total_reviews,
-            //'total_sales' => $this->total_sales,
-            'total_students' => $this->total_students,
-            'total_video_hours' => $this->total_video_hours,
+            
+            // KPIs
+            'average_review' => $this->settings()->get('average_rating', 0),
+            'total_reviews' => $this->settings()->get('total_reviews', 0),
+            'total_students' => $this->settings()->get('total_students', 0),
+            'total_video_hours' => $this->settings()->get('total_video_hours', 0),
+            'total_articles' => $this->settings()->get('total_articles', 0),
+            'total_hours' => $this->settings()->get('total_hours', 0),
+            'total_lessons' => $this->settings()->get('total_lessons', 0),
+            'total_published_lessons' => $this->settings()->get('total_published_lessons', 0),
+            
+            
+            
+
             'updated_at' => $this->updated_at,
             'uuid' => $this->uuid,
             'what_to_learn' => RequirementsResource::collection($this->what_to_learn),

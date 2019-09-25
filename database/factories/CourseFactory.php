@@ -26,4 +26,3 @@ $factory->define(Course::class, function (Faker $faker, $user_id) {
 });
 
 
-//factory(App\Models\User::class, 3)->create()->each(function ($user) {$user->authored_courses()->save(factory(App\Models\Course::class)->make());});

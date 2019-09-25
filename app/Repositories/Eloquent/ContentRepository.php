@@ -5,9 +5,9 @@ namespace App\Repositories\Eloquent;
 use App\Models\Video;
 use App\Models\Lesson;
 use App\Models\Section;
-use App\Models\Content;
 use App\Repositories\Contracts\IContent;
 use App\Http\Resources\ContentResource;
+use App\Events\UpdateCourseStats;
 
 
 class ContentRepository extends RepositoryAbstract implements IContent
@@ -15,23 +15,24 @@ class ContentRepository extends RepositoryAbstract implements IContent
     
     public function entity()
     {
-        return Content::class;
+        return Video::class;
     }
     
-    public function findByLesson($id){
-        
-        $content = Content::where('lesson_id', $id)->first();
-        return $content;
+    public function findByLesson($id)
+    {
+        $video = Video::where('lesson_id', $id)->first();
+        return $video;
     }
     
     
     public function deleteVideo($fileName)
     {
-        
-        if(setting('site.video_upload_location') == 'local' && \Storage::disk('server')->exists('videos/'.$fileName)){
-            \Storage::disk('server')->delete('videos/'.$fileName);
-        } elseif(setting('site.video_upload_location') == 's3' && Storage::disk('s3')->exists($fileName)){
-            \Storage::disk('s3')->delete($fileName);
+        if($fileName !== 'sample_360.mp4' && $fileName !== 'sample_video_720.mp4'){
+            if(setting('site.video_upload_location') == 'local' && \Storage::disk('server')->exists('videos/'.$fileName)){
+                \Storage::disk('server')->delete('videos/'.$fileName);
+            } elseif(setting('site.video_upload_location') == 's3' && Storage::disk('s3')->exists($fileName)){
+                \Storage::disk('s3')->delete($fileName);
+            }
         }
     }
 
@@ -51,6 +52,7 @@ class ContentRepository extends RepositoryAbstract implements IContent
         $lesson->duration = $data['duration'];
         $lesson->content_type = 'video';
         $lesson->save();
+        event(new UpdateCourseStats($lesson->course, 'course_content_stats'));
         return $video;
     }
    
@@ -71,6 +73,8 @@ class ContentRepository extends RepositoryAbstract implements IContent
         $lesson->duration = $data['duration'];
         $lesson->content_type = 'youtube';
         $lesson->save();
+
+        event(new UpdateCourseStats($lesson->course, 'course_content_stats'));
         return $lesson;
     }
     
@@ -82,12 +86,14 @@ class ContentRepository extends RepositoryAbstract implements IContent
            'article_body' => $data['content'],
            'duration' => $this->calculateArticleReadingTime($data['content'])
         ]);
+        event(new UpdateCourseStats($lesson->course, 'course_content_stats'));
         return $lesson;
     }
     
     public function updateDuration($id, $duration)
     {
         $lesson = Lesson::find($id)->update(['duration' => $duration]);
+        event(new UpdateCourseStats($lesson->course, 'course_content_stats'));
         
     }
 

@@ -18,7 +18,12 @@ class CategoriesComposer
     
     public function compose(View $view)
     {
-        $categories = $this->categories->fetchAllWithCourses();
+       // $categories = $this->categories->fetchAllWithCourses();
+        
+        $categories = \Cache::rememberForever('categories', function () {
+                            return $this->categories->fetchAllWithCourses();
+                        });
+                        
         $view->with('gcategories', CategoryResource::collection($categories));
     }
     

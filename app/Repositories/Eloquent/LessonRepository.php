@@ -6,6 +6,7 @@ use App\Models\Lesson;
 use App\Models\Section;
 use App\Repositories\Contracts\ILesson;
 use App\Http\Resources\LessonResource;
+use App\Events\UpdateCourseStats;
 
 
 class LessonRepository extends RepositoryAbstract implements ILesson
@@ -33,11 +34,6 @@ class LessonRepository extends RepositoryAbstract implements ILesson
     }
     
     public function findByCourse($id){
-        /*$lessons = Lesson::whereHas('section', function($q) use ($id){
-            $q->where('course_id', $id);
-        })
-        ->orderBy('sortOrder')
-        ->get();*/
         $lessons = Lesson::where('course_id', $id)->orderBy('sortOrder')->get();
         return LessonResource::collection($lessons);
     }
@@ -60,6 +56,8 @@ class LessonRepository extends RepositoryAbstract implements ILesson
         	'sortOrder' => $maxSort+1,
             'lesson_type' => $data['lesson_type'],
         ]);
+        
+        event(new UpdateCourseStats($lesson->course, 'course_content_stats'));
         
         return $lesson;
     }

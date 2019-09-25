@@ -120,7 +120,7 @@
                         this.sections = response.data.data
                         setTimeout(() => {
                             this.loading = false
-                        }, 2000)
+                        }, 3000)
                         
                     })
             },

@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 use App\Repositories\Contracts\IRefund;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use Razorpay\Api\Api;
-
 use App\Payment\PayPalProvider;
+use App\Events\UpdateCourseStats;
 
 // paypal api
 // use PayPal\Api\Amount;
@@ -133,7 +133,11 @@ class RefundRepository  extends RepositoryAbstract implements IRefund
         // process the refund on stripe
         if($gateway =='stripe'){
             try {
-                \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+                if(setting('payments.stripe_mode') == 'live'){
+                    \Stripe\Stripe::setApiKey(setting('payments.stripe_live_secret_key'));
+                } else {
+                    \Stripe\Stripe::setApiKey(setting('payments.stripe_sandbox_secret_key'));
+                }
                 $stripe_refund = \Stripe\Refund::create([
                     'charge' => $charge_id
                 ]);
@@ -149,24 +153,6 @@ class RefundRepository  extends RepositoryAbstract implements IRefund
                 if($result == 'COMPLETED'){
                     $status = 'success';
                 }
-                // $amt = new Amount();
-                // $amt->setCurrency('USD')
-                //     ->setTotal($refund->payment->amount);
-                
-                // $refundRequest = new RefundRequest();
-                // $refundRequest->setAmount($amt);
-
-                // $payment = PayPalPayment::get($charge_id, $this->_api_context);
-                // $sale_id = $payment->getTransactions()[0]->getRelatedResources()[0]->sale->id;
-                // $sale = new Sale();
-                // $sale->setId($sale_id);
-
-                // $refundedSale = $sale->refundSale($refundRequest, $this->_api_context);
-
-                // if($refundedSale->getState() == 'COMPLETED'){
-                //     $status = 'success';
-                // }
-
             } catch (Exception $e) {
                 return $e->getMessage();
             }
@@ -183,7 +169,7 @@ class RefundRepository  extends RepositoryAbstract implements IRefund
         }
         
         // update the refund record
-        if($status = 'succeess'){
+        if($status == 'success'){
             $refund->status = 'closed';
             $refund->processed_at = Carbon::now('UTC');
             $refund->refunded_to = $refunded_to;
@@ -196,6 +182,13 @@ class RefundRepository  extends RepositoryAbstract implements IRefund
             // mark payment as refunded
             $refund->payment->refunded_at = Carbon::now('UTC');
             $refund->payment->save();
+
+            // delete any reviews this user has made to the course
+            $reviews = $refund->course->reviews()->where('user_id', $refund->requester->id)->delete();
+
+            // update course stats
+            event(new UpdateCourseStats($refund->course, 'total_reviews'));
+            event(new UpdateCourseStats($refund->course, 'total_students'));
         }
             
         return $refund;

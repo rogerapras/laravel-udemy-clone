@@ -52,26 +52,35 @@ class Lesson extends Model
 
     public function course()
     {
-        return $this->belongsTo(Lesson::class, 'course_id');
+        return $this->belongsTo(Course::class);
     }
     
     /********* SCOPE  ************************/
     public function scopeHasContent(Builder $builder)
     {
-        return $builder->orWhere(function($q){
-                $q->where('content_type', 'article')
-                    ->whereNotNull('article_body');
-            })
-            ->orWhere(function($q){
-                $q->where('content_type', 'video')
-                    ->whereHas('video', function($v){
-                        $v->whereNotNull('streamable_sm')
-                            ->where('is_processed', true)
-                            ->where('processing_succeeded', true);
-                    });
+        return $builder->where(function($i) {
+                $i->orWhere(function($j){
+                    $j->where('content_type', 'article')
+                        ->whereNotNull('article_body');
+                })
+                ->orWhere(function($k){
+                    $k->where('content_type', 'video')
+                        ->whereHas('video', function($l){
+                            $l->whereNotNull('streamable_sm')
+                                ->where('is_processed', 1)
+                                ->where('processing_succeeded', 1);
+                        });
+                })
+                ->orWhere(function($m){
+                    $m->where('content_type', 'youtube')
+                        ->whereHas('video', function($n){
+                            $n->whereNotNull('youtube_link');
+                        });
+                });
             });
     }
 
+    
     /*********** APPENDS ****************************/
     public function getUserHasCompletedAttribute()
     {

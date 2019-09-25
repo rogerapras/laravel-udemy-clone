@@ -33,7 +33,6 @@ class User extends BaseUser
     public function students()
     {
         $courses = $this->authored_courses->pluck('id');
-        
         $students = \DB::table('enrollments')
                             ->whereIn('course_id', $courses)
                             ->pluck('user_id');

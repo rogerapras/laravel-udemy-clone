@@ -99,13 +99,13 @@
 
 <script>
 import Form from 'vform'
-import VueTagsInput from '@johmun/vue-tags-input';
+//import VueTagsInput from '@johmun/vue-tags-input';
 import IncCourseImageUpload from './imports/_course_image_upload'
 export default {
     props: ['course', 'categories'],
     components:{
         IncCourseImageUpload,
-        VueTagsInput
+       // VueTagsInput
     },
     data(){
         return {
@@ -175,12 +175,12 @@ export default {
             this.form[key] = this.course[key]
         })
         this.form.category = this.course.category_id
-        this.topics = this.course.tags.map(t => {
-            return {
-                text: t.name.en,
-                tiClasses:["ti-valid"]
-            }
-        })
+        // this.topics = this.course.tags.map(t => {
+        //     return {
+        //         text: t.name.en,
+        //         tiClasses:["ti-valid"]
+        //     }
+        // })
     }
 
 }

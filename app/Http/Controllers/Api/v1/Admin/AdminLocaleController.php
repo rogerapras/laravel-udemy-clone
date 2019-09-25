@@ -52,6 +52,8 @@ class AdminLocaleController extends Controller
             'is_rtl' => $request->is_rtl
         ]);
 
+        \Cache::forget('locales');
+
     }
 
     public function fetchTranslations(Request $request)

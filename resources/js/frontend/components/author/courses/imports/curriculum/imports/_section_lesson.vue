@@ -12,7 +12,7 @@
                 <span class="fa fa-file-text-o" v-if="hasContent && lesson.content_type=='article'"></span> 
                 {{ lesson.title }}
             </a>
-            <span class="actions d-none pull-right mr-0">
+            <span class="actions d-none pull-right mr-0 font-13">
                 <i class="fas fa-arrows-alt reorder-icon mr-3 handle"></i>
                 <a href="#" @click.prevent="EditLesson(lesson.uuid)">
                     <i class="fas fa-pencil-alt mr-3"></i>

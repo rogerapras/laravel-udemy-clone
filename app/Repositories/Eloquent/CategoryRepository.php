@@ -60,7 +60,7 @@ class CategoryRepository extends RepositoryAbstract implements ICategory
                             'slug' => \Str::slug($data['name']),
                             'image' => $data['icon']
                         ]);
-
+        \Cache::forget('categories');
         return $category;
 
     }
@@ -75,11 +75,10 @@ class CategoryRepository extends RepositoryAbstract implements ICategory
                         'parent_id' => $data['parent'],
                         'image' => $data['icon']
                     ]);
+        \Cache::forget('categories');
         return $category;
 
     }
-
-
 
     public function findBySlug($slug)
     {
@@ -121,6 +120,8 @@ class CategoryRepository extends RepositoryAbstract implements ICategory
                 endforeach;
             endif;
         endforeach;
+
+        \Cache::forget('categories');
     }
 
     public function destroy($id)
@@ -128,6 +129,7 @@ class CategoryRepository extends RepositoryAbstract implements ICategory
         $category = Category::find($id);
         if(! $category->hasChildren()){
             $category->delete();
+            \Cache::forget('categories');
         }
     }
 }

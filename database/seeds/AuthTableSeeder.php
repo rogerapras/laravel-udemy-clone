@@ -41,7 +41,7 @@ class AuthTableSeeder extends Seeder
                                     ->each(function($lesson){
                                         // generate video content for each video if it is youtube or video type
                                         if($lesson->content_type == 'youtube' || $lesson->content_type == 'video'){
-                                            $lesson->video()->save(factory(App\Models\Video::class)->make());
+                                            $lesson->video()->save(factory(App\Models\Video::class)->make(['lesson_type' => $lesson->content_type]));
                                         }
                                     });
                             });

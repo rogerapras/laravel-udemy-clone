@@ -5,8 +5,13 @@
         'default_currency' => setting('site.site_currency') ? setting('site.site_currency') : 'USD',
         'source' => setting('site.video_providers') ? setting('site.video_providers') : 'both'
     ];
+    
+    //Cache::forget('pages');
+    $pages = Cache::rememberForever('pages', function () {
+        return \App\Models\Page::where('published', true)->get();
+    });
 
-    $pages = \App\Models\Page::where('published', true)->get();
+    // $pages = \App\Models\Page::where('published', true)->get();
 @endphp
 
 <!DOCTYPE html>

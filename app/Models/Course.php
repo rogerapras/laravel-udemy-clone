@@ -5,12 +5,14 @@ namespace App\Models;
 // use Spatie\Tags\HasTags;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Methods\CourseMethods;
+use Glorand\Model\Settings\Traits\HasSettingsField;
 
 
 class Course extends Model
 {
     //use Uuid, HasTags;
-    use Uuid;
+    use Uuid, CourseMethods, HasSettingsField;
 
     protected $fillable = [
     	'user_id', 
@@ -30,32 +32,23 @@ class Course extends Model
     ];
     
     protected $appends=[
-        'average_review',
-        'total_reviews',
         'cover_image',
         'thumbnail',
-        'total_video_hours',
-        'total_minutes',
-        'durationHMS',
-        'total_articles',
         'short_description',
         'is_in_cart',
         'status_code',
-        //'sales_this_month',
-        //'total_sales',
-        'total_hours',
-        'total_lessons',
-        //'total_quizzes',
-        'total_published_lessons',
-        'total_students',
-        'enrolled_this_month',
-        'percent_completed',
-        'price_discounted',
-        'total_unanswered_questions'
+        //'total_published_lessons',
+        //'percent_completed',
+        'price_discounted'
     ];
 
 
     /******* RELATIONSHIPS ************/
+    public function stat()
+    {
+        return $this->hasOne(CourseStats::class);
+    }
+
     public function category()
     {
     	return $this->belongsTo(Category::class);
@@ -129,65 +122,16 @@ class Course extends Model
     
     public function getPriceDiscountedAttribute()
     {
-        $sitewide_coupon = Coupon::active()->isSitewide()->notExpired()->first();
-        if(!is_null($sitewide_coupon)){
+        $sitewide_coupon = \Cache::remember('sitewide_coupon', 1440,  function(){ // remember for 24 hours (in minutes)
+            $coupon = Coupon::active()->isSitewide()->notExpired()->first();
+            return is_null($coupon) ? false : $coupon;
+        });
+
+        if($sitewide_coupon){
             $disc = $this->price - ($this->price * ($sitewide_coupon->percent/100.00));
             return $disc;
         }
         return false;
-    }
-    
-    
-    public function getPercentCompletedAttribute()
-    {
-        return auth()->check() ? auth()->user()->percentCompleted($this) : null;
-    }
-    
-    public function getAverageReviewAttribute()
-    {
-        return round($this->reviews()->avg('rating'),1);
-    }
-    
-    public function getTotalReviewsAttribute()
-    {
-        return $this->reviews()->count();
-    }
-    
-    public function getTotalLessonsAttribute()
-    {
-        return Lesson::whereHas('section', function($q){
-            $q->where('course_id', $this->id);
-        })->count();
-    }
-    
-    public function getTotalPublishedLessonsAttribute()
-    {
-        return Lesson::whereHas('section', function($q){
-            $q->where('course_id', $this->id);
-        })
-        ->hasContent()
-        ->count();
-    }
-    
-    public function getTotalStudentsAttribute()
-    {
-        return $this->students()->count();
-    }
-    
-    public function getEnrolledThisMonthAttribute()
-    {
- 
-        $now = \Carbon\Carbon::now();
-        $enrolled_this_month = $this->students()
-                                    ->whereBetween('enrollments.created_at', [$now->startOfMonth() , $now->copy()->endOfMonth()])
-                                    ->count('enrollments.id');
-                                        
-        return $enrolled_this_month;
-    }
-
-    public function getTotalUnansweredQuestionsAttribute()
-    {
-        return $this->questions()->doesntHave('comments')->count();
     }
     
     public function getIsInCartAttribute()
@@ -201,77 +145,13 @@ class Course extends Model
         if(!in_array($this->id, $items)){
             return false;
         }
-        
         return true;
-        
-        
     }
     
     public function getShortDescriptionAttribute()
     {
         return $this->description ? \Str::limit(strip_tags($this->description),250) : null;
     }
-    
-    public function getTotalHoursAttribute()
-    {
-        $q = \DB::table('sections')
-            ->join('lessons', 'sections.id', '=', 'lessons.section_id')
-            ->whereIn('lessons.content_type', ['video', 'article', 'youtube'])
-            ->where('sections.course_id', '=', $this->id)
-            ->sum('lessons.duration');
-
-        $duration = round( $q/60, 1);    
-        
-        return $duration;
-    }
-    
-    // public function getTotalQuizzesAttribute()
-    // {
-    //     $q = \DB::table('sections')
-    //         ->join('lessons', 'sections.id', '=', 'lessons.section_id')
-    //         ->where('lessons.content_type', '=', 'quiz')
-    //         ->where('sections.course_id', '=', $this->id)
-    //         ->count();
-        
-    //     return $q;
-    // }
-    
-    public function getTotalArticlesAttribute()
-    {
-        $q = \DB::table('sections')
-            ->join('lessons', 'sections.id', '=', 'lessons.section_id')
-            ->where('lessons.content_type', '=', 'article')
-            ->where('sections.course_id', '=', $this->id)
-            ->count();
-        
-        return $q;
-    }
-    
-    public function getTotalVideoHoursAttribute()
-    {
-        $q = \DB::table('sections')
-            ->join('lessons', 'sections.id', '=', 'lessons.section_id')
-            ->whereIn('lessons.content_type', ['video', 'youtube'])
-            ->where('sections.course_id', '=', $this->id)
-            ->sum('lessons.duration');
-        $time = round($q/60,1);
-        return $time;
-    }
-    
-    public function getTotalMinutesAttribute()
-    {
-        $q = \DB::table('sections')
-            ->join('lessons', 'sections.id', '=', 'lessons.section_id')
-            ->where('sections.course_id', '=', $this->id)
-            ->sum('lessons.duration');
-
-        return $q;
-    }
-    
-    public function getDurationHMSAttribute()
-    {
-        return convert_minutes_to_duration($this->total_minutes);
-    } 
     
     public function getCoverImageAttribute()
     {
@@ -295,37 +175,6 @@ class Course extends Model
         } else {
             return '/uploads/images/defaults/cover.jpg';
         }
-    }
-    
-    // public function getSalesThisMonthAttribute()
-    // {
- 
-    //     $now = \Carbon\Carbon::now();
-    //     $sales_earnings_this_month = Payment::where('course_id', $this->id)
-    //                                     ->whereBetween('created_at', [$now->startOfMonth() , $now->copy()->endOfMonth()])
-    //                                     ->sum('author_earning');
-                                        
-    //     return $sales_earnings_this_month;
-    // }
-
-    public function get_sales_this_month()
-    {
- 
-        $now = \Carbon\Carbon::now();
-        $sales_earnings_this_month = Payment::where('course_id', $this->id)
-                                        ->whereBetween('created_at', [$now->startOfMonth() , $now->copy()->endOfMonth()])
-                                        ->sum('author_earning');
-                                        
-        return $sales_earnings_this_month;
-    }
-    
-    // public function getTotalSalesAttribute()
-    // {
-    //     return Payment::where('course_id', $this->id)->sum('author_earning');
-    // }
-    public function get_total_sales()
-    {
-        return Payment::where('course_id', $this->id)->sum('author_earning');
     }
     
     public function getStatusCodeAttribute()

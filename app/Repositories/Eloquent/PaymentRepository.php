@@ -11,6 +11,7 @@ use App\Models\Period;
 use App\Repositories\Contracts\IPayment;
 use App\Repositories\Contracts\ICourse;
 use App\Repositories\Contracts\ICart;
+use App\Events\UpdateCourseStats;
 
 class PaymentRepository extends RepositoryAbstract implements IPayment
 {
@@ -103,25 +104,7 @@ class PaymentRepository extends RepositoryAbstract implements IPayment
             
             $payment->transaction_id = $transaction->id;
             $payment->save();
-            
-            // insert transaction for affiliate if it exists
-            // if(!is_null($referee) && config('site_settings.site_enable_affiliate') == 1){
-            //     $transaction = $referee->transactions()->create([
-            //         'type' => 'credit',
-            //         'description' => 'Affiliate Program',
-            //         'long_description' => 'Earnings from Affiliate promotion of "'. $course->title . '"',
-            //         'amount' => $affiliateEarning
-            //     ]);
-            // }
-            
-            // if($gateway=='account-balance'){
-            //     $buyer_transaction = $payer->transactions()->create([
-            //         'type' => 'debit',
-            //         'description' => 'Purchase',
-            //         'long_description' => 'Purchase of '. $course->title . 'with account balance',
-            //         'amount' => -$amount
-            //     ]);
-            // }
+            event(new UpdateCourseStats($course, 'total_students'));
             
         }
         

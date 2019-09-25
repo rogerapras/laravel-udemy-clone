@@ -32,6 +32,10 @@ class CouponRepository  extends RepositoryAbstract implements ICoupon
            'active' => true,
            'sitewide' => $data['sitewide']
         ]);
+
+        if(!$data['course_id']){
+            \Cache::forget('sitewide_coupon');
+        }
         return $coupon;
     }
     
@@ -40,6 +44,10 @@ class CouponRepository  extends RepositoryAbstract implements ICoupon
         $coupon = $this->find($id);
         $coupon->active = ! $coupon->active;
         $coupon->save();
+
+        if(!$coupon->course_id){
+            \Cache::forget('sitewide_coupon');
+        }
         
         return $coupon;
     }

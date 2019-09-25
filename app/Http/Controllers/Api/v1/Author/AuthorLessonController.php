@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\ILesson;
 use App\Repositories\Contracts\IContent;
 use App\Http\Resources\LessonResource;
+use App\Events\UpdateCourseStats;
 
 class AuthorLessonController extends Controller
 {
@@ -71,16 +72,15 @@ class AuthorLessonController extends Controller
      */
     public function destroy($id)
     {
-        $content = $this->contents->findByLesson($id);
-        
-        if($content){
-            if($content->content_type=='video'){
-                $currentVideo = $content->video_filename;
-                $this->contents->deleteVideo($currentVideo);
-            }
-            $this->contents->destroy($content->id);
+        $lesson = $this->lessons->findById($id);
+        if($lesson->content_type=='video'){
+            $currentVideo = $lesson->video->original_filename;
+            $this->contents->deleteVideo($currentVideo);
         }
-        
+        if($lesson->content_type=='video'){
+            $this->contents->destroyVideo($lesson->video->id);
+        }
         $this->lessons->destroy($id);
+        event(new UpdateCourseStats($lesson->course, 'course_content_stats'));
     }
 }

@@ -40,6 +40,8 @@ class PageRepository  extends RepositoryAbstract implements IPage
         $page->slug = $data['slug'];
         $page->save();
 
+        \Cache::forget('pages');
+
         return $page;
     }
 
@@ -61,6 +63,7 @@ class PageRepository  extends RepositoryAbstract implements IPage
         $page->setTranslation('title', $data['locale'], $data['title']);
         $page->setTranslation('body', $data['locale'], $data['body']);
         $page->save();
+        \Cache::forget('pages');
 
     }
 
@@ -69,7 +72,9 @@ class PageRepository  extends RepositoryAbstract implements IPage
         $page = Page::find($id);
         $page->slug = $data['slug'];
         $page->save();
+        \Cache::forget('pages');
         return $page;
+
     }
 
     public function togglePublish($id)
@@ -77,12 +82,14 @@ class PageRepository  extends RepositoryAbstract implements IPage
         $page = Page::find($id);
         $page->published = ! $page->published;
         $page->save();
+        \Cache::forget('pages');
         return $page;
     }
     
     public function destroy($id)
     {
         $page = Page::find($id);
+        \Cache::forget('pages');
         $page->delete();
     }
     

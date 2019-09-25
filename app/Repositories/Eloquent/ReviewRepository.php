@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquent;
 use App\Models\Review;
 use App\Models\Course;
 use App\Repositories\Contracts\IReview;
+use App\Events\UpdateCourseStats;
 
 
 class ReviewRepository extends RepositoryAbstract implements IReview
@@ -21,12 +22,6 @@ class ReviewRepository extends RepositoryAbstract implements IReview
         $reviews = Review::latest()->with(['user', 'comments', 'comments.user'])
         	->where('course_id', $id);
         
-        /*
-    	if($data['query']){
-    	    $q = $data['query'];
-    	    $reviews = $reviews->where('body', 'like', '%' . $q . '%');
-    	}*/
-    	
         if($data['rating']){
     	    $reviews = $reviews->whereRaw('ROUND(rating) = ?', [$data['rating']]);
     	}
@@ -91,23 +86,27 @@ class ReviewRepository extends RepositoryAbstract implements IReview
 			'title' => $data['title'],
 			'user_id' => auth()->id(),
 			'body' => $data['body']
-		]);
+        ]);
+        
+        event(new UpdateCourseStats($course, 'total_reviews'));
     }
     
     public function updateReview(array $data, $id)
     {
         $review = $this->find($id);
-        
         $review->update([
 			'rating' => $data['rating'],
 			'title' => $data['title'],
 			'body' => $data['body']
-		]);
+        ]);
+        event(new UpdateCourseStats($review->course, 'total_reviews'));
     }
     
     public function destroyReview($id)
     {
-        $this->find($id)->delete();
+        $review = $this->find($id);
+        $review->delete();
+        event(new UpdateCourseStats($review->course, 'total_reviews'));
     }
     
 }

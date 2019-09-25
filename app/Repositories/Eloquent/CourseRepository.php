@@ -8,6 +8,7 @@ use App\Repositories\Contracts\ICourse;
 use App\Http\Resources\CourseResource;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
+use App\Events\UpdateCourseStats;
 
 class CourseRepository  extends RepositoryAbstract implements ICourse
 {
@@ -41,6 +42,7 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
             'sortOrder' => 1
         ]);
         
+        event(new UpdateCourseStats($course, 'course_content_stats'));
         return $course;
         
     }
@@ -77,7 +79,6 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
         $course = $this->find($id);
         $course->price = $data['price'];
         $course->save();
-        
         return $course;
         
     }
@@ -107,7 +108,7 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
     
     public function search(Request $request)
     {
-        
+
         $builder = (new Course)->newQuery();
         
         $builder->where('published', true)
@@ -148,9 +149,6 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
         
         if($request->rating){
             $val = $request->rating;
-            // $builder->whereHas('reviews', function($q) use ($val) {
-            //         $q->havingRaw('AVG(reviews.rating) >= ?', [$val]);
-            //     });
             $builder->join('reviews', 'reviews.course_id', '=', 'courses.id')
                     ->select(\DB::raw('avg(rating) as average, courses.*'))
                     ->groupBy('course_id')
@@ -187,7 +185,6 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
             } else {
                 $builder->orderByJoin('reviews.rating', 'desc', 'AVG');
             }
-            
         }
         
         $courses = $builder->with(['category', 'what_to_learn', 'sections', 'sections.lessons', 'author'])->get();
