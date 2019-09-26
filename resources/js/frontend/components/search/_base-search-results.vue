@@ -3,8 +3,23 @@
         <vue-element-loading :active="loading" :is-full-screen="false" spinner="bar-fade-scale" background-color="rgba(255,255,255,1)"/>
         
         <template v-if="!loading">
-            <div v-if="courses.length > 0">
-                <list-item v-for="course in courses" :course="course" :key="course.uuid" />
+            <div v-if="courses.data.length > 0">
+                <list-item v-for="course in courses.data" :course="course" :key="course.uuid" />
+
+                <pagination 
+                    class="pagination-sm justify-content-endx text-info"
+                    :data="courses"
+                    align="right"
+                    :limit="-1"
+                    @pagination-change-page="fetchCourses" 
+                    :show-disabled="true">
+                    <span slot="prev-nav">
+                        <i class="fas fa-angle-left"></i>
+                    </span>
+	                <span slot="next-nav">
+	                    <i class="fas fa-angle-right"></i>
+	                </span>
+                </pagination>
             </div>
             <div v-else>
                 <p>{{ trans('strings.no_search_results') }}</p>
@@ -25,9 +40,16 @@
         computed: {
             ...mapGetters({
                 loading: 'search/loading',
-                courses: 'search/courses'
+                courses: 'search/courses',
+                page: 'search/page'
             })
         },
+
+        methods:{
+            fetchCourses(page){
+                this.$bus.$emit('fetch:course', page)
+            }
+        }
     }
     
 </script>

@@ -180,6 +180,9 @@
         },
         
         computed: {
+            ...mapGetters({
+                page: 'search/page'
+            }),
             finalPrice() {
                 if(this.priceFree == true && this.pricePaid==true) return 'all';
                 if(this.priceFree== true) return 'free';
@@ -190,6 +193,7 @@
         
         methods: {
             async fetchCourses(){
+                this.form.page = this.page
                 this.form.category=this.category_id
                 this.form.price = this.finalPrice
                 await this.$store.commit('search/SET_LOADING', true)
@@ -212,6 +216,13 @@
         
         created(){
             this.fetchFilterParameters()
+        },
+
+        mounted(){
+            this.$bus.$on('fetch:course', async(page) => {
+                await this.$store.commit('search/SET_PAGE', page)
+                await this.fetchCourses()
+            })
         }
     }
 </script>
