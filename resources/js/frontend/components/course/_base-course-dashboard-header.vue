@@ -8,7 +8,7 @@
                             <i class="fas fa-play-o fa-3x"></i>
                         </div>
                     </div>
-                    <img :src="course.images.cover_image" class="rounded" width="340"/>
+                    <img :src="course.images.thumbnail" class="rounded" width="340"/>
                 </a>
             </div>
             

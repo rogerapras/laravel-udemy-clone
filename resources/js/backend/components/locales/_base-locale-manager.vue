@@ -57,6 +57,14 @@
                         </div>
 
                         <div slot="beforeLimit" class="mr-2 d-flex ml-2">
+                            <button :busy="importing" class="btn btn-danger mr-2 btn-md" @click="importTranslations()">
+                                <span v-if="!importing">{{ trans('strings.import') }}</span>
+                                <span v-else>
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    {{ trans('strings.importing') }}
+                                </span>
+                            </button>
+
                             <button :busy="publishing" class="btn btn-success btn-md" @click="publish()">
                                 <span v-if="!publishing">{{ trans('strings.publish') }}</span>
                                 <span v-else>
@@ -87,6 +95,7 @@ export default {
     
     data(){
         return {
+            importing: false,
             publishing: false,
             loading: false,
             selected_language: 'en',
@@ -142,6 +151,18 @@ export default {
     },
 
     methods: {
+        async importTranslations(){
+            this.importing = await true
+            await axios.get('/api/admin/locales/import')
+                .then(response => {
+                    location.reload()
+                }).catch(error => {
+                    console.log(error.response)
+                }).finally(() => {
+                    this.importing = false
+                })
+        },
+
         async publish(){
             this.publishing = await true
             setTimeout(() => {

@@ -69,6 +69,7 @@
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import Form from 'vform'
 export default {
     props:['query'],
@@ -89,8 +90,15 @@ export default {
         }
     },
 
+    computed: {
+        ...mapGetters({
+            page: 'search/page'
+        }),
+    },
+
     methods:{
         async fetchCourses(){
+            this.form.page = this.page
             this.form.q = await this.query
             await this.$store.commit('search/SET_LOADING', true)
             this.$store.dispatch('search/fetchCourses', this.form)
@@ -100,6 +108,13 @@ export default {
 
     beforeMount(){
         this.fetchCourses()
+    },
+
+    mounted(){
+        this.$bus.$on('fetch:course', async(page) => {
+            await this.$store.commit('search/SET_PAGE', page)
+            await this.fetchCourses()
+        })
     }
 }
 </script>

@@ -715,6 +715,9 @@ return [
     "unpublish" => "Unpublish",
     "unpublishing" => "Unpublishing...",
 
+    "import" => "Import translations",
+    "importing" => "Importing...",
+
     "pages" => "Pages",
     "slug" => "Slug",
     "body" => "Body",

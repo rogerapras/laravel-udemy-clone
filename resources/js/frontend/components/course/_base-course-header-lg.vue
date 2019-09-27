@@ -48,7 +48,7 @@
                                                     {{ trans('strings.preview') }}
                                                 </span>
                                             </div>
-                                            <img :src="course.images.cover_image" width="350"/>
+                                            <img :src="course.images.thumbnail" width="350"/>
                                         </a>
                                     </div>
                                 </div>

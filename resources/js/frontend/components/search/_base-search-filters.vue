@@ -72,13 +72,13 @@
                 
                 <!-- Subcategory -->
                 <template v-if="subcategories.length">
-                    <div class="col-lg-2 col-md-6 mb">
+                    <div class="col-lg-4 col-md-6 mb">
                         <div class="filter-title mb-3 font-14 fw-500">{{ trans('strings.subcategory') }}</div>
                         <ul class="filter-list m-0 p-0">
                             <li v-for="category in subcategories" :key="category.slug">
                                 <div class="custom-control custom-checkbox mr-sm-2 font-14 fw-300">
                                     <input type="checkbox" :value="category.id" v-model="form.subcategories" class="custom-control-input" :id="`category-${category.id}`">
-                                    <label class="custom-control-label" :for="`category-${category.id}`">{{ category.name }}</label>
+                                    <label class="custom-control-label" :for="`category-${category.id}`">{{ category.name | truncate(25) }}</label>
                                 </div>
                             </li>
                         </ul>

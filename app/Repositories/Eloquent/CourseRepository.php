@@ -189,7 +189,7 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
         
         //$courses = $builder->with(['category', 'what_to_learn', 'sections', 'sections.lessons', 'author'])->get();
 
-        $courses = $builder->with(['category', 'what_to_learn', 'sections', 'sections.lessons', 'author'])->paginate(5, ['*'], 'page', $request->page);
+        $courses = $builder->with(['category', 'what_to_learn', 'requirements', 'target_students', 'author'])->paginate(5, ['*'], 'page', $request->page);
         
         // foreach($courses as $course){
         //     $course->first_lesson = get_first_lesson($course);

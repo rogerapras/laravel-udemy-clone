@@ -41,8 +41,6 @@ Vue.prototype.trans = (string, args) => {
     return value;
 };
 
-
-
 const app = new Vue({
     el: '#app',
     store

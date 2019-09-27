@@ -314,6 +314,7 @@ Route::group(['namespace' => 'Api\v1'], function () {
         Route::put('locales/{id}/update', 'AdminLocaleController@updateTranslation');
         Route::post('locales', 'AdminLocaleController@saveTranslation');
         Route::post('locale/{group}/publish', 'AdminLocaleController@publish');
+        Route::get('locales/import', 'AdminLocaleController@import');
 
 
         // Site pages

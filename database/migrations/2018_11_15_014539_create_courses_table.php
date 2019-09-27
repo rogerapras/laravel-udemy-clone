@@ -29,6 +29,7 @@ class CreateCoursesTable extends Migration
             $table->decimal('price', 10,2)->default(0);
             $table->boolean('published')->default(false);
             $table->boolean('approved')->default(false);
+            $table->text('settings')->nullable();
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

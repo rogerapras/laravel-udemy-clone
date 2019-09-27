@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\ICourse;
 use App\Repositories\Contracts\ICategory;
+use App\Http\Resources\CourseResource;
 
 class AdminCourseController extends Controller
 {
@@ -29,7 +30,7 @@ class AdminCourseController extends Controller
     
     public function details($uuid)
     {
-        $course = $this->courses->findByUuid($uuid);
+        $course = new CourseResource($this->courses->findByUuid($uuid));
         return view('backend.courses.Details', compact('course'));
     }
     

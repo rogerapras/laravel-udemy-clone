@@ -12,7 +12,6 @@ Route::get('/js/lang.js', function () {
         $lang = config('app.locale');
         $files   = glob(resource_path('lang/' . $lang . '/*.php'));
         $strings = [];
-
         foreach ($files as $file) {
             $name = basename($file, '.php');
             $strings[$name] = require $file;

@@ -186,3 +186,9 @@ if (! function_exists('get_first_lesson')) {
         return $first_lesson;
     }
 }
+
+if (! function_exists('active_languages')) {
+    function active_languages(){
+        return \App\Models\Language::where('is_active', true)->get();
+    }
+}

@@ -6,9 +6,7 @@
     <div class="row">
         <div class="col">
 
-            <base-admin-payout-details
-                :period="{{ $period }}">
-            </base-admin-payout-details>
+            <base-admin-payout-details :period="{{ $period }}"></base-admin-payout-details>
 
         </div><!--col-->
     </div><!--row-->

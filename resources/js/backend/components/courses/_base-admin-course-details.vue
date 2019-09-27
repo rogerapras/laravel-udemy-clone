@@ -108,7 +108,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <h5>{{ trans('strings.course_image') }}</h5>
-                                            <img :src="course.cover_image" width="100%" />
+                                            <img :src="course.images.thumbnail" class="rounded" width="100%" />
                                         </div>
                                         <div class="col">
                                             <h5>{{ trans('strings.details') }}</h5>

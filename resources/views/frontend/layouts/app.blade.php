@@ -88,21 +88,23 @@
                                     </div>
 
                                     <!-- LANGUAGE -->
-                                    <div class="dropup">
-                                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-globe"></i>
-                                            <span class="text-uppercase">{{ app()->getLocale() }}</span>
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="about-us">
-                                            @foreach(\App\Models\Language::where('is_active', true)->get() as $lang)
-                                                @if($lang->carbon_code != app()->getLocale())
-                                                    <a class="dropdown-item" href="{{ '/lang/'.$lang->carbon_code }}">
-                                                        @lang('menus.language-picker.langs.'.$lang->carbon_code)
-                                                    </a>
-                                                @endif
-                                            @endforeach
+                                    @if(count(active_languages()) > 1)
+                                        <div class="dropup">
+                                            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-globe"></i>
+                                                <span class="text-uppercase">{{ app()->getLocale() }}</span>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="about-us">
+                                                @foreach(active_languages() as $lang)
+                                                    @if($lang->carbon_code != app()->getLocale())
+                                                        <a class="dropdown-item" href="{{ '/lang/'.$lang->carbon_code }}">
+                                                            @lang('menus.language-picker.langs.'.$lang->carbon_code)
+                                                        </a>
+                                                    @endif
+                                                @endforeach
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

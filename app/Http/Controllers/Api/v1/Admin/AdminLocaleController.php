@@ -29,6 +29,14 @@ class AdminLocaleController extends Controller
         return response()->json($query->get(), 200);
     }
 
+    public function import(request $request)
+    {
+        ini_set('memory_limit', '200M');
+        $replace = $request->get('replace', false);
+        $counter = $this->manager->importTranslations($replace);
+        return response()->json(['status' => 'ok', 'counter' => $counter], 200);
+    }
+
     public function updateLanguage(Request $request, $id)
     {
         $language = Language::find($id);

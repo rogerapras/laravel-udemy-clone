@@ -35,22 +35,22 @@ return [
      *    )
      */
     'exclude_groups' => [
-        'pagination',
-        'validation',
-        'alerts',
-        'roles',
-        'navs',
-        'menus',
-        'labels',
-        'install',
-        'exceptions',
-        'buttons',
-        //'auth',
-        'http',
-        'passwords',
-        'vendor/lang',
-        'vendor/log-viewer',
-        'vendor/self-diagnosis'
+         'pagination',
+         'validation',
+         'alerts',
+         'roles',
+         'navs',
+         'menus',
+         'labels',
+         'install',
+         'exceptions',
+         'buttons',
+         'auth',
+         'http',
+         'passwords',
+         'vendor/lang',
+         'vendor/log-viewer',
+         'vendor/self-diagnosis'
     ],
 
     /**

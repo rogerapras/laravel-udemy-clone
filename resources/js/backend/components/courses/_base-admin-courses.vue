@@ -47,7 +47,7 @@
                 loading: true,
                 pendingOnly: 0,
                 filteredCategory: '',
-                columns: ['cover_image', 'title', 'category.name', 'author.full_name', 'approved', 'price', 'average_review', 'created_at', 'details'],
+                columns: ['cover_image', 'title', 'category.name', 'author.full_name', 'approved', 'price', 'created_at', 'details'],
                 
                 options: {
                     requestFunction:  function (data) {
@@ -82,7 +82,7 @@
                         'author.full_name': this.trans('strings.instructor'),
                         'category.name': this.trans('strings.category'),
                         'approved': this.trans('strings.status'),
-                        'average_review': this.trans('strings.average_review'),
+                        //'average_review': this.trans('strings.average_review'),
                         'price': this.trans('strings.price'),
                         'details': '',
                         'created_at': this.trans('strings.created_at')

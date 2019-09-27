@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //Model::unguard();
-        $file = new Filesystem;
-        $file->cleanDirectory(public_path('uploads/images/course/thumbnails'));
+        //$file = new Filesystem;
+        //$file->cleanDirectory(public_path('uploads/images/course/thumbnails'));
 
         $this->disableForeignKeys();
         $this->truncateMultiple([
@@ -49,9 +49,20 @@ class DatabaseSeeder extends Seeder
         $this->call(CurrenciesTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
         $this->call(LanguageSeeder::class);
-        $this->call(AuthTableSeeder::class);
+        $this->call(PagesTableSeeder::class);
+        //$this->call(AuthTableSeeder::class);
 
+        $this->call(UsersTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
+        $this->call(ModelHasRolesTableSeeder::class);
+        $this->call(CoursesTableSeeder::class);
+        $this->call(CourseTargetsTableSeeder::class);
+        $this->call(SectionsTableSeeder::class);
+        $this->call(LessonsTableSeeder::class);
+        $this->call(VideosTableSeeder::class);
+        
         $this->enableForeignKeys();
-       // Model::reguard();
+        
     }
 }

@@ -1,9 +1,9 @@
 <template>
     <div>
-        <vue-element-loading :active="loading" :is-full-screen="false" spinner="bar-fade-scale" background-color="rgba(255,255,255,1)"/>
+        <vue-element-loading :active="loading" :is-full-screen="false" spinner="bar-fade-scale" background-color="rgba(255,255,255,.9)"/>
         
-        <template v-if="!loading">
-            <div v-if="courses.data.length > 0">
+        <template>
+            <div v-if="courses && courses.data && courses.data.length > 0">
                 <list-item v-for="course in courses.data" :course="course" :key="course.uuid" />
 
                 <pagination 
@@ -21,7 +21,7 @@
 	                </span>
                 </pagination>
             </div>
-            <div v-else>
+            <div v-if="courses && courses.data && courses.data.length == 0">
                 <p>{{ trans('strings.no_search_results') }}</p>
             </div>
         </template>
