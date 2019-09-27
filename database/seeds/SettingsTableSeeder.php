@@ -106,7 +106,7 @@ class SettingsTableSeeder extends Seeder
                 'id' => 94,
                 'user_id' => NULL,
                 'key' => 'site.site_name',
-                'value' => 'EduCorea',
+                'value' => 'EduCore',
             ),
             13 => 
             array (
@@ -260,7 +260,7 @@ class SettingsTableSeeder extends Seeder
                 'id' => 143,
                 'user_id' => NULL,
                 'key' => 'site.logo',
-                'value' => '/images/logo.png',
+                'value' => '/images/default-meta-image.png',
             ),
             35 => 
             array (
@@ -274,7 +274,7 @@ class SettingsTableSeeder extends Seeder
                 'id' => 145,
                 'user_id' => NULL,
                 'key' => 'site.homepage_image',
-                'value' => '/images/homepage.jpg',
+                'value' => '/images/homepagebg.jpg',
             ),
             37 => 
             array (
