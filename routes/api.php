@@ -47,6 +47,11 @@ Route::group(['namespace' => 'Api\v1'], function () {
     | GENERAL ROUTES (NAMESPACED)
     |----------------------------------------------------------------*/
     Route::group(['namespace' => 'General'], function () {
+        // Homepage Data
+        Route::get('home/getMostViewedCourses', 'HomeController@getMostViewedCourses');
+        Route::get('home/getCategoryCourses', 'HomeController@getCategoryCourses');
+
+
         //-- Categories
         Route::get('categories/findBySlug/{slug}', 'CategoryController@findBySlug');
         Route::resource('categories', 'CategoryController');

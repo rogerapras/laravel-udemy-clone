@@ -2,7 +2,8 @@
     <div class="row">
       <div class="col-md-12 p-0 cards__carousel">
           <slick
-            ref="slick"
+            v-if="courses.length"
+            ref="carousel"
             :options="slickOptions"
             @afterChange="handleAfterChange"
             @beforeChange="handleBeforeChange"
@@ -15,14 +16,7 @@
             @swipe="handleSwipe"
             @lazyLoaded="handleLazyLoaded"
             @lazyLoadError="handleLazeLoadError">
-              <CourseCardSlick />
-              <CourseCardSlick />
-              <CourseCardSlick />
-              <CourseCardSlick />
-              <CourseCardSlick />
-              <CourseCardSlick />
-              <CourseCardSlick />
-      		  
+              <CourseCardSlick v-for="course in courses" :course="course" :key="course.uuid" />
           </slick>
         </div>
     </div>
@@ -42,9 +36,20 @@
         },
         
         props: {
-            num_slides: { type: Number, default: 5 }
+            num_slides: { type: Number, default: 5 },
+            courses: { type: Array }
         },
         
+        watch:{
+            courses:{
+                deep: true,
+                immediate: false,
+                handler(courses){
+                    this.reInit()
+                }
+            }
+        },
+
         data() {
           return {
             slickOptions: {
@@ -94,18 +99,22 @@
       
         methods: {
             next() {
-                this.$refs.slick.next();
+                this.$refs.carousel.next();
             },
         
             prev() {
-                this.$refs.slick.prev();
+                this.$refs.carousel.prev();
             },
         
             reInit() {
-                // Helpful if you have to deal with v-for to update dynamic lists
-                this.$nextTick(() => {
-                    this.$refs.slick.reSlick();
-                });
+                if (this.$refs.carousel !== undefined) {
+                    //let currIndex = this.$refs.carousel.currentSlide()
+                    this.$refs.carousel.destroy()
+                    this.$nextTick(() => {
+                        this.$refs.carousel.create()
+                        //this.$refs.carousel.goTo(currIndex, true)
+                    })
+                }
             },
         
             // Events listeners
@@ -125,7 +134,7 @@
                 //console.log('handleEdge', event, slick, direction);
             },
             handleInit(event, slick) {
-                //console.log('handleInit', event, slick);
+                
             },
             handleReInit(event, slick) {
                 //console.log('handleReInit', event, slick);
@@ -150,6 +159,5 @@
         created(){
             this.slickOptions.slidesToShow = this.num_slides
         }
-        
     }
 </script>

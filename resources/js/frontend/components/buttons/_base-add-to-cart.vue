@@ -4,6 +4,7 @@
             {{ trans('strings.go_to_cart') }}
         </a>
         <base-button :loading="form.busy" type="" :class="css_class" v-else>
+            <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
             {{ trans('strings.add_to_cart') }}
         </base-button>  
     </form>

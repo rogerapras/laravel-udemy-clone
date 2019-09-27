@@ -28,7 +28,10 @@ class CourseResource extends JsonResource
             'category' => [
                 'name' => $category->name,
                 'slug' => $category->slug,
-                'uuid' => $category->uuid
+                'uuid' => $category->uuid,
+                'parent_name' => $category->parent->name,
+                'parent_slug' => $category->parent->slug,
+                'link' => '/courses/{$category->parent->slug}/{$category->slug}'
             ],
             //'category' => new CategoryResource($this->whenLoaded('category')),
             'description' => $this->description,
@@ -73,7 +76,7 @@ class CourseResource extends JsonResource
             'target_students' => RequirementsResource::collection($this->whenLoaded('target_students')),
             'sections' => SectionResource::collection($this->whenLoaded('sections')),
             //'first_lesson' => new LessonResource($this->first_lesson),
-            'tags' => $this->tags
+            //'tags' => $this->tags
         ];
     }
 }

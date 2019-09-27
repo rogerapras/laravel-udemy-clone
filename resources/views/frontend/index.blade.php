@@ -84,8 +84,11 @@
 
 
           <div class="col-md-9 col-lg-9">
-            <div class="tc-tabs-style3">
-                <ul class="nav nav-tabs" role="tablist">
+            <div class="tc-tabs-style6">
+                <base-homepage-categories-tabs :categories="{{ $top_categories }}"></base-homepage-categories-tabs>
+                <!-- <ul class="nav nav-tabs" role="tablist">
+                    
+
                     <li class="nav-item active">
                         <a class="nav-link active" data-toggle="tab" href="#development">Developoment</a>
                     </li>
@@ -97,7 +100,8 @@
                     <div id="development" class="tab-pane in active">
                         <base-slick-carousel :num_slides="4"></base-slick-carousel>
                     </div>
-                </div>	                			
+                </div>	  -->
+
             </div>
           </div>
 
@@ -111,8 +115,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 tc-post-grid-style1 sec-spacer">
-                    <base-heading text="Students are viewing"></base-heading>
-                    <base-slick-carousel :num_slides="5"></base-slick-carousel>
+                    <base-heading text="{{ __('strings.students_are_viewing') }}"></base-heading>
+                    <base-slick-carousel :num_slides="5" :courses="{{ json_encode($most_viewed) }}"></base-slick-carousel>
                 </div>
             </div>
         </div>
@@ -124,7 +128,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 tc-post-grid-style1 sec-spacer">
-                    <base-heading text="Top Categories"></base-heading>
+                    <base-heading text="{{ __('strings.students_are_viewing') }}"></base-heading>
                 </div>
             </div>
         

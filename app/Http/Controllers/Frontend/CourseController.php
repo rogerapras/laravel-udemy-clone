@@ -46,6 +46,7 @@ class CourseController extends Controller
         if(!$course->isLive()){
             return redirect()->back();
         }
+        views($course)->delayInSession(30)->record();
         if(auth()->check() && auth()->user()->canAccessCourse($course)){
             return redirect()->route('frontend.course.dashboard.overview', ['slug' => $course->slug]);
         }
@@ -62,6 +63,7 @@ class CourseController extends Controller
         if(!auth()->user()->canAccessCourse($course)){
             return redirect()->route('frontend.course.show', ['slug' => $course->slug]);
         }
+        views($course)->delayInSession(30)->record();
         return view('frontend.courses.dashboard.Overview')
                     ->with(['course' => new CourseResource($course)]);
     }
@@ -107,6 +109,7 @@ class CourseController extends Controller
         if(!$course->isLive()){
             return redirect()->back();
         }
+        views($course)->delayInSession(30)->record();
 
         $data = $this->lessons->findByUuid($uuid);
 

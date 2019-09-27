@@ -2,39 +2,39 @@
     <div class="course_card__slick">
         <div class="post-grid-item with-popover">
             <div class="post-grid-img">
-                <a href="#" class="popx">
-                    <img src="https://via.placeholder.com/240x170" alt="post-grid Image">
+                <a :href="`/course/${course.slug}`">
+                    <img :src="course.images.thumbnail" alt="post-grid Image">
                 </a>
             </div>
             <div class="post-grid-content">
                 <div class="post-grid-head">
-                    <h3 class="post-grid-title">
-                        <a href="#">Business Card Design</a>
+                    <h3 class="post-grid-title font-weight-normal">
+                        <a :href="`/course/${course.slug}`">{{ course.title | truncate(15) }}</a>
                     </h3>
                     <ul class="post-grid-meta">
-                        <li>By <a href="#">Author Name</a></li>
+                        <li>{{ trans('strings.by') }} 
+                        <a :href="`/user/${course.author.username}`">{{ course.author.full_name | truncate(20) }}</a></li>
                     </ul>
-                    <ul class="post-grid-meta mt-2">
-                        <li>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star-half-alt"></i>
-                            <b>4.4</b> (11,234)
-                        </li>
+                    <ul class="post-grid-meta mt-2 d-flex">
+                        <star-rating :read-only="true" :rating="course.average_review" :increment="0.5" 
+                            :star-size="15" 
+                            :show-rating="false" 
+                            active-color="#f4c150"></star-rating>
+                            <span class="list_item_ratings ml-2">
+                                <b>{{ course.average_review }}</b> ({{ course.total_reviews }})
+                            </span>
                     </ul>
                 </div>
                 <div class="post-grid-footer text-right">
-                    <base-currency :price="10" customClass="price-promo__card"></base-currency>
-                    <base-currency :price="25" customClass="price__card"></base-currency>
+                    <base-currency v-if="course.price_discounted" :price="course.price_discounted" customClass="price-promo__card"></base-currency>
+                    <base-currency :price="course.price" customClass="price__card"></base-currency>
                 </div>
             </div>
         </div>
         
         <!-- POPOVER CONTENT -->
         <div class="webui-popover-content">
-            <webui-popover-card />
+            <webui-popover-card :course="course" />
         </div>
 
     </div>
@@ -45,9 +45,7 @@
     import WebuiPopoverCard from './WebuiPopoverCard'
 
     export default{
-        
         name: 'CourseCardSlick',
-        
         components: {
             WebuiPopoverCard
         },
@@ -65,7 +63,7 @@
                     show: 300,
                     hide: null
                 },
-                width: 335
+                width: 345
             });
         }
         

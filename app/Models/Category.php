@@ -33,6 +33,11 @@ class Category extends Model
     {
         return $this->hasMany(Course::class);
     }
+
+    public function child_courses()
+    {
+        return $this->hasManyThrough(Course::class, Category::class, 'parent_id', 'category_id', 'id', 'id');
+    }
     
     
 }

@@ -5,14 +5,19 @@ namespace App\Models;
 // use Spatie\Tags\HasTags;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Methods\CourseMethods;
 use Glorand\Model\Settings\Traits\HasSettingsField;
+use CyrildeWit\EloquentViewable\Viewable;
+use CyrildeWit\EloquentViewable\Contracts\Viewable as ViewableContract;
 
 
-class Course extends Model
+class Course extends Model implements ViewableContract
 {
     //use Uuid, HasTags;
-    use Uuid, CourseMethods, HasSettingsField;
+    use Uuid, CourseMethods, HasSettingsField, Viewable;
+
+    protected $removeViewsOnDelete = true;
 
     protected $fillable = [
     	'user_id', 
@@ -37,11 +42,14 @@ class Course extends Model
         'short_description',
         'is_in_cart',
         'status_code',
-        //'total_published_lessons',
         //'percent_completed',
         'price_discounted'
     ];
 
+    public function scopeLive(Builder $builder)
+    {
+        return $builder->where('published', true)->where('approved', true);
+    }
 
     /******* RELATIONSHIPS ************/
     public function stat()
