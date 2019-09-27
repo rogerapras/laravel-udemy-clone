@@ -19,7 +19,7 @@
             </div>
         </div>
     </section>
-    <section class="bg-light mt-0 py-4">
+    <section class="bg-lightgrey mt-0 py-4">
         <div class="container">
             <base-search-filters
                 category_id="{{ $subcategory ? $subcategory->id : $category->id }}"
