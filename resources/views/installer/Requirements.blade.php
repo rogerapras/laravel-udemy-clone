@@ -2,7 +2,7 @@
 
 @section('content')
     <base-installer-requirements inline-template>
-        <div class="card" v-cloak>
+        <div class="card border border-secondary " v-cloak>
             <div class="card-header bg-white py-4">
                 <h2 class="h4 m-0">Server Requirements</h2>
             </div>

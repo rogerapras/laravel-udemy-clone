@@ -26,8 +26,14 @@
                     </ul>
                 </div>
                 <div class="post-grid-footer text-right">
-                    <base-currency v-if="course.price_discounted" :price="course.price_discounted" customClass="price-promo__card"></base-currency>
-                    <base-currency :price="course.price" customClass="price__card"></base-currency>
+                    <template v-if="course.price_discounted">
+                        <base-currency v-if="course.price_discounted" :price="course.price" customClass="price-promo__card mr-1"></base-currency>
+                        <base-currency :price="course.price_discounted" customClass="price__card"></base-currency>
+                    </template>
+                    <template v-else>
+                        <base-currency :price="course.price" customClass="price__card"></base-currency>
+                    </template>
+                    
                 </div>
             </div>
         </div>

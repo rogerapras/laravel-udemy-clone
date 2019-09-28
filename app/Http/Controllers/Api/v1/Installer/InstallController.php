@@ -14,13 +14,8 @@ class InstallController extends Controller
 
     public function checkRequirements()
     {
-        $requirements = Installer::checkServerRequirements();
-        if (empty($requirements)) {
-            return response()->json(null, 200);
-        } else {
-            return response()->json($requirements, 200);
-        }
-
+        $result = Installer::checkServerRequirements();
+        return response()->json($result, 200);
     }
 
     public function checkLicense(Request $request)

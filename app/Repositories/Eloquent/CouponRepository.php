@@ -26,14 +26,14 @@ class CouponRepository  extends RepositoryAbstract implements ICoupon
         $coupon = Coupon::create([
            'course_id' => $data['course'],
            'code' => strToUpper($data['code']),
-           'percent' => $data['percent'],
+           'percent' => +$data['percent'],
            'quantity' => $data['quantity'],
            'expires' => $data['expires'] ? date("Y-m-d",strtotime($data['expires'])) : null,
            'active' => true,
            'sitewide' => $data['sitewide']
         ]);
 
-        if(!$data['course_id']){
+        if(!$data['course']){
             \Cache::forget('sitewide_coupon');
         }
         return $coupon;

@@ -4,7 +4,7 @@
             <div class="col-md-6 mx-auto">
                 <div class="card card-accent-success">
                     <div class="card-header">
-                        create-coupon
+                        {{ trans('strings.create_coupon') }}
                     </div>
                     
                     <div class="card-body bg-light">

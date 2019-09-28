@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1\Author;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\IAuthorDashboard;
+use App\Http\Resources\CourseResource;
 
 class AuthorDashboardController extends Controller
 {
@@ -19,7 +20,11 @@ class AuthorDashboardController extends Controller
     public function findAuthorCourses(Request $request)
     {
         $courses = $this->dashboard->findAuthorCourses($request->all());
-        return response()->json($courses, 200);
+
+        return response()->json([
+            'live' => CourseResource::collection($courses['live']),
+            'draft' => CourseResource::collection($courses['draft'])
+        ], 200);
     }
     
     public function findAuthorReviews(Request $request)

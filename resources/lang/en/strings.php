@@ -726,6 +726,15 @@ return [
     "students_are_viewing" => "Students are viewing",
     "top_categories" => "Top Categories",
     "edit_profile" => "Edit Profile",
-    "public_profile" => "Public Profile"
+    "public_profile" => "Public Profile",
+    "plus_online_courses" => "80,000 online courses",
+    "plus_online_courses_sub" => "Explore our library of fresh topics",
+    "expert_instruction" => "Expert Instruction",
+    "expert_instruction_sub" => "Find the right instructor for you",
+    "lifetime_access" => "Lifetime access",
+    "lifetime_access_sub" => "Learn on your own time, for life.",
+    "learn_on_your_schedule" => "Learn on your schedule",
+    "learn_on_your_schedule_sub" => "Study any topic, anytime. Choose from thousands of expert-led courses now.",
+    "coupons" => "Coupons"
     
 ];

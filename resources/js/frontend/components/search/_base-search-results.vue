@@ -11,13 +11,16 @@
                     :data="courses"
                     align="right"
                     :limit="-1"
+                    size="large"
                     @pagination-change-page="fetchCourses" 
-                    :show-disabled="true">
+                    :show-disabled="false">
                     <span slot="prev-nav">
+                        {{ trans('strings.previous') }}
                         <i class="fas fa-angle-left"></i>
                     </span>
 	                <span slot="next-nav">
-	                    <i class="fas fa-angle-right"></i>
+                        {{ trans('strings.next') }}
+                        <i class="fas fa-angle-right"></i>
 	                </span>
                 </pagination>
             </div>

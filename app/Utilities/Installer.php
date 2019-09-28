@@ -36,94 +36,209 @@ class Installer
         return false;
     }
 
+    // post_max_size
+    // upload_max_filesize
+    // memory_limit
+
     public static function checkServerRequirements()
     {
         $requirements = array();
-        
+        $errors = 0;
+
+        // check php version
         if(! version_compare(PHP_VERSION , "7.2", ">=")){
-            $requirements[] = trans('install.requirements.php_version', ['version' => '>= 7.2.0']);
+            $requirements['PHP Version >= 7.2'] = ['status' => 'FAILED', 'message' => trans('install.requirements.php_version', ['version' => '>= 7.2.0'])];
+            $errors++;
+        } else {
+            $req['PHP Version >= 7.0'] = ['status' => 'OK', 'message' => ''];
         }
 
+        // mod_rewrite
         if(function_exists('apache_get_modules')){
             if(!in_array('mod_rewrite', apache_get_modules())){
-                $requirements[] = trans('install.requirements.enabled', ['feature' => 'Apache mod_rewrite']);
+                $requirements['mod_rewrite'] = ['status' => 'FAILED', 'message' => trans('install.requirements.enabled', ['feature' => 'Apache mod_rewrite'])];
+                $errors++;
+            } else {
+                $requirements['mod_rewrite'] = ['status' => 'OK', 'message' => ''];
             }
         }
 
         if(self::getMemoryLimit() < 104857600){ // 100MB
-            $requirements[] = trans('install.requirements.memory_limit', ['minimum' => '100MB']);
+            $requirements['memory_limit'] = ['status' => 'FAILED', 'message' => trans('install.requirements.memory_limit', ['minimum' => '100MB'])];
+            $errors++;
+        } else {
+            $requirements['memory_limit'] = ['status' => 'OK', 'message' => ''];
         }
 
         if (ini_get('safe_mode')) {
-            $requirements[] = trans('install.requirements.disabled', ['feature' => 'Safe Mode']);
+            $requirements['safe_mode'] = ['status' => 'FAILED', 'message' => trans('install.requirements.disabled', ['feature' => 'Safe Mode'])];
+            $errors++;
+        } else {
+            $requirements['safe_mode'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (ini_get('register_globals')) {
-            $requirements[] = trans('install.requirements.disabled', ['feature' => 'Register Globals']);
+            $requirements['register_globals'] = ['status' => 'FAILED', 'message' => trans('install.requirements.disabled', ['feature' => 'Register Globals']) ];
+            $errors++;
+        } else {
+            $requirements['register_globals'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (ini_get('magic_quotes_gpc')) {
-            $requirements[] = trans('install.requirements.disabled', ['feature' => 'Magic Quotes']);
+            $requirements['magic_quotes_gpc'] = ['status' => 'FAILED', 'message' => trans('install.requirements.disabled', ['feature' => 'Magic Quotes'])];
+            $errors++;
+        } else {
+            $requirements['magic_quotes_gpc'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!ini_get('file_uploads')) {
-            $requirements[] = trans('install.requirements.enabled', ['feature' => 'File Uploads']);
+            $requirements['File Uploads enabled'] = ['status' => 'FAILED', 'message' => trans('install.requirements.enabled', ['feature' => 'File Uploads'])];
+            $errors++;
+        } else {
+            $requirements['File Uploads enabled'] = ['status' => 'OK', 'message' => ''];
         }
+
+
         if (!function_exists('proc_open')) {
-            $requirements[] = trans('install.requirements.enabled', ['feature' => 'proc_open']);
+            $requirements['proc_open enabled'] = ['status' => 'FAILED', 'message' => trans('install.requirements.enabled', ['feature' => 'proc_open'])];
+            $errors++;
+        } else {
+            $requirements['proc_open enabled'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!function_exists('proc_close')) {
-            $requirements[] = trans('install.requirements.enabled', ['feature' => 'proc_close']);
+            $requirements['proc_close'] = ['status' => 'FAILED', 'message' => trans('install.requirements.enabled', ['feature' => 'proc_close'])];
+            $errors++;
+        } else {
+            $requirements['proc_close enabled'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!class_exists('PDO')) {
-            $requirements[] = trans('install.requirements.extension', ['extension' => 'MySQL PDO']);
+            $requirements['MySQL PDO'] = ['status' => 'FAILED', 'message' => trans('install.requirements.extension', ['extension' => 'MySQL PDO'])];
+            $errors++;
+        } else {
+            $requirements['MySQL PDO'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!extension_loaded('openssl')) {
-            $requirements[] = trans('install.requirements.extension', ['extension' => 'OpenSSL']);
+            $requirements['OpenSSL extension'] = ['status' => 'FAILED', 'message' => trans('install.requirements.extension', ['extension' => 'OpenSSL'])];
+            $errors++;
+        } else {
+            $requirements['OpenSSL extension'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!extension_loaded('tokenizer')) {
-            $requirements[] = trans('install.requirements.extension', ['extension' => 'Tokenizer']);
+            $requirements['Tokenizer extension'] = ['status' => 'FAILED', 'message' => trans('install.requirements.extension', ['extension' => 'Tokenizer'])];
+            $errors++;
+        } else {
+            $requirements['Tokenizer extension'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!extension_loaded('gd')) {
-            $requirements[] = trans('install.requirements.extension', ['extension' => 'GD']);
+            $requirements['GD extension'] = ['status' => 'FAILED', 'message' => trans('install.requirements.extension', ['extension' => 'GD'])];
+            $errors++;
+        } else {
+            $requirements['GD extension'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!extension_loaded('JSON')) {
-            $requirements[] = trans('install.requirements.extension', ['extension' => 'JSON']);
+            $requirements['JSON extension'] = ['status' => 'FAILED', 'message' => trans('install.requirements.extension', ['extension' => 'JSON'])];
+            $errors++;
+        } else {
+            $requirements['JSON extension'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!extension_loaded('mbstring')) {
-            $requirements[] = trans('install.requirements.extension', ['extension' => 'mbstring']);
+            $requirements['mbstring extension'] = ['status' => 'FAILED', 'message' => trans('install.requirements.extension', ['extension' => 'mbstring'])];
+            $errors++;
+        } else {
+            $requirements['mbstring extension'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!extension_loaded('ctype')) {
-            $requirements[] = trans('install.requirements.extension', ['extension' => 'Ctype']);
+            $requirements['Ctype extension'] = ['status' => 'FAILED', 'message' => trans('install.requirements.extension', ['extension' => 'Ctype'])];
+            $errors++;
+        } else {
+            $requirements['Ctype extension'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!extension_loaded('curl')) {
-            $requirements[] = trans('install.requirements.extension', ['extension' => 'cURL']);
+            $requirements['cURL extension'] = ['status' => 'FAILED', 'message' => trans('install.requirements.extension', ['extension' => 'cURL'])];
+            $errors++;
+        } else {
+            $requirements['cURL extension'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!extension_loaded('xml')) {
-            $requirements[] = trans('install.requirements.extension', ['extension' => 'XML']);
+            $requirements['XML extension'] = ['status' => 'FAILED', 'message' => trans('install.requirements.extension', ['extension' => 'XML'])];
+            $errors++;
+        } else {
+            $requirements['XML extension'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!extension_loaded('zip')) {
-            $requirements[] = trans('install.requirements.extension', ['extension' => 'ZIP']);
+            $requirements['ZIP extension'] = ['status' => 'FAILED', 'message' => trans('install.requirements.extension', ['extension' => 'ZIP'])];
+            $errors++;
+        } else {
+            $requirements['ZIP extension'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!extension_loaded('bcmath')) {
-            $requirements[] = trans('install.requirements.extension', ['extension' => 'BCMath']);
+            $requirements['bcmath extension'] = ['status' => 'FAILED', 'message' => trans('install.requirements.extension', ['extension' => 'BCMath'])];
+            $errors++;
+        } else {
+            $requirements['bcmath extension'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!extension_loaded('fileinfo')) {
-            $requirements[] = trans('install.requirements.extension', ['extension' => 'FileInfo']);
+            $requirements['fileinfo extension'] = ['status' => 'FAILED', 'message' => trans('install.requirements.extension', ['extension' => 'FileInfo'])];
+            $errors++;
+        } else {
+            $requirements['fileinfo extension'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!is_writable(base_path('storage/app'))) {
-            $requirements[] = trans('install.requirements.directory', ['directory' => 'storage/app']);
+            $requirements['storage/app is writable'] = ['status' => 'FAILED', 'message' => trans('install.requirements.directory', ['directory' => 'storage/app'])];
+            $errors++;
+        } else {
+            $requirements['storage/app is writable'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!is_writable(base_path('storage/app/uploads'))) {
-            $requirements[] = trans('install.requirements.directory', ['directory' => 'storage/app/uploads']);
+            $requirements['storage/app/uploads is writable'] = ['status' => 'FAILED', 'message' => trans('install.requirements.directory', ['directory' => 'storage/app/uploads'])];
+            $errors++;
+        } else {
+            $requirements['storage/app/uploads is writable'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!is_writable(base_path('storage/uploads'))) {
-            $requirements[] = trans('install.requirements.directory', ['directory' => 'storage/uploads']);
+            $requirements['storage/uploads is writable'] = ['status' => 'FAILED', 'message' => trans('install.requirements.directory', ['directory' => 'storage/uploads'])];
+            $errors++;
+        } else {
+            $requirements['storage/uploads is writable'] = ['status' => 'OK', 'message' => ''];
         }
+        if (!is_writable(base_path('storage/updates'))) {
+            $requirements['storage/updates is writable'] = ['status' => 'FAILED', 'message' => trans('install.requirements.directory', ['directory' => 'storage/updates'])];
+            $errors++;
+        } else {
+            $requirements['storage/updates is writable'] = ['status' => 'OK', 'message' => ''];
+        }
+
         if (!is_writable(base_path('storage/framework'))) {
-            $requirements[] = trans('install.requirements.directory', ['directory' => 'storage/framework']);
+            $requirements['storage/framework is writable'] = ['status' => 'FAILED', 'message' => trans('install.requirements.directory', ['directory' => 'storage/framework'])];
+            $errors++;
+        } else {
+            $requirements['storage/framework is writable'] = ['status' => 'OK', 'message' => ''];
         }
+
         if (!is_writable(base_path('storage/logs'))) {
-            $requirements[] = trans('install.requirements.directory', ['directory' => 'storage/logs']);
+            $requirements['storage/logs is writable'] = ['status' => 'FAILED', 'message' => trans('install.requirements.directory', ['directory' => 'storage/logs'])];
+            $errors++;
+        } else {
+            $requirements['storage/logs is writable'] = ['status' => 'OK', 'message' => ''];
         }
-        return $requirements;
+
+        return ['requirements' => $requirements, 'errors' => $errors];
     }
 
 
@@ -165,7 +280,9 @@ class Installer
         Artisan::call('db:seed', ['--class' => \PeriodsTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \CurrenciesTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \CurrenciesTableSeeder::class, '--force' => true]);
-        Artisan::call('db:seed', ['--class' => \PermissionRoleTableSeeder::class, '--force' => true]);
+        Artisan::call('db:seed', ['--class' => \RolesTableSeeder::class, '--force' => true]);
+        Artisan::call('db:seed', ['--class' => \PermissionsTableSeeder::class, '--force' => true]);
+        Artisan::call('db:seed', ['--class' => \LanguageSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \InitialSettingsSeeder::class, '--force' => true]);
 
         //Artisan::call('db:seed', ['--class' => 'Database\Seeds\CategoriesTableSeeder', '--force' => true]);
@@ -200,13 +317,14 @@ class Installer
         // File::delete($file);
 
         Artisan::call('db:seed', ['--class' => \UserTableSeeder::class, '--force' => true]);
-        Artisan::call('db:seed', ['--class' => \UserRoleTableSeeder::class, '--force' => true]);
+        Artisan::call('db:seed', ['--class' => \ModelHasRolesTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \CoursesTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \CourseTargetsTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \SectionsTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \LessonsTableSeeder::class, '--force' => true]);
-        Artisan::call('db:seed', ['--class' => \ContentsTableSeeder::class, '--force' => true]);
-        Artisan::call('db:seed', ['--class' => \ReviewsTableSeeder::class, '--force' => true]);
+        Artisan::call('db:seed', ['--class' => \VideosTableSeeder::class, '--force' => true]);
+        Artisan::call('db:seed', ['--class' => \CouponsTableSeeder::class, '--force' => true]);
+        //Artisan::call('db:seed', ['--class' => \ReviewsTableSeeder::class, '--force' => true]);
 
         return true;
 

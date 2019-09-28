@@ -63,48 +63,60 @@
                     <div class="push" style="height: 103px;"></div>
                 </div>
 
-                <footer class="gabs__footer mt-autox py-3 bg-dark text-white" style="height: 103px;">
-                    <div class="container py-4">
+                <footer class="gabs__footer bg-lightgrey mt-autox py-3 text-white" style="height: 103px;">
+                    <div class="container-fluid py-4">
                         <div class="row">
-                            <div class="col-md-6">
-                                <ul class="list-inline">
-                                    @foreach($pages as $page)
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" href="{{ route('frontend.page', $page->slug) }}"> 
-                                                {{ $page->title }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
+
+                            <div class="col-md-6 d-flex align-items-center">
+                                <div>
+                                    <img src="{{ setting('site.logo') }}" height="35" />
+                                </div>
+                                <div class="ml-2 font-13 text-muted">
+                                    @lang('strings.backend.general.all_rights_reserved')
+                                    <strong>
+                                        @lang('labels.general.copyright') &copy; {{ date('Y') }} {{ app_name() }}
+                                    </strong> 
+                                </div>
                             </div>
 
 
                             
                             <div class="col-md-6 text-right">
-                                <div class="d-flex align-items-center justify-content-end">
-                                    <!-- CURRENCY -->
-                                    <div class="mr-3">
-                                        <base-currency-switcher></base-currency-switcher>
-                                    </div>
-
-                                    <!-- LANGUAGE -->
-                                    @if(count(active_languages()) > 1)
-                                        <div class="dropup">
-                                            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-globe"></i>
-                                                <span class="text-uppercase">{{ app()->getLocale() }}</span>
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="about-us">
-                                                @foreach(active_languages() as $lang)
-                                                    @if($lang->carbon_code != app()->getLocale())
-                                                        <a class="dropdown-item" href="{{ '/lang/'.$lang->carbon_code }}">
-                                                            @lang('menus.language-picker.langs.'.$lang->carbon_code)
-                                                        </a>
-                                                    @endif
-                                                @endforeach
-                                            </div>
+                                <div class="d-flex justify-content-end align-items-center font-13">
+                                    <ul class="list-inline">
+                                        @foreach($pages as $page)
+                                            <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" href="{{ route('frontend.page', $page->slug) }}"> 
+                                                    {{ $page->title }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    <div class="d-flex align-items-center ml-2 justify-content-end">
+                                        <!-- CURRENCY -->
+                                        <div>
+                                            <base-currency-switcher></base-currency-switcher>
                                         </div>
-                                    @endif
+
+                                        <!-- LANGUAGE -->
+                                        @if(count(active_languages()) > 1)
+                                            <div class="dropup" class="ml-3">
+                                                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-globe"></i>
+                                                    <span class="text-uppercase">{{ app()->getLocale() }}</span>
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="about-us">
+                                                    @foreach(active_languages() as $lang)
+                                                        @if($lang->carbon_code != app()->getLocale())
+                                                            <a class="dropdown-item" href="{{ '/lang/'.$lang->carbon_code }}">
+                                                                @lang('menus.language-picker.langs.'.$lang->carbon_code)
+                                                            </a>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>

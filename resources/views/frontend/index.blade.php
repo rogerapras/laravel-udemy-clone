@@ -21,11 +21,23 @@
 
 @section('content')
 <section class="homepage">
-    <section class="hero d-none d-lg-flex flex-row align-items-center text-center bg-secondary text-white">
+    <section class="hero d-none d-lg-flex flex-row align-items-center text-left bg-secondary text-white">
   	    <div class="container-fluid">
-  	        <h1 class="font-28 fw-600 text-uppercase">What are you working on?</h1>
-  		    <p class="font-16 fw-400">Demo is where designers get inspired.</p>
-  		    <a class="get-started font-16 fw-400" href="#" title="Get Started">Get Started</a>
+            <div style="width: 40%;">
+                <h1 class="font-28 fw-600 text-uppercase">@lang('strings.learn_on_your_schedule')</h1>
+                <p class="font-20 font-weight-light mb-2">
+                    @lang('strings.learn_on_your_schedule_sub')
+                </p>            
+                <div class="nav__search_wrapper ml-0">
+                    <div class="nav__search">
+                        <div class="nav__quick_search_form pos-r">
+                            <div class="gabs__dropdown">
+                                <base-nav-search></base-nav-search>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
   	    </div>
     </section>
     
@@ -37,9 +49,9 @@
 		            <i class="fa fa-globe"></i>
 		        </span>
 		        <div class="home__how-it-works-text">
-		            <span class="home__how_it_works-text-title">80,000 online courses</span>
+		            <span class="home__how_it_works-text-title">@lang('strings.plus_online_courses')</span>
 		            <div class="home__how_it_works-text-subtitle">
-		                Explore a variety of fresh topics
+                    @lang('strings.plus_online_courses_sub')
 		            </div>
 		        </div>
 		    </div>
@@ -49,9 +61,9 @@
 		            <i class="fa fa-check-circle"></i>
 		        </span>
 		        <div class="home__how-it-works-text">
-		            <span class="home__how_it_works-text-title">Expert instruction</span>
+		            <span class="home__how_it_works-text-title">@lang('strings.expert_instruction')</span>
 		            <div class="home__how_it_works-text-subtitle">
-		                Find the right instructor for you
+                        @lang('strings.expert_instruction_sub')
 		            </div>
 		        </div>
 		    </div>
@@ -61,9 +73,9 @@
 		            <i class="fa fa-clock-o"></i>
 		        </span>
 		        <div class="home__how-it-works-text">
-		            <span class="home__how_it_works-text-title">Lifetime Access</span>
+		            <span class="home__how_it_works-text-title">@lang('strings.lifetime_access')</span>
 		            <div class="home__how_it_works-text-subtitle">
-		                Learn on your schedule...forever
+                        @lang('strings.lifetime_access_sub')
 		            </div>
 		        </div>
 		    </div>

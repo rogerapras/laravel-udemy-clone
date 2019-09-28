@@ -7,7 +7,7 @@
                     <div class="col-md-4">
                         <div class="d-flex">
                             <div class="">
-                                <img :src="course.thumbnail" width="175" class="shadow-sm" />
+                                <img :src="course.images.thumbnail" width="175" class="shadow-sm" />
                             </div>
                             <div class="border border-left-0 border-bottom-0 border-top-0 d-flex flex-column px-3 flex-grow-1">
                                 <span class="fw-600 font-15 mb-2">{{ course.title | truncate(25) }}</span>

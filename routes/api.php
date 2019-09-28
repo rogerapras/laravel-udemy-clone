@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 Route::group(['namespace' => 'Api\v1'], function () {
 
     Route::group(['middleware' => 'web', 'namespace' => 'Installer'], function () {
-        Route::post('installer/requirements', 'InstallController@checkRequirements');
+        Route::get('installer/requirements', 'InstallController@checkRequirements');
         Route::post('installer/database', 'InstallController@setDatabase');
         Route::get('installer/database', 'InstallController@getDatabaseInfo');
         Route::post('installer/settings', 'InstallController@saveSettings');

@@ -3,7 +3,7 @@
 @section('content')
 <base-installer-license inline-template>
     <form @submit.prevent="submit" v-cloak>
-        <div class="card">
+        <div class="card border border-secondary ">
             <div class="card-header bg-white py-4">
                 <h2 class="h4 m-0">START</h2>
             </div>

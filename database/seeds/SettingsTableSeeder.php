@@ -311,6 +311,62 @@ class SettingsTableSeeder extends Seeder
                 'key' => 'site.site_currency',
                 'value' => 'USD',
             ),
+            42 => 
+            array (
+                'id' => 151,
+                'user_id' => NULL,
+                'key' => 'site.video_hd_dimension',
+                'value' => '1280, 720',
+            ),
+            43 => 
+            array (
+                'id' => 152,
+                'user_id' => NULL,
+                'key' => 'site.video_sd_dimension',
+                'value' => '640, 360',
+            ),
+            44 => 
+            array (
+                'id' => 153,
+                'user_id' => NULL,
+                'key' => 'site.s3_access_id',
+                'value' => NULL,
+            ),
+            45 => 
+            array (
+                'id' => 154,
+                'user_id' => NULL,
+                'key' => 'site.s3_secret_access_key',
+                'value' => NULL,
+            ),
+            46 => 
+            array (
+                'id' => 155,
+                'user_id' => NULL,
+                'key' => 'site.s3_default_region',
+                'value' => NULL,
+            ),
+            47 => 
+            array (
+                'id' => 156,
+                'user_id' => NULL,
+                'key' => 'site.s3_bucket',
+                'value' => NULL,
+            ),
+            48 => 
+            array (
+                'id' => 157,
+                'user_id' => NULL,
+                'key' => 'site.s3_url',
+                'value' => NULL,
+            ),
+            49 => 
+            array (
+                'id' => 158,
+                'user_id' => NULL,
+                'key' => 'site.queue_connection',
+                'value' => 'sync',
+            ),
         ));
         
         

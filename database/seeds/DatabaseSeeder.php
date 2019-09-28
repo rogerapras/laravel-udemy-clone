@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LanguageSeeder::class);
         $this->call(PagesTableSeeder::class);
         //$this->call(AuthTableSeeder::class);
-
+        $this->call(AdminUserTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
@@ -61,8 +61,10 @@ class DatabaseSeeder extends Seeder
         $this->call(SectionsTableSeeder::class);
         $this->call(LessonsTableSeeder::class);
         $this->call(VideosTableSeeder::class);
+        $this->call(CouponsTableSeeder::class);
         
         $this->enableForeignKeys();
         
+        $this->call(CouponsTableSeeder::class);
     }
 }

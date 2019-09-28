@@ -3,7 +3,7 @@
 @section('content')
 <base-installer-database-connection inline-template>
     <form @submit.prevent="submit" v-cloak>
-        <div class="card">
+        <div class="card border border-secondary">
             <div class="card-header bg-white py-4">
                 <h2 class="h3 m-0">Database Configuration</h2>
             </div>
