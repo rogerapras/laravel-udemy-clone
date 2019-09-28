@@ -4,10 +4,10 @@
         <!-- Search Filter -->
         <div class="filter-search p-0">
             <div class="row">
-                <div class="col-md-9 p-l-r">
+                <div class="col-lg-9 col-sm-12 p-l-r">
                     <div class="row">
                         <template v-if="!showAdvanced">
-                            <div class="col-lg-2 p-l-r">
+                            <div class="col-lg-2 col-sm-12 mb-1 p-l-r">
                                 <button class="btn btn-sm border-secondary btn-block bg-white font-16 fw-400" 
                                     @click.prevent="showAdvanced=true">
                                     <i class="sl sl-icon-equalizer"></i>
@@ -15,7 +15,7 @@
                                 </button>
                             </div>
                         
-                            <div class="col-lg-2 p-l-r">
+                            <div class="col-lg-2 col-sm-12 mb-1 p-l-r">
                                 <select class="form-control border-secondary font-14 fw-300" v-model="form.rating" @change="fetchCourses()">
                                     <option v-for="rating in ratings" :value="rating.value" :key="rating.label">
                                         {{ rating.label }}
@@ -24,7 +24,7 @@
                             </div>
                         </template>
                         <template v-else>
-                            <div class="col-lg-3 p-l-r">
+                            <div class="col-lg-3  col-sm-12 mb-1 p-l-r">
                                 <div class="btn-group ml-0" role="group">
                                     <base-button :loading="form.busy" class="btn btn-info mr-2 rounded-0">
                                         {{ trans('strings.apply') }}
@@ -38,7 +38,7 @@
                         </template>
                     </div>
                 </div>
-                <div class="col-md-3 d-flex align-items-center justify-content-end">
+                <div class="col-lg-3  col-sm-12 mb-1 d-flex align-items-center justify-content-end">
                     <select class="form-control border-secondary w-75 font-14 fw-300" 
                         v-model="form.orderBy"
                         @change="fetchCourses()">

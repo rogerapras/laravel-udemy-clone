@@ -101,7 +101,12 @@
     import Cookie from 'js-cookie'
     
     export default{
-        
+        props: {
+            is_mobile: {
+                type: Boolean,
+                default: false
+            }
+        },
         computed:{
             user(){
                 return this.auth.user ? this.auth.user : null

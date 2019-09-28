@@ -208,16 +208,16 @@
         },
         {
             "name": "arcanedev/log-viewer",
-            "version": "5.0.2",
+            "version": "5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ARCANEDEV/LogViewer.git",
-                "reference": "39d56464238a4ab41b73c8290875b7f2cbfc054b"
+                "reference": "fc65898036e606d241236817484e16b8db1ba8fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ARCANEDEV/LogViewer/zipball/39d56464238a4ab41b73c8290875b7f2cbfc054b",
-                "reference": "39d56464238a4ab41b73c8290875b7f2cbfc054b",
+                "url": "https://api.github.com/repos/ARCANEDEV/LogViewer/zipball/fc65898036e606d241236817484e16b8db1ba8fe",
+                "reference": "fc65898036e606d241236817484e16b8db1ba8fe",
                 "shasum": ""
             },
             "require": {
@@ -272,7 +272,7 @@
                 "log-viewer",
                 "logviewer"
             ],
-            "time": "2019-09-14T08:13:15+00:00"
+            "time": "2019-09-25T11:07:09+00:00"
         },
         {
             "name": "arcanedev/support",
@@ -756,23 +756,23 @@
         },
         {
             "name": "divineomega/password_exposed",
-            "version": "v3.0.1",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DivineOmega/password_exposed.git",
-                "reference": "3f000edde89180764052492a1661d9550d9bcf5e"
+                "reference": "6ad5613976d8e2fbd130cfb8900d10542905fbba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DivineOmega/password_exposed/zipball/3f000edde89180764052492a1661d9550d9bcf5e",
-                "reference": "3f000edde89180764052492a1661d9550d9bcf5e",
+                "url": "https://api.github.com/repos/DivineOmega/password_exposed/zipball/6ad5613976d8e2fbd130cfb8900d10542905fbba",
+                "reference": "6ad5613976d8e2fbd130cfb8900d10542905fbba",
                 "shasum": ""
             },
             "require": {
                 "divineomega/do-file-cache-psr-6": "^2.0",
                 "divineomega/psr-18-guzzle-adapter": "^1.0",
                 "nyholm/psr7": "^1.0",
-                "paragonie/certainty": "^1|^2",
+                "paragonie/certainty": "^2.4",
                 "php": "^7.1",
                 "php-http/discovery": "^1.6",
                 "psr/cache": "^1.0",
@@ -819,7 +819,7 @@
             ],
             "description": "This PHP package provides a `password_exposed` helper function, that uses the haveibeenpwned.com API to check if a password has been exposed in a data breach.",
             "homepage": "https://github.com/DivineOmega/password_exposed",
-            "time": "2019-02-20T12:19:45+00:00"
+            "time": "2019-09-27T09:56:51+00:00"
         },
         {
             "name": "divineomega/psr-18-guzzle-adapter",
@@ -1402,16 +1402,16 @@
         },
         {
             "name": "glorand/laravel-model-settings",
-            "version": "3.4.1",
+            "version": "3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glorand/laravel-model-settings.git",
-                "reference": "6f5789674eecb5c6e45c31d06790fba1d392bb61"
+                "reference": "b54e8fb0e228e252ea6361c3eaf0047f53f87bfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glorand/laravel-model-settings/zipball/6f5789674eecb5c6e45c31d06790fba1d392bb61",
-                "reference": "6f5789674eecb5c6e45c31d06790fba1d392bb61",
+                "url": "https://api.github.com/repos/glorand/laravel-model-settings/zipball/b54e8fb0e228e252ea6361c3eaf0047f53f87bfe",
+                "reference": "b54e8fb0e228e252ea6361c3eaf0047f53f87bfe",
                 "shasum": ""
             },
             "require": {
@@ -1463,7 +1463,7 @@
                 "laravel-model-settings",
                 "laravel-settings"
             ],
-            "time": "2019-09-17T13:00:37+00:00"
+            "time": "2019-09-25T11:03:21+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2485,9 +2485,9 @@
             "authors": [
                 {
                     "name": "Ben Corlett",
-                    "role": "Developer",
                     "email": "bencorlett@me.com",
-                    "homepage": "http://www.webcomm.com.au"
+                    "homepage": "http://www.webcomm.com.au",
+                    "role": "Developer"
                 }
             ],
             "description": "OAuth 1.0 Client Library",
@@ -3113,16 +3113,16 @@
         },
         {
             "name": "paragonie/certainty",
-            "version": "v2.3.2",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/certainty.git",
-                "reference": "617a90a40bec9288f334f099e34ded6b3ef6f04c"
+                "reference": "67c01d4adab534a45eab670396addfbbb41791e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/certainty/zipball/617a90a40bec9288f334f099e34ded6b3ef6f04c",
-                "reference": "617a90a40bec9288f334f099e34ded6b3ef6f04c",
+                "url": "https://api.github.com/repos/paragonie/certainty/zipball/67c01d4adab534a45eab670396addfbbb41791e9",
+                "reference": "67c01d4adab534a45eab670396addfbbb41791e9",
                 "shasum": ""
             },
             "require": {
@@ -3169,7 +3169,7 @@
                 "ssl",
                 "tls"
             ],
-            "time": "2019-09-12T11:09:52+00:00"
+            "time": "2019-09-27T09:17:40+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -4475,16 +4475,16 @@
         },
         {
             "name": "spatie/laravel-html",
-            "version": "2.23.0",
+            "version": "2.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-html.git",
-                "reference": "a07f4f90339e17a192f503020a565a22e01aa656"
+                "reference": "577ac734b4a1e8e5ab7a5a382d10b4e57f8020d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-html/zipball/a07f4f90339e17a192f503020a565a22e01aa656",
-                "reference": "a07f4f90339e17a192f503020a565a22e01aa656",
+                "url": "https://api.github.com/repos/spatie/laravel-html/zipball/577ac734b4a1e8e5ab7a5a382d10b4e57f8020d5",
+                "reference": "577ac734b4a1e8e5ab7a5a382d10b4e57f8020d5",
                 "shasum": ""
             },
             "require": {
@@ -4539,7 +4539,7 @@
                 "html",
                 "spatie"
             ],
-            "time": "2019-09-03T17:56:16+00:00"
+            "time": "2019-09-24T19:35:00+00:00"
         },
         {
             "name": "spatie/laravel-permission",
@@ -7409,16 +7409,16 @@
         },
         {
             "name": "facade/flare-client-php",
-            "version": "1.0.4",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/flare-client-php.git",
-                "reference": "7128b251b48f24ef64e5cddd7f8d40cc3a06fd3e"
+                "reference": "4de2e8062e66edadbff261ebb5baae6eccfb799c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/7128b251b48f24ef64e5cddd7f8d40cc3a06fd3e",
-                "reference": "7128b251b48f24ef64e5cddd7f8d40cc3a06fd3e",
+                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/4de2e8062e66edadbff261ebb5baae6eccfb799c",
+                "reference": "4de2e8062e66edadbff261ebb5baae6eccfb799c",
                 "shasum": ""
             },
             "require": {
@@ -7430,7 +7430,7 @@
             },
             "require-dev": {
                 "larapack/dd": "^1.1",
-                "phpunit/phpunit": "^7.0",
+                "phpunit/phpunit": "^7.5.16",
                 "spatie/phpunit-snapshot-assertions": "^2.0"
             },
             "type": "library",
@@ -7459,26 +7459,26 @@
                 "flare",
                 "reporting"
             ],
-            "time": "2019-09-11T14:19:56+00:00"
+            "time": "2019-09-27T14:54:17+00:00"
         },
         {
             "name": "facade/ignition",
-            "version": "1.8.2",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "4ff9397a24da58b35382802e2d22325b640123ea"
+                "reference": "40461a1f680171876c186dfff419b2a4c892995c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/4ff9397a24da58b35382802e2d22325b640123ea",
-                "reference": "4ff9397a24da58b35382802e2d22325b640123ea",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/40461a1f680171876c186dfff419b2a4c892995c",
+                "reference": "40461a1f680171876c186dfff419b2a4c892995c",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "facade/flare-client-php": "^1.0.4",
+                "facade/flare-client-php": "^1.1",
                 "facade/ignition-contracts": "^1.0",
                 "filp/whoops": "^2.4",
                 "illuminate/support": "~5.5.0 || ~5.6.0 || ~5.7.0 || ~5.8.0 || ^6.0",
@@ -7513,7 +7513,10 @@
             "autoload": {
                 "psr-4": {
                     "Facade\\Ignition\\": "src"
-                }
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -7527,7 +7530,7 @@
                 "laravel",
                 "page"
             ],
-            "time": "2019-09-20T09:37:06+00:00"
+            "time": "2019-09-27T16:49:08+00:00"
         },
         {
             "name": "filp/whoops",
@@ -7574,8 +7577,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "homepage": "https://github.com/filp",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "homepage": "https://github.com/filp"
                 }
             ],
             "description": "php error handling for cool kids",
@@ -9869,8 +9872,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",

@@ -260,7 +260,7 @@ class SettingsTableSeeder extends Seeder
                 'id' => 143,
                 'user_id' => NULL,
                 'key' => 'site.logo',
-                'value' => '/images/default-meta-image.png',
+                'value' => '/images/logo.png',
             ),
             35 => 
             array (
@@ -274,7 +274,7 @@ class SettingsTableSeeder extends Seeder
                 'id' => 145,
                 'user_id' => NULL,
                 'key' => 'site.homepage_image',
-                'value' => '/images/homepagebg.jpg',
+                'value' => '/images/homepage_image.png',
             ),
             37 => 
             array (

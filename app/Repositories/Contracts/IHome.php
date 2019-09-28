@@ -7,7 +7,7 @@ interface IHome extends IRepository
 {
     
     public function getMostViewedCourses();
-    public function getTopCategories();
+    public function getTopCategories($type);
     public function getCategoryCourses($id);
 
 

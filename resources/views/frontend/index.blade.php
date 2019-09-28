@@ -21,7 +21,7 @@
 
 @section('content')
 <section class="homepage">
-    <section class="hero d-flex flex-row align-items-center text-center bg-secondary text-white">
+    <section class="hero d-none d-lg-flex flex-row align-items-center text-center bg-secondary text-white">
   	    <div class="container-fluid">
   	        <h1 class="font-28 fw-600 text-uppercase">What are you working on?</h1>
   		    <p class="font-16 fw-400">Demo is where designers get inspired.</p>
@@ -73,40 +73,25 @@
 
     <!-- Carousel -->
     <section class="py-4">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3 col-lg-3 d-flex">
-            <div class="bg-light p-4 flex-grow flex-fill d-flex text-center align-items-center flex-column justify-content-center">
-                <h5 class="fw-600 font-18">The world's largest selection of courses</h5>
-                <p>Learn anything, anywhere, anytime</p>
-            </div>
-          </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 d-none d-lg-flex">
+                        <div class="bg-light p-4 flex-grow flex-fill d-flex text-center align-items-center flex-column justify-content-center">
+                            <h5 class="fw-600 font-18 mb-2">
+                                @lang('strings.join_happy_students')
+                            </h5>
+                            <p class="font-weight-light">@lang('strings.join_happy_students_desc')</p>
+                        </div>
+                </div>
 
 
-          <div class="col-md-9 col-lg-9">
-            <div class="tc-tabs-style6">
-                <base-homepage-categories-tabs :categories="{{ $top_categories }}"></base-homepage-categories-tabs>
-                <!-- <ul class="nav nav-tabs" role="tablist">
-                    
-
-                    <li class="nav-item active">
-                        <a class="nav-link active" data-toggle="tab" href="#development">Developoment</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#design">Design</a>
-                    </li>
-                </ul>
-                <div class="tab-content tc-post-grid-style1 sec-spacer">
-                    <div id="development" class="tab-pane in active">
-                        <base-slick-carousel :num_slides="4"></base-slick-carousel>
+                <div class="col-sm-12 col-lg-9">
+                    <div class="tc-tabs-style6">
+                        <base-homepage-categories-tabs :categories="{{ $top_categories }}"></base-homepage-categories-tabs>
                     </div>
-                </div>	  -->
-
+                </div>
             </div>
-          </div>
-
         </div>
-      </div>
     </section>
 
 
@@ -128,19 +113,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 tc-post-grid-style1 sec-spacer">
-                    <base-heading text="{{ __('strings.students_are_viewing') }}"></base-heading>
+                    <base-heading text="{{ __('strings.top_categories') }}"></base-heading>
                 </div>
             </div>
         
             <div class="row">
-                <base-home-category-card name="Development" icon="im im-icon-Code-Window"></base-home-category-card>
-                <base-home-category-card name="Business" icon="im im-icon-Bar-Chart"></base-home-category-card>
-                <base-home-category-card name="IT and Software" icon="im im-icon-Computer-3"></base-home-category-card>
-                <base-home-category-card name="Design" icon="im im-icon-Fountain-Pen"></base-home-category-card>
-                <base-home-category-card name="Photography" icon="im im-icon-Old-Camera"></base-home-category-card>
-                <base-home-category-card name="Health and Fitness" icon="im im-icon-Stethoscope"></base-home-category-card>
-                <base-home-category-card name="Music" icon="im im-icon-Cloud-Music"></base-home-category-card>
-                <base-home-category-card name="Marketing" icon="im im-icon-Target-Market"></base-home-category-card>
+                @foreach($top_subcategories as $subcategory)
+                    <base-home-category-card :category="{{ json_encode($subcategory) }}"></base-home-category-card>
+                @endforeach 
             </div>
         
         </div>

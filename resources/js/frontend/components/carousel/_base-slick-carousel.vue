@@ -43,7 +43,7 @@
         watch:{
             courses:{
                 deep: true,
-                immediate: false,
+                immediate: true,
                 handler(courses){
                     this.reInit()
                 }
@@ -107,6 +107,7 @@
             },
         
             reInit() {
+                //if (!this.$refs.carousel == null) {
                 if (this.$refs.carousel !== undefined) {
                     //let currIndex = this.$refs.carousel.currentSlide()
                     this.$refs.carousel.destroy()

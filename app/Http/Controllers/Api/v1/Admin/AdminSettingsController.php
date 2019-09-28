@@ -112,7 +112,11 @@ class AdminSettingsController extends Controller
     public function uploadLogo(Request $request)
     {
         $file = $request->file('photo');
-        $path = $file->storeAs('images', $file->getClientOriginalName(), 'icons'); // folder, filename, disk
+        $extension = $request->file('photo')->extension();
+        $name = "{$request->icon_type}.{$extension}";
+
+        //$path = $file->storeAs('images', $file->getClientOriginalName(), 'icons'); // folder, filename, disk
+        $path = $file->storeAs('images', $name, 'icons'); // folder, filename, disk
         
         if($path){
             setting(["site.{$request->icon_type}" => '/'.$path]);

@@ -37,10 +37,21 @@ class HomeRepository extends RepositoryAbstract implements IHome
         return $courses;
     }
 
-    public function getTopCategories()
+    public function getTopCategories($type='parent')
     {
-
-        $categories = \DB::table('categories as c1')
+        
+        if($type == 'subcategory'){
+            $categories = Category::join('courses as c', 'c.category_id', '=', 'categories.id')
+                            ->leftJoin('reviews as r', 'c.id', '=', 'r.course_id')
+                            ->groupBy('categories.id')
+                            ->havingRaw('COUNT(c.id) > 0')
+                            ->orderBy('ratings', 'desc')
+                            ->orderBy('total_courses', 'desc')
+                            ->select('categories.*', \DB::raw('AVG(rating) as ratings'), \DB::raw('COUNT(c.id) as total_courses'))
+                            ->take(8)
+                            ->get();
+        } else {
+            $categories = \DB::table('categories as c1')
                             ->join('categories as c2', 'c1.id', '=', 'c2.parent_id')
                             ->join('courses as c', 'c.category_id', '=', 'c2.id')
                             ->leftJoin('reviews as r', 'c.id', '=', 'r.course_id')
@@ -51,6 +62,8 @@ class HomeRepository extends RepositoryAbstract implements IHome
                             ->select('c1.*', \DB::raw('AVG(rating) as ratings'), \DB::raw('COUNT(c.id) as total_courses'))
                             ->take(5)
                             ->get();
+        }
+        
         return $categories;
     }
 

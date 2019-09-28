@@ -7,7 +7,7 @@
     <section class="h-75 py-4 my-4">
         <div class="container">
             <div class="row">
-                <div class="col-5 mx-auto">
+                <div class="col-lg-5 col-sm-6 mx-auto">
                     <div class="card shadow-sm">
                         <div class="card-body p-4">
                             <h4 class="text-uppercase fw-500 text-center font-22 mb-4">

@@ -724,6 +724,8 @@ return [
     "paypal_email" => "PayPal Email",
     "payout_explanation" => "Your payments will be processed through PayPal. Please provide your PayPal email else your payouts will not be processed.",
     "students_are_viewing" => "Students are viewing",
-    "top_categories" => "Top Categories"
+    "top_categories" => "Top Categories",
+    "edit_profile" => "Edit Profile",
+    "public_profile" => "Public Profile"
     
 ];

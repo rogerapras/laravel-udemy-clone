@@ -22,8 +22,14 @@ class CategoryResource extends JsonResource
             'name' => $this->name,
             'sortOrder' => $this->sortOrder,
             'live' => $this->live,
-            'total_courses' => $this->course_count,
-            'children' => CategoryResource::collection($this->whenLoaded('children'))
+            'children' => CategoryResource::collection($this->whenLoaded('children')),
+            'parent' =>  $this->when( $this->parent_id, function () {
+                            return [
+                                    'name' => $this->parent->name,
+                                    'slug' => $this->parent->slug,
+                                    'uuid' => $this->parent->uuid
+                                ];
+                        }),
         ];
     }
 }

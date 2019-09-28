@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul class="nav nav-tabs">
-            <li v-for="category in categories" :key="category.uuid" class="nav-item" 
+            <li v-for="category in categories" :key="category.uuid" class="nav-item mr-2" 
                 :class="{ 'active' : category.uuid == form.category }">
                 <a class="nav-link" :class="{ 'active' : category.id == form.category }" href="javascript:void(0)"
                     @click="fetchCategoryCourses(category.id)">
