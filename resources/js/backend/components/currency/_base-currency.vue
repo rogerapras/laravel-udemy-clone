@@ -23,7 +23,12 @@
             currency(val){
                 
             }
+        },
+
+        mounted(){
+            
         }
+
 
         
     }

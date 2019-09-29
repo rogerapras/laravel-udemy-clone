@@ -10,5 +10,6 @@ interface ICoupon extends IRepository
     public function apply(array $data);
     public function removeCoupon($itemId);
     public function getAdminCoupons(array $data);
+    public function getSitewideCoupon();
     
 }

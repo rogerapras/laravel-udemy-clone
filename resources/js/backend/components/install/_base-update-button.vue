@@ -1,5 +1,6 @@
 <script>
 import Form from 'vform'
+import { mapGetters } from 'vuex'
 export default {
     data(){
         return {
@@ -16,6 +17,18 @@ export default {
                 }).catch(e => {
                     console.log(r.response)
                 })
+        }
+    },
+
+    computed:{
+        ...mapGetters({
+            currencies: 'currency/currencies'
+        })
+    },
+    
+    mounted(){
+        if(this.currencies.length === 0){
+            this.$store.dispatch('currency/fetchCurrencies')
         }
     }
 

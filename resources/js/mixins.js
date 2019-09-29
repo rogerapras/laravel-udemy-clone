@@ -28,9 +28,7 @@ Vue.mixin({
     },
 
     mounted(){
-        if(this.currencies.length === 0){
-            this.$store.dispatch('currency/fetchCurrencies')
-        }
+        
     }
 
 })

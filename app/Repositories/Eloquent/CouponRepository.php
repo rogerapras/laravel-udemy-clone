@@ -66,6 +66,11 @@ class CouponRepository  extends RepositoryAbstract implements ICoupon
         return $coupons;
     }
     
+    public function getSitewideCoupon()
+    {
+        $sitewideCoupon = Coupon::active()->isSitewide()->notExpired()->first();
+        return $sitewideCoupon;
+    }
     
     public function apply(array $data)
     {
@@ -92,6 +97,10 @@ class CouponRepository  extends RepositoryAbstract implements ICoupon
         
     }
     
+    // public function getSitewideCoupon()
+    // {
+
+    // }
     
     public function removeCoupon($itemId)
     {
