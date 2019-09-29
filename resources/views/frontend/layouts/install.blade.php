@@ -16,7 +16,7 @@
 
         <style>
             body{
-                background: #e2e2e2;
+                background: #F4F4F4 !important;
             }
             [v-cloak]{
                 display: none;
@@ -27,13 +27,13 @@
             }
             .progressbar li {
                 list-style-type: none;
-                width: 20%;
+                width: 16.66%;
                 float: left;
                 font-size: 12px;
                 position: relative;
                 text-align: center;
                 text-transform: uppercase;
-                color: #7d7d7d;
+                color: #adadad;
             }
             .progressbar li:before {
                 width: 30px;
@@ -78,13 +78,14 @@
                 <div class="row">
                     <div class="col-md-6 mx-auto">
                         <div class="mb-2 text-center">
-                            <h1 class="h3">Place logo image {{ session('install_step', 0) }}</h1>
+                            <h1 class="h3">{{ app_name() }} <span class="font-12">v{{ app_version() }}</span></h1>
                             <div class="bg-white">
                                 <ul class="progressbar">
                                     <li class="{{ active_class(Route::is('frontend.installer.index')) }}">Start</li>
                                     <li class="{{ active_class(Route::is('frontend.installer.requirements')) }}">Requirements</li>
                                     <li class="{{ active_class(Route::is('frontend.installer.database')) }}">Database</li>
                                     <li class="{{ active_class(Route::is('frontend.installer.settings')) }}">Settings</li>
+                                    <li class="{{ active_class(Route::is('frontend.installer.mail')) }}">Mail</li>
                                     <li class="{{ active_class(Route::is('frontend.installer.finish')) }}">Finish</li>
                                 </ul>
                             </div>

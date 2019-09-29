@@ -1,5 +1,6 @@
 <script>
 import Form from 'vform'
+import { setTimeout } from 'timers';
 export default {
     data(){
         return {
@@ -19,7 +20,9 @@ export default {
         submit(){
             this.form.post(`/api/installer/database`)
                 .then(response => {
-                    this.connection_success = true
+                    setTimeout(() => {
+                        this.connection_success = true
+                    }, 2000)
                 }).catch(err => {
                     const error = err.response.data
                     if(error.connection_error){

@@ -31,6 +31,7 @@ Route::group(['middleware' => 'is_installed', 'namespace' => 'Installer', 'as' =
     Route::get('/install/requirements', 'InstallController@requirements')->name('requirements');
     Route::get('/install/database', 'InstallController@database')->name('database');
     Route::get('/install/settings', 'InstallController@settings')->name('settings');
+    Route::get('/install/mail-settings', 'InstallController@mail')->name('mail');
     Route::get('/install/finish', 'InstallController@finish')->name('finish');
 });
 

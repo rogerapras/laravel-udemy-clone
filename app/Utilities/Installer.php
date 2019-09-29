@@ -14,6 +14,9 @@ use GuzzleHttp\Client;
 
 class Installer
 {
+
+    private static $item = 'educore';
+
     public static function checkLicense(array $data)
     {
         $client = new Client(['verify' => false, 'base_uri' => config('api.base_uri')]); //GuzzleHttp\Client
@@ -21,7 +24,8 @@ class Installer
             $response = $client->request('POST', 'api/verify', [
                 'form_params' => [
                     'purchase_code' => $data['purchase_code'], 
-                    'username' =>  $data['username'] 
+                    'username' =>  $data['username'],
+                    'item' => self::$item
                 ]
             ]);
         } catch (GuzzleException $e) {
@@ -56,25 +60,39 @@ class Installer
         // mod_rewrite
         if(function_exists('apache_get_modules')){
             if(!in_array('mod_rewrite', apache_get_modules())){
-                $requirements['mod_rewrite'] = ['status' => 'FAILED', 'message' => trans('install.requirements.enabled', ['feature' => 'Apache mod_rewrite'])];
+                $requirements['Apache mod_rewrite enabled'] = ['status' => 'FAILED', 'message' => trans('install.requirements.enabled', ['feature' => 'Apache mod_rewrite'])];
                 $errors++;
             } else {
-                $requirements['mod_rewrite'] = ['status' => 'OK', 'message' => ''];
+                $requirements['Apache mod_rewrite enabled'] = ['status' => 'OK', 'message' => ''];
             }
         }
 
         if(self::getMemoryLimit() < 104857600){ // 100MB
-            $requirements['memory_limit'] = ['status' => 'FAILED', 'message' => trans('install.requirements.memory_limit', ['minimum' => '100MB'])];
+            $requirements['memory_limit >= 100MB'] = ['status' => 'FAILED', 'message' => trans('install.requirements.param_size', ['param' => 'memory_limit', 'minimum' => '100MB'])];
             $errors++;
         } else {
-            $requirements['memory_limit'] = ['status' => 'OK', 'message' => ''];
+            $requirements['memory_limit >= 100MB'] = ['status' => 'OK', 'message' => ''];
+        }
+
+        if(self::getInitParamValue(ini_get('post_max_size')) < 30000){ // 30MB
+            $requirements['post_max_size >= 30MB'] = ['status' => 'FAILED', 'message' => trans('install.requirements.param_size', ['param' => 'post_max_size', 'minimum' => '30MB'])];
+            $errors++;
+        } else {
+            $requirements['post_max_size >= 30MB'] = ['status' => 'OK', 'message' => ''];
+        }
+
+        if(self::getInitParamValue(ini_get('upload_max_filesize')) < 30000){ // 30MB
+            $requirements['upload_max_filesize >= 30MB'] = ['status' => 'FAILED', 'message' => trans('install.requirements.param_size', ['param' => 'upload_max_filesize', 'minimum' => '30MB'])];
+            $errors++;
+        } else {
+            $requirements['upload_max_filesize >= 30MB'] = ['status' => 'OK', 'message' => ''];
         }
 
         if (ini_get('safe_mode')) {
-            $requirements['safe_mode'] = ['status' => 'FAILED', 'message' => trans('install.requirements.disabled', ['feature' => 'Safe Mode'])];
+            $requirements['safe_mode off'] = ['status' => 'FAILED', 'message' => trans('install.requirements.disabled', ['feature' => 'Safe Mode'])];
             $errors++;
         } else {
-            $requirements['safe_mode'] = ['status' => 'OK', 'message' => ''];
+            $requirements['safe_mode off'] = ['status' => 'OK', 'message' => ''];
         }
 
         if (ini_get('register_globals')) {
@@ -316,7 +334,8 @@ class Installer
         // Delete zip file
         // File::delete($file);
 
-        Artisan::call('db:seed', ['--class' => \UserTableSeeder::class, '--force' => true]);
+        Artisan::call('db:seed', ['--class' => \PagesTableSeeder::class, '--force' => true]);
+        Artisan::call('db:seed', ['--class' => \UsersTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \ModelHasRolesTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \CoursesTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \CourseTargetsTableSeeder::class, '--force' => true]);
@@ -473,6 +492,20 @@ class Installer
         }
         
         return $memory_limit;
+    }
+
+    protected static function getInitParamValue($value)
+    {
+        $rtn = 0;
+        if (preg_match('/^(\d+)(.)$/', $value, $matches)) {
+            if ($matches[2] == 'M') {
+                $rtn = $matches[1] * 1024 * 1024; // nnnM -> nnn MB
+            } else if ($matches[2] == 'K') {
+                $rtn = $matches[1] * 1024; // nnnK -> nnn KB
+            }
+        }
+        
+        return $rtn;
     }
 
 }

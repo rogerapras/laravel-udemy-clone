@@ -15,8 +15,8 @@
                     @pagination-change-page="fetchCourses" 
                     :show-disabled="false">
                     <span slot="prev-nav">
-                        {{ trans('strings.previous') }}
                         <i class="fas fa-angle-left"></i>
+                        {{ trans('strings.previous') }}
                     </span>
 	                <span slot="next-nav">
                         {{ trans('strings.next') }}

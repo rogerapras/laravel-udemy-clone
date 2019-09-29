@@ -12,9 +12,7 @@ class InstallController extends Controller
     {
         session()->forget("install_step");
         $step = session("install_step", 0);
-        
         session(["install_step" => 0]);
-        
         return view('installer.Index');
     }
 
@@ -22,7 +20,6 @@ class InstallController extends Controller
     {
         $step = session("install_step");
         if($step > 1) return redirect()->route('frontend.installer.database');
-        
         session(["install_step" => 1]);
         return view('installer.Requirements');
     }
@@ -38,16 +35,26 @@ class InstallController extends Controller
     public function settings()
     {
         $step = session("install_step");
-        if($step > 3) return redirect()->route('frontend.installer.finish');
+        if($step > 3) return redirect()->route('frontend.installer.mail');
 
         session(["install_step" => 3]);
         return view('installer.Settings');
     }
 
+    public function mail()
+    {
+        $step = session("install_step");
+        if($step > 4) return redirect()->route('frontend.installer.finish');
+
+        session(["install_step" => 4]);
+        return view('installer.MailSettings');
+    }
+
     public function finish()
     {
         $step = session("install_step");
-        if($step < 3) return redirect()->route('frontend.installer.settings');
+        if($step < 4) return redirect()->route('frontend.installer.mail');
+        session(["install_step" => 5]);
         return view('installer.Finish');
     }
 

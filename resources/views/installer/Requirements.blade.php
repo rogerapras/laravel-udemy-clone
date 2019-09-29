@@ -2,38 +2,55 @@
 
 @section('content')
     <base-installer-requirements inline-template>
-        <div class="card border border-secondary " v-cloak>
+        <div class="card border border-secondary mb-4" v-cloak>
             <div class="card-header bg-white py-4">
                 <h2 class="h4 m-0">Server Requirements</h2>
             </div>
 
-            <div class="card-body d-flex flex-column align-items-center justify-content-center" style="min-height: 50vh;">
+            <div class="card-body p-1 d-flex flex-column align-items-center justify-content-center" 
+                style="min-height: 50vh;">
                 <vue-element-loading :active="form.busy" :is-full-screen="false" spinner="bar-fade-scale" color="#ea5352"></vue-element-loading>
-
-                <template v-if="Object.keys(messages).length == 0">
-                    <div class="alert alert-success">
+                <template v-if="Object.keys(requirements).length > 0 && errors == 0">
+                    <div class="alert alert-success text-center font-13">
                         <p>
                             Your server seems to meet the minimum requirements to run the application. Click on "NEXT".
                         </p>
                     </div>
                 </template>
-                <template v-else>
-                    <div class="alert alert-danger">
-                        Address the following server issues. Please fix them and then click on 
-                        "RE-RUN CHECK"
+                <template v-if="Object.keys(requirements).length > 0 && errors > 0">
+                    <div class="alert alert-danger text-center font-13">
+                        <p>Address the following server issues. Please fix them and run the check again</p>
                     </div>
-                    <ul class="fa-ul">
+                    <!-- <ul class="fa-ul">
                         <li v-for="item in messages">
                             <i class="fa-li fa fa-times-circle text-danger"></i>@{{ item }}
                         </li>
-                    </ul>
+                    </ul> -->
                 </template>
+
+                <ul class="list-group w-100" style="font-size: 13px;">
+                    <li class="list-group-item pt-1 pb-1 d-flex justify-content-between" v-for="(req,k) in requirements">
+                        @{{ k }}
+                        <span v-if="req.message && req.status == 'FAILED'" class="text-danger pull-right">
+                            @{{ req.message }}
+                            <span class="fa fa-times-circle"></span>
+                        </span>
+                        <span v-if="req.message && req.status == 'WARNING'" class="text-warning pull-right">
+                            @{{ req.message }}
+                            <span class="fa fa-warning"></span>
+                        </span>
+                        <span v-if="!req.message" class="text-success pull-right">
+                            <span class="fa fa-check-circle"></span>
+                        </span>
+                    </li>
+                </ul>
             </div>
             <div class="card-footer bg-transparent d-flex justify-content-end">
                 <!-- <a href="{{ route('frontend.installer.index') }}" class="btn btn-sm rounded-0 btn-info">
                     Previous
                 </a> -->
-                <a href="{{ route('frontend.installer.database') }}" class="btn btn-sm rounded-0 btn-info" v-if="Object.keys(messages).length == 0">
+                <a href="{{ route('frontend.installer.database') }}" class="btn btn-sm rounded-0 btn-info" 
+                    v-if="Object.keys(requirements).length > 0 && errors == 0">
                     Next
                 </a>
                 <button @click.prevent="checkRequirements()" class="btn btn-sm rounded-0 btn-danger" v-else>

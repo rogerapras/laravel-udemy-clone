@@ -33,7 +33,8 @@ class RegisterRequest extends FormRequest
             'last_name' => ['required', 'string'],
             'username' => ['required', 'string', 'alpha_dash', 'max:15', Rule::unique('users')],
             'email' => ['required', 'string', 'email', Rule::unique('users')],
-            'password' => PasswordRules::register($this->email),
+            'password' => 'required|string|min:6|confirmed',
+            //'password' => PasswordRules::register($this->email),
             'g-recaptcha-response' => ['required_if:captcha_status,true', 'captcha'],
         ];
     }

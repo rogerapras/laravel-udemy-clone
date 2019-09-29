@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 use App\Utilities\Installer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\EmailSettingsTest;
 
 class InstallController extends Controller
 {
@@ -94,6 +95,74 @@ class InstallController extends Controller
         return response()->json($user, 200);
     }
 
+    public function saveMailSettings(Request $request)
+    {
+        $this->validate($request, [
+            'driver' => ['required'],
+            'smtp_host' => ['required_if:driver,smtp'],
+            'smtp_username' => ['required_if:driver,smtp'],
+            'smtp_password' => ['required_if:driver,smtp'],
+            'smtp_port' => ['required_if:driver,smtp'],
+            
+            'ses_key' => ['required_if:driver,ses'],
+            'ses_secret' => ['required_if:driver,ses'],
+            'ses_region' => ['required_if:driver,ses'],
+
+            'sendmail_path' => ['required_if:driver,sendmail'],
+
+            'sparkpost_secret' => ['required_if:driver,sparkpost'],
+
+            'postmark_token' => ['required_if:driver,postmark'],
+            
+            'mailgun_domain' => ['required_if:driver,mailgun'],
+            'mailgun_secret' => ['required_if:driver,mailgun'],
+            'mailgun_endpoint' => ['required_if:driver,mailgun'],
+
+            'from_address' => ['required'],
+            'from_name' => ['required']
+        ]);
+
+        $data = $request->all();
+        collect($data)->each(function ($v, $key) {
+            setting(["mail.{$key}" => $v]);
+        });
+        setting()->save();
+
+        // \Artisan::call('cache:clear');
+        // \Artisan::call('config:clear');
+        // $driver = $request->driver;
+        // if($driver == 'smtp'){
+        //     \Config::set('mail.driver', 'smtp');
+        //     \Config::set('mail.host', $request->smtp_host);
+            
+        //     config(['mail.port' => $request->smtp_port]);
+        //     config(['mail.from.address' => $request->from_address]);
+        //     config(['mail.from.name' => $request->from_name]);
+        //     config(['mail.encryption' => $request->smtp_encryption]);
+        //     config(['mail.username' => $request->smtp_username]);
+        //     config(['mail.password' => $request->smtp_password]);
+
+        // }
+        // if($driver == 'sendmail'){
+        //     \Config::set('mail.sendmail', $request->sendmail_path);
+        // }
+        //try{
+        //      \App\Models\User::find(1)->notify(new EmailSettingsTest());
+        // }catch (\Swift_TransportException $e){
+        //     return response()->json([
+        //         'driver' => 'Unable to connect with these settings.',
+        //         'details' => $e
+        //     ], 422);
+        // }catch(\Exception $e){
+        //     return response()->json([
+        //         'driver' => 'Unable to connect with these settings.',
+        //         'details' => $e->getMessages()
+        //     ], 422);
+        // }
+        return response()->json(null, 200);
+
+    }
+
     public function finish(Request $request)
     {
         
@@ -104,6 +173,8 @@ class InstallController extends Controller
             if(! Installer::finalTouches()){
                 return response()->json(['message' => 'Unable to finalize installation'], 404);
             }
+
+            cache()->flush();
         }catch(\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 404); 
         }

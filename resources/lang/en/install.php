@@ -13,7 +13,7 @@ return [
     ],
     'requirements' => [
         'php_version'       => 'Your PHP version must be :version',
-        'memory_limit'      => 'Increase the Memory Limit value in your PHP.ini to at least :minimum',
+        'param_size'        => 'The minimum value of the :param parameter in PHP.ini should be :minimum',
         'enabled'           => ':feature needs to be enabled!',
         'disabled'          => ':feature needs to be disabled!',
         'extension'         => ':extension extension needs to be installed and loaded!',

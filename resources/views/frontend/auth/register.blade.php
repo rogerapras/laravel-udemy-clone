@@ -17,25 +17,27 @@
                                 @include('includes.partials.messages')
                                 {{ html()->form('POST', route('frontend.auth.register.post'))->open() }}
                                     <div class="form-label-groupx mb-3 floating-label">
-                                        <input id="username" autocomplete="off" required name="username"
+                                        <input id="username" autocomplete="off" required name="username" value="{{ old('username') }}"
                                             class="form-control font-16 py-4 form-control-lg" type="text" placeholder=" ">
                                         <label for="username">@lang('strings.username')</label>
                                     </div>
 
                                     <div class="form-label-groupx mb-3 floating-label">
-                                        <input id="first_name" autocomplete="off" required name="first_name"
+                                        <input id="first_name" autocomplete="off" 
+                                            required name="first_name" value="{{ old('first_name') }}"
                                             class="form-control font-16 py-4 form-control-lg" type="text" placeholder=" ">
                                         <label for="first_name">@lang('validation.attributes.frontend.first_name')</label>
                                     </div>
 
                                     <div class="form-label-groupx mb-3 floating-label">
-                                        <input id="last_name" autocomplete="off" required name="last_name"
+                                        <input id="last_name" autocomplete="off" required 
+                                            name="last_name" value="{{ old('last_name') }}"
                                             class="form-control font-16 py-4 form-control-lg" type="text" placeholder=" ">
                                         <label for="last_name">@lang('validation.attributes.frontend.last_name')</label>
                                     </div>
 
                                     <div class="form-label-groupx mb-3 floating-label">
-                                        <input id="email" autocomplete="off" required name="email"
+                                        <input id="email" autocomplete="off" required name="email" value="{{ old('email') }}"
                                             class="form-control font-16 py-4 form-control-lg" type="text" placeholder=" ">
                                         <label for="email">@lang('validation.attributes.frontend.email')</label>
                                     </div>

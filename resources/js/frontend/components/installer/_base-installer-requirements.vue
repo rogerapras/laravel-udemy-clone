@@ -6,9 +6,9 @@ export default {
     data(){
         return {
             messages: {},
-            form: new Form({
-
-            })
+            errors: 0,
+            requirements: [],
+            form: new Form({})
         }
     },
 
@@ -16,7 +16,10 @@ export default {
         checkRequirements(){
             this.form.post(`/api/installer/requirements`)
                 .then(response => {
-                    this.messages = response.data
+                    this.errors = response.data.errors
+                    this.requirements = response.data.requirements
+                    // if(response.data.errors > 0)this.message = 'Please fix the errors shown below and re-run the check'   
+                    // if(response.data.errors == 0)this.message = 'Your server seems to meet the minimum requirements to run this application'   
                 })
         }
     },
