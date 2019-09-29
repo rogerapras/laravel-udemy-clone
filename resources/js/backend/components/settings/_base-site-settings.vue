@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-8">
                 <fieldset>
-                    <legend class="scheduler-border">{{ trans('strings.site_mode') }}</legend>
+                    <legend class="scheduler-border">{{ trans('strings.site_settings') }}</legend>
                     <div class="form-group row mb-1">
                         <label class="col-md-4 form-control-label">{{ trans('strings.site_mode') }}</label>
                         <div class="col-md-8">

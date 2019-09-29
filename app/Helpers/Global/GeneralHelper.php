@@ -1,5 +1,7 @@
 <?php
 use App\Models\Lesson;
+use App\Utilities\Updater;
+
 if (! function_exists('app_name')) {
     /**
      * Helper to grab the application name.
@@ -191,4 +193,12 @@ if (! function_exists('active_languages')) {
     function active_languages(){
         return \App\Models\Language::where('is_active', true)->get();
     }
+}
+
+if( !function_exists('get_latest_version_info')){
+    function get_latest_version_info(){
+        $currentVersion = Updater::checkLatestVersion();
+        return $currentVersion;
+    }
+
 }

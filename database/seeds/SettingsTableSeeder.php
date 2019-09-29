@@ -106,7 +106,7 @@ class SettingsTableSeeder extends Seeder
                 'id' => 94,
                 'user_id' => NULL,
                 'key' => 'site.site_name',
-                'value' => 'EduCore',
+                'value' => 'ArcInspire',
             ),
             13 => 
             array (
@@ -366,6 +366,132 @@ class SettingsTableSeeder extends Seeder
                 'user_id' => NULL,
                 'key' => 'site.queue_connection',
                 'value' => 'sync',
+            ),
+            50 => 
+            array (
+                'id' => 159,
+                'user_id' => NULL,
+                'key' => 'mail.driver',
+                'value' => 'smtp',
+            ),
+            51 => 
+            array (
+                'id' => 160,
+                'user_id' => NULL,
+                'key' => 'mail.sendmail_path',
+                'value' => '/usr/sbin/sendmail -bs',
+            ),
+            52 => 
+            array (
+                'id' => 161,
+                'user_id' => NULL,
+                'key' => 'mail.mailgun_domain',
+                'value' => NULL,
+            ),
+            53 => 
+            array (
+                'id' => 162,
+                'user_id' => NULL,
+                'key' => 'mail.mailgun_secret',
+                'value' => NULL,
+            ),
+            54 => 
+            array (
+                'id' => 163,
+                'user_id' => NULL,
+                'key' => 'mail.mailgun_endpoint',
+                'value' => NULL,
+            ),
+            55 => 
+            array (
+                'id' => 164,
+                'user_id' => NULL,
+                'key' => 'mail.postmark_token',
+                'value' => NULL,
+            ),
+            56 => 
+            array (
+                'id' => 165,
+                'user_id' => NULL,
+                'key' => 'mail.sparkpost_secret',
+                'value' => NULL,
+            ),
+            57 => 
+            array (
+                'id' => 166,
+                'user_id' => NULL,
+                'key' => 'mail.ses_key',
+                'value' => NULL,
+            ),
+            58 => 
+            array (
+                'id' => 167,
+                'user_id' => NULL,
+                'key' => 'mail.ses_secret',
+                'value' => NULL,
+            ),
+            59 => 
+            array (
+                'id' => 168,
+                'user_id' => NULL,
+                'key' => 'mail.ses_region',
+                'value' => NULL,
+            ),
+            60 => 
+            array (
+                'id' => 169,
+                'user_id' => NULL,
+                'key' => 'mail.smtp_host',
+                'value' => 'smtp.mailtrap.io',
+            ),
+            61 => 
+            array (
+                'id' => 170,
+                'user_id' => NULL,
+                'key' => 'mail.smtp_port',
+                'value' => '2525',
+            ),
+            62 => 
+            array (
+                'id' => 171,
+                'user_id' => NULL,
+                'key' => 'mail.smtp_username',
+                'value' => '40b6c42a13f173',
+            ),
+            63 => 
+            array (
+                'id' => 172,
+                'user_id' => NULL,
+                'key' => 'mail.smtp_password',
+                'value' => '86b26d5e618335',
+            ),
+            64 => 
+            array (
+                'id' => 173,
+                'user_id' => NULL,
+                'key' => 'mail.smtp_encryption',
+                'value' => NULL,
+            ),
+            65 => 
+            array (
+                'id' => 174,
+                'user_id' => NULL,
+                'key' => 'mail.from_address',
+                'value' => 'contact@arcinspire.com',
+            ),
+            66 => 
+            array (
+                'id' => 175,
+                'user_id' => NULL,
+                'key' => 'mail.from_name',
+                'value' => 'ArcInspire',
+            ),
+            67 => 
+            array (
+                'id' => 176,
+                'user_id' => NULL,
+                'key' => 'mail.mailing_address',
+                'value' => NULL,
             ),
         ));
         

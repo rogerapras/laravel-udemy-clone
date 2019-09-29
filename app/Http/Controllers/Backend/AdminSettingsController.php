@@ -10,6 +10,7 @@ class AdminSettingsController extends Controller
 {
     public function index()
     {
+        //dd(setting('site.redirect_https') == null);
         return view('backend.settings.Index');
     }
     

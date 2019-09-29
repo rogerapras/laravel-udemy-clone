@@ -17,8 +17,7 @@ class DashboardController extends Controller
     public function index()
     {
         //dd(request_ip());
-        $currentVersion = Updater::checkLatestVersion();
-        return view('backend.dashboard', compact('currentVersion'));
+        return view('backend.dashboard');
     }
     
 }

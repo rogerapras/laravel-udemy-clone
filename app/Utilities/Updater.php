@@ -14,7 +14,7 @@ use GuzzleHttp\Client;
 
 class Updater
 {
-    private static $item = 'educore';
+    private static $item = 'arcinspire';
     private static $latestUrl = 'api/latest';
     private static $downloadUrl = 'api/get_latest';
 

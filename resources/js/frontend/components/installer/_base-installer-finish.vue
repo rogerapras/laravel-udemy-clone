@@ -13,7 +13,7 @@ export default {
         submit(){
             this.form.post(`/api/installer/finish`)
                 .then(response => {
-                    window.location.href="/login"
+                    window.location.href="/"
                 }).catch(err => {
                     //
                 })

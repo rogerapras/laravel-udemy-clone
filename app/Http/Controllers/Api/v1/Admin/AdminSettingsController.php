@@ -115,7 +115,6 @@ class AdminSettingsController extends Controller
         $extension = $request->file('photo')->extension();
         $name = "{$request->icon_type}.{$extension}";
 
-        //$path = $file->storeAs('images', $file->getClientOriginalName(), 'icons'); // folder, filename, disk
         $path = $file->storeAs('images', $name, 'icons'); // folder, filename, disk
         
         if($path){

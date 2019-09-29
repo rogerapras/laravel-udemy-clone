@@ -20,9 +20,7 @@ export default {
         submit(){
             this.form.post(`/api/installer/database`)
                 .then(response => {
-                    setTimeout(() => {
-                        this.connection_success = true
-                    }, 2000)
+                    this.connection_success = true
                 }).catch(err => {
                     const error = err.response.data
                     if(error.connection_error){

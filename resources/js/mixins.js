@@ -25,6 +25,12 @@ Vue.mixin({
             conversion_rate: 'currency/conversion_rate',
             currencies: 'currency/currencies'
         })
+    },
+
+    mounted(){
+        if(this.currencies.length === 0){
+            this.$store.dispatch('currency/fetchCurrencies')
+        }
     }
 
 })

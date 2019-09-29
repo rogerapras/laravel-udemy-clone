@@ -9,9 +9,7 @@
             </div>
             <div class="card-body p-4 d-flex flex-column" style="min-height: 50vh;">
                 <p class="text-center mb-4">
-                    Welcome to the installation of EduCore PRO.
-                    You may want to read our <a href="#">Documentation page</a>
-                    for details on the installation process, and post-installation actions.
+                    Welcome to the installation of ArcInspire.
                 </p>
                 
                 <div class="my-3 font-weight-bold bg-light p-2 border border-secondary">

@@ -21,7 +21,7 @@ export default {
             this.form.post(`/api/installer/settings`)
                 .then(response => {
                     this.success = true
-                    window.location.href="/install/finish"
+                    window.location.href="/install/mail-settings"
                 }).catch(err => {
                     // console.log(this.form.errors.flatten())
                     //const error = err.response.data

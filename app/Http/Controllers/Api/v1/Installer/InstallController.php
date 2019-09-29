@@ -30,6 +30,13 @@ class InstallController extends Controller
             return response()->json(['purchase_code' => 'Unable to validate the purchase. Please check the username and purchase code'], 422);
         }
 
+        $envato = session([
+            'purchase_code' => $request->purchase_code, 
+            'envato_username' => $request->username
+        ]);
+
+        // cache()->rememberForever('purchase_code', $request->purchase_code); 
+        // cache()->rememberForever('envato_username', $request->username);
         return response()->json(null, 200);
 
     }
@@ -68,6 +75,7 @@ class InstallController extends Controller
             $message = trans('install.error.connection');
             return response()->json(['connection_error' => $message], 404);
         }
+
         return response()->json(null, 200);
     }
 
@@ -92,6 +100,16 @@ class InstallController extends Controller
             
         // Create user
         $user = Installer::createUser($request->all());
+
+        // save the purchase details from cache
+        setting([
+            "site.purchase_code" => session('purchase_code'),
+            "site.envato_username" => session('envato_username'),
+            "site.site_url" => url('/')
+        ]);
+        setting()->save();
+        session()->forget('purchase_code');
+        session()->forget('envato_username');
         return response()->json($user, 200);
     }
 

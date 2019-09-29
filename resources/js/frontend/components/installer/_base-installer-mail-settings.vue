@@ -32,7 +32,7 @@ export default {
             this.form.post(`/api/installer/mail`)
                 .then(response => {
                     this.success = true
-                   //window.location.href="/install/finish"
+                   window.location.href="/install/finish"
                 }).catch(err => {
                     
                 })

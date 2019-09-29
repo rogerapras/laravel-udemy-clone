@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <area-chart :data="chartData" :discrete="true" :ytitle="'sales'" 
+                            <area-chart :data="chartData" :discrete="true" :ytitle="trans('strings.sales')" 
                                 :download="true" :curve="false" legend="top" label="Sales"
                                     v-if="show_chart"></area-chart>
                         </div>

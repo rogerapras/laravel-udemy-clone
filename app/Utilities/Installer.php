@@ -15,7 +15,7 @@ use GuzzleHttp\Client;
 class Installer
 {
 
-    private static $item = 'educore';
+    private static $item = 'arcinspire';
 
     public static function checkLicense(array $data)
     {
