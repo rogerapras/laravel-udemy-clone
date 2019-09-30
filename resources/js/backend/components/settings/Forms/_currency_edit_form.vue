@@ -61,11 +61,11 @@ import Form from 'vform'
 import axios from 'axios'
 export default {
     props: {
-        currency: { type: Object, required: true },
+        prop_currency: { type: Object, required: true },
     },
 
     watch:{
-        currency:{
+        prop_currency:{
             deep: true,
             handler(val){
                 this.form.keys().forEach(key => {
@@ -142,7 +142,7 @@ export default {
 
     mounted(){
         this.form.keys().forEach(key => {
-            this.form[key] = this.currency[key]
+            this.form[key] = this.prop_currency[key]
         })
     }
 }

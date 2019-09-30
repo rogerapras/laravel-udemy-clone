@@ -85,8 +85,8 @@
                         <div class="col-md-8 ">
                             <select v-model="form.site_currency" class="form-control" 
                                 :class="{ 'is-invalid': form.errors.has('site_currency') }">
-                                <option v-for="currency in currencies" :value="currency.code" :key="currency.code">
-                                    {{ currency.name }}
+                                <option v-for="site_currency in site_currencies" :value="currency.code" :key="site_currency.code">
+                                    {{ site_currency.name }}
                                 </option>
                             </select>
                             <has-error :form="form" field="site_currency"></has-error>
@@ -218,7 +218,7 @@ export default {
     data(){
         return {
             isLoading: false,
-            currencies: [],
+            site_currencies: [],
             croper_options: {
                 //aspectRatio: 16 / 9,
                 autoCropArea: 1
@@ -284,7 +284,7 @@ export default {
 
     mounted(){
         this.$bus.$on('currencies:fetched', data => {
-            this.currencies = data 
+            this.site_currencies = data 
         })
     }
 

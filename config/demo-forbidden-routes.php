@@ -36,9 +36,6 @@ return [
     ['method' => 'PUT', 'uri' => 'api/categories/{category}'],
     ['method' => 'DELETE', 'uri' => 'api/categories/{category}'],
 
-    // Search
-    ['method' => 'POST', 'uri' => 'api/search'],
-
     // Content
     ['method' => 'POST', 'uri' => 'api/contents/{id}/update-duration'],
 
@@ -73,8 +70,6 @@ return [
     ['method' => 'POST', 'uri' => 'api/coupons'],
     ['method' => 'PUT', 'uri' => 'api/coupons/{coupon}'],
     ['method' => 'DELETE', 'uri' => 'api/coupons/{coupon}'],
-    ['method' => 'POST', 'uri' => 'api/author/courses'],
-    ['method' => 'POST', 'uri' => 'api/author/reviews'],
     ['method' => 'POST', 'uri' => 'api/announcements'],
     ['method' => 'PUT', 'uri' => 'api/announcements/{id}/update'],
     ['method' => 'DELETE', 'uri' => 'api/announcements/{uuid}'],

@@ -8,8 +8,8 @@
         <div class="col-md-12" v-if="!creating">
             <fieldset>
                 <legend class="scheduler-border">{{ trans('strings.site_currencies') }}</legend>
-                <template v-if="currencies.length > 0">
-                    <table class="table table-sm table-borderedx" v-if="currencies.length > 0">
+                <template v-if="site_currencies.length > 0">
+                    <table class="table table-sm table-borderedx" v-if="site_currencies.length > 0">
                         <thead>
                             <th style="width: 100px;">{{ trans('strings.iso_code') }}</th>
                             <th style="width: 150px;">{{ trans('strings.name') }}</th>
@@ -23,7 +23,7 @@
                             <th style="width: 150px;"></th>
                         </thead>
                         <tbody>
-                            <currency-edit-form v-for="currency in currencies" :key="currency.code" :currency = "currency" />
+                            <currency-edit-form v-for="currency in site_currencies" :key="currency.code" :prop_currency = "currency" />
                         </tbody>
                     </table>
                 </template>
@@ -65,7 +65,7 @@ export default {
                 live: false
             }),
 
-            currencies: []
+            site_currencies: []
         }
     },
 
@@ -74,13 +74,13 @@ export default {
             axios.get('/api/admin/currencies')
                 .then(response => {
                     const currencies = response.data.data 
-                    this.currencies = currencies.map(c => {
+                    this.site_currencies = currencies.map(c => {
                         c.enabled = c.enabled==1 ? true : false
                         c.is_primary = c.is_primary==1 ? true : false
                         return c
                     })
                 })
-                .then(() => this.$bus.$emit('currencies:fetched', this.currencies))
+                .then(() => this.$bus.$emit('currencies:fetched', this.site_currencies))
         },
 
 
