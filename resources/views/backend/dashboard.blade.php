@@ -142,15 +142,15 @@
         <div class="col-6 col-lg-6">
             <div class="card card-accent-danger clearfix">
                 <div class="card-body">
+                    <p>@lang('strings.periods_need_to_be_closed')</p>
+                    <hr class="my-2" />
                     <div v-if="periods_to_close.length">
-                        <p>@lang('strings.periods_need_to_be_closed')</p>
-                        <hr class="my-2" />
-                        <div style="height: 300px; overflow-y: auto;">
+                        <div style="height: 200px; overflow-y: auto;">
                             <ul class="list-group list-group-flush ml-4x">
                                 <li class="list-group-item py-2 px-2 d-flex justify-content-between" v-for="period_to_close in periods_to_close">
                                     <span>
-                                        @{{ $moment(period_to_close.start_time).format('MMMM d, Y') }} - 
-                                        @{{ $moment(period_to_close.end_time).format('MMMM d, Y') }}
+                                        @{{ $moment(period_to_close.start_time).format('YYYY-MM-DD')}} - 
+                                        @{{ $moment(period_to_close.end_time).format('YYYY-MM-DD')}}
                                     </span>
 
                                     <span>
@@ -162,7 +162,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div v-else>
+                    <div v-else style="height: 200px; overflow-y: auto;">
                         <p>@lang('strings.no_period_pending_closure')</p>
                     </div>
                 </div>
@@ -178,7 +178,7 @@
                     <hr class="my-2" />
                     <div v-if="courses_to_approve.length">
                         
-                        <div style="height: 300px; overflow-y: auto;">
+                        <div style="height: 200px; overflow-y: auto;">
                             <ul class="list-group list-group-flush ml-4x">
                                 <li class="list-group-item py-2 px-2 d-flex justify-content-between" 
                                     v-for="course in courses_to_approve">
@@ -195,7 +195,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div v-else style="height: 300px; overflow-y: auto;">
+                    <div v-else style="height: 200px; overflow-y: auto;">
                         <p>@lang('strings.no_courses_to_approve')</p>
                     </div>
                 </div>
