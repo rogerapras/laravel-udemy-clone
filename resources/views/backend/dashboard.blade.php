@@ -115,11 +115,93 @@
 
         <!-- Right side -->
         <div class="col-md-4">
-            xx
+            <div class="card card-accent-danger clearfix">
+                <div class="card-header">
+                    @lang('strings.system_messages_require_attention')
+                </div>
+                <div class="card-body" style="height: 300px; overflow-y: auto;">
+                    <div v-if="messages.length">
+                        <ul class="fa-ul ml-3">
+                            <li v-for="message in messages">
+                                <i class="fa-li fa fa-times text-danger"></i> @{{message.message}}
+                                <hr />
+                            </li>
+                        </ul>
+                    </div>
+                    <div v-else>
+                        <p>@lang('strings.no_messages')</p>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
     </div><!--row-->
+
+    <div class="row">
+        <div class="col-6 col-lg-6">
+            <div class="card card-accent-danger clearfix">
+                <div class="card-body">
+                    <div v-if="periods_to_close.length">
+                        <p>@lang('strings.periods_need_to_be_closed')</p>
+                        <hr class="my-2" />
+                        <div style="height: 300px; overflow-y: auto;">
+                            <ul class="list-group list-group-flush ml-4x">
+                                <li class="list-group-item py-2 px-2 d-flex justify-content-between" v-for="period_to_close in periods_to_close">
+                                    <span>
+                                        @{{ $moment(period_to_close.start_time).format('MMMM d, Y') }} - 
+                                        @{{ $moment(period_to_close.end_time).format('MMMM d, Y') }}
+                                    </span>
+
+                                    <span>
+                                        <a :href="`/admin/payouts/period/${period_to_close.uuid}`">
+                                            @lang('strings.details')
+                                        </a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <p>@lang('strings.no_period_pending_closure')</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- COURSES NEEDING REVIEW -->
+        <div class="col-6 col-lg-6">
+            <div class="card card-accent-danger clearfix">
+                <div class="card-body">
+                    <p>@lang('strings.courses_needing_approval')</p>
+                    <hr class="my-2" />
+                    <div v-if="courses_to_approve.length">
+                        
+                        <div style="height: 300px; overflow-y: auto;">
+                            <ul class="list-group list-group-flush ml-4x">
+                                <li class="list-group-item py-2 px-2 d-flex justify-content-between" 
+                                    v-for="course in courses_to_approve">
+                                    <span>
+                                        @{{ course.title }}
+                                    </span>
+
+                                    <span>
+                                        <a :href="`/admin/courses/${course.uuid}`">
+                                            @lang('strings.details')
+                                        </a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div v-else style="height: 300px; overflow-y: auto;">
+                        <p>@lang('strings.no_courses_to_approve')</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 </base-admin-sales-chart>

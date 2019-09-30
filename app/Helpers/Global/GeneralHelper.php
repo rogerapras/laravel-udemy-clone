@@ -202,3 +202,19 @@ if( !function_exists('get_latest_version_info')){
     }
 
 }
+
+if(! function_exists('get_init_param_value')){
+    function get_init_param_value($value)
+    {
+        $rtn = 0;
+        if (preg_match('/^(\d+)(.)$/', $value, $matches)) {
+            if ($matches[2] == 'M') {
+                $rtn = $matches[1] * 1024 * 1024; // nnnM -> nnn MB
+            } else if ($matches[2] == 'K') {
+                $rtn = $matches[1] * 1024; // nnnK -> nnn KB
+            }
+        }
+        
+        return $rtn;
+    }
+}

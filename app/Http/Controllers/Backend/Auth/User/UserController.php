@@ -68,6 +68,7 @@ class UserController extends Controller
         $this->userRepository->create($request->only(
             'first_name',
             'last_name',
+            'username',
             'email',
             'password',
             'active',

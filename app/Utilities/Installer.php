@@ -74,14 +74,14 @@ class Installer
             $requirements['memory_limit >= 100MB'] = ['status' => 'OK', 'message' => ''];
         }
 
-        if(self::getInitParamValue(ini_get('post_max_size')) < 30000){ // 30MB
+        if(get_init_param_value(ini_get('post_max_size')) < 30000){ // 30MB
             $requirements['post_max_size >= 30MB'] = ['status' => 'FAILED', 'message' => trans('install.requirements.param_size', ['param' => 'post_max_size', 'minimum' => '30MB'])];
             $errors++;
         } else {
             $requirements['post_max_size >= 30MB'] = ['status' => 'OK', 'message' => ''];
         }
 
-        if(self::getInitParamValue(ini_get('upload_max_filesize')) < 30000){ // 30MB
+        if(get_init_param_value(ini_get('upload_max_filesize')) < 30000){ // 30MB
             $requirements['upload_max_filesize >= 30MB'] = ['status' => 'FAILED', 'message' => trans('install.requirements.param_size', ['param' => 'upload_max_filesize', 'minimum' => '30MB'])];
             $errors++;
         } else {
@@ -438,6 +438,7 @@ class Installer
         static::updateEnv([
             'APP_INSTALLED' =>  'true',
             'APP_DEBUG'     =>  'false',
+            'DEBUGBAR_ENABLED' => 'false'
         ]);
         // Rename the robots.txt file
         try {
@@ -492,20 +493,6 @@ class Installer
         }
         
         return $memory_limit;
-    }
-
-    protected static function getInitParamValue($value)
-    {
-        $rtn = 0;
-        if (preg_match('/^(\d+)(.)$/', $value, $matches)) {
-            if ($matches[2] == 'M') {
-                $rtn = $matches[1] * 1024 * 1024; // nnnM -> nnn MB
-            } else if ($matches[2] == 'K') {
-                $rtn = $matches[1] * 1024; // nnnK -> nnn KB
-            }
-        }
-        
-        return $rtn;
     }
 
 }

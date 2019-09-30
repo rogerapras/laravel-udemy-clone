@@ -2,20 +2,10 @@
 
 namespace App\Utilities;
 
-use DB;
-use File;
-use Config;
-use Artisan;
-use ZipArchive; 
-use App\Models\User;
-use Illuminate\Filesystem\Filesystem;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Client;
-
 class Checker
 {
 
-    public static function checkLicense(array $data)
+    public static function check()
     {
         $messages = [];
 
@@ -84,8 +74,27 @@ class Checker
             }
         }
 
+        // check post_max_size
+        $post_max_size = get_init_param_value(ini_get('post_max_size'))/1000000;
+        $upload_max_filesize = get_init_param_value(ini_get('upload_max_filesize'))/1000000;
+        $compare = setting('site.video_max_size_mb') ?? 20;
+
+        if($post_max_size <= $compare){
+            array_push($messages, [
+                'feature' => 'php.ini',
+                'message' => "The value of post_max_size in your PHP.ini (" . ini_get('post_max_size') . ") is lower than the Max. video upload size in your Video settings ({$compare}MB). Uploads will fail."
+            ]);
+        }
+
+        if($upload_max_filesize <= $compare){
+            array_push($messages, [
+                'feature' => 'php.ini',
+                'message' => "The value of upload_max_filesize in your PHP.ini (". ini_get('upload_max_filesize')  . ") is lower than the Max. video upload size in your Video settings ({$compare}MB). Uploads will fail."
+            ]);
+        }
 
 
+        return $messages;
 
     }
 

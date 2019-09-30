@@ -739,6 +739,12 @@ return [
     "lifetime_access_sub" => "Learn on your own time, for life.",
     "learn_on_your_schedule" => "Learn on your schedule",
     "learn_on_your_schedule_sub" => "Study any topic, anytime. Choose from thousands of expert-led courses now.",
-    "coupons" => "Coupons"
+    "coupons" => "Coupons",
+    "system_messages_require_attention" => "System messages",
+    "no_messages" => "No messages",
+    "no_period_pending_closure" => "No period needs to be closed",
+    "periods_need_to_be_closed" => "The following periods need to be closed",
+    "courses_needing_approval" => "The following courses are pending admin approval",
+    "no_courses_to_approve" => "No courses pending approval",
     
 ];

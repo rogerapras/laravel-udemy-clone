@@ -9,8 +9,8 @@
                 <a class="dropdown-item" href="{{ route('admin.auth.user.deactivated') }}">@lang('menus.backend.access.users.deactivated')</a>
                 <a class="dropdown-item" href="{{ route('admin.auth.user.deleted') }}">@lang('menus.backend.access.users.deleted')</a>
             </div>
-        </div><!--dropdown-->
+        </div>
 
-        <!--<a class="btn" href="#">Static Link</a>-->
-    </div><!--btn-group-->
+        
+    </div>
 </li>

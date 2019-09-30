@@ -10,16 +10,16 @@
     </div>
 @else
     <div class="btn-group" role="group" aria-label="@lang('labels.backend.access.users.user_actions')">
-        <a href="{{ route('admin.auth.user.show', $user) }}" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.view')" class="btn btn-info">
+        <a href="{{ route('frontend.user.show', $user->username) }}" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.view')" class="btn btn-success" target="_blank">
             <i class="fas fa-eye"></i>
         </a>
 
-        <a href="{{ route('admin.auth.user.edit', $user) }}" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.edit')" class="btn btn-primary">
+        <a href="{{ route('admin.auth.user.edit', $user) }}" data-toggle="tooltip" data-placement="top" title="@lang('buttons.general.crud.edit')" class="btn btn-warning">
             <i class="fas fa-edit"></i>
         </a>
 
         <div class="btn-group btn-group-sm" role="group">
-            <button id="userActions" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button id="userActions" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @lang('labels.general.more')
             </button>
             <div class="dropdown-menu" aria-labelledby="userActions">

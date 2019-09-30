@@ -7,8 +7,10 @@ use App\Models\User;
 use App\Models\Payment;
 use App\Models\Course;
 use App\Models\Payout;
+use App\Models\Period;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Utilities\Checker;
 
 class AdminDashboardController extends Controller
 {
@@ -84,9 +86,25 @@ class AdminDashboardController extends Controller
            'lifetime_earnings' => $total_platform_earnings ? (float)$total_platform_earnings->total : 0
         ];
 
+        // messages
+        $messages = Checker::check();
+
+        // periods requiring closure
+        $periods_to_close = Period::where('status', 'open')
+                            ->where('end_time', '<=', Carbon::now())
+                            ->orderBy('end_time', 'desc')
+                            ->get();
+
+        $courses_to_approve = Course::where('published', true)
+                                    ->where('approved', false)
+                                    ->get();
+
         $res = [
             'chartData' => $data,
             'lifetimeData' => $lifetime_data,
+            'messages' => $messages,
+            'periods_to_close' => $periods_to_close,
+            'courses_to_approve' => $courses_to_approve
         ];
 
         return response()->json($res, 200);

@@ -5,6 +5,8 @@ import Vue from 'vue';
 window.Vue = Vue;
 window.webuiPopover =  require('webui-popover')
 window.moment = require('moment')
+Vue.prototype.$moment = require('moment')
+
 window.nestable = require('./plugins/nestable2')
 import store from '../store'
 
@@ -20,6 +22,8 @@ locale.use(lang)
 Vue.use(DatePicker)
 Vue.use(Switch)
 Vue.use(Checkbox)
+
+
 
 
 Vue.prototype.trans = (string, args) => {

@@ -256,9 +256,8 @@ Route::group(['namespace' => 'Api\v1'], function () {
     | ADMIN ROUTES
     |----------------------------------------------------------------*/
     Route::group(['namespace' => 'Admin', 'middleware' => 'admin', 'prefix' => 'admin'], function () {
-        /* Dashboard Stats */
+        // Dashboard info
         Route::get('dashboard/fetch_admin_sales_data', 'AdminDashboardController@fetchAdminSalesChartData');
-        
 
 
         /* Coupons */
