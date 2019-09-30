@@ -40,6 +40,7 @@ class CategoryRepository extends RepositoryAbstract implements ICategory
                         ->with(['children' => function($children){
                             $children->ordered();
                         }])
+                        ->with('children.courses')
                         ->ordered()
                         ->get();
         

@@ -99,6 +99,14 @@ class AdminDashboardController extends Controller
                                     ->where('approved', false)
                                     ->get();
 
+        // $routes = app()->routes->getRoutes();
+        // foreach($routes as $route){
+        //     if($route->methods()[0] !== 'GET'){
+        //         $san = "['method' => '" . $route->methods()[0] . "', 'uri' => '" . $route->uri . "'],";
+        //         file_put_contents(base_path('ROUTELIST.txt'), $san.PHP_EOL, FILE_APPEND | LOCK_EX);
+        //     }
+        // }
+    
         $res = [
             'chartData' => $data,
             'lifetimeData' => $lifetime_data,

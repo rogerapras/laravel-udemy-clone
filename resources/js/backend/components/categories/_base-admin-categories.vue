@@ -42,7 +42,7 @@
                                             <a href="#" class="mr-2" @click.prevent="selectCategory(child.id)">
                                                 {{ trans('strings.edit') }}
                                             </a>
-                                            <a href="#" class="text-danger" v-if="child.total_courses == 0"
+                                            <a href="#" class="text-danger" v-if="child.courses.length == 0"
                                                 @click.prevent="destroy(child.id)">
                                                 {{ trans('strings.delete') }}
                                             </a>
@@ -61,7 +61,7 @@
         <div class="col-md-6">
             <template v-if="editing">
                 <form @submit.prevent="update()" class="form-horizontal p-3 bg-light border">
-                    <div class="form-group mb-0">
+                    <div class="form-group mb-1">
                         <label for="inputEmail3 control-label mb-0">
                             {{ trans('strings.name') }}
                         </label>

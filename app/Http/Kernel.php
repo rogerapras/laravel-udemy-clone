@@ -27,6 +27,7 @@ class Kernel extends HttpKernel
 
        \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+
     ];
     
     /**
@@ -84,6 +85,7 @@ class Kernel extends HttpKernel
         'is_course_author' => \App\Http\Middleware\CheckIfUserIsAuthor::class,
         'is_installed' => \App\Http\Middleware\RedirectIfInstalled::class,
         'is_not_installed' => \App\Http\Middleware\RedirectIfNotInstalled::class,
+        'check_demo' => \App\Http\Middleware\RestrictIfDemo::class
     ];
 
     /**
