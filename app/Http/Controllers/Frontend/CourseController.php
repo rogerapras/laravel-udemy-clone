@@ -115,6 +115,7 @@ class CourseController extends Controller
 
         return view('frontend.courses.player.Play')
             ->with([
+                'sections' => new SectionResource($data['sections']),
                 'course' => new CourseResource($course),
                 'playing' => new LessonResource($data['playing']),
                 'next' => $data['next'] ? new LessonResource($data['next']) : null,

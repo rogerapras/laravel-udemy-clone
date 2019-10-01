@@ -40,10 +40,10 @@ return [
     ['method' => 'POST', 'uri' => 'api/contents/{id}/update-duration'],
 
     // Cart
-    ['method' => 'POST', 'uri' => 'api/cart'],
-    ['method' => 'POST', 'uri' => 'api/cart/items/remove'],
-    ['method' => 'POST', 'uri' => 'api/cart/applyCoupon'],
-    ['method' => 'POST', 'uri' => 'api/cart/removeCoupon'],
+    //['method' => 'POST', 'uri' => 'api/cart'],
+    //['method' => 'POST', 'uri' => 'api/cart/items/remove'],
+    //['method' => 'POST', 'uri' => 'api/cart/applyCoupon'],
+    //['method' => 'POST', 'uri' => 'api/cart/removeCoupon'],
 
     
     ['method' => 'POST', 'uri' => 'api/settings/picture/upload'],
@@ -73,12 +73,8 @@ return [
     ['method' => 'POST', 'uri' => 'api/announcements'],
     ['method' => 'PUT', 'uri' => 'api/announcements/{id}/update'],
     ['method' => 'DELETE', 'uri' => 'api/announcements/{uuid}'],
-    ['method' => 'POST', 'uri' => 'api/cart/payment/process'],
-    ['method' => 'POST', 'uri' => 'api/cart/payment/razorpay/process'],
     ['method' => 'POST', 'uri' => 'api/admin/course/{uuid}/approve'],
     ['method' => 'POST', 'uri' => 'api/admin/periods/{uuid}/close'],
-    ['method' => 'POST', 'uri' => 'api/admin/refunds/{uuid}/process'],
-    ['method' => 'POST', 'uri' => 'api/admin/payouts/{uuid}/process'],
     ['method' => 'POST', 'uri' => 'api/admin/payouts/{uuid}/fetchStatusUpdate'],
     ['method' => 'POST', 'uri' => 'api/admin/categories'],
     ['method' => 'PUT', 'uri' => 'api/admin/category/{id}'],

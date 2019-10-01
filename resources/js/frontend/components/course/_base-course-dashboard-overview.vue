@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-md-9">
                         <h1 class="fw-600 font-18 mb-2">{{ trans('strings.course_description') }}</h1>
-                        <div v-html="course.description"></div>
+                        <p v-html="course.description"></p>
                     </div>
                     <div class="col-md-3">
                         <h1 class="fw-600 font-18 mb-2">{{ trans('strings.course_includes') }}</h1>

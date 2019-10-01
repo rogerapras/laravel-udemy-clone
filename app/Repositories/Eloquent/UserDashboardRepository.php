@@ -53,6 +53,7 @@ class UserDashboardRepository  extends RepositoryAbstract implements IUserDashbo
         
         //$courses = $courses->paginate(24, ['*'], 'page', $page);
         $courses = $courses->paginate(24);
+
         return $courses;
     }
 

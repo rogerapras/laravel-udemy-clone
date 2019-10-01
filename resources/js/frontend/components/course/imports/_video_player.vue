@@ -1,4 +1,3 @@
-
 <template>
     <div class="video-js-responsive-containerx vjs-hdx video-border vjs-16-9">
         <video autoplay ref="videoPlayer" class="video-js"></video>
@@ -8,24 +7,60 @@
 <script>
 import videojs from 'video.js';
 import youtube from 'videojs-youtube';
+
 export default {
     name: "VideoPlayer",
+    
     props: {
-        options: {
-            type: Object,
+        poster: { type: String, required: false },
+        sources: {
+            type: Array,
             default() {
-                return {};
+                return [];
             }
         },
-        next_url: { type: String }
+        next_url: { type: String },
+        content_type: { type: String, default: 'youtube' }
     },
-    data() {
+
+    data(){
         return {
-            player: null
+            player: null,
+            playerOptions:{
+                muted: false,
+                autoplay: true,
+                language: 'en',
+                fluid: true,
+                responsive: true,
+                techOrder: ['html5', 'youtube'],
+                playbackRates: [0.5, 1, 1.5, 2],
+                sources: [],
+                poster: "",
+                controls: false,
+                youtube: {
+                    ytControls: 2,
+                    customVars: { 
+                        wmode: 'transparent' 
+                    }
+                }
+            }
         }
     },
+
+    methods: {
+        
+    },
+
+
+    beforeMount(){
+        if(this.content_type !== 'youtube') this.playerOptions.controls=true
+        this.playerOptions.poster = this.poster
+        this.playerOptions.sources = this.sources
+    },
+
     async mounted() {
-        this.player = await videojs(this.$refs.videoPlayer, this.options, function onPlayerReady() {
+        this.player = await videojs(this.$refs.videoPlayer, this.playerOptions, function onPlayerReady() {
+            console.log('ready')
             //this.player.play()
         }).on('ended', () => {
             if(this.next_url){
@@ -35,11 +70,13 @@ export default {
             }
         })
     },
+
     beforeDestroy() {
         if (this.player) {
             this.player.dispose()
         }
     }
+
 }
 </script>
 

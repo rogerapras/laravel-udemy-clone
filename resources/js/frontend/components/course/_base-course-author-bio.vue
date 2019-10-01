@@ -4,7 +4,6 @@
             <div class="course__content py-2 d-flex justify-content-between">
                 <base-heading :text="trans('strings.about_the_instructor')"></base-heading>
             </div>
-            
             <div class="row">
                 <div class="col-md-3 d-flex flex-column">
                     <img :src="author.picture" width="100" height="100" class="rounded-circle" />

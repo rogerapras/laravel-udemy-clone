@@ -95,10 +95,6 @@ trait CourseMethods
     }
 
 
-
-
-    
-
     public function get_percent_complete()
     {
         return auth()->check() ? auth()->user()->percentCompleted($this) : null;

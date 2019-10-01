@@ -110,6 +110,7 @@
             fetchInfo(){
                 axios.get(`/api/course/${this.course.id}/dashboard-header-info`)
                     .then(response => {
+                        //console.log(response.data)
                         this.firstLesson = response.data.firstLesson
                         this.lastWatched = response.data.lastWatched
                         this.uuid = response.data.uuid

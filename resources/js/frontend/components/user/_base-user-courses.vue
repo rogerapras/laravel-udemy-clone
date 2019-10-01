@@ -132,6 +132,7 @@ export default {
             this.form.pageNumber = page
             this.form.post(`/api/user/courses/learning`)
                 .then( response => {
+                    //console.log(response.data)
                     this.courses = response.data
                     this.loading = false
                 }).finally( error => {

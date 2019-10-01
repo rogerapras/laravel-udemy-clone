@@ -33,7 +33,7 @@ class LessonResource extends JsonResource
             'uuid' => $this->uuid,
             'video_link' => $this->video_link,
             'video_provider' => $this->video_provider,
-            'type' => $this->content_type == 'video' ? 'video/'.$this->video_provider : null,
+            'type' => $this->content_type == 'video' || $this->content_type == 'youtube' ? 'video/'.$this->video_provider : null,
             'video' => new VideoResource($this->video),
             'has_content' => ! is_null($this->content_type)
         ];

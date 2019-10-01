@@ -23,7 +23,14 @@ class CourseResource extends JsonResource
             'status_code' => $this->status_code,
             'author' => [
                 'username' => $author->username,
-                'full_name' => $author->full_name
+                'full_name' => $author->full_name,
+                'picture' => $author->picture,
+                'tagline' => $author->tagline,
+                'bio' => $author->bio,
+                'average_review' => $author->average_review,
+                'total_reviews' => $author->total_reviews,
+                'total_courses' => $author->total_courses,
+                'total_students' => $author->total_students
             ],
             'category' => [
                 'name' => $category->name,
@@ -43,7 +50,6 @@ class CourseResource extends JsonResource
             ],
             'language' => $this->language,
             'level' => $this->level,
-            'percent_completed' => $this->percent_completed,
             'price' => $this->price,
             'price_discounted' => $this->price_discounted,
             'published' => $this->published,
@@ -53,6 +59,7 @@ class CourseResource extends JsonResource
             'sales_this_month' => $this->settings()->get('sales_this_month', 0),
             'enrolled_this_month' => $this->settings()->get('enrolled_this_month', 0),
             'durationHMS' => $this->settings()->get('durationHMS', '00:00:00'),
+            'percent_completed' => $this->when(auth()->check(), $this->get_percent_complete()), //$this->get_percent_complete(),
 
             'short_description' => $this->short_description,
             'slug' => $this->slug,
@@ -68,6 +75,8 @@ class CourseResource extends JsonResource
             'total_hours' => $this->settings()->get('total_hours', 0),
             'total_lessons' => $this->settings()->get('total_lessons', 0),
             'total_published_lessons' => $this->settings()->get('total_published_lessons', 0),
+
+            
             
             'updated_at' => $this->updated_at,
             'uuid' => $this->uuid,

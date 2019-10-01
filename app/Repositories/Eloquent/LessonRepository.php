@@ -75,7 +75,7 @@ class LessonRepository extends RepositoryAbstract implements ILesson
     
     public function findByUuid($uuid)
     {
-        $lesson = Lesson::with('content')->where('uuid', $uuid)->first();
+        $lesson = Lesson::with('video')->where('uuid', $uuid)->first();
         
         
         // mark this lesson as completed
@@ -86,7 +86,7 @@ class LessonRepository extends RepositoryAbstract implements ILesson
         
         $sections = Section::with(['lessons' => function($q){
                 $q->orderBy('sortOrder', 'asc');
-                $q->with('content');
+                $q->with('video');
             }])
             ->where('course_id', $lesson->section->course->id)
             ->orderBy('sortOrder', 'asc')
@@ -112,16 +112,18 @@ class LessonRepository extends RepositoryAbstract implements ILesson
         
         // if this is the last lesson by this user, then generate course certificate
         $course = $lesson->section->course;
+
         $pcnt_course_complete = auth()->user()->percentCompleted($course);
-        if($pcnt_course_complete == 100 && !auth()->user()->hasCompletedCourse($course)){
+        if($pcnt_course_complete >= 100 && !auth()->user()->hasCompletedCourse($course)){
             auth()->user()->certificates()->create([
                 'course_id' => $course->id,
-                'certificate_no' => 'C00'.strToUpper(str_random(2)).$course->category->id.'-'. auth()->user()->id . rand(100, 999).rand(3,99),
+                'certificate_no' => 'C00'.strToUpper(\Str::random(2)).$course->category->id.'-'. auth()->user()->id . rand(100, 999).rand(3,99),
                 'course_title' => $course->title,
                 'course_subtitle' => $course->subtitle,
-                'video_hours' => $course->total_hours,
-                'total_articles' => $course->total_articles,
-                'total_quizzes' => $course->total_quizzes
+                'video_hours' => $course->get_total_video_hours(),
+                'total_articles' => $course->get_total_articles(),
+                'total_quizzes' => 0
+                //'total_quizzes' => $course->total_quizzes
             ]);
         }
         

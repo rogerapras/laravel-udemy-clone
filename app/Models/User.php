@@ -111,9 +111,11 @@ class User extends BaseUser
     
     public function percentCompleted($course)
     {
-        $sections = $course->sections->pluck('id');
-        $total_lessons = Lesson::whereIn('section_id', $sections)->where('lesson_type', 'lecture')->count();
-        $lessons_array = Lesson::whereIn('section_id', $sections)->where('lesson_type', 'lecture')->pluck('id');
+        //$sections = $course->sections->pluck('id');
+        $total_lessons = $course->lessons()->hasContent()->count();
+        $lessons_array = $course->lessons->pluck('id');
+        //$total_lessons = Lesson::hasContent()->whereIn('section_id', $sections)->where('lesson_type', 'lecture')->count();
+        //$lessons_array = Lesson::whereIn('section_id', $sections)->where('lesson_type', 'lecture')->pluck('id');
         $user_completed = $this->completions()->whereIn('lessons.id', $lessons_array)->count();
         
         if($total_lessons > 0){

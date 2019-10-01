@@ -278,12 +278,14 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
         
         $last_watched = auth()->user()->completions()->latest()
                             ->whereIn('lessons.id', $lessons)->first();
-      
+        
+        $published_lessons = $course->lessons()->hasContent()->count();
+
         $data = [
             'uuid' => $last_watched ? $last_watched->uuid : $first_lesson->uuid,
 		    'lastWatched' => $last_watched,
 		    'firstLesson' => $first_lesson,
-		    'totalLessons' => $course->total_published_lessons,
+		    'totalLessons' => $published_lessons,
 		    'totalCompleted' => auth()->user()->completions()->whereIn('lesson_id', $lessons)->count(),
 		    'percentCompleted' => auth()->user()->percentCompleted($course),
 		    'userRating' => $course->reviews()->where('user_id', auth()->id())->first()

@@ -105,9 +105,9 @@
         props:['course'],
 
         computed: {
-            ...mapGetters({
-                loading: 'course/loading'
-            })
+            // ...mapGetters({
+            //     loading: 'course/loading'
+            // })
         },
         data() {
             return {
@@ -128,6 +128,7 @@
         
         methods: {
             async fetchQuestions(page = 1){
+                this.loading = await true
                 this.form.course = await this.course.id
                 await this.form.post(`/api/questions/fetchQuestions`)
                     .then(response => {

@@ -93,7 +93,7 @@ trait UserAttribute
 
     public function getAverageReviewAttribute()
     {
-        return $this->course_reviews->avg('rating');
+        return $this->total_reviews > 0 ? $this->course_reviews->avg('rating') : 0;
     }
 
     public function getTotalStudentsAttribute()

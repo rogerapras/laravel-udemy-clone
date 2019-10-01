@@ -4,7 +4,7 @@
             <div class="post-grid-item border border-secondary">
                 <div class="post-grid-img">
                     <a :href="`/course/${course.slug}/learn/v1/overview`">
-                        <img :src="course.thumbnail" />
+                        <img :src="course.images.thumbnail" />
                     </a>
                 </div>
                 <div class="post-grid-content p-2">

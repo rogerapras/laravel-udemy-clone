@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\IUserDashboard;
 use App\Repositories\Contracts\IRefund;
 use App\Notifications\Frontend\RefundRequestReceived;
+use App\Http\Resources\CourseResource;
 
 class DashboardController extends Controller
 {
@@ -21,8 +22,8 @@ class DashboardController extends Controller
     
     public function fetchCourses(Request $request)
     {
-        $courses = $this->dashboard->findUserCourses($request->all());
-        return response()->json($courses, 200);
+        $courses = CourseResource::collection( $this->dashboard->findUserCourses($request->all()));
+        return $courses;
     }
     
     public function fetchUserCourseCategories()

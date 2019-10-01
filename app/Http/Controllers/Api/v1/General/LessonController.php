@@ -9,6 +9,7 @@ use App\Repositories\Contracts\IContent;
 use App\Repositories\Contracts\ICourse;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\LessonResource;
+use App\Http\Resources\SectionResource;
 
 class LessonController extends Controller
 {
@@ -43,6 +44,7 @@ class LessonController extends Controller
         $data = $this->lessons->findByUuid($uuid);
 
         return response()->json([
+            'sections' => SectionResource::collection($data['sections']),
             'course' => new CourseResource($data['course']),
             'playing' => new LessonResource($data['playing']),
             'next' => $data['next'] ? new LessonResource($data['next']) : null,
