@@ -3,9 +3,9 @@
 @section('title', $course->title . ' | ' . app_name())
 
 @section('content')
-    <base-course-header-lg :course="{{ json_encode($course) }}"></base-course-header-lg>
-    <base-course-header-sm :course="{{ json_encode($course) }}"></base-course-header-sm>
 
+    <base-course-header-lg :course="{{ json_encode($course) }}" :preview="{{ json_encode($preview) }}"></base-course-header-lg>
+    <base-course-header-sm :course="{{ json_encode($course) }}"></base-course-header-sm>
     <section class="course__list py-4">
         <div class="container">
             <div class="row">

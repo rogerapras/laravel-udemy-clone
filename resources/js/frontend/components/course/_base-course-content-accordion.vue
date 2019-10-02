@@ -31,7 +31,7 @@
                                 </a>
                             </template>
                             <template v-else>
-                                <a href="#" class="font-14 d-flex justify-content-between"
+                                <!-- <a href="#" class="font-14 d-flex justify-content-between"
                                     v-if="lesson.preview">
                                     <div>
                                         <i class="fa fa-play-circle" v-if="lesson.content_type=='video'"></i>
@@ -46,10 +46,11 @@
                                         </span>
                                         <span>{{ lesson.durationHMS }}</span>
                                     </div>
-                                </a>
-                                <div class="font-14 d-flex justify-content-between" v-else>
+                                </a> -->
+                                <div class="font-14 d-flex justify-content-between">
                                     <div>
                                         <i class="fa fa-play-circle" v-if="lesson.content_type=='video'"></i>
+                                        <i class="fab fa-play-youtube" v-else-if="lesson.content_type=='youtube'"></i>
                                         <i class="fa fa-file-text-o" v-else-if="lesson.content_type=='article'"></i>
                                         <i class="fa fa-file-text-o" v-else></i>
                                         {{ lesson.title }}

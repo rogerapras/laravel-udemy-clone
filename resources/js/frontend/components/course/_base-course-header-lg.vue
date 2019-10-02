@@ -1,6 +1,6 @@
 <template>
-    <section class="text-white py-2 jumbotron__course_details">
-        <div class="container">
+    <section class="py-2 jumbotron__course_details">
+        <div class="container text-white">
             <div class="row pt-4">
                 <div class="col-md-8">
                     <div class="jumbotron__course_title mb-3">
@@ -39,8 +39,8 @@
                             <div class="clp-component-render">
                                 <div class="introduction-asset d-flex flex-column">
                                     <div class="introduction-asset__inner d-flex flex-column">
-                                        <a role="button">
-                                            <div class="play-button-trigger d-flex flex-column justify-content-end">
+                                        <a role="button" @click.prevent="showModal()">
+                                            <div class="play-button-trigger d-flex flex-column justify-content-end" v-if="Object.keys(preview).length > 0">
                                                 <div class="play-button d-flex justify-content-center align-items-center">
                                                     <i class="fa fa-play-circle fa-4x"></i>
                                                 </div>
@@ -53,6 +53,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            
                             
                             <div class="right-col__inner d-flex flex-column">
                                 <div class="d-flex flex-column">
@@ -110,11 +112,74 @@
             </div>
             
         </div>
+
+        <!-- Preview Modal -->
+        <div class="modal fade text-dark" id="video_preview">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content rounded-0">
+                    <!-- Modal Header -->
+                    <div class="modal-header rounded-0 bg-dark text-white py-1">
+                        <button type="button" class="close text-white" @click="hideModal()">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body p-0">
+                        <video-player v-if="modalOpen" :sources="sources"></video-player>
+                    </div>
+
+                    <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+        <!--/ End Preview Modal -->
+
+        
     </section>
 </template>
 
 <script>
+    import VideoPlayer from './imports/_video_player'
     export default {
-        props: ['course']
+        props: ['course', 'preview'],
+        
+        components: {
+            VideoPlayer
+        },
+        data(){
+            return {
+                modalOpen: false
+            }
+        },
+
+        computed:{
+            sources(){
+                if(Object.keys(this.preview).length > 0){
+                    let vpath = this.preview.content_type == 'video' ? `/uploads/videos/${this.preview.video.streamable_sm}` : this.preview.video.youtube_link
+                    return [{
+                        type: this.preview.type,
+                        src: vpath,
+                        label: "340P",
+                        res: 1
+                    }]
+                }
+                return []
+            }
+        },
+
+        methods:{
+            async showModal(){
+                this.modalOpen = await true
+                await $('#video_preview').modal({show: true, backdrop: 'static', keyboard: false })
+            },
+
+            hideModal(){
+                this.modalOpen = false
+                $('#video_preview').modal('hide')
+                this.$bus.$emit('video:stop')
+            }
+        }
     }
 </script>

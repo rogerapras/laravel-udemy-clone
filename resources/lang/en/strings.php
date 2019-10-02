@@ -746,5 +746,7 @@ return [
     "periods_need_to_be_closed" => "The following periods need to be closed",
     "courses_needing_approval" => "The following courses are pending admin approval",
     "no_courses_to_approve" => "No courses pending approval",
+    "promo_video" => "Course Promo Video",
+    "promo_video_description" => "Please upload a promo video, which will appear on the course page as a preview video. You can enter either a YouTube video or upload an mp4 video."
     
 ];

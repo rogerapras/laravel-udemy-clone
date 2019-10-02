@@ -51,9 +51,12 @@ class CourseController extends Controller
             return redirect()->route('frontend.course.dashboard.overview', ['slug' => $course->slug]);
         }
         
-        
+        $preview_lesson = $this->courses->getFirstVideoLesson($course);
         return view('frontend.courses.Show')
-                    ->with(['course' => new CourseResource($course)]);
+                    ->with([
+                        'course' => new CourseResource($course),
+                        'preview' => new LessonResource($preview_lesson)
+                    ]);
     }
     
     

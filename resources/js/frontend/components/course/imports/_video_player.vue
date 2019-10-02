@@ -19,7 +19,7 @@ export default {
                 return [];
             }
         },
-        next_url: { type: String },
+        next_url: { type: String, required: false },
         content_type: { type: String, default: 'youtube' }
     },
 
@@ -77,12 +77,11 @@ export default {
             }
         })
 
-        // if(this.player !== undefined){
-        //     console.log("Hel")
-        //     await this.player.on('resolutionchange', function(){
-        //         console.info('Source changed')
-        //     })
-        // }
+        this.$bus.$on('video:stop', () => {
+            if(this.player){
+                this.player.dispose()
+            }
+        })
     },
 
     beforeDestroy() {

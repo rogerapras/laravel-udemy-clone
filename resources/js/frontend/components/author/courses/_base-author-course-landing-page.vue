@@ -94,6 +94,25 @@
             </div>
         </div>
 
+        <!-- <hr />
+
+        <div class="row" v-if="course">
+            <div class="col-md-12">
+                <div class="font-16 fw-600 mb-4">
+                    <h3>{{ trans('strings.promo_video') }}</h3>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <inc-course-promo-video-upload :course="course"></inc-course-promo-video-upload>
+            </div>
+            <div class="col-md-6">
+                <p>
+                    {{ trans('strings.promo_video_description') }}
+                </p>
+            </div>
+        </div> -->
+
+
     </div>
 </template>
 
@@ -101,10 +120,12 @@
 import Form from 'vform'
 //import VueTagsInput from '@johmun/vue-tags-input';
 import IncCourseImageUpload from './imports/_course_image_upload'
+import IncCoursePromoVideoUpload from './imports/_course_promo_video_upload'
 export default {
     props: ['course', 'categories'],
     components:{
         IncCourseImageUpload,
+        IncCoursePromoVideoUpload
        // VueTagsInput
     },
     data(){

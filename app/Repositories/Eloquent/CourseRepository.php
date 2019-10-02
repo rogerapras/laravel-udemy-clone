@@ -263,6 +263,15 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
         }
         
     }
+
+    public function getFirstVideoLesson($course)
+    {
+        $lesson = $course->lessons()->hasContent()
+                            ->whereIn('content_type', ['video', 'youtube'])
+                            ->with('video')
+                            ->first();
+        return $lesson;
+    }
     
     
     public function fetchDashboardHeaderInformation($id)
@@ -293,6 +302,8 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
 	    
 	    return $data;
     }
+
+
     
     
     public function resetProgress($id)
