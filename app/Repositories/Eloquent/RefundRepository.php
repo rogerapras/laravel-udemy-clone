@@ -149,8 +149,9 @@ class RefundRepository  extends RepositoryAbstract implements IRefund
         
         if($gateway=='paypal'){
             try {
-                $result = PayPalProvider::processRefund($refund);
-                if($result == 'COMPLETED'){
+                $provider = new PayPalProvider;
+                $result = $provider->processRefund($refund);
+                if(strToUpper($result) == 'COMPLETED'){
                     $status = 'success';
                 }
             } catch (Exception $e) {
@@ -160,7 +161,12 @@ class RefundRepository  extends RepositoryAbstract implements IRefund
         
         if($gateway=='razorpay'){
             try {
-                $api = new Api(config('services.razorpay.key'), config('services.razorpay.secret'));
+                if(setting('payments.razorpay_mode') == 'live'){
+                    $api = new Api(setting('payments.razorpay_live_public_key'), setting('payments.razorpay_live_secret_key'));
+                } else {
+                    $api = new Api(setting('payments.razorpay_sandbox_public_key'), setting('payments.razorpay_sandbox_secret_key'));
+                }
+                
                 $response = $api->refund->create(array('payment_id' => $charge_id));
                 $status = 'success';
             } catch (Exception $e) {

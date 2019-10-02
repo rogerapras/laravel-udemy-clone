@@ -24,7 +24,7 @@ class CouponResource extends JsonResource
             'quantity' => $this->quantity,
             'created' => date("Y-m-d",strtotime($this->created_at)),
             'finalPrice' => $this->course ? round($this->course->price - (($this->percent/100)*$this->course->price), 2):null,
-            'link' => config('app.url') . '/coupons?COUPON='.$this->code,
+            'link' => url('/') . '/coupons?COUPON='.$this->code,
             'totalUsed' => 0,
             'exhausted' => false,
             'remaining' => 1,

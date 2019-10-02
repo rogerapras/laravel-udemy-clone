@@ -88,13 +88,13 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link {{active_class(Route::is('admin/locales')) }}" 
                         href="{{ route('admin.locales.index') }}">
                         <i class="nav-icon fas fa-globe"></i>
                         @lang('strings.languages')
                     </a>
-                </li>
+                </li> -->
 
                 <li class="nav-item">
                     <a class="nav-link {{ active_class(Route::is('admin/pages')) }}" 

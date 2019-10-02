@@ -2,14 +2,13 @@
     <div class="card shadow-sm mb-3">
         <div class="card-header bg-white d-flex">
             <div class="mr-3">
-                <img :src="review.course.thumbnail" width="120" />
+                <img :src="review.course.images.thumbnail" width="120" />
             </div>
             <div>
-                <a :href="`/course/${review.course.slug}/learn/v1/overview`"
-                    class="mb-2">
+                <a :href="`/course/${review.course.slug}/learn/v1/overview`" class="mb-2 font-13">
                     {{ review.course.title }}
                 </a>
-                <p>
+                <p class="d-flex align-items-center">
                     <star-rating 
                         :rating="parseFloat(review.course.average_review)"
                         :increment="0.5"
@@ -17,9 +16,9 @@
                         :show-rating="true"
                         :inline="true"
                         class="mb-2"
-                        text-class="font-16 mr-2"
+                        text-class="font-16 mr-1"
                         :star-size="16"></star-rating>
-                        {{ trans('strings.average_review') }}
+                        <span class="font-13">{{ trans('strings.average_review') }}</span>
                 </p>
             </div>
         </div>

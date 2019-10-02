@@ -36,6 +36,8 @@ axios.interceptors.response.use(
                 toast.error(error.response.data.message);
             }
         }
+
+        return Promise.reject(error)
     }
 );
 

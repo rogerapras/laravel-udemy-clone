@@ -124,7 +124,9 @@
 
                     <!-- Modal body -->
                     <div class="modal-body p-0">
-                        <video-player v-if="modalOpen" :sources="sources"></video-player>
+                        <video-player v-if="modalOpen" 
+                            :sources="sources"
+                            content_type="preview.type"></video-player>
                     </div>
 
                     <!-- <div class="modal-footer">

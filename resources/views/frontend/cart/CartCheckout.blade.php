@@ -29,6 +29,6 @@
 @endsection
 
 @push('after-scripts')
-    <script type="text/javascript" src="https://checkout.razorpay.com/v1/razorpay.js"></script>
+    <script type="text/javascript" src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
 @endpush

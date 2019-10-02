@@ -80,6 +80,30 @@ class Lesson extends Model
             });
     }
 
+    public function scopeDoesntHaveContent(Builder $builder)
+    {
+        return $builder->where(function($i) {
+                $i->orWhere(function($j){
+                    $j->where('content_type', 'article')
+                        ->whereNull('article_body');
+                })
+                ->orWhere(function($k){
+                    $k->where('content_type', 'video')
+                        ->whereHas('video', function($l){
+                            $l->orWhereNull('streamable_sm')
+                                ->orWhere('is_processed', 0)
+                                ->orWhere('processing_succeeded', 0);
+                        });
+                })
+                ->orWhere(function($m){
+                    $m->where('content_type', 'youtube')
+                        ->whereHas('video', function($n){
+                            $n->whereNull('youtube_link');
+                        });
+                });
+            });
+    }
+
     
     /*********** APPENDS ****************************/
     public function getUserHasCompletedAttribute()

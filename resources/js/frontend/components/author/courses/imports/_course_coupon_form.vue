@@ -89,6 +89,12 @@
               return (this.course.price - ((this.form.percent/100)*this.course.price)).toFixed(2)
             },
         },
+
+        watch:{
+            type(value){
+                if(value == 'free') this.form.percent = 100
+            }
+        },
           
         methods: {
             create(){

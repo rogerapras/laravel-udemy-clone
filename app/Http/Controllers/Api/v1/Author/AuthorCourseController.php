@@ -144,7 +144,8 @@ class AuthorCourseController extends Controller
     public function submitForReview($uuid)
     {
         // check course if all lessons have contents
-        return $this->courses->submitForReview($uuid);
+        $send = $this->courses->submitForReview($uuid);
+        return response()->json($send, 200);
         
     }
     

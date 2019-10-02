@@ -49,6 +49,9 @@ button{
   cursor: pointer;
 }
 
+.VueTables__table{
+  font-size: 14px;
+}
 
 .VueTables__table thead{
   background-color: #f0f3f5 !important;
@@ -77,4 +80,5 @@ button{
 
 .table > thead > tr > th {
   border-bottom-color: #17a2b8;
+  font-size: 14px;
 }

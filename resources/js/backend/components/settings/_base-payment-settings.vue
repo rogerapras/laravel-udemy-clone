@@ -92,7 +92,6 @@
                             </div>
                         </div>
 
-
                         <hr />
                         <div class="form-group row mb-1">
                             <label class="col-md-5 form-control-label">
@@ -283,7 +282,11 @@ export default {
     methods:{
         submit(){
             this.form.post(`/api/admin/settings/payment`)
-                .then(res => this.settings = res.data.payments)
+                .then(res => {
+                    this.settings = res.data.payments
+                }).catch(err => {
+                    //console.log(this.form)
+                })
             
         },
         fetchSettings(){

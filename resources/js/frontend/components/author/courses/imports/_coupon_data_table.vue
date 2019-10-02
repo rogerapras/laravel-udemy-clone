@@ -9,7 +9,7 @@
             ref="datatable"
             :options="options">
             
-            <template slot="child_row" slot-scope="props">
+            <!-- <template slot="child_row" slot-scope="props">
                 <div class="input-group mb-1">
                     <input type="text" class="form-control" :value="props.row.link">
                     <div class="input-group-append">
@@ -22,7 +22,7 @@
                 <div class="text-success" v-if="copiedId==props.row.id">
                     {{ trans('strings.link_copied') }}
                 </div>
-            </template>
+            </template> -->
             <template slot="status" slot-scope="props">
                 <el-switch
                     :value="props.row.active"
@@ -91,7 +91,7 @@
                     is:'fa-sort' 
                 },
                 sortable:['code', 'quantity'],
-                childRow: true,
+                childRow: false,
                 childRowTogglerFirst:false,
                 columnsDropdown: false,
                 texts:{

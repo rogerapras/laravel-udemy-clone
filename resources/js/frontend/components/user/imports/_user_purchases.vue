@@ -9,7 +9,7 @@
         <template slot="cover_image" slot-scope="props">
             <div class="d-flex">
                 <div>
-                    <img :src="props.row.course.cover_image" width="120" class="rounded shadow-sm mr-2" />
+                    <img :src="props.row.course.thumbnail" width="120" class="rounded shadow-sm mr-2" />
                 </div>
                 <div>
                     <h3>

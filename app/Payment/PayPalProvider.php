@@ -25,20 +25,25 @@ class PayPalProvider
     public function __construct()
     {
         $paypal_conf = \Config::get('paypal');
-        $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
+
+        $client_id = setting('payments.paypal_mode') == 'live' ? setting('payments.paypal_live_client_id') : setting('payments.paypal_sandbox_client_id');
+        $secret = setting('payments.paypal_mode') == 'live' ? setting('payments.paypal_live_secret') : setting('payments.paypal_sandbox_secret');
+
+        $this->_api_context = new ApiContext(new OAuthTokenCredential($client_id, $secret));
         $this->_api_context->setConfig($paypal_conf['settings']);
     }
 
     public function processRefund(Refund $refund)
     {
+        
         $amt = new Amount();
-        $amt->setCurrency('USD')
+        $amt->setCurrency(setting('site.site_currency') ?? 'USD')
             ->setTotal($refund->payment->amount);
         
         $refundRequest = new RefundRequest();
         $refundRequest->setAmount($amt);
 
-        $payment = PayPalPayment::get($charge_id, $this->_api_context);
+        $payment = PayPalPayment::get($refund->payment->gateway_payment_id, $this->_api_context);
         $sale_id = $payment->getTransactions()[0]->getRelatedResources()[0]->sale->id;
         $sale = new Sale();
         $sale->setId($sale_id);

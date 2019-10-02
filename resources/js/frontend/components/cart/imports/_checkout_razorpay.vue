@@ -1,5 +1,6 @@
 <template>
-    <button class="btn btn-danger rounded-0 btn-lg font-16" @click="onBtnClick()">
+    <button :disabled="form.busy" class="btn btn-danger rounded-0 btn-lg font-16" @click="onBtnClick()">
+        <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
         <span>{{ trans('strings.complete_payment') }}</span>
     </button> 
 </template>
@@ -22,7 +23,7 @@
                     key: '',
                     amount: 1000,
                     name: '',
-                    currency: 'USD',
+                    currency: 'INR',
                     handler: this.handler,
                     theme: {
                         color: "#168AFA"
@@ -34,7 +35,6 @@
         
         props:{
             type: { type: String, default: 'cart' },
-            course: { type: [Array, Object] },
             api_key: { type: String, required: true }
         },
         
@@ -47,14 +47,17 @@
             
             cartHasDiscount(){
                 return this.cart.total_price > this.cart.total_purchase_price
+            },
+
+            razorPayInstance(){
+                return new Razorpay(this.options)
             }
         },
         
         methods: {
             onBtnClick(){
                 this.options.amount = parseInt(this.cart.total_purchase_price*100)
-                var rzp_popup = new Razorpay(this.options);   
-                rzp_popup.open();
+                this.razorPayInstance.open()
             },
             
             handler(response){
@@ -68,29 +71,16 @@
                 this.form.purchase_price = this.cart.total_purchase_price
                 this.form.post(`/api/cart/payment/razorpay/process`)
                     .then(response => {
-                        //console.log(response)
-                        //window.location.href="/"
+                        window.location.href="/home/my-courses/learning"
                     })
             }
         },
         
-        
         beforeMount(){
             this.options.key = this.api_key
             this.options.name = window.config.appName
-            this.options.currency = window.config.default_currency
-            /*
-            setTimeout(() => {
-                this.options.amount = this.cart.total_purchase_price*100
-                var rzp_popup = new Razorpay(this.options);
-            
-                document.getElementById('razorpay-button').onclick = (e) => {
-                    e.preventDefault();
-                    $('#razorpay-button').attr('disabled', 'disabled');
-    		        $('#razorpay-button').html("<i class='fa fa-gear fa-spin'></i> processing");
-                    rzp_popup.open();
-                }
-            }, 1500)*/
+            //this.options.currency = window.config.default_currency
+
         }
         
     }

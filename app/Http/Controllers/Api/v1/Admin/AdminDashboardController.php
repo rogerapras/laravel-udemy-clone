@@ -80,7 +80,7 @@ class AdminDashboardController extends Controller
 
         // total sales
         $lifetime_sales = Payment::whereNull('refunded_at')->sum('amount');
-        $total_platform_earnings = Payment::select(\DB::raw('sum(amount - author_earning - affiliate_earning) as total'))->first();
+        $total_platform_earnings = Payment::whereNull('refunded_at')->select(\DB::raw('sum(amount - author_earning - affiliate_earning) as total'))->first();
         $lifetime_data = [
            'lifetime_sales' => $lifetime_sales ? (float)$lifetime_sales : 0,
            'lifetime_earnings' => $total_platform_earnings ? (float)$total_platform_earnings->total : 0

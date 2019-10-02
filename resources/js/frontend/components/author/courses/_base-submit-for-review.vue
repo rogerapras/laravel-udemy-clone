@@ -3,6 +3,7 @@
         <form @submit.prevent="submitForReview">
             <base-button :loading="form.busy"
                 class="btn btn-block btn-lg font-14 btn-danger rounded-0">
+                <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                 {{ trans('strings.submit_for_review') }}
             </base-button>
         </form>

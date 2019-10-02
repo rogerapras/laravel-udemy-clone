@@ -331,15 +331,14 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
     public function submitForReview($uuid)
     {
         $course = Course::where('uuid', $uuid)->first();
-        
         // check if all lessons have content
-        $lessons_with_no_content =  $course->lessons()->doesntHave('content')->count() == 0;
-     
+        $lessons_with_no_content =  $course->lessons()->doesntHaveContent()->count() == 0;
+
         $course_has_description = !empty($course->description);
         $target_students = $course->target_students()->count() > 0;
         $what_to_learn = $course->what_to_learn()->count() > 0;
         $requirements = $course->requirements()->count() > 0;
-        $course_image = ! is_null($course->image);
+        $course_image = !is_null($course->image);
         $overall = $lessons_with_no_content && $course_has_description && $target_students && $what_to_learn && $requirements && !is_null($course->image);
         
         if($overall == false){
@@ -368,8 +367,8 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
                 $admin->notify(new AdminCourseSubmittedForReview($course));
             }
         }*/
-        
-        return response()->json(['message' => 'ok'], 200);
+        event(new UpdateCourseStats($course, 'course_content_stats'));
+        return ['message' => 'ok'];
         
     }
 

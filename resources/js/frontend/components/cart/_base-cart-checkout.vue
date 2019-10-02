@@ -82,23 +82,40 @@
                             <div id="payment-stripe" aria-expanded="false" 
                                 class="panel-collapse collapse show">
                                 <div class="acdn-body">
-                                    <template v-if="payment_settings.credit_card_processor === 'stripe'">
+                                    <template v-if="enable_stripe">
                                         <checkout-stripe 
                                             :api_key="payment_settings.stripe_mode === 'live' ? payment_settings.stripe_live_public_key : payment_settings.stripe_sandbox_public_key" />
+                                            <div v-if="payment_settings.razorpay_mode == 'sandbox'"
+                                                class="alert alert-warning mt-2">
+                                                <p>
+                                                    The site is in demo mode. Use the following test card number with any future expiry date and cvv to checkout in demo mode.
+                                                </p>
+                                                <p class="fw-600 text-danger">424242-424242-424242-424242</p>
+                                            </div>
                                     </template>
 
-                                    <template v-if="payment_settings.credit_card_processor === 'razorpay'">
-                                        <checkout-razorpay 
+                                    <template v-if="enable_razorpay">
+                                        <checkout-razorpay
                                             :api_key="payment_settings.razorpay_mode === 'live' ? payment_settings.razorpay_live_public_key : payment_settings.razorpay_sandbox_public_key"
                                             :site_name="site_name" :currency="site_currency" />
+
+                                        <div v-if="payment_settings.razorpay_mode == 'sandbox'"
+                                            class="alert alert-warning mt-2">
+                                            <p>
+                                                The site is in demo mode. Use the following test card number with any future expiry date and cvv to checkout in demo mode.
+                                            </p>
+                                            <p class="fw-600 text-danger">5104-0155-5555-5558</p>
+                                        </div>
+                                            
                                     </template>
                                     <hr />
                                 </div>
                             </div>
                         </div>
                     </template>
+                    
 
-                    <template v-if="payment_settings.enable_paypal">
+                    <template v-if="enable_paypal">
                         <div class="panel border border-secondary bg-white shadow-sm">
                             <h4 class="acdn-title course__detail">
                                 <a data-toggle="collapse" data-parent="#checkout__accordion" href="#payment-paypal" aria-expanded="false" 
@@ -160,6 +177,25 @@
             
             cartHasDiscount(){
                 return this.cart.total_price > this.cart.total_purchase_price
+            },
+
+            enable_paypal(){
+                return parseInt(this.payment_settings.enable_paypal)==1 &&
+                        this.payment_settings[`paypal_${this.payment_settings.paypal_mode}_secret`] !== null &&
+                        this.payment_settings[`paypal_${this.payment_settings.paypal_mode}_client_id`] !== null
+
+            },
+            enable_razorpay(){
+                return parseInt(this.payment_settings.enable_credit_card)==1 &&
+                        this.payment_settings.credit_card_processor == 'razorpay' &&
+                        this.payment_settings[`razorpay_${this.payment_settings.razorpay_mode}_secret_key`] !== null &&
+                        this.payment_settings[`razorpay_${this.payment_settings.razorpay_mode}_public_key`] !== null
+            },
+            enable_stripe(){
+                return parseInt(this.payment_settings.enable_credit_card)==1 &&
+                        this.payment_settings.credit_card_processor == 'stripe' &&
+                        this.payment_settings[`stripe_${this.payment_settings.stripe_mode}_secret_key`] !== null &&
+                        this.payment_settings[`stripe_${this.payment_settings.stripe_mode}_public_key`] !== null
             }
         },
         

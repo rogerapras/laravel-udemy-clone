@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\IAuthorDashboard;
 use App\Http\Resources\CourseResource;
+use App\Http\Resources\ReviewResource;
 
 class AuthorDashboardController extends Controller
 {
@@ -29,8 +30,8 @@ class AuthorDashboardController extends Controller
     
     public function findAuthorReviews(Request $request)
     {
-        $reviews = $this->dashboard->findAuthorReviews($request->all());
-        return response()->json($reviews, 200);
+        $reviews = ReviewResource::collection($this->dashboard->findAuthorReviews($request->all()));
+        return $reviews;
     }
     
 }
