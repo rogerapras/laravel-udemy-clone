@@ -22,10 +22,10 @@
 @section('content')
 <section class="homepage">
     <section class="hero d-none d-lg-flex flex-row align-items-center text-left bg-secondary text-white">
-  	    <div class="container-fluid">
+  	    <div class="container">
             <div style="width: 40%;">
                 <h1 class="font-28 fw-600 text-uppercase">@lang('strings.learn_on_your_schedule')</h1>
-                <p class="font-20 font-weight-light mb-2">
+                <p class="font-18 font-weight-light mb-2">
                     @lang('strings.learn_on_your_schedule_sub')
                 </p>            
                 <div class="nav__search_wrapper ml-0">

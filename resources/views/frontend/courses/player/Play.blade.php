@@ -19,8 +19,8 @@
             </div>
         </div>
     </section>
-
-    <section class="player__jumbotron p-3">
+    
+    <section>
         <base-course-player uuid="{{ $playing->uuid }}"></base-course-player>
     </section>
 @endsection

@@ -2485,9 +2485,9 @@
             "authors": [
                 {
                     "name": "Ben Corlett",
+                    "role": "Developer",
                     "email": "bencorlett@me.com",
-                    "homepage": "http://www.webcomm.com.au",
-                    "role": "Developer"
+                    "homepage": "http://www.webcomm.com.au"
                 }
             ],
             "description": "OAuth 1.0 Client Library",
@@ -3113,19 +3113,21 @@
         },
         {
             "name": "paragonie/certainty",
-            "version": "v2.4.0",
+            "version": "v2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/certainty.git",
-                "reference": "67c01d4adab534a45eab670396addfbbb41791e9"
+                "reference": "e323b0640af27fa90105c5fbad8e15e6eff226de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/certainty/zipball/67c01d4adab534a45eab670396addfbbb41791e9",
-                "reference": "67c01d4adab534a45eab670396addfbbb41791e9",
+                "url": "https://api.github.com/repos/paragonie/certainty/zipball/e323b0640af27fa90105c5fbad8e15e6eff226de",
+                "reference": "e323b0640af27fa90105c5fbad8e15e6eff226de",
                 "shasum": ""
             },
             "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
                 "guzzlehttp/guzzle": "^6",
                 "paragonie/constant_time_encoding": "^1|^2",
                 "paragonie/sodium_compat": "^1.11",
@@ -3169,7 +3171,7 @@
                 "ssl",
                 "tls"
             ],
-            "time": "2019-09-27T09:17:40+00:00"
+            "time": "2019-09-29T08:05:22+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -6269,16 +6271,16 @@
         },
         {
             "name": "tanmuhittin/laravel-google-translate",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tanmuhittin/laravel-google-translate.git",
-                "reference": "83275a6f32090dd54fe7d33f6498243943b5961c"
+                "reference": "7b4efd17e509a10fa7e8ae32dd458dd96f97bf27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tanmuhittin/laravel-google-translate/zipball/83275a6f32090dd54fe7d33f6498243943b5961c",
-                "reference": "83275a6f32090dd54fe7d33f6498243943b5961c",
+                "url": "https://api.github.com/repos/tanmuhittin/laravel-google-translate/zipball/7b4efd17e509a10fa7e8ae32dd458dd96f97bf27",
+                "reference": "7b4efd17e509a10fa7e8ae32dd458dd96f97bf27",
                 "shasum": ""
             },
             "require": {
@@ -6313,7 +6315,7 @@
                 }
             ],
             "description": "Translate translation files to other languages using google translate api",
-            "time": "2019-09-07T19:26:02+00:00"
+            "time": "2019-10-02T06:32:47+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -7129,16 +7131,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "v1.7.0",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "fa4c4e861e809d6a1103bd620cce63ed91aedfeb"
+                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/fa4c4e861e809d6a1103bd620cce63ed91aedfeb",
-                "reference": "fa4c4e861e809d6a1103bd620cce63ed91aedfeb",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/904dca4eb10715b92569fbcd79e201d5c349b6bc",
+                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc",
                 "shasum": ""
             },
             "require": {
@@ -7147,7 +7149,7 @@
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
-                "phpunit/phpunit": "^7.5@dev"
+                "phpunit/phpunit": "^7.5"
             },
             "type": "library",
             "extra": {
@@ -7193,7 +7195,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2019-08-08T18:11:40+00:00"
+            "time": "2019-10-01T18:55:10+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -7463,16 +7465,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "1.9.0",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "40461a1f680171876c186dfff419b2a4c892995c"
+                "reference": "ca7ab4f49230cb57c62fedddc5245f5496b82065"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/40461a1f680171876c186dfff419b2a4c892995c",
-                "reference": "40461a1f680171876c186dfff419b2a4c892995c",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/ca7ab4f49230cb57c62fedddc5245f5496b82065",
+                "reference": "ca7ab4f49230cb57c62fedddc5245f5496b82065",
                 "shasum": ""
             },
             "require": {
@@ -7530,7 +7532,7 @@
                 "laravel",
                 "page"
             ],
-            "time": "2019-09-27T16:49:08+00:00"
+            "time": "2019-10-01T17:44:44+00:00"
         },
         {
             "name": "filp/whoops",
@@ -7577,8 +7579,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "role": "Developer",
-                    "homepage": "https://github.com/filp"
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
                 }
             ],
             "description": "php error handling for cool kids",
@@ -7966,16 +7968,16 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "4eff936d83eb809bde2c57a3cea0ee9643769031"
+                "reference": "b3453f75fd23d9fd41685f2148f4abeacabc6405"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/4eff936d83eb809bde2c57a3cea0ee9643769031",
-                "reference": "4eff936d83eb809bde2c57a3cea0ee9643769031",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/b3453f75fd23d9fd41685f2148f4abeacabc6405",
+                "reference": "b3453f75fd23d9fd41685f2148f4abeacabc6405",
                 "shasum": ""
             },
             "require": {
@@ -7989,7 +7991,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -8027,7 +8029,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2019-08-07T15:01:07+00:00"
+            "time": "2019-09-30T08:30:27+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -9872,8 +9874,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
