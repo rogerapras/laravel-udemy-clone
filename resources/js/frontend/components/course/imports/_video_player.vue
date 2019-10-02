@@ -67,7 +67,7 @@ export default {
 
     async mounted() {
         this.player = await videojs(this.$refs.videoPlayer, this.playerOptions, function onPlayerReady() {
-            console.log('ready')
+            //console.log('ready')
             //this.player.play()
         }).on('ended', () => {
             if(this.next_url){
@@ -76,6 +76,13 @@ export default {
                 }, 2000)
             }
         })
+
+        // if(this.player !== undefined){
+        //     console.log("Hel")
+        //     await this.player.on('resolutionchange', function(){
+        //         console.info('Source changed')
+        //     })
+        // }
     },
 
     beforeDestroy() {

@@ -50,14 +50,16 @@
             <div id="wrapper">
                 <div class="wrapper-inner" style="min-height: 100%;margin-bottom: -100px;">
                     @include('includes.partials.logged-in-as')
-                    <section class="desktop__nav d-none d-lg-block">
-                        @include('frontend.includes.nav')
-                    </section>
-                    <section class="mobile__nav d-block d-lg-none">
-                        @include('frontend.includes.nav_mobile')
-                    </section>
+
+                    @if(request()->route()->getName() !== 'frontend.course.play')
+                        <section class="desktop__nav d-none d-lg-block">
+                            @include('frontend.includes.nav')
+                        </section>
+                        <section class="mobile__nav d-block d-lg-none">
+                            @include('frontend.includes.nav_mobile')
+                        </section>
+                    @endif
                     
-                    <!-- @include('includes.partials.messages') -->
                     @yield('content')
 
                     <div class="push" style="height: 103px;"></div>
