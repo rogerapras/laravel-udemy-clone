@@ -3,7 +3,7 @@
         <section class="player__jumbotron p-3">
             <div class="container-fluid px-0">
                 <div class="row">
-                    <div class="col-md-9 pr-0">
+                    <div class="col-md-9 pr-0" style="min-height: 50vh; ">
                         <vue-element-loading :active="loading" 
                             background-color="rgba(255,255,255,.9)" 
                             :is-full-screen="false" spinner="bar-fade-scale"/>
