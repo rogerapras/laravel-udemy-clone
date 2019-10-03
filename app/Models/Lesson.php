@@ -30,7 +30,8 @@ class Lesson extends Model
                             //'article_body', 
                             'minutes_seconds', 
                             'image',
-                            'user_has_completed'
+                            'user_has_completed',
+                            'video_links'
                         ];
 
     
@@ -106,6 +107,23 @@ class Lesson extends Model
 
     
     /*********** APPENDS ****************************/
+    public function getVideoLinksAttribute()
+    {
+        if(($this->content_type == 'video' || $this->content_type == 'youtube') && $this->video)
+        {
+            $disk = $this->video->disk == 's3' ? 's3' : 'stream';
+            $file_sm = $this->video->streamable_sm ? \Storage::disk($disk)->url($this->video->streamable_sm) : $this->youtube_link;
+            $file_lg = $this->video->streamable_lg ? \Storage::disk($disk)->url($this->video->streamable_lg) : $this->youtube_link;
+            
+            return [
+                'video_720' => $file_lg,
+                'video_360' => $file_sm 
+            ];
+        }
+        return null;
+        
+    }
+
     public function getUserHasCompletedAttribute()
     {
         if(! auth()->check()){

@@ -65,6 +65,13 @@ return [
             'visibility' => 'public'
         ],
 
+        'stream' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/videos'),
+            'visibility' => 'public',
+            'url' => '/uploads/videos'
+        ],
+
         'installPath' => [
             'driver' => 'local',
             'root' => storage_path(),
