@@ -69,13 +69,15 @@ button{
 .VueTables__child-row-toggler--closed::before {
   font-weight: 900; 
   content: "\f055";
+  color: green;
   font-family: "Font Awesome 5 Free";
 }
 
 .VueTables__child-row-toggler--open::before {
   font-weight: 900; 
-  content: "\f146";
+  content: "\f056";
   font-family: "Font Awesome 5 Free";
+  color: red;
 }
 
 .table > thead > tr > th {

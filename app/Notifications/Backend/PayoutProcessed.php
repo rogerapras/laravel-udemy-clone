@@ -45,7 +45,7 @@ class PayoutProcessed extends Notification
         return (new MailMessage)
             ->subject(config('app.name') . ': Your payout has been processed (i.e. we sent you money!)')
             ->greeting('Hello '. $this->payout->user->full_name . ',')
-            ->line('It\'s Payday! We just processed your payout for' . format_currency($this->payout->net_earnings) . 'via ' . $this->payout->payment_address . '"')
+            ->line('It\'s Payday! We just processed your payout for ' . format_currency($this->payout->net_earnings) . ' via ' . $this->payout->payment_address . '"')
             ->line('Your payout was sent to ' . $this->payout->payment_address)
             ->line('Happy Spending! ' . $this->payout->payment_address);
     }

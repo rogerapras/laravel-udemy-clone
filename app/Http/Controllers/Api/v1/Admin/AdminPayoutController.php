@@ -8,6 +8,7 @@ use App\Repositories\Contracts\IPayout;
 use App\Http\Resources\PeriodResource;
 use App\Http\Resources\PayoutResource;
 use App\Notifications\Backend\PayoutProcessed;
+use App\Notifications\Backend\UserPayPalEmailReminder;
 
 
 class AdminPayoutController extends Controller
@@ -56,6 +57,9 @@ class AdminPayoutController extends Controller
     public function processPayout($uuid)
     {
         $payout = $this->payouts->processPayout($uuid);
+
+        if(!$payout)return response()->json(['message' => 'PayPal Email Missing'], 422);
+        
         try{
             $payout->user->notify(new PayoutProcessed($payout));        
         } catch(\Exception $e){
@@ -68,6 +72,17 @@ class AdminPayoutController extends Controller
     public function fetchPayoutStatusUpdate($uuid)
     {
         return $this->payouts->fetchPayoutStatusUpdate($uuid);
+    }
+
+    public function sendEmailReminder(Request $request)
+    {
+        $payout = $this->payouts->find($request->payout);
+        try{
+            $payout->user->notify(new UserPayPalEmailReminder($payout));
+        } catch(\Exception $e){
+            report($e);
+            return response()->json(null, 422);
+        }
     }
     
     

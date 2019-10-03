@@ -1,28 +1,55 @@
 <template>
     <v-client-table
-        name="purchaseTable"
+        name="payoutTable"
         :data="tableData"
         :columns="columns" 
         ref="datatable"
         :options="options">
-        <div slot="child_row" slot-scope="props" v-if="props.row.comment">
+        <div slot="child_row" slot-scope="props">
             <div class="card card-body d-flex mb-0">
-                <div>
-                    <b>{{ trans('strings.comment')}}: </b>{{props.row.comment}}
+                <div v-if="props.row.comment">
+                    <template>
+                        <div>
+                            <b>{{ trans('strings.comment')}}: </b>{{props.row.comment}}
+                        </div>
+                        <div>
+                            <b>{{ trans('strings.gateway_payout_id')}}: </b>{{ props.row.payout_batch_id }}
+                        </div>
+                    </template>
                 </div>
-                <div>
-                    <b>{{ trans('strings.gateway_payout_id')}}: </b>{{ props.row.payout_batch_id }}
-                </div>
-                <!-- <div class="mt-1" v-if="props.row.payout_batch_status !== 'SUCCESS'">
-                    <update-payout-batch-status-button :uuid="props.row.uuid"></update-payout-batch-status-button>
-                </div> -->
+                <template v-if="!props.row.user.paypal_email">
+                    <div class="mb-2">
+                        {{ trans('strings.paypal_email_missing') }}
+                    </div>
+                    <div>
+                        <button :disabled="form.busy" class="btn btn-info btn-sm"
+                            @click="sendEmailReminder(props.row.id)">
+                            <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
+                            <span>
+                                {{ trans('strings.send_email_reminder', {user: props.row.user.full_name}) }}
+                            </span>
+                        </button>
+                    </div>
+                </template>
             </div>
         </div>
         <template slot="action" slot-scope="props">
-            <process-payout-button :uuid="props.row.uuid" 
-                @payout-processed="refreshTable()"
-                v-if="props.row.is_processed == false"></process-payout-button>
-
+            <div v-if="props.row.is_processed == false">
+                <template v-if="props.row.user.paypal_email">
+                    <process-payout-button :uuid="props.row.uuid"></process-payout-button>
+                </template>
+                <template v-else>
+                    <button class="btn btn-sm" :class="isChildOpen(props.row.id) ? 'btn-danger' : 'btn-success'" 
+                        @click="toggleChildRow(props.row.id)">
+                        <span v-if="isChildOpen(props.row.id)">
+                            <i class="fas fa-minus-square"></i> {{ trans('strings.close') }}
+                        </span>
+                        <span v-else>
+                            <i class="fas fa-plus-square"></i> {{ trans('strings.open') }}
+                        </span>
+                    </button>
+                </template>
+            </div>
             <update-payout-batch-status-button v-if="props.row.payout_batch_status && props.row.payout_batch_status !== 'SUCCESS'" 
                 :uuid="props.row.uuid"></update-payout-batch-status-button>
         </template>
@@ -46,8 +73,9 @@
 
         data() {
             return {
-                columns: ['period.start_string', 'user.full_name', 'user.email', 'net_earnings', 'expected_payout_date', 'processed_at', 'is_processed', 'payout_batch_status', 'action'],
-                
+                columns: ['period.start_string', 'user.full_name', 'user.paypal_email', 'net_earnings', 'expected_payout_date', 'processed_at', 'is_processed', 'payout_batch_status', 'action'],
+                openChildRows: [],
+                form: new Form({payout: null}),
                 options: {
                     perPage: 25,
                     perPageValues:[25,50,100],
@@ -57,7 +85,7 @@
                     headings: {
                         'period.start_string': this.trans('strings.period'),
                         'user.full_name': this.trans('strings.user'),
-                        'user.email': this.trans('strings.email'),
+                        'user.paypal_email': this.trans('strings.paypal_email'),
                         'is_processed': this.trans('strings.status'),
                         'net_earnings': this.trans('strings.amount'),
                         'expected_payout_date': this.trans('strings.payout_date'),
@@ -84,10 +112,13 @@
                           return moment(row.expected_payout_date).format('DD-MM-YYYY');
                         },
                         net_earnings(h, row) {
-                          return '$'+row.net_earnings;
+                          return this.formatCurrency(row.net_earnings, false);
                         },
                         is_processed(h, row){
                             return row.is_processed==1 ? this.trans('strings.processed') : this.trans('strings.pending')
+                        },
+                        'user.paypal_email': function(h, row){
+                            return row.paypal_email ? row.paypal_email : this.trans('strings.not_provided');
                         }
                     }
                 }
@@ -95,8 +126,28 @@
         },
         
         watch:{
-            tableData(val){
+            tableData: {
+                deep: true,
+                handler(value) {
+                    
+                }
+            }
+        },
 
+        methods:{
+            toggleChildRow(id){
+                this.$refs.datatable.toggleChildRow(id)
+                this.openChildRows = this.$refs.datatable.openChildRows
+            },
+            isChildOpen(id){
+                return this.openChildRows.includes(id);
+            },
+            async sendEmailReminder(id){
+                this.form.payout = await id
+                await this.form.post(`/api/admin/send_reminder_for_paypal_email`)
+                    .then(response => {
+                        //console.log(response)
+                    })
             }
         }
     }

@@ -95,7 +95,7 @@ export default {
                 },
                 templates: {
                     amount(h, row) {
-                        return '$'+row.amount;
+                        return this.formatCurrency(row.amount, false);
                     },
                     status(h, row){
                         return this.trans(`strings.${row.status}`)

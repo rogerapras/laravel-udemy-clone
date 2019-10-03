@@ -71,7 +71,8 @@ abstract class BaseUser extends Authenticatable implements Recordable
         'total_courses',
         'has_purchases',
         'has_refunds',
-        'roles_label'
+        'roles_label',
+        'paypal_email'
     ];
 
     /**

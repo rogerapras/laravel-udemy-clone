@@ -747,6 +747,9 @@ return [
     "courses_needing_approval" => "The following courses are pending admin approval",
     "no_courses_to_approve" => "No courses pending approval",
     "promo_video" => "Course Promo Video",
-    "promo_video_description" => "Please upload a promo video, which will appear on the course page as a preview video. You can enter either a YouTube video or upload an mp4 video."
+    "promo_video_description" => "Please upload a promo video, which will appear on the course page as a preview video. You can enter either a YouTube video or upload an mp4 video.",
+    "not_provided" => "-not provided-",
+    "paypal_email_missing" => "This user does not have a PayPal email on file yet, so payment cannot be processed.",
+    "send_email_reminder" => "Send email reminder to :user"
     
 ];

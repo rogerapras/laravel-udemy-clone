@@ -56,7 +56,10 @@
                           return moment(row.created_at).format('DD-MM-YYYY');
                         },
                         amount(h, row) {
-                          return '$'+row.amount;
+                            return this.formatCurrency(row.amount, false);
+                        },
+                        author_earning(h, row) {
+                            return this.formatCurrency(row.author_earning, false);
                         }
                     }
                 }

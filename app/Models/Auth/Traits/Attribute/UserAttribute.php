@@ -28,6 +28,11 @@ trait UserAttribute
         $this->attributes['password'] = $hash;
     }
 
+    public function getPaypalEmailAttribute()
+    {
+        return $this->settings()->get('paypal_email', null);
+    }
+
     /**
      * @return string
      */

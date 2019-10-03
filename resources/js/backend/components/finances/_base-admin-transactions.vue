@@ -58,7 +58,7 @@ export default {
                 texts:{ filter: "", limit: "" },
                 templates: {
                     amount(h, row) {
-                        return '$'+row.amount;
+                        return this.formatCurrency(row.amount, false);
                     },
                     created_at(h, row) {
                         return moment(row.created_at).format('DD-MM-YYYY');

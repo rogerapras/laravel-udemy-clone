@@ -279,6 +279,7 @@ Route::group(['namespace' => 'Api\v1', 'middleware' => 'check_demo'], function (
         Route::get('refunds', 'AdminRefundController@index');
         Route::post('refunds/{uuid}/process', 'AdminRefundController@process');
         Route::post('payouts/{uuid}/process', 'AdminPayoutController@processPayout');
+        Route::post('send_reminder_for_paypal_email', 'AdminPayoutController@sendEmailReminder');
         Route::post('payouts/{uuid}/fetchStatusUpdate', 'AdminPayoutController@fetchPayoutStatusUpdate');
 
         // Categories

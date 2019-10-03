@@ -18,7 +18,7 @@ class PayoutRepository extends RepositoryAbstract implements IPayout
     
     public function entity()
     {
-        return Period::class;
+        return Payout::class;
     }
     
     public function fetchAllPeriods(array $data)
@@ -133,16 +133,18 @@ class PayoutRepository extends RepositoryAbstract implements IPayout
     public function processPayout($uuid)
     {
         $payout = Payout::where('uuid', $uuid)->first();
+        if(!$payout->user->paypal_email) return false;
+        
         $provider = new PayPalProvider();
         $results = $provider->processPayout($payout);
 
         $payout->payout_batch_id = $results['batchId'];
         $payout->payout_batch_status = $results['batchStatus'];
-        $payout->comment = 'Paid to PayPal via email address ' . $payout->user->email; // change to the user's payment gateway preference
+        $payout->comment = 'Paid to PayPal via email address ' . $payout->user->paypal_email; // change to the user's payment gateway preference
         $payout->processed_at = Carbon::now('UTC');
         $payout->is_processed = true;
         $payout->gateway = 'PayPal';
-        $payout->payment_address = $payout->user->email; // change this too
+        $payout->payment_address = $payout->user->paypal_email; // change this too
         $payout->save();
         return $payout;
     }

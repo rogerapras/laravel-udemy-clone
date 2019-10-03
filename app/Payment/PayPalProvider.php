@@ -63,7 +63,7 @@ class PayPalProvider
         $senderItem = new PayoutItem();
         $senderItem->setRecipientType('Email')
             ->setNote('Thanks for your patronage!')
-            ->setReceiver('fgneba-buyer@gmail.com') // change to user's email address
+            ->setReceiver($payout->user->paypal_email) 
             ->setSenderItemId($payout->uuid)
             ->setAmount(new Currency('{ "value": "'. $payout->net_earnings . '", "currency": "'. setting('site.site_currency') .'"  }'  ));
         
