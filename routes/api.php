@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-// from installer
 
 Route::group(['namespace' => 'Api\v1', 'middleware' => 'check_demo'], function () {
 
