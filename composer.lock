@@ -208,35 +208,36 @@
         },
         {
             "name": "arcanedev/log-viewer",
-            "version": "5.0.3",
+            "version": "5.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ARCANEDEV/LogViewer.git",
-                "reference": "fc65898036e606d241236817484e16b8db1ba8fe"
+                "reference": "560d395293b1d5797443b836b9fa18da872204cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ARCANEDEV/LogViewer/zipball/fc65898036e606d241236817484e16b8db1ba8fe",
-                "reference": "fc65898036e606d241236817484e16b8db1ba8fe",
+                "url": "https://api.github.com/repos/ARCANEDEV/LogViewer/zipball/560d395293b1d5797443b836b9fa18da872204cc",
+                "reference": "560d395293b1d5797443b836b9fa18da872204cc",
                 "shasum": ""
             },
             "require": {
-                "arcanedev/support": "~5.0.0",
+                "arcanedev/support": "^5.0",
                 "ext-json": "*",
                 "php": ">=7.2.0",
-                "psr/log": "~1.0"
+                "psr/log": "^1.0"
             },
             "require-dev": {
-                "mockery/mockery": "~1.0",
-                "orchestra/testbench": "~4.0.0",
-                "phpunit/phpcov": "~6.0",
-                "phpunit/phpunit": "~8.0"
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^4.0",
+                "phpunit/phpcov": "^6.0",
+                "phpunit/phpunit": "^8.0"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Arcanedev\\LogViewer\\LogViewerServiceProvider"
+                        "Arcanedev\\LogViewer\\LogViewerServiceProvider",
+                        "Arcanedev\\LogViewer\\Providers\\DeferredServicesProvider"
                     ]
                 }
             },
@@ -272,31 +273,31 @@
                 "log-viewer",
                 "logviewer"
             ],
-            "time": "2019-09-25T11:07:09+00:00"
+            "time": "2019-10-03T13:08:24+00:00"
         },
         {
             "name": "arcanedev/support",
-            "version": "5.0.0",
+            "version": "5.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ARCANEDEV/Support.git",
-                "reference": "cb32ca20be93a24bd2f86bb82263796023c5f761"
+                "reference": "cf731be18e7d0138223bd8e134f623a9d8c674d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ARCANEDEV/Support/zipball/cb32ca20be93a24bd2f86bb82263796023c5f761",
-                "reference": "cb32ca20be93a24bd2f86bb82263796023c5f761",
+                "url": "https://api.github.com/repos/ARCANEDEV/Support/zipball/cf731be18e7d0138223bd8e134f623a9d8c674d7",
+                "reference": "cf731be18e7d0138223bd8e134f623a9d8c674d7",
                 "shasum": ""
             },
             "require": {
-                "illuminate/filesystem": "~6.0.0",
-                "illuminate/support": "~6.0.0",
+                "illuminate/filesystem": "^6.0",
+                "illuminate/support": "^6.0",
                 "php": ">=7.2.0"
             },
             "require-dev": {
-                "orchestra/testbench": "~4.0.0",
-                "phpunit/phpcov": "~6.0",
-                "phpunit/phpunit": "~8.0"
+                "orchestra/testbench": "^4.0",
+                "phpunit/phpcov": "^6.0",
+                "phpunit/phpunit": "^8.0"
             },
             "type": "library",
             "autoload": {
@@ -327,7 +328,7 @@
                 "laravel",
                 "support"
             ],
-            "time": "2019-09-04T08:48:36+00:00"
+            "time": "2019-10-02T18:20:38+00:00"
         },
         {
             "name": "aws/aws-sdk-php",
@@ -2615,9 +2616,9 @@
             "authors": [
                 {
                     "name": "Ben Corlett",
+                    "role": "Developer",
                     "email": "bencorlett@me.com",
-                    "homepage": "http://www.webcomm.com.au",
-                    "role": "Developer"
+                    "homepage": "http://www.webcomm.com.au"
                 }
             ],
             "description": "OAuth 1.0 Client Library",
@@ -2835,16 +2836,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.24.0",
+            "version": "2.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "934459c5ac0658bc765ad1e53512c7c77adcac29"
+                "reference": "b70da677101cca7b584c7489770d2677c2733593"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/934459c5ac0658bc765ad1e53512c7c77adcac29",
-                "reference": "934459c5ac0658bc765ad1e53512c7c77adcac29",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/b70da677101cca7b584c7489770d2677c2733593",
+                "reference": "b70da677101cca7b584c7489770d2677c2733593",
                 "shasum": ""
             },
             "require": {
@@ -2891,14 +2892,14 @@
                     "homepage": "http://github.com/kylekatarnls"
                 }
             ],
-            "description": "A API extension for DateTime that supports 281 different languages.",
+            "description": "An API extension for DateTime that supports 281 different languages.",
             "homepage": "http://carbon.nesbot.com",
             "keywords": [
                 "date",
                 "datetime",
                 "time"
             ],
-            "time": "2019-08-31T16:37:55+00:00"
+            "time": "2019-09-30T16:22:22+00:00"
         },
         {
             "name": "neutron/temporary-filesystem",
@@ -4855,16 +4856,16 @@
         },
         {
             "name": "spatie/laravel-translatable",
-            "version": "4.2.0",
+            "version": "4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-translatable.git",
-                "reference": "734bd735dc41cf745c3c6f3fb32b8364c918fe34"
+                "reference": "3a07be9e1e3cc9566c6d7274b613552d5cbf4b1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-translatable/zipball/734bd735dc41cf745c3c6f3fb32b8364c918fe34",
-                "reference": "734bd735dc41cf745c3c6f3fb32b8364c918fe34",
+                "url": "https://api.github.com/repos/spatie/laravel-translatable/zipball/3a07be9e1e3cc9566c6d7274b613552d5cbf4b1a",
+                "reference": "3a07be9e1e3cc9566c6d7274b613552d5cbf4b1a",
                 "shasum": ""
             },
             "require": {
@@ -4924,7 +4925,7 @@
                 "spatie",
                 "translate"
             ],
-            "time": "2019-09-04T07:42:04+00:00"
+            "time": "2019-10-03T11:05:01+00:00"
         },
         {
             "name": "stichoza/google-translate-php",
@@ -4977,16 +4978,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v7.2.2",
+            "version": "v7.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "9a58f033d9d126c3785f0d8ad47f2e1db269864a"
+                "reference": "bebdb8360a6a1436c5b9d42e193e90eb047a4374"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/9a58f033d9d126c3785f0d8ad47f2e1db269864a",
-                "reference": "9a58f033d9d126c3785f0d8ad47f2e1db269864a",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/bebdb8360a6a1436c5b9d42e193e90eb047a4374",
+                "reference": "bebdb8360a6a1436c5b9d42e193e90eb047a4374",
                 "shasum": ""
             },
             "require": {
@@ -5030,7 +5031,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2019-09-24T17:11:03+00:00"
+            "time": "2019-10-02T20:16:43+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -7764,8 +7765,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "role": "Developer",
-                    "homepage": "https://github.com/filp"
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
                 }
             ],
             "description": "php error handling for cool kids",
@@ -8633,22 +8634,22 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "1.8.1",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "1927e75f4ed19131ec9bcc3b002e07fb1173ee76"
+                "reference": "f6811d96d97bdf400077a0cc100ae56aa32b9203"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/1927e75f4ed19131ec9bcc3b002e07fb1173ee76",
-                "reference": "1927e75f4ed19131ec9bcc3b002e07fb1173ee76",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/f6811d96d97bdf400077a0cc100ae56aa32b9203",
+                "reference": "f6811d96d97bdf400077a0cc100ae56aa32b9203",
                 "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
                 "php": "^5.3|^7.0",
-                "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0",
+                "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0|^5.0",
                 "sebastian/comparator": "^1.1|^2.0|^3.0",
                 "sebastian/recursion-context": "^1.0|^2.0|^3.0"
             },
@@ -8692,7 +8693,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2019-06-13T12:50:23+00:00"
+            "time": "2019-10-03T11:07:50+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -8948,16 +8949,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.3.5",
+            "version": "8.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "302faed7059fde575cf3403a78c730c5e3a62750"
+                "reference": "57e5e77b62086033528ee1f4063ae03035f57894"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/302faed7059fde575cf3403a78c730c5e3a62750",
-                "reference": "302faed7059fde575cf3403a78c730c5e3a62750",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/57e5e77b62086033528ee1f4063ae03035f57894",
+                "reference": "57e5e77b62086033528ee1f4063ae03035f57894",
                 "shasum": ""
             },
             "require": {
@@ -9001,7 +9002,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.3-dev"
+                    "dev-master": "8.4-dev"
                 }
             },
             "autoload": {
@@ -9027,7 +9028,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-09-14T09:12:03+00:00"
+            "time": "2019-10-04T03:12:25+00:00"
         },
         {
             "name": "scrivo/highlight.php",
@@ -10059,8 +10060,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
