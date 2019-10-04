@@ -120,6 +120,41 @@ class AdminDashboardController extends Controller
     }
 
 
+    public function removeDemoData()
+    {
+        $users = User::whereBetween('id', [2, 5])->get();
+
+        \Eloquent::unguard();
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        // delete demo users
+        foreach($users as $user){
+            $user->delete();
+        }
+
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        \Eloquent::reguard();
+
+        // \Eloquent::unguard();
+        // \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        // Content::truncate();
+        // QuizAnswer::truncate();
+        // QuizQuestion::truncate();
+        // Lesson::truncate();
+        // Section::truncate();
+        // Course::truncate();
+        // \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        
+        // if($user){
+        //     $user->delete();    
+        // }
+        
+        // $files = \File::allFiles(public_path('/uploads/images/course'));
+        
+        // \File::delete($files);
+
+    }
+
     private function generateDateRange(Carbon $start_date, Carbon $end_date)
     {
         $dates = [];
