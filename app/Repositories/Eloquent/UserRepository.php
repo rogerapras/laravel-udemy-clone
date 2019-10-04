@@ -20,7 +20,11 @@ class UserRepository  extends RepositoryAbstract implements IUser
                     ->with(['authored_courses' => function($q){
                         $q->where('published', true) 
                             ->where('approved', true);
-                    }])->first();
+                    }, 
+                        'authored_courses.what_to_learn',
+                        'authored_courses.requirements',
+                        'authored_courses.target_students'
+                    ])->first();
         return $user;
     }
 

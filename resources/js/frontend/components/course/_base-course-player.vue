@@ -147,27 +147,27 @@
                     }).then(() =>{
                         if(['video', 'youtube'].includes(this.playing.content_type)){
                             const video = this.playing.video
-                            if(this.playing.content_type=='video'){
+                            if(this.playing.content_type=='video' || this.playing.content_type=='youtube'){
                                 this.sources.push({
                                     type: this.playing.type,
-                                    src: `/uploads/videos/${this.playing.video.streamable_lg}`,
+                                    src: this.playing.video_links.video_720,
                                     label: "720P",
                                     res: 1
                                 })
                                 this.sources.push({
                                     type: this.playing.type,
-                                    src: `/uploads/videos/${this.playing.video.streamable_sm}`,
+                                    src: this.playing.video_links.video_360,
                                     label: "360P",
                                     res: 2
                                 })
                             }
-                            if(this.playing.content_type=='youtube'){
-                                this.sources.push({
-                                    type: this.playing.type,
-                                    src: this.playing.video.youtube_link
-                                })
+                            // if(this.playing.content_type=='youtube'){
+                            //     this.sources.push({
+                            //         type: this.playing.type,
+                            //         src: this.playing.video.youtube_link
+                            //     })
                                 
-                            }
+                            // }
                         }
                     }).catch(err => {
                         this.error = err.response

@@ -41,7 +41,7 @@ class UserResource extends JsonResource
             'linkedin' => $this->linkedin,
             'has_purchases' => $this->has_purchases,
             'has_refunds' => $this->has_refunds,
-            'authored_courses' => CourseSimpleResource::collection($this->whenLoaded('authored_courses')),
+            'authored_courses' => CourseResource::collection($this->whenLoaded('authored_courses')),
             //'roles' => $this->getRoleNames(),
             'isAdmin' => $this->hasRole('administrator'),
             'links' => [

@@ -1,5 +1,5 @@
 <template>
-    <div class="course_card__slick col-md-3 col-lg-3 col-sm-6 col-xs-12">
+    <div class="course_card__slick col-md-3 col-lg-3 col-sm-6 col-xs-12 mb-4">
         <div class="post-grid-item with-popover">
             <div class="post-grid-img">
                 <a :href="`/course/${course.slug}`" class="popx">
@@ -9,7 +9,7 @@
             <div class="post-grid-content">
                 <div class="post-grid-head">
                     <h3 class="post-grid-title">
-                        <a :href="`/course/${course.slug}`">{{ course.title }}</a>
+                        <a :href="`/course/${course.slug}`">{{ course.title | truncate(25) }}</a>
                     </h3>
                     <ul class="post-grid-meta">
                         <li><a :href="`/user/${course.author.username}`">{{ course.author.full_name }}</a></li>
@@ -65,7 +65,7 @@
                     show: 300,
                     hide: null
                 },
-                width: 335
+                width: 345
             });
         }
         

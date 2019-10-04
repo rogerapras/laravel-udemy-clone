@@ -38,8 +38,8 @@
     margin: 0 16px 0 0;
     
     img{
-        width: 110px;
-        height: 32px;
+        width: 220px;
+        // height: 32px;
     }
 }
 
@@ -234,12 +234,12 @@
             border-radius: 0;
             border-bottom-right-radius: 2px;
             border-top-right-radius: 2px;
-            color: #EC5252;
+            color: #067a96;
             width: 44px;
             height: 44px;
         }
         .btn-link:hover {
-            background: #EC5252;
+            background: #067a96;
             color: #FFF;
         }
         .input-group-btn:last-child>.btn, 
@@ -330,6 +330,15 @@
 .nav_inner .dropdown--on-hover.open .gabs__dropdown-toggle {
     background: rgba(20, 23, 28, 0.05);
     border-color: rgba(20, 23, 28, 0.05)
+}
+
+.gabs__dropdown-toggle.btn-danger {
+    background-color: #067a96;
+    border-color: #067a96;
+}
+.gabs__dropdown-toggle.btn-danger:hover {
+    background-color: #02b3df !important;
+    border-color: #02b3df !important;
 }
 
 .nav_inner .dropdown--on-hover:hover .dropdown-menu,
@@ -857,14 +866,14 @@
     position:absolute;
     right:0;
     border-radius:0;
-    color:#ec5252;
+    color:#067a96;
     border-color:transparent;
     top:0;
     height:100%;
     width:44px;
 }
 .mob-form .search-icon:hover{
-    background:#ec5252;
+    background:#067a96;
     color:#FFF;
     border-color:transparent !important;
 }

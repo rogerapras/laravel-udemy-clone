@@ -89,7 +89,7 @@ return [
     ['method' => 'POST', 'uri' => 'api/admin/settings/payment'],
     ['method' => 'POST', 'uri' => 'api/admin/settings/site'],
     ['method' => 'POST', 'uri' => 'api/admin/settings/mail'],
-    ['method' => 'POST', 'uri' => 'api/admin/settings/upload'],
+    //['method' => 'POST', 'uri' => 'api/admin/settings/upload'],
 
     ['method' => 'PUT', 'uri' => 'api/admin/languages/{id}'],
     ['method' => 'PUT', 'uri' => 'api/admin/locales/{id}/update'],
