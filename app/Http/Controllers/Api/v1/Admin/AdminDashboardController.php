@@ -136,7 +136,7 @@ class AdminDashboardController extends Controller
             \App\Models\Payment::truncate();
             \App\Models\Comment::truncate();
             \App\Models\Video::truncate();
-            \App\Models\Lessons::truncate();
+            \App\Models\Lesson::truncate();
             \App\Models\CourseTarget::truncate();
             \App\Models\Completion::truncate();
             \App\Models\Section::truncate();
