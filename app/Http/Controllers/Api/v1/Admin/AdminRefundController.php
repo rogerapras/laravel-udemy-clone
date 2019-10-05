@@ -28,7 +28,7 @@ class AdminRefundController extends Controller
     {
         $refund = $this->refunds->process($request, $uuid);
         try{
-            $refund->course->author->notify(new RefundRequestProcessed($refund));        
+            $refund->requester->notify(new RefundRequestProcessed($refund));        
         } catch(\Exception $e){
             report($e);
             return response()->json($refund, 200);

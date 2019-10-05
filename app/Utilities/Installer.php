@@ -437,6 +437,7 @@ class Installer
     {
         // Update .env file
         static::updateEnv([
+            'APP_ENV' => 'production',
             'APP_INSTALLED' =>  'true',
             'APP_DEBUG'     =>  'false',
             'DEBUGBAR_ENABLED' => 'false'

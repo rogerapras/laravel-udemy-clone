@@ -70,9 +70,12 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         // Force SSL in production
-        /*if ($this->app->environment() === 'production') {
-            URL::forceScheme('https');
-        }*/
+        // Force SSL in production
+        // if($this->app->environment() === 'production') {
+        //     if(\Storage::disk('installPath')->exists('INSTALL/site_installed.key') && (int)setting('site.redirect_https')==1){
+        //         \URL::forceScheme('https');
+        //     }
+        // }
 
         // Set the default template for Pagination to use the included Bootstrap 4 template
         \Illuminate\Pagination\AbstractPaginator::defaultView('pagination::bootstrap-4');
