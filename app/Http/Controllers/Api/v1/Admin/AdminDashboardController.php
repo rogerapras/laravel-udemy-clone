@@ -139,7 +139,6 @@ class AdminDashboardController extends Controller
             \App\Models\Video::truncate();
             \App\Models\Lesson::truncate();
             \App\Models\CourseTarget::truncate();
-            \App\Models\Completion::truncate();
             \App\Models\Section::truncate();
             
             // delete demo users

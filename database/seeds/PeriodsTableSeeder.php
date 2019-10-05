@@ -57,9 +57,9 @@ class PeriodsTableSeeder extends Seeder
                 'start_time' => '2019-04-01 00:00:00',
                 'end_time' => '2019-04-30 23:59:59',
                 'payout_date' => '2019-05-15 00:00:00',
-                'status' => 'open',
+                'status' => 'closed',
                 'created_at' => '2019-04-25 23:19:13',
-                'updated_at' => '2019-04-25 23:19:13',
+                'updated_at' => '2019-10-02 18:57:20',
             ),
             4 => 
             array (
@@ -68,9 +68,9 @@ class PeriodsTableSeeder extends Seeder
                 'start_time' => '2019-05-01 00:00:00',
                 'end_time' => '2019-05-31 23:59:59',
                 'payout_date' => '2019-06-15 00:00:00',
-                'status' => 'open',
+                'status' => 'closed',
                 'created_at' => '2019-04-25 23:19:13',
-                'updated_at' => '2019-04-25 23:19:13',
+                'updated_at' => '2019-10-02 18:57:34',
             ),
             5 => 
             array (
@@ -79,9 +79,9 @@ class PeriodsTableSeeder extends Seeder
                 'start_time' => '2019-06-01 00:00:00',
                 'end_time' => '2019-06-30 23:59:59',
                 'payout_date' => '2019-07-15 00:00:00',
-                'status' => 'open',
+                'status' => 'closed',
                 'created_at' => '2019-04-25 23:19:13',
-                'updated_at' => '2019-04-25 23:19:13',
+                'updated_at' => '2019-10-02 18:57:47',
             ),
             6 => 
             array (
@@ -90,9 +90,9 @@ class PeriodsTableSeeder extends Seeder
                 'start_time' => '2019-07-01 00:00:00',
                 'end_time' => '2019-07-31 23:59:59',
                 'payout_date' => '2019-08-15 00:00:00',
-                'status' => 'open',
+                'status' => 'closed',
                 'created_at' => '2019-04-25 23:19:13',
-                'updated_at' => '2019-04-25 23:19:13',
+                'updated_at' => '2019-10-02 18:57:56',
             ),
             7 => 
             array (
@@ -101,9 +101,9 @@ class PeriodsTableSeeder extends Seeder
                 'start_time' => '2019-08-01 00:00:00',
                 'end_time' => '2019-08-31 23:59:59',
                 'payout_date' => '2019-09-15 00:00:00',
-                'status' => 'open',
+                'status' => 'closed',
                 'created_at' => '2019-04-25 23:19:13',
-                'updated_at' => '2019-04-25 23:19:13',
+                'updated_at' => '2019-10-03 20:25:32',
             ),
             8 => 
             array (
@@ -112,9 +112,9 @@ class PeriodsTableSeeder extends Seeder
                 'start_time' => '2019-09-01 00:00:00',
                 'end_time' => '2019-09-30 23:59:59',
                 'payout_date' => '2019-10-15 00:00:00',
-                'status' => 'open',
+                'status' => 'closed',
                 'created_at' => '2019-04-25 23:19:13',
-                'updated_at' => '2019-04-25 23:19:13',
+                'updated_at' => '2019-10-05 17:21:29',
             ),
             9 => 
             array (

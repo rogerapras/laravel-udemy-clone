@@ -301,7 +301,6 @@ class Installer
         Artisan::call('db:seed', ['--class' => \CountrySeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \PeriodsTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \CurrenciesTableSeeder::class, '--force' => true]);
-        Artisan::call('db:seed', ['--class' => \CurrenciesTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \RolesTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \PermissionsTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \LanguageSeeder::class, '--force' => true]);
@@ -347,7 +346,6 @@ class Installer
         Artisan::call('db:seed', ['--class' => \LessonsTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \VideosTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \CouponsTableSeeder::class, '--force' => true]);
-        //Artisan::call('db:seed', ['--class' => \ReviewsTableSeeder::class, '--force' => true]);
 
         return true;
 
