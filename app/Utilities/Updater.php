@@ -22,7 +22,13 @@ class Updater
     {
         $client = new Client(['verify' => false, 'base_uri' => config('api.base_uri')]); 
         try{
-            $response = $client->request('GET', self::$latestUrl, ['query' => ['item' => self::$item]]);
+            $response = $client->request('GET', self::$latestUrl, [
+                'query' => ['item' => self::$item],
+                'headers' => [
+                    'User-Agent' => 'testing/1.0',
+                    'Accept'     => 'application/json'
+                ]
+            ]);
         } catch (GuzzleException $e) {
             return ['success' => false];
         }
@@ -37,12 +43,16 @@ class Updater
 
     public static function getLatestVersion()
     {
-
-
         set_time_limit(600); // 10 minutes
         $client = new Client(['verify' => false, 'base_uri' => config('api.base_uri')]);
         try {
-            $release = $client->request('GET', self::$latestUrl, ['query' => ['item' => self::$item]]);
+            $release = $client->request('GET', self::$latestUrl, [
+                'query' => ['item' => self::$item],
+                'headers' => [
+                    'User-Agent' => 'testing/1.0',
+                    'Accept'     => 'application/json'
+                ]
+            ]);
             $version = json_decode($release->getBody()->getContents());
             $file_path = storage_path('updates/downloads/'.$version->filename);
             // get the zip file
@@ -50,7 +60,11 @@ class Updater
                 'query' => [
                     'purchase_code' => setting('site.purchase_code'),
                     'username' => setting('site.envato_username'),
-                    'item' => 'educore'
+                    'item' => self::$item
+                ],
+                'headers' => [
+                    'User-Agent' => 'testing/1.0',
+                    'Accept'     => 'application/json'
                 ],
                 'sink' => $file_path
             ]);

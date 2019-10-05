@@ -103,6 +103,7 @@ class InstallController extends Controller
 
         // save the purchase details from cache
         setting([
+            "site.site_name" => $request->site_name,
             "site.purchase_code" => session('purchase_code'),
             "site.envato_username" => session('envato_username'),
             "site.site_url" => url('/')

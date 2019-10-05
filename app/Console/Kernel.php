@@ -27,6 +27,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        // Run command on the 2nd of every month to close periods
+        $schedule->command('arcinspire:closeperiods')->monthlyOn(2, '00:00');
+
+        // Run command to execute queues
+        $schedule->command('queue:work --sleep=3 --tries=3')->everyTenMinutes()->withoutOverlapping();;
+
+
     }
 
     /**
@@ -35,7 +43,6 @@ class Kernel extends ConsoleKernel
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');
-
         require base_path('routes/console.php');
     }
 }

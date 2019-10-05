@@ -121,6 +121,34 @@ class PayoutRepository extends RepositoryAbstract implements IPayout
         return $this->fetchPayoutsForPeriod($uuid);
         
     }
+
+    public function closeAllOpenPeriods()
+    {
+        $authors = User::has('authored_courses')->get();
+        $now = \Carbon\Carbon::now('UTC');
+        $periods = Period::where('status', 'open')->where('end_time', '<=', $now)->get();
+        foreach($periods as $period){
+            foreach($authors as $user){
+                $payout_amount = $user->sales()->whereNull('refunded_at')->where('period_id', $period->id)->sum('author_earning');
+                if($existing = $user->payouts()->where('period_id', $period->id)->first())
+                {
+                    $existing->delete();
+                }
+
+                $period->payouts()->create([
+                    'user_id' => $user->id,
+                    'total_author_earnings' => $user->sales()->whereNull('refunded_at')->where('period_id', $period->id)->sum('author_earning'),
+                    'net_earnings' => $payout_amount,
+                    'total_refunds' => $user->sales()->whereNotNull('refunded_at')->where('period_id', $period->id)->sum('author_earning'),
+                    'is_processed' => $payout_amount == 0,
+                    'processed_at' => $payout_amount == 0 ? Carbon::now('UTC') : null
+                ]);
+            }
+            $period->status = 'closed';
+            $period->save();
+        }
+        
+    }
     
     public function fetchPayoutsForPeriod($uuid)
     {

@@ -111,13 +111,13 @@ class Lesson extends Model
     {
         if(($this->content_type == 'video' || $this->content_type == 'youtube') && $this->video)
         {
-            $disk = $this->video->disk == 's3' ? 's3' : 'stream';
-            $file_sm = $this->video->streamable_sm ? \Storage::disk($disk)->url($this->video->streamable_sm) : $this->youtube_link;
-            $file_lg = $this->video->streamable_lg ? \Storage::disk($disk)->url($this->video->streamable_lg) : $this->youtube_link;
+            $disk = $this->video->disk == 'local' ? 'stream' : $this->video->disk;
+            $file_sm = $this->content_type = 'video' && $this->video->streamable_sm ? \Storage::disk($disk)->url($this->video->streamable_sm) : $this->video->youtube_link;
+            $file_lg = $this->content_type = 'video' && $this->video->streamable_lg ? \Storage::disk($disk)->url($this->video->streamable_lg) : $this->video->youtube_link;
             
             return [
                 'video_720' => $file_lg,
-                'video_360' => $file_sm 
+                'video_360' => $file_sm
             ];
         }
         return null;

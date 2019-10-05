@@ -40,6 +40,7 @@ class CreateUsersTable extends Migration
             $table->string('twitter')->nullable();
             $table->string('youtube')->nullable();
             $table->string('github')->nullable();
+            $table->text('settings')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

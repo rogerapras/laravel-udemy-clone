@@ -30,6 +30,7 @@ trait UserAttribute
 
     public function getPaypalEmailAttribute()
     {
+        if(!installed()) return null;
         return $this->settings()->get('paypal_email', null);
     }
 

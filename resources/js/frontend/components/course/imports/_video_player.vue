@@ -28,7 +28,7 @@ export default {
             player: null,
             playerOptions:{
                 muted: false,
-                autoplay: true,
+                autoplay: !this.content_type=='youtube',
                 language: 'en',
                 fluid: true,
                 responsive: true,

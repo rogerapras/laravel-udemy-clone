@@ -77,7 +77,7 @@ class User extends BaseUser
     
     public function payouts()
     {
-        return $this->hasMany(Payouts::class);
+        return $this->hasMany(Payout::class);
     }
     
     public function refunds()

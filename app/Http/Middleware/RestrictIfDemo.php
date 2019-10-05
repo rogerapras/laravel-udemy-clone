@@ -15,9 +15,10 @@ class RestrictIfDemo
      */
     public function handle($request, Closure $next)
     {
-        
-        if( (int)setting('site.enable_demo_mode') == 1 && $this->forbidRequest($request)) {
-            return response(['type' => 'demo', 'message' => 'Action not allowed in Demo Site'], 403);
+        if(installed()){
+            if( (int)setting('site.enable_demo_mode') == 1 && $this->forbidRequest($request)) {
+                return response(['type' => 'demo', 'message' => 'Action not allowed in Demo Site'], 403);
+            }
         }
 
         return $next($request);

@@ -30,26 +30,14 @@
                 inactive-text="">
             </el-switch>
         </td>
-        <!-- <td>
-            <el-switch
-                :disabled="form.is_primary == true"
-                @change="primaryChanged()"
-                style="display: block"
-                v-model="form.is_primary"
-                active-color="#13ce66"
-                inactive-color="#ff4949"
-                active-text=""
-                inactive-text="">
-            </el-switch>
-        </td> -->
         <td>
             <button class="btn btn-sm btn-success" @click.prevent="update()">
                 <i class="fa fa-save" v-if="!form.busy"></i>
-                <!-- {{ trans('strings.save') }} -->
+                <i class="fas fa-spinner fa-spin" v-else></i>
             </button>
             <button class="btn btn-sm btn-danger ml-2" v-if="!form.is_primary" @click.prevent="destroy()">
                 <i class="fa fa-trash" v-if="!form.busy"></i>
-                <!-- {{ trans('strings.delete') }} -->
+                <i class="fas fa-spinner fa-spin" v-else></i>
             </button>
         </td>
     </tr>

@@ -153,8 +153,8 @@
                                     src: this.playing.video_links.video_720,
                                     label: "720P",
                                     res: 1
-                                })
-                                this.sources.push({
+                                },
+                                {
                                     type: this.playing.type,
                                     src: this.playing.video_links.video_360,
                                     label: "360P",

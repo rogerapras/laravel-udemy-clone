@@ -26,10 +26,14 @@ class Installer
                     'purchase_code' => $data['purchase_code'], 
                     'username' =>  $data['username'],
                     'item' => self::$item
+                ],
+                'headers' => [
+                    'User-Agent' => 'testing/1.0',
+                    'Accept'     => 'application/json'
                 ]
             ]);
         } catch (GuzzleException $e) {
-            return false;
+             return false;
         }   
 
         if($response->getStatusCode() == 200){
@@ -425,9 +429,6 @@ class Installer
             // Attach admin role
             $user->assignRole(config('access.users.admin_role'));
 
-            // save setting
-            setting(["site.site_name" => $data['site_name']]);
-            setting()->save();
             return $user;
         });
     }

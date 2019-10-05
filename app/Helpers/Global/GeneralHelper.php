@@ -100,10 +100,12 @@ if( ! function_exists('app_version')){
  *
  * @return boolean
  */
-function installed()
-{
-    return \Storage::disk('installPath')->exists('INSTALL/site_installed.key');
-    //return file_exists(storage_path('app/installed'));
+if( ! function_exists('installed')){
+    function installed()
+    {
+        return \Storage::disk('installPath')->exists('INSTALL/site_installed.key');
+    }
+
 }
 
 if( ! function_exists('request_ip')){

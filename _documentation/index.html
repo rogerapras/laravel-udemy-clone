@@ -416,6 +416,23 @@
 								video will be placed in a queue and processed in the background.
 								We highly recommend that you choose this option so as not to keep users waiting for video uploads
 								to complete (especially if you are using FFMpeg to process videos).
+
+								<div class="alert alert-info">
+									<b>NB</b> If you decide to use Database Driver for queuing (and we recommend that you do), then in your 
+									server, you will need to set up a cron job with the following expression:
+									<br />
+									<code>
+										*/5 * * * * /path-to-php/php /path-to-your-website/artisan schedule:run >> /dev/null 2>&1
+									</code>
+									<p>For instance:</p>
+									<code>
+										*/5 * * * * /usr/local/bin/php /home/myusername/public_html/artisan schedule:run >> /dev/null 2>&1
+									</code>
+									<p>
+										This command will execute the task scheduler every 5 minutes and process any videos that are in the queue. 
+										The Scheduler runs an internal command to process videos every 10 minutes.
+									</p>
+								</div>
 							</li>
 							<li><b>Sync:</b> 
 								With the Sync queue processing, nothing is queued for later. All queues are processed 

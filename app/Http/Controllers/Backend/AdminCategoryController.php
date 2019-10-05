@@ -11,7 +11,7 @@ class AdminCategoryController extends Controller
     
     public function index()
     {
-        return view('backend.categories.index');
+        return view('backend.categories.Index');
     }
 
 }
