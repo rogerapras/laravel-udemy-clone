@@ -82,63 +82,62 @@
 	    </div>
     </section>
 
-
-    <!-- Carousel -->
-    <section class="py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 d-none d-lg-flex">
+    @if(count($top_categories) > 0 )
+        <section class="py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 d-none d-lg-flex">
                         <div class="bg-light p-4 flex-grow flex-fill d-flex text-center align-items-center flex-column justify-content-center">
                             <h5 class="fw-600 font-18 mb-2">
                                 @lang('strings.join_happy_students')
                             </h5>
                             <p class="font-weight-light">@lang('strings.join_happy_students_desc')</p>
                         </div>
-                </div>
+                    </div>
 
 
-                <div class="col-sm-12 col-lg-9">
-                    <div class="tc-tabs-style6">
-                        <base-homepage-categories-tabs :categories="{{ $top_categories }}"></base-homepage-categories-tabs>
+                    <div class="col-sm-12 col-lg-9">
+                        <div class="tc-tabs-style6">
+                            <base-homepage-categories-tabs :categories="{{ $top_categories }}"></base-homepage-categories-tabs>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
-
-    <!-- CURRENTLY VIEWING -->
-    <section class="cards-block py-4 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 tc-post-grid-style1 sec-spacer">
-                    <base-heading text="{{ __('strings.students_are_viewing') }}"></base-heading>
-                    <base-slick-carousel :num_slides="5" :courses="{{ json_encode($most_viewed) }}"></base-slick-carousel>
+    @if(count($most_viewed) > 0)
+        <section class="cards-block my-0 py-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 tc-post-grid-style1 sec-spacer">
+                        <base-heading text="{{ __('strings.students_are_viewing') }}"></base-heading>
+                        <base-slick-carousel :num_slides="5" :courses="{{ json_encode($most_viewed) }}"></base-slick-carousel>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
     
-
-    <!-- TOP CATEGORIES -->
-    <section class="py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 tc-post-grid-style1 sec-spacer">
-                    <base-heading text="{{ __('strings.top_categories') }}"></base-heading>
+    @if(count($top_subcategories) > 0)
+        <!-- TOP CATEGORIES -->
+        <section class="py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 tc-post-grid-style1 sec-spacer">
+                        <base-heading text="{{ __('strings.top_categories') }}"></base-heading>
+                    </div>
                 </div>
+            
+                <div class="row">
+                    @foreach($top_subcategories as $subcategory)
+                        <base-home-category-card :category="{{ json_encode($subcategory) }}"></base-home-category-card>
+                    @endforeach 
+                </div>
+            
             </div>
-        
-            <div class="row">
-                @foreach($top_subcategories as $subcategory)
-                    <base-home-category-card :category="{{ json_encode($subcategory) }}"></base-home-category-card>
-                @endforeach 
-            </div>
-        
-        </div>
-    </section>
-
-
+        </section>
+    @endif
 
 </section>
 

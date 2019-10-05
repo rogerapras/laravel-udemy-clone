@@ -244,7 +244,11 @@ export default {
                     const settings = await res.data.mail
                     if(settings !== undefined){
                         for(const key of this.form.keys()){
-                            this.form[key] = await settings[key] || this.form[key]
+                            if(window.config.demo_mode==1 && key !== 'driver'){
+                                this.form[key] = await 'xxxxxxx-DEMO-MODE-xxxxxxx'
+                            } else {
+                                this.form[key] = await settings[key] || this.form[key]
+                            }
                         }
                     }
                 })

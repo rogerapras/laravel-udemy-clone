@@ -31,6 +31,10 @@
                         this.lifetime_earnings = Math.round(response.data.lifetimeData.lifetime_earnings,2)
                     })
             },
+
+            removeDemoData(){
+
+            },
             
             sumObj(obj) {
                 return Object.keys(obj).reduce(function (sum, next) {

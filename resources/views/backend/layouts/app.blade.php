@@ -1,7 +1,8 @@
 @php
     $config = [
         'url' => setting('site.site_url') ? setting('site.site_url') : url('/'),
-        'locale' => app()->getLocale()
+        'locale' => app()->getLocale(),
+        'demo_mode' => (int)setting('site.enable_demo_mode')
     ];
 @endphp
 <!DOCTYPE html>

@@ -196,7 +196,7 @@ export default {
 
     methods:{
         submit(){
-            this.form.post(`/api/admin/settings/site`)
+            this.form.post(`/api/admin/settings/site?type=videos`)
         },
 
         fetchSettings(){

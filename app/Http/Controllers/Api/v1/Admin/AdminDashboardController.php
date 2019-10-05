@@ -11,6 +11,7 @@ use App\Models\Period;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Utilities\Checker;
+use Illuminate\Filesystem\Filesystem;
 
 class AdminDashboardController extends Controller
 {
@@ -122,36 +123,42 @@ class AdminDashboardController extends Controller
 
     public function removeDemoData()
     {
-        $users = User::whereBetween('id', [2, 5])->get();
-
         \Eloquent::unguard();
         \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
+        \App\Models\Transaction::truncate();
+        \App\Models\Payout::truncate();
+        \App\Models\Refund::truncate();
+        \App\Models\Certificate::truncate();
+        \App\Models\CartLine::truncate();
+        \App\Models\Cart::truncate();
+        \App\Models\Payment::truncate();
+        \App\Models\Comment::truncate();
+        \App\Models\Video::truncate();
+        \App\Models\Lessons::truncate();
+        \App\Models\CourseTarget::truncate();
+        \App\Models\Completion::truncate();
+        \App\Models\Section::truncate();
+        \App\Models\Page::truncate();
+        
         // delete demo users
+        $users = User::whereBetween('id', [2, 5])->get();
         foreach($users as $user){
+            $user->enrollments()->detach();
+            $user->removeRole('user');
             $user->delete();
         }
 
+        \App\Models\Course::truncate();
+
         \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         \Eloquent::reguard();
-
-        // \Eloquent::unguard();
-        // \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        // Content::truncate();
-        // QuizAnswer::truncate();
-        // QuizQuestion::truncate();
-        // Lesson::truncate();
-        // Section::truncate();
-        // Course::truncate();
-        // \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         
-        // if($user){
-        //     $user->delete();    
-        // }
-        
-        // $files = \File::allFiles(public_path('/uploads/images/course'));
-        
-        // \File::delete($files);
+        // clean files
+        $file = new Filesystem;
+        $file->cleanDirectory(public_path('uploads/images/course/thumbnails'));
+        $file->cleanDirectory(public_path('uploads/videos'));
+        \Artisan::call('cache:clear');
 
     }
 

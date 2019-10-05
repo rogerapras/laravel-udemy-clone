@@ -79,13 +79,14 @@ class AdminSettingsController extends Controller
                 $this->currencies->markAsPrimary($currency->id);
             }
         }
-
-        $this->validate($request, [
-            's3_access_id' => 'required_if:video_upload_location,s3',
-            's3_secret_access_key' => 'required_if:video_upload_location,s3',
-            's3_default_region' => 'required_if:video_upload_location,s3',
-            's3_bucket' => 'required_if:video_upload_location,s3'
-        ]);
+        if($request->type=='video'){
+            $this->validate($request, [
+                's3_access_id' => 'required_if:video_upload_location,s3',
+                's3_secret_access_key' => 'required_if:video_upload_location,s3',
+                's3_default_region' => 'required_if:video_upload_location,s3',
+                's3_bucket' => 'required_if:video_upload_location,s3'
+            ]);
+        }
         
 
         $data = $request->all();

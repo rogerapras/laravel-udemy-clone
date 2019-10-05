@@ -69,9 +69,13 @@ export default {
                     const settings = await res.data.site
                     if(settings !== undefined){
                         for(const key of this.form.keys()){
-                            // if(settings[key] && parseInt(settings[key])==1) settings[key] = await true
-                            // if(settings[key] && parseInt(settings[key])==0) settings[key] = await false
-                            this.form[key] = await settings[key] || this.form[key]
+                            if(window.config.demo_mode==1){
+                                this.form[key] = await 'xxxxxxx-DEMO-MODE-xxxxxxx'
+                            } else {
+                                this.form[key] = await settings[key] || this.form[key]
+                            }
+
+                            
                         }
                     }
                 })

@@ -295,10 +295,15 @@ export default {
                     const settings = await res.data.payments
 
                     for(const key of this.form.keys()){
-                        if(settings[key] && parseInt(settings[key])==1) settings[key] = await true
-                        if(settings[key] && parseInt(settings[key])==0) settings[key] = await false
+                        if(window.config.demo_mode==1 && !['enable_paypal', 'enable_credit_card', 'credit_card_processor', 'paypal_mode', 'stripe_mode', 'razorpay_mode'].includes(key)){
+                            this.form[key] = await 'xxxxxxx-DEMO-MODE-xxxxxxx'
+                        } else {
+                            if(settings[key] && parseInt(settings[key])==1) settings[key] = await true
+                            if(settings[key] && parseInt(settings[key])==0) settings[key] = await false
+                            this.form[key] = await settings[key] || this.form[key]
+                        }
 
-                        this.form[key] = await settings[key] || this.form[key]
+                        
                     }
                 })
         }
