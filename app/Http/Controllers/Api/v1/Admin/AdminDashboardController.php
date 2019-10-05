@@ -134,13 +134,13 @@ class AdminDashboardController extends Controller
             \App\Models\CartLine::truncate();
             \App\Models\Cart::truncate();
             \App\Models\Payment::truncate();
+            \App\Models\Coupon::truncate();
             \App\Models\Comment::truncate();
             \App\Models\Video::truncate();
             \App\Models\Lesson::truncate();
             \App\Models\CourseTarget::truncate();
             \App\Models\Completion::truncate();
             \App\Models\Section::truncate();
-            \App\Models\Page::truncate();
             
             // delete demo users
             $users = User::whereBetween('id', [2, 5])->get();
