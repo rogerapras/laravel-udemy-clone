@@ -1,4 +1,5 @@
 <script>
+    import Form from 'vform'
     export default {
         data: function () {
             return {
@@ -12,7 +13,8 @@
                 chartData:{},
                 messages: [],
                 courses_to_approve: [],
-                periods_to_close: []
+                periods_to_close: [],
+                form: new Form({})
             }
         },    
         
@@ -32,8 +34,16 @@
                     })
             },
 
-            removeDemoData(){
-
+            emptyDatabase(){
+                this.$dialog.confirm({title: "Are you sure?", body: "This will delete all courses and all users (except Admin user)" }, {animation: 'fade'})
+                    .then(dialog => {
+                        this.form.post(`/api/admin/empty_database`)
+                            .then(() => {
+                                location.reload()
+                            }).catch(e => {
+                                console.log(e.response)
+                            })
+                    })
             },
             
             sumObj(obj) {

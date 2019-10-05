@@ -121,44 +121,49 @@ class AdminDashboardController extends Controller
     }
 
 
-    public function removeDemoData()
+    public function emptyDatabase()
     {
-        \Eloquent::unguard();
-        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        try{
+            \Eloquent::unguard();
+            \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        \App\Models\Transaction::truncate();
-        \App\Models\Payout::truncate();
-        \App\Models\Refund::truncate();
-        \App\Models\Certificate::truncate();
-        \App\Models\CartLine::truncate();
-        \App\Models\Cart::truncate();
-        \App\Models\Payment::truncate();
-        \App\Models\Comment::truncate();
-        \App\Models\Video::truncate();
-        \App\Models\Lessons::truncate();
-        \App\Models\CourseTarget::truncate();
-        \App\Models\Completion::truncate();
-        \App\Models\Section::truncate();
-        \App\Models\Page::truncate();
-        
-        // delete demo users
-        $users = User::whereBetween('id', [2, 5])->get();
-        foreach($users as $user){
-            $user->enrollments()->detach();
-            $user->removeRole('user');
-            $user->delete();
+            \App\Models\Transaction::truncate();
+            \App\Models\Payout::truncate();
+            \App\Models\Refund::truncate();
+            \App\Models\Certificate::truncate();
+            \App\Models\CartLine::truncate();
+            \App\Models\Cart::truncate();
+            \App\Models\Payment::truncate();
+            \App\Models\Comment::truncate();
+            \App\Models\Video::truncate();
+            \App\Models\Lessons::truncate();
+            \App\Models\CourseTarget::truncate();
+            \App\Models\Completion::truncate();
+            \App\Models\Section::truncate();
+            \App\Models\Page::truncate();
+            
+            // delete demo users
+            $users = User::whereBetween('id', [2, 5])->get();
+            foreach($users as $user){
+                $user->enrollments()->detach();
+                $user->removeRole('user');
+                $user->delete();
+            }
+
+            \App\Models\Course::truncate();
+
+            \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            \Eloquent::reguard();
+            
+            // clean files
+            $file = new Filesystem;
+            $file->cleanDirectory(public_path('uploads/images/course/thumbnails'));
+            $file->cleanDirectory(public_path('uploads/videos'));
+            \Artisan::call('cache:clear');
+        } catch(\Exception $e){
+            return response()->json(['message' => $e->getMessages()], 422);
         }
-
-        \App\Models\Course::truncate();
-
-        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        \Eloquent::reguard();
         
-        // clean files
-        $file = new Filesystem;
-        $file->cleanDirectory(public_path('uploads/images/course/thumbnails'));
-        $file->cleanDirectory(public_path('uploads/videos'));
-        \Artisan::call('cache:clear');
 
     }
 
