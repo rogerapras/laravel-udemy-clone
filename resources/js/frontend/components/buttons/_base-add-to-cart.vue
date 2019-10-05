@@ -43,7 +43,7 @@
             
             cartHasDiscount(){
                 return this.cart.total_price > this.cart.total_purchase_price
-            }
+            },
         },
         
         methods: {
@@ -61,10 +61,13 @@
             },
             
             checkIfCourseIsInCart(){
-                axios.get(`/api/cart/containsItem/${this.course.id}`)
-                    .then(res => {
-                        this.is_in_cart = res.data
-                    })
+                const lst = this.cartItems.map(ci => ci.product_id)
+                if(lst.length == 0) return false
+                this.is_in_cart = lst.includes(this.course.id)
+                // axios.get(`/api/cart/containsItem/${this.course.id}`)
+                //     .then(res => {
+                //         this.is_in_cart = res.data
+                //     })
             }
         },
         

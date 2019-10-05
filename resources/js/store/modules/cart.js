@@ -3,12 +3,12 @@ import Cookie from 'js-cookie'
 import axios from 'axios'
 // state
 export const state = () => {
-    return {
-        cart: [],
-        items: [],
-        sitewideCoupon: [],
-        loading: false
-    }
+  return {
+    cart: [],
+    items: [],
+    sitewideCoupon: [],
+    loading: false
+  }
 }
 
 // getters
