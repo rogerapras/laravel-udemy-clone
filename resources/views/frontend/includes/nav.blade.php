@@ -9,15 +9,18 @@
 
         <!-- Left Side { categories, search bar } -->
         <div class="nav__left_container">
-            <div class="gabs__dropdown dropdown--on-hover dropdown--topics">
-                <a href="javascript:void(0)" class="gabs__dropdown-toggle" role="button">
-                    <span class="fa fa-th gicon"></span>
-                    <span>
-                        @lang('strings.categories')
-                    </span>
-                </a>
-                <base-nav-category-dropdown :categories="{{ json_encode($gcategories) }}"></base-nav-category-dropdown>
-            </div>
+                <div class="gabs__dropdown dropdown--on-hover dropdown--topics">
+                    <a href="javascript:void(0)" class="gabs__dropdown-toggle" role="button">
+                        <span class="fa fa-th gicon"></span>
+                        <span>
+                            @lang('strings.categories')
+                        </span>
+                    </a>
+                    @if(count($gcategories) > 0)
+                        <base-nav-category-dropdown :categories="{{ json_encode($gcategories) }}"></base-nav-category-dropdown>
+                    @endif
+                </div>
+           
 
             <!-- Search bar -->
             <div class="nav__search_wrapper">
