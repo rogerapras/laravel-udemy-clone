@@ -8,9 +8,9 @@
                     </h1>
                 </div>
                 <div class="course__detail__what_you_will_learn mb-4 font-13">
-                    <ul class="fa-ul font-14 row">
-                        <li class="col-md-4 mb-3" v-for="goal in course.what_to_learn" :key="goal.id">
-                            <i class="fa-li fa fa-check"></i> {{ goal.text }}
+                    <ul class="fa-ul font-14 rowx">
+                        <li class="col-md-4x mb-3 mr-2 pl-0" v-for="goal in course.what_to_learn" :key="goal.id">
+                            <i class="fa-li fa fa-check-circle"></i> {{ goal.text }}
                         </li>
                     </ul>
                 </div>

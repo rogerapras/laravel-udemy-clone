@@ -46,6 +46,15 @@
         components: {
             SectionLesson
         },
+
+        // watch:{
+        //     section:{
+        //         deep: true,
+        //         handler(section){
+
+        //         }
+        //     }
+        // },
         
         data(){
             return {
@@ -69,6 +78,7 @@
                 if(this.lessons.length){
                     axios.put('/api/lessons/save-draggable', this.lessons)
                         .then(response => {
+                            this.findLessonsBySection()
                             this.$bus.$emit('order:saved', null)
                         })  
                 }

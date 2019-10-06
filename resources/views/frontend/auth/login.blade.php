@@ -45,6 +45,18 @@
                                         @lang('labels.frontend.auth.login_button')
                                     </button>
                                 {{ html()->form()->close() }}
+
+                                @if( config('api.demo_credentials') )
+                                    <div class="alert alert-warning mt-2">
+                                        <h5 class="fw-600 mb-2">Demo Credentials</h5>
+                                        <p>
+                                            Admin User: admin@example.net / secret 
+                                        </p>
+                                        <p>
+                                            Instructor: pwalker@example.net / secret
+                                        </p>
+                                    </div>
+                                @endif    
                             </div>
 
                         </div>

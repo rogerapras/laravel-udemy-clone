@@ -28,7 +28,7 @@ export default {
             player: null,
             playerOptions:{
                 muted: false,
-                autoplay: !this.content_type=='youtube',
+                autoplay: false,
                 language: 'en',
                 fluid: true,
                 responsive: true,
@@ -60,9 +60,13 @@ export default {
 
 
     beforeMount(){
-        if(this.content_type !== 'youtube') this.playerOptions.controls=true
+        if(this.content_type !== 'youtube') {
+            this.playerOptions.controls=true
+            this.playerOptions.autoplay=true
+        }
         this.playerOptions.poster = this.poster
         this.playerOptions.sources = this.sources
+
     },
 
     async mounted() {

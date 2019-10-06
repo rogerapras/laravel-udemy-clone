@@ -161,7 +161,15 @@
         },
         
         props: ['index', 'prop_lesson', 'section', 'findLessonsBySection'],
-        
+        watch:{
+            prop_lesson:{
+                deep: true,
+                handler(lesson){
+                    this.findLessonContent()
+                }
+            }
+        },
+
         data(){
             return {
                 source: '',

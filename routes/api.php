@@ -339,6 +339,9 @@ Route::group(['namespace' => 'Api\v1', 'middleware' => 'check_demo'], function (
         Route::put('page/{id}/toggle_publish', 'AdminPagesController@togglePublish');
         Route::delete('pages/{id}', 'AdminPagesController@destroy');
 
+        // Empty database
+        Route::post('empty_database', 'AdminDashboardController@emptyDatabase');
+
     });
 
 });

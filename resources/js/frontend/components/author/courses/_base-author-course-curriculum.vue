@@ -113,6 +113,14 @@
             })
         }),
         
+        // watch:{
+        //     sections:{
+        //         deep: true,
+        //         handler(section){
+
+        //         }
+        //     }
+        // },
         methods: {
             findSectionsByCourse(){
                 axios.get(`/api/sections/findByCourse/${this.course.id}`)
@@ -154,7 +162,9 @@
         },
         
         mounted(){
-            this.$bus.$on('order:saved', () => {})
+            this.$bus.$on('order:saved', () => {
+                //this.findSectionsByCourse()
+            })
         }
     }
 </script>

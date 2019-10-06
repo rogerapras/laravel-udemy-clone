@@ -89,14 +89,14 @@ return [
     ['method' => 'POST', 'uri' => 'api/admin/settings/payment'],
     ['method' => 'POST', 'uri' => 'api/admin/settings/site'],
     ['method' => 'POST', 'uri' => 'api/admin/settings/mail'],
-    //['method' => 'POST', 'uri' => 'api/admin/settings/upload'],
+    ['method' => 'POST', 'uri' => 'api/admin/settings/upload'],
 
     ['method' => 'PUT', 'uri' => 'api/admin/languages/{id}'],
     ['method' => 'PUT', 'uri' => 'api/admin/locales/{id}/update'],
     ['method' => 'POST', 'uri' => 'api/admin/locales'],
     ['method' => 'POST', 'uri' => 'api/admin/locale/{group}/publish'],
     ['method' => 'POST', 'uri' => 'api/admin/pages'],
-    // ['method' => 'POST', 'uri' => 'api/admin/empty_database'],
+    ['method' => 'POST', 'uri' => 'api/admin/empty_database'],
     
     ['method' => 'PUT', 'uri' => 'api/admin/page/{uuid}'],
     ['method' => 'PUT', 'uri' => 'api/admin/page/{id}/update_slug'],

@@ -4,7 +4,7 @@
             <div class="col-md-8">
                 <fieldset>
                     <legend class="scheduler-border">{{ trans('strings.site_settings') }}</legend>
-                    <div class="form-group row mb-1">
+                    <!-- <div class="form-group row mb-1">
                         <label class="col-md-4 form-control-label">{{ trans('strings.site_mode') }}</label>
                         <div class="col-md-8">
                             <div class="form-group rowx mb-1">
@@ -18,7 +18,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group row mb-1">
                         <label class="col-md-4 form-control-label">{{ trans('strings.redirect_https') }}</label>
                         <div class="col-md-8 ">
