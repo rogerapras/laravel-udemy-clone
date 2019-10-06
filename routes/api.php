@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+// from installer
 
 Route::group(['namespace' => 'Api\v1', 'middleware' => 'check_demo'], function () {
 
@@ -305,6 +306,7 @@ Route::group(['namespace' => 'Api\v1', 'middleware' => 'check_demo'], function (
         Route::put('currency/{id}/mark_as_primary', 'AdminCurrencyController@markAsPrimary');
         Route::put('currency/{id}/toggle_enabled', 'AdminCurrencyController@toggleEnabled');
 
+
         // Settings
         Route::post('settings/payment', 'AdminSettingsController@save_payment_settings');
         Route::post('settings/site', 'AdminSettingsController@save_site_settings');
@@ -337,8 +339,6 @@ Route::group(['namespace' => 'Api\v1', 'middleware' => 'check_demo'], function (
         Route::put('page/{id}/toggle_publish', 'AdminPagesController@togglePublish');
         Route::delete('pages/{id}', 'AdminPagesController@destroy');
 
-        // Empty database
-        Route::post('empty_database', 'AdminDashboardController@emptyDatabase');
     });
 
 });

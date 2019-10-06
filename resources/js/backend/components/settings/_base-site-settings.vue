@@ -85,8 +85,8 @@
                         <div class="col-md-8 ">
                             <select v-model="form.site_currency" class="form-control" 
                                 :class="{ 'is-invalid': form.errors.has('site_currency') }">
-                                <option v-for="site_currency in site_currencies" :value="currency.code" :key="site_currency.code">
-                                    {{ site_currency.name }}
+                                <option v-for="site_currency in site_currencies" :value="site_currency.code" :key="site_currency.code">
+                                    {{ site_currency.name }} 
                                 </option>
                             </select>
                             <has-error :form="form" field="site_currency"></has-error>
