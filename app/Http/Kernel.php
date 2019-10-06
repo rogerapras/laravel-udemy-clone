@@ -47,6 +47,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\RedirectHttps::class,
             \App\Http\Middleware\ToBeLoggedOut::class,
+            \HTMLMin\HTMLMin\Http\Middleware\MinifyMiddleware::class,
             'site.settings'
         ],
 

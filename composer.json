@@ -23,6 +23,7 @@
         "glorand/laravel-model-settings": "^3.4",
         "guzzlehttp/guzzle": "^6.3",
         "hassansin/dbcart": "dev-master",
+        "htmlmin/htmlmin": "^6.0",
         "intervention/image": "^2.5",
         "james-heinrich/getid3": "^1.9",
         "lab404/laravel-impersonate": "^1.4",
