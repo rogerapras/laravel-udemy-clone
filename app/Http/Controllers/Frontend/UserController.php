@@ -25,7 +25,7 @@ class UserController extends Controller
             return redirect()->route('frontend.404');
         }
 
-        return view('frontend.user.show')
+        return view('frontend.user.Show')
                 ->with([
                     'user' => new UserResource($user)
                 ]);
