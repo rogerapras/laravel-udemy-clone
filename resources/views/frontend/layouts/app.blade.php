@@ -1,17 +1,16 @@
 @php
     $config = [
         'appName' => config('app.name'),
-        'max_size' => setting('site.video_max_size_mb') ? (int)setting('site.video_max_size_mb') : 10,
+        'max_size' => get_upload_max_size(),
+        //'max_size' => setting('site.video_max_size_mb') ? (int)setting('site.video_max_size_mb') : 10,
         'default_currency' => setting('site.site_currency') ? setting('site.site_currency') : 'USD',
         'source' => setting('site.video_providers') ? setting('site.video_providers') : 'both'
     ];
     
-    //Cache::forget('pages');
     $pages = Cache::rememberForever('pages', function () {
         return \App\Models\Page::where('published', true)->get();
     });
 
-    // $pages = \App\Models\Page::where('published', true)->get();
 @endphp
 
 <!DOCTYPE html>
@@ -41,7 +40,7 @@
     </head>
     <body>
         @include('includes.partials.read-only')
-
+        
         <div id="app">
             <div id="wrapper">
                 <div class="wrapper-inner" style="min-height: 100%;margin-bottom: -100px;">

@@ -52,7 +52,7 @@ return [
     ['method' => 'PUT', 'uri' => 'api/settings/password'],
     
     ['method' => 'POST', 'uri' => 'api/courses/upload-cover-image/{id}'],
-    ['method' => 'POST', 'uri' => 'api/lessons/{id}/video/upload'],
+    //['method' => 'POST', 'uri' => 'api/lessons/{id}/video/upload'],
     ['method' => 'POST', 'uri' => 'api/courses'],
     ['method' => 'PUT', 'uri' => 'api/courses/{course}'],
     ['method' => 'DELETE', 'uri' => 'api/courses/{course}'],

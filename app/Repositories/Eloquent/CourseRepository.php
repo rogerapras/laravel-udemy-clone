@@ -332,7 +332,7 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
     {
         $course = Course::where('uuid', $uuid)->first();
         // check if all lessons have content
-        $lessons_with_no_content =  $course->lessons()->doesntHaveContent()->count() == 0;
+        $lessons_with_no_content =  $course->lessons()->hasNoContent()->count() == 0;
 
         $course_has_description = !empty($course->description);
         $target_students = $course->target_students()->count() > 0;

@@ -42,6 +42,7 @@
                             <div class="form-group text-right">
                                 <a href="#" @click.prevent="cancel()">{{ trans('strings.cancel') }}</a>
                                 <base-button :loading="form.busy" class="btn btn-info btn-sm rounded-0 fw-500">
+                                    <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                                     {{ trans('strings.send_request') }}
                                 </base-button>
                             </div>

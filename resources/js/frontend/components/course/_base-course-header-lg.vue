@@ -124,9 +124,9 @@
 
                     <!-- Modal body -->
                     <div class="modal-body p-0">
-                        <video-player v-if="modalOpen" 
+                        <base-video-player v-if="modalOpen" 
                             :sources="sources"
-                            content_type="preview.type"></video-player>
+                            content_type="preview.type"></base-video-player>
                     </div>
 
                     <!-- <div class="modal-footer">
@@ -143,12 +143,12 @@
 </template>
 
 <script>
-    import VideoPlayer from './imports/_video_player'
+    // import VideoPlayer from './imports/_video_player'
     export default {
         props: ['course', 'preview'],
         
         components: {
-            VideoPlayer
+            // VideoPlayer
         },
         data(){
             return {

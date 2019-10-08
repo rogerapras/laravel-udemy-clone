@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-=@section('title', $course->title . ' - ' . __('strings.course_landing_page') . ' | ' . app_name())
+@section('title', $course->title . ' - ' . __('strings.course_landing_page') . ' | ' . app_name())
 
 @section('content')
     @include('frontend.author.course._header', compact('course'))

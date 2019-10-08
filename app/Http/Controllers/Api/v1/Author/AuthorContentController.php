@@ -54,7 +54,7 @@ class AuthorContentController extends Controller
         ], $id);
         
         // if job fails, remove the content
-        if(setting('site.encode_videos')){
+        if(setting('site.encode_videos') && (int)setting('site.encode_videos')==1 && !config('api.demo_credentials')){
             ConvertVideoForStreaming::dispatch($video, $this->contents);
         } else {
             UploadVideo::dispatch($video, $this->contents);

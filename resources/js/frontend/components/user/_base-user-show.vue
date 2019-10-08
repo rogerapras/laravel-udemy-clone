@@ -94,6 +94,7 @@
                                     <div class="form-group d-flex justify-content-between">
                                         <button class="btn btn-link text-danger text-uppercase" @click.prevent="cancel">{{ trans('strings.cancel') }}</button>
                                         <base-button class="btn-info rounded-0" :loading="form.busy">
+                                            <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                                             {{ trans('strings.send') }}
                                         </base-button>
                                     </div>

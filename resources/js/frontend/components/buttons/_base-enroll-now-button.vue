@@ -1,7 +1,8 @@
 <template>
   <form @submit.prevent="enroll">
     <base-button :loading="form.busy" class="btn btn-danger rounded-0 btn-block">
-        {{ trans('strings.enroll_now') }}
+      <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
+      {{ trans('strings.enroll_now') }}
     </base-button>    
   </form>
 </template>

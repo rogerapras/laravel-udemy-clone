@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-5 mx-auto">
                 <div class="card shadow-sm">
-                    <div class="card-body">
+                    <div class="card-body p-4">
                         <h1 class="text-uppercase fw-500 text-center font-22 mb-2">
                             @lang('strings.start_here')
                         </h1>

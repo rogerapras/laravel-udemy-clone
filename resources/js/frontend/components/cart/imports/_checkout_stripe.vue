@@ -7,7 +7,10 @@
         <div class="form-group d-flex mt-2 justify-content-between">
             <base-button :loading="form.busy" class="btn btn-danger rounded-0 btn-sm font-16">
                 <span v-if="!form.busy">{{ trans('strings.complete_payment') }}</span>
-                <span v-else>{{ trans('strings.processing') }}</span>
+                <span v-else>
+                    <i class="fas fa-spinner fa-spin"></i>
+                    {{ trans('strings.processing') }}
+                </span>
             </base-button> 
         </div>
     </form>

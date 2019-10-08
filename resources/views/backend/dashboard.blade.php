@@ -118,12 +118,14 @@
             <div class="card card-accent-danger clearfix">
                 <div class="card-header d-flex justify-content-between">
                     <span>@lang('strings.system_messages_require_attention')</span>
-                    <span>
-                        <button :disabled="form.busy" class="btn btn-sm btn-danger" @click.prevent="emptyDatabase()">
-                            <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
-                            Empty database
-                        </button>
-                    </span>
+                    @if(!config('api.demo_credentials'))
+                        <span>
+                            <button :disabled="form.busy" class="btn btn-sm btn-danger" @click.prevent="emptyDatabase()">
+                                <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
+                                Empty database
+                            </button>
+                        </span>
+                    @endif
                 </div>
                 <div class="card-body" style="height: 300px; overflow-y: auto;">
                     <div v-if="messages.length">

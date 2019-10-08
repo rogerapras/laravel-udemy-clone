@@ -4,9 +4,9 @@
             <a data-toggle="collapse" data-parent="#sectionAccordion" 
                 :href="'#collapse'+section.id" class="draggable-panel collapsed" aria-expanded="false">
                 {{ trans('strings.section') }} {{ section.sortOrder }}: 
-                <span class="fa fa-file-text-o"></span> {{ section.title }}
+                <span class="fa fa-file-text-o"></span> {{ section.title | truncate(50) }}
             </a>
-            <span class="actions d-none pull-right mr-4">
+            <span class="actions d-none pull-right mr-4 font-13">
                 <i class="fas fa-arrows-alt reorder-icon mr-3"></i>
                 <a href="#" @click.prevent="startEdit()">
                     <i class="fas fa-pencil-alt mr-3"></i>

@@ -47,14 +47,7 @@
             SectionLesson
         },
 
-        // watch:{
-        //     section:{
-        //         deep: true,
-        //         handler(section){
-
-        //         }
-        //     }
-        // },
+        
         
         data(){
             return {

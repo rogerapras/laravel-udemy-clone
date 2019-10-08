@@ -81,19 +81,23 @@ class Lesson extends Model
             });
     }
 
-    public function scopeDoesntHaveContent(Builder $builder)
+    public function scopeHasNoContent(Builder $builder)
     {
         return $builder->where(function($i) {
                 $i->orWhere(function($j){
                     $j->where('content_type', 'article')
                         ->whereNull('article_body');
                 })
+                ->orWhere(function($x) {
+                    $x->whereIn('content_type', ['video', 'youtube'])
+                        ->doesntHave('video');
+                })
                 ->orWhere(function($k){
                     $k->where('content_type', 'video')
                         ->whereHas('video', function($l){
-                            $l->orWhereNull('streamable_sm')
-                                ->orWhere('is_processed', 0)
-                                ->orWhere('processing_succeeded', 0);
+                            $l->whereNull('streamable_sm')
+                                ->orWhere('is_processed', false)
+                                ->orWhere('processing_succeeded', false);
                         });
                 })
                 ->orWhere(function($m){

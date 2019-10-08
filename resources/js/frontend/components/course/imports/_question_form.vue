@@ -16,6 +16,7 @@
         <div class="text-right">
             <a href="#" @click.prevent="cancel()" class="mr-3">{{ trans('strings.cancel') }}</a>
             <base-button :loading="form.busy" class="btn btn-danger rounded-0 font-12 fw-500">
+                <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                 {{ trans('strings.post_question') }}
             </base-button>
         </div>

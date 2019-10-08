@@ -26,6 +26,7 @@
         </div>
     
         <base-button :loading="form.busy" class="btn btn-danger font-16 fw-500">
+            <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
             {{ trans('strings.create') }}
         </base-button>
 </form>
@@ -44,9 +45,12 @@ export default {
     }),
     
     methods: {
-        async create(){
-            let course = await this.form.post(`/api/courses`)
-            window.location.href= `/course/${course.data.uuid}/manage/basics`
+        create(){
+            this.form.post(`/api/courses`)
+                .then(response => {
+                    window.location.href= `/course/${response.data.uuid}/manage/basics`
+                })
+            
         }
     }
 }

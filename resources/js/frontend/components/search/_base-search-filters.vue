@@ -27,6 +27,7 @@
                             <div class="col-lg-3  col-sm-12 mb-1 p-l-r">
                                 <div class="btn-group ml-0" role="group">
                                     <base-button :loading="form.busy" class="btn btn-info mr-2 rounded-0">
+                                        <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                                         {{ trans('strings.apply') }}
                                     </base-button>
                                     

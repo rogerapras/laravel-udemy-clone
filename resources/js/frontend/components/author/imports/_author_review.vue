@@ -95,9 +95,11 @@
                             <a href="#" @click.prevent="cancel()" class="mr-2">{{ trans('strings.cancel') }}</a>
                             
                             <base-button :loading="form.busy" class="btn btn-info btn-sm fw-500" v-if="action=='create'">
+                                <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                                 {{ trans('strings.save') }}
                             </base-button>
                             <base-button :loading="form.busy" class="btn btn-info btn-sm fw-500" v-if="action=='edit'">
+                                <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                                 {{ trans('strings.update') }}
                             </base-button>
                             

@@ -53,11 +53,8 @@
                 <div id="course-sections" class="tab-pane">
                     <div class="card card-body border">
                         <div class="row">
-                            <div class="col-md-5">
-                                <inc-edit-section-form v-if="editing" v-bind="{ findSectionsByCourse }" :section = "selectedSection"></inc-edit-section-form>
-                                <inc-create-section-form v-else v-bind="{ findSectionsByCourse }" :course_id="course.id"></inc-create-section-form>
-                            </div>
-                            <div class="col-md-7">
+                            
+                            <div class="col-md-12">
                                 <div class="tc-accordion" id="sectionAccordion">
                                     <draggable style="min-height: 10px;"
                                         v-model="sections" 
@@ -71,6 +68,10 @@
                                             </inc-course-section>
                                     </draggable>
                                 </div>
+                            </div>
+                            <div class="col-md-12 mt-4">
+                                <inc-edit-section-form v-if="editing" v-bind="{ findSectionsByCourse }" :section = "selectedSection"></inc-edit-section-form>
+                                <inc-create-section-form v-else v-bind="{ findSectionsByCourse }" :course_id="course.id"></inc-create-section-form>
                             </div>
                         </div>
                     </div>

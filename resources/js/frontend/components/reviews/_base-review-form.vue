@@ -31,9 +31,11 @@
                             </a>
                             
                             <base-button :loading="form.busy" class="btn btn-info btn-sm fw-500" v-if="!review">
+                                <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                                 {{ trans('strings.save_review') }}
                             </base-button>
                             <base-button :loading="form.busy" class="btn btn-info btn-sm fw-500" v-if="review">
+                                <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                                 {{ trans('strings.update_review') }}
                             </base-button>
                             

@@ -24,6 +24,7 @@ class CourseController extends Controller
     
     public function create()
     {
+
         $categories = CategoryResource::collection($this->categories->fetchAll());
         return view('frontend.author.course.Create', compact('categories'));
     }

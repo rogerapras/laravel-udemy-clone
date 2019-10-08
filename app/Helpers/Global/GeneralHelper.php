@@ -220,3 +220,12 @@ if(! function_exists('get_init_param_value')){
         return $rtn;
     }
 }
+if(! function_exists('get_upload_max_size')){
+    function get_upload_max_size()
+    {
+        $post_max = get_init_param_value(ini_get('post_max_size'));
+        $upload_max_filesize = get_init_param_value(ini_get('upload_max_filesize'));
+        
+        return min($post_max, $upload_max_filesize) / 1024 / 1024;
+    }
+}

@@ -105,6 +105,7 @@
                                     :placeholder="trans('strings.apply_coupon_code')" class="form-control rounded-0">
                                 <div class="input-group-append">
                                     <base-button :loading="form.busy" class="btn rounded-0 text-white btn-info">
+                                        <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                                         {{ trans('strings.apply') }}
                                     </base-button>
                                 </div>

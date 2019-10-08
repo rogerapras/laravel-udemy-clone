@@ -9,8 +9,8 @@
                             :is-full-screen="false" spinner="bar-fade-scale"/>
                         <div class="h-100" v-if="!loading">
                             <template v-if="playing.content_type=='video' || playing.content_type=='youtube'">
-                                <video-player :sources="sources" :poster="poster" :content_type="playing.content_type"
-                                    :next_url="next ? `/course/${course.slug}/learn/v1/lecture/${next.uuid}` : null" />
+                                <base-video-player :sources="sources" :poster="poster" :content_type="playing.content_type"
+                                    :next_url="next ? `/course/${course.slug}/learn/v1/lecture/${next.uuid}` : null"></base-video-player>
                             </template>
                             <template v-if="playing.content_type=='article'">
                                 <div class="card card-body h-100 article_area" v-html="playing.article_body"></div>
@@ -107,10 +107,10 @@
 
 <script>
     import axios from 'axios'
-    import VideoPlayer from './imports/_video_player'
+    // import VideoPlayer from './imports/_video_player'
     export default {
         components: {
-            VideoPlayer
+            // VideoPlayer
         },
 
         props: ['uuid'],

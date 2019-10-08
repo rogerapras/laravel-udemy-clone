@@ -12,7 +12,7 @@ window.webuiPopover =  require('webui-popover')
 window.moment = require('moment')
 Vue.prototype.$moment = require('moment')
 
-import { DatePicker, Switch, Checkbox, Select, Option, OptionGroup } from 'element-ui'
+import { DatePicker, Button, Switch, Checkbox, Select, Option, MessageBox, Message, OptionGroup, Upload, Progress } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
 locale.use(lang)
@@ -23,6 +23,12 @@ Vue.use(Checkbox)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(OptionGroup)
+Vue.use(Upload)
+Vue.use(Progress)
+Vue.use(Button)
+
+Vue.prototype.$vmessage = Message;
+Vue.prototype.$vconfirm = MessageBox.confirm;
 
 // import { TablePlugin } from 'bootstrap-vue'
 // Vue.use(TablePlugin)

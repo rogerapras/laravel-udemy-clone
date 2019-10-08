@@ -20,8 +20,8 @@ class CourseTargetRepository  extends RepositoryAbstract implements ICourseTarge
     {
   
         foreach($data as $key => $items) {
-            $ids = data_get(array_collapse($items), '*.id');
-            $filtered = array_where($ids, function ($value, $key) {
+            $ids = data_get(\Arr::collapse($items), '*.id');
+            $filtered = \Arr::where($ids, function ($value, $key) {
                 return $value != null;
             });
             

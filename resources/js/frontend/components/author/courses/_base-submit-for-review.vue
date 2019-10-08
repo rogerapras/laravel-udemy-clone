@@ -1,8 +1,7 @@
 <template>
     <div class="mt-4">
         <form @submit.prevent="submitForReview">
-            <base-button :loading="form.busy"
-                class="btn btn-block btn-lg font-14 btn-danger rounded-0">
+            <base-button :loading="form.busy" class="btn btn-block btn-lg font-14 btn-danger rounded-0">
                 <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                 {{ trans('strings.submit_for_review') }}
             </base-button>
@@ -78,14 +77,16 @@
             },
             submitForReview(){
                 this.form.get(`/api/author/course/${this.uuid}/submit`)
-                    .then(response => {
-                        if(!response.data.message){
-                            this.check = response.data
-                            this.showModal()
-                        } else {
-                            location.reload();
-                        }
+                        .then(response => {
+                            if(!response.data.message){
+                                this.check = response.data
+                                this.showModal()
+                            } else {
+                                location.reload();
+                            }
                     })
+                
+                
             }
         }
         

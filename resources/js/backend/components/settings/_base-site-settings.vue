@@ -119,6 +119,9 @@
 
                 <fieldset>
                     <legend class="scheduler-border">{{ trans('strings.images') }}</legend>
+                    <div class="alert alert-danger" v-if="error">
+                        {{ error }}
+                    </div>
                     <div class="form-group row mb-1">
                         <!-- <label class="col-md-4 form-control-label">{{ trans('strings.site_logo') }}</label> -->
                         <div class="col-md-12">
@@ -127,9 +130,11 @@
                             </div>
                             <div class="">
                                 <button id="pick-logo" :disabled="isLoading" :class="{ 'btn-loading': isLoading }" class="btn btn-sm btn-info">
+                                    <i class="fas fa-spinner fa-spin" v-if="isLoading"></i>
                                     {{ trans('strings.choose_logo') }}
                                 </button>
                                 <avatar-cropper
+                                    @error="handleUploadError"
                                     @uploaded="handleUploaded"
                                     @uploading="handleUploading"
                                     mimes="image/png,image/gif,image/jpeg"
@@ -150,9 +155,11 @@
                             </div>
                             <div class="">
                                 <button id="pick-favicon" :disabled="isLoading" :class="{ 'btn-loading': isLoading }" class="btn btn-sm btn-info">
+                                    <i class="fas fa-spinner fa-spin" v-if="isLoading"></i>
                                     {{ trans('strings.choose_icon') }}
                                 </button>
                                 <avatar-cropper
+                                    @error="handleUploadError"
                                     @uploaded="handleUploaded"
                                     @uploading="handleUploading"
                                     mimes="image/png,image/ico"
@@ -174,9 +181,11 @@
                             </div>
                             <div class="">
                                 <button id="pick-homepage_image" :disabled="isLoading" :class="{ 'btn-loading': isLoading }" class="btn btn-sm btn-info">
+                                    <i class="fas fa-spinner fa-spin" v-if="isLoading"></i>
                                     {{ trans('strings.choose_homepage_image') }}
                                 </button>
                                 <avatar-cropper
+                                    @error="handleUploadError"
                                     @uploaded="handleUploaded"
                                     @uploading="handleUploading"
                                     mimes="image/png,image/jpg,image/gif,image/jpeg"
@@ -199,6 +208,7 @@
 
             <div class="col-md-12">
                 <base-button :loading="form.busy" class="btn btn-lg rounded-0 btn-success">
+                    <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                     {{ trans('strings.save') }}
                 </base-button>
             </div>
@@ -217,6 +227,7 @@ export default {
 
     data(){
         return {
+            error: '',
             isLoading: false,
             site_currencies: [],
             croper_options: {
@@ -225,7 +236,7 @@ export default {
             },
             form: new Form({
                 encode_videos: false,
-                enable_demo_mode: false,
+                //enable_demo_mode: false,
                 site_url: '',
                 redirect_https: false,
                 site_name: '',
@@ -243,6 +254,15 @@ export default {
                 favicon: '',
                 homepage_image: ''
             })
+        }
+    },
+
+    watch:{
+        form:{
+            deep: true,
+            handler(form){
+
+            }
         }
     },
 
@@ -274,7 +294,13 @@ export default {
             this.isLoading = false
         },
         handleUploading(){
+            this.error = ''
             this.isLoading = true;
+        },
+
+        handleUploadError(message, type, context){
+            this.isLoading = false
+            this.error = JSON.parse(context.response).message || message
         }
     },
 

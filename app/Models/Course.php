@@ -17,6 +17,8 @@ class Course extends Model implements ViewableContract
     //use Uuid, HasTags;
     use Uuid, CourseMethods, HasSettingsField, Viewable;
 
+    public $settingsFieldName = 'settings';
+
     protected $removeViewsOnDelete = true;
 
     protected $fillable = [
@@ -33,7 +35,8 @@ class Course extends Model implements ViewableContract
     	'featured', 
     	'price', 
     	'published', 
-    	'approved'
+        'approved',
+        'settings'
     ];
     
     protected $appends=[

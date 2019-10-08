@@ -33,6 +33,7 @@
                                 class="form-control border border-secondary  rounded-0">
                             <div class="input-group-append">
                                 <base-button :loading="form.busy" class="btn  rounded-0 text-white btn-info">
+                                    <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                                     <i class="fa fa-search"></i>
                                 </base-button>
                             </div>

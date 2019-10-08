@@ -66,13 +66,17 @@
                                 <i class="fa fa-play-circle fa-2x text-white"></i>    
                             </div>
                             <div class="d-flex flex-column">
-                                <div>
+                                <div class="d-flex align-items-center">
                                     <h4 class="text-secondary">
                                         {{ lesson.video.original_filename }}
                                     </h4>
+                                    <span class="ml-3" v-if="sources && lesson.video.is_processed && lesson.video.processing_succeeded">
+                                        <button class="btn btn-link btn-sm" @click.prevent="showModal()">
+                                            <i class="fas fa-eye"></i> {{ trans('strings.preview') }}
+                                        </button>
+                                    </span>
                                 </div>
-                                <div class="mt-1">{{ lesson.durationHMS }} min</div>
-                                
+                                <div class="mt-1">{{ lesson.durationHMS }}min</div>
                                 <div class="mt-1">
                                     <template v-if="lesson.video.is_processed && lesson.video.processing_succeeded">
                                         <a href="#" @click.prevent="SetAddContent('video', 'edit')">
@@ -89,7 +93,6 @@
                                         <span class="badge badge-warning">{{ trans('strings.video_processing') }}</span>
                                     </template>
                                 </div>
-                                
                             </div>
                         </div>
                         
@@ -99,10 +102,15 @@
                                 <i class="fab fa-youtube fa-2x text-white"></i>    
                             </div>
                             <div class="d-flex flex-column">
-                                <div>
+                                <div class="d-flex align-items-center">
                                     <h4 class="text-secondary">
                                         {{ lesson.video.youtube_link }}
                                     </h4>
+                                    <span class="ml-3" v-if="sources && lesson.video.youtube_link">
+                                        <button class="btn btn-link btn-sm" @click.prevent="showModal()">
+                                            <i class="fas fa-eye"></i> {{ trans('strings.preview') }}
+                                        </button>
+                                    </span>
                                 </div>
                                 <div class="mt-1">{{ lesson.durationHMS }}</div>
                                 <div class="mt-1">
@@ -137,6 +145,30 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- Preview Modal -->
+        <div class="modal fade text-dark" :id="`lesson_video_preview-${prop_lesson.uuid}`">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content rounded-0">
+                    <!-- Modal Header -->
+                    <div class="modal-header rounded-0 bg-dark text-white py-1">
+                        <button type="button" class="close text-white" @click="hideModal()">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body p-0">
+                        <base-video-player v-if="modalOpen" 
+                            :sources="sources"
+                            content_type="prop_lesson.type"></base-video-player>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--/ End Preview Modal -->
+
+
     </div>
     
 </template>
@@ -147,6 +179,7 @@
     import ContentVideoUpload from './_content_video_upload'
     import ContentCreateYoutubeForm from './_content_create_youtube_form'
     import ContentCreateArticleForm from './_content_create_article_form'
+    // import VideoPlayer from './imports/_video_player'
     
     import Form from 'vform'
     import axios from 'axios'
@@ -161,6 +194,7 @@
         },
         
         props: ['index', 'prop_lesson', 'section', 'findLessonsBySection'],
+
         watch:{
             prop_lesson:{
                 deep: true,
@@ -170,8 +204,23 @@
             }
         },
 
+        computed:{
+            sources(){
+                if(Object.keys(this.prop_lesson).length > 0){
+                    return [{
+                        type: this.prop_lesson.type,
+                        src: this.prop_lesson.video_links ? this.prop_lesson.video_links.video_360 : null,
+                        label: "360P",
+                        res: 1
+                    }]
+                }
+                return null
+            }
+        },
+
         data(){
             return {
+                modalOpen: false,
                 source: '',
                 lesson: {},
                 action: null,
@@ -182,6 +231,17 @@
         },
         
         methods: {
+            async showModal(){
+                this.modalOpen = await true
+                await $(`#lesson_video_preview-${this.prop_lesson.uuid}`).modal({show: true, backdrop: 'static', keyboard: false })
+            },
+
+            hideModal(){
+                this.modalOpen = false
+                $(`#lesson_video_preview-${this.prop_lesson.uuid}`).modal('hide')
+                this.$bus.$emit('video:stop')
+            },
+
             findLessonContent(){
                 axios.get(`/api/lessons/${this.prop_lesson.id}`)
                     .then(response => {
