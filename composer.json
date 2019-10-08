@@ -20,7 +20,6 @@
         "cyrildewit/eloquent-viewable": "^4.1",
         "davejamesmiller/laravel-breadcrumbs": "^5.0",
         "fideloper/proxy": "^4.0",
-        "glorand/laravel-model-settings": "^3.4",
         "guzzlehttp/guzzle": "^6.3",
         "hassansin/dbcart": "dev-master",
         "htmlmin/htmlmin": "^6.0",
@@ -33,6 +32,7 @@
         "laravel/tinker": "^1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
         "musonza/chat": "^3.5",
+        "nfunwigabga/laravel-model-settings": "dev-master",
         "nfunwigabga/laravel-eloquent-join": "dev-master",
         "nfunwigabga/setting": "dev-master",
         "orangehill/iseed": "^2.6",
@@ -59,6 +59,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/nfunwigabga/setting"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/nfunwigabga/laravel-model-settings"
         }
     ],
     "require-dev": {
