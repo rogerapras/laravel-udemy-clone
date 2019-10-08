@@ -229,3 +229,11 @@ if(! function_exists('get_upload_max_size')){
         return min($post_max, $upload_max_filesize) / 1024 / 1024;
     }
 }
+
+if(! function_exists('is_envato')){
+
+    function is_envato(){
+        return auth()->check() && auth()->user()->email == 'envato@example.net';
+    }
+    
+}

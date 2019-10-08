@@ -24,6 +24,10 @@ class AdminSettingsController extends Controller
 
     public function save_payment_settings(Request $request)
     {
+        if(is_envato()){
+            return response()->json(null, 200);
+        }
+
         $paypal_sandbox_rule = Rule::requiredIf(function() use ($request){
             return $request->enable_paypal == true && $request->paypal_mode == 'sandbox';
         });
@@ -72,6 +76,7 @@ class AdminSettingsController extends Controller
 
     public function save_site_settings(Request $request)
     {
+        
         $cur = $request->site_currency;
         if($cur){
             $currency = $this->currencies->findByCode($cur);
@@ -101,6 +106,9 @@ class AdminSettingsController extends Controller
 
     public function save_mail_settings(Request $request)
     {
+        if(is_envato()){
+            return response()->json(null, 200);
+        }
         $data = $request->all();
 
         collect($data)->each(function ($v, $key) {

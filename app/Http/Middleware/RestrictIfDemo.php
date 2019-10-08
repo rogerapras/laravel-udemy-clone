@@ -16,7 +16,7 @@ class RestrictIfDemo
     public function handle($request, Closure $next)
     {
         if(installed()){
-            if(auth()->check() && auth()->user()->email == 'envato@example.net') {
+            if(is_envato()) {
                 return $next($request);
             }
 
