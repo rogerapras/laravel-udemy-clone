@@ -34,6 +34,7 @@ return [
     'ses_region' => 'SES Region',
     'smtp_host' => 'SMTP Host',
     'smtp_port' => 'SMTP Port',
+    'smtp_password' => 'SMTP Password',
     'smtp_username' => 'SMTP Username',
     'smtp_encryption' => 'SMTP Encryption',
     'mail_from_address' => 'Mail From Address',
