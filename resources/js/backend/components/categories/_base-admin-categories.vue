@@ -68,13 +68,6 @@
                         <input class="form-control" v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }">
                         <has-error :form="form" field="name"/>
                     </div>
-                    <!-- <div class="form-group mb-0">
-                        <label for="inputEmail3 control-label mb-0">
-                            icon
-                        </label>
-                        <input class="form-control" v-model="form.icon" :class="{ 'is-invalid': form.errors.has('icon') }">
-                        <has-error :form="form" field="icon"/>
-                    </div> -->
                     <base-button :loading="form.busy" class="btn btn-info pull-right">
                         {{ trans('strings.update') }}
                     </base-button>

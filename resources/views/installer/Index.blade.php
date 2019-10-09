@@ -5,20 +5,20 @@
     <form @submit.prevent="submit" v-cloak>
         <div class="card border border-secondary ">
             <div class="card-header bg-white py-4">
-                <h2 class="h4 m-0">START</h2>
+                <h2 class="h4 m-0">@lang('install.start')</h2>
             </div>
             <div class="card-body p-4 d-flex flex-column" style="min-height: 50vh;">
                 <p class="text-center mb-4">
-                    Welcome to the installation of ArcInspire.
+                    @lang('install.welcome')
                 </p>
                 
                 <div class="my-3 font-weight-bold bg-light p-2 border border-secondary">
-                    <h4>Enter Envato License Information</h4>
+                    <h4>@lang('install.enter_license') </h4>
                 </div>
                 <alert-success :form="form" message="License verified successfully"></alert-success>
                 <div class="form-group form-row">
                     <label class="col-form-label col-md-4 text-right">
-                        Envato Username
+                        @lang('install.envato_username')
                     </label>
                     <div class="col-md-8">
                         <input v-model="form.username" :class="{ 'is-invalid': form.errors.has('username') }" 
@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group form-row">
                     <label class="col-form-label col-md-4 text-right">
-                        Purchase Code
+                        @lang('install.purchase_code')
                     </label>
                     <div class="col-md-8">
                         <input v-model="form.purchase_code" :class="{ 'is-invalid': form.errors.has('purchase_code') }" 
@@ -41,15 +41,15 @@
             </div>
             <div class="card-footer bg-white text-right">
                 <a href="{{ route('frontend.installer.requirements') }}" class="btn btn-info btn-sm rounded-0" v-if="!form.busy && success">
-                    Next
+                    @lang('install.next')
                 </a>
                 <base-button :disabled="form.busy" class="btn btn-danger btn-sm rounded-0" v-else>
                     <span v-if="form.busy">
                         <i class="fa fa-cog fa-spin"></i>
-                        Busy. Please wait...
+                        @lang('install.busy_wait')
                     </span>
                     <span v-else>
-                        Submit
+                    @lang('install.submit')
                     </span>
                 </base-button>
             </div>

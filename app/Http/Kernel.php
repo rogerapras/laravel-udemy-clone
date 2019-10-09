@@ -53,7 +53,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             'throttle:60,1',
-            'bindings',
+            'bindings'
         ],
 
         'admin' => [
@@ -87,7 +87,8 @@ class Kernel extends HttpKernel
         'is_course_author' => \App\Http\Middleware\CheckIfUserIsAuthor::class,
         'is_installed' => \App\Http\Middleware\RedirectIfInstalled::class,
         'is_not_installed' => \App\Http\Middleware\RedirectIfNotInstalled::class,
-        'check_demo' => \App\Http\Middleware\RestrictIfDemo::class
+        'check_demo' => \App\Http\Middleware\RestrictIfDemo::class,
+        'XSS' => \App\Http\Middleware\XSS::class,
     ];
 
     /**

@@ -120,7 +120,6 @@ class PaymentRepository extends RepositoryAbstract implements IPayment
     
     protected function get_current_period()
     {
-        //$d = Carbon::now('UTC')->add('30 days');
         $current_period = Period::where('start_time', '=', Carbon::now('UTC')->startOfMonth())->first();
         return $current_period;
     }

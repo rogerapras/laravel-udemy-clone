@@ -14,26 +14,21 @@ use App\Http\Controllers\Frontend\Auth\PasswordExpiredController;
  * All route names are prefixed with 'frontend.auth'.
  */
 
-Route::group(['middleware' => 'is_not_installed', 'namespace' => 'Auth', 'as' => 'auth.'], function () {
+Route::group(['middleware' => ['is_not_installed'], 'namespace' => 'Auth', 'as' => 'auth.'], function () {
     // These routes require the user to be logged in
     Route::group(['middleware' => 'auth'], function () {
         Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
-        // These routes can not be hit if the password is expired
-        // Route::group(['middleware' => 'password_expires'], function () {
-        // Route::patch('password/update', [UpdatePasswordController::class, 'update'])->name('password.update');
-        //});
-
         // Password expired routes
         Route::get('password/expired', [PasswordExpiredController::class, 'expired'])->name('password.expired');
-        Route::patch('password/expired', [PasswordExpiredController::class, 'update'])->name('password.expired.update');
+        Route::patch('password/expired', [PasswordExpiredController::class, 'update'])->name('password.expired.update')->middleware('XSS');
     });
 
     // These routes require no user to be logged in
     Route::group(['middleware' => 'guest'], function () {
         // Authentication Routes
         Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-        Route::post('login', [LoginController::class, 'login'])->name('login.post');
+        Route::post('login', [LoginController::class, 'login'])->name('login.post')->middleware('XSS');
 
         // Socialite Routes
         Route::get('login/{provider}', [SocialLoginController::class, 'login'])->name('social.login');
@@ -49,9 +44,9 @@ Route::group(['middleware' => 'is_not_installed', 'namespace' => 'Auth', 'as' =>
 
         // Password Reset Routes
         Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.email');
-        Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email.post');
+        Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email.post')->middleware('XSS');
 
         Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset.form');
-        Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset');
+        Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset')->middleware('XSS');
     });
 });

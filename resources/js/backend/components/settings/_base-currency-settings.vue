@@ -19,7 +19,6 @@
                             <th style="width: 60px;"></th>
                             <th class="bg-light" style="width: 100px;">{{ trans('strings.formatted') }}</th>
                             <th>{{ trans('strings.enabled') }}</th>
-                            <!-- <th>{{ trans('strings.is_primary') }}</th> -->
                             <th style="width: 150px;"></th>
                         </thead>
                         <tbody>

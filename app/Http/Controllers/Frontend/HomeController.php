@@ -20,11 +20,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        //dd(extension_loaded('ctype'));
-        // $requirements=[];
-        // $requirements['storage/logs'] = ['status' => 'OK', 'message' => ''];
-        // dd($requirements);
-
+        
         $most_viewed = CourseResource::collection($this->home->getMostViewedCourses());
         $top_categories = $this->home->getTopCategories();
         $top_subcategories = CategoryResource::collection($this->home->getTopCategories('subcategory'));

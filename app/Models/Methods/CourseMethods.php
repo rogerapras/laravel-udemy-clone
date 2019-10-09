@@ -99,9 +99,5 @@ trait CourseMethods
     {
         return auth()->check() ? auth()->user()->percentCompleted($this) : null;
     }
-
-    
-
-    //{"total_video_hours":0.9,"durationHMS":"00:00:01","total_articles":3,"total_hours":1.1,"total_published_lessons":291,"total_lessons":17,"total_unanswered_questions":0}
     
 }

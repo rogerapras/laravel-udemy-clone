@@ -14,7 +14,6 @@
                     <div>
                         <div class="text-value-sm text-primary">
                             <div class="text-value-sm text-primary">@{{ formatCurrency(total_sales, false) }}</div>
-                            <!-- <base-currency :price="total_sales" :showFree="false"></base-currency> -->
                         </div>
                         <div class="text-muted text-uppercase font-weight-bold small">
                             @{{ trans('strings.sales_last_x_days', {days: period} ) }}
@@ -49,7 +48,6 @@
                     <div>
                         <div class="text-value-sm text-primary">
                             <div class="text-value-sm text-primary">@{{ formatCurrency(total_earnings, false) }}</div>
-                            <!-- <base-currency :price="total_sales" :showFree="false"></base-currency> -->
                         </div>
                         <div class="text-muted text-uppercase font-weight-bold small">
                             @{{ trans('strings.earnings_last_x_days', {days: period} ) }}
@@ -75,8 +73,6 @@
                 </div>
             </div>
         </div>
-        
-
 
     </div>
 

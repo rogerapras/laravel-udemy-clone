@@ -64,7 +64,6 @@ class CurrencyRepository extends RepositoryAbstract implements ICurrency
     {
         Currency::all()->each(function ($c) {
             $c->is_primary = false;
-            //$c->conversion_rate = 1;
             $c->save();
         });
         

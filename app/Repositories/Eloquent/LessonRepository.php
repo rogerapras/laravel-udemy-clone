@@ -79,7 +79,6 @@ class LessonRepository extends RepositoryAbstract implements ILesson
         
         
         // mark this lesson as completed
-        //if(! auth()->user()->hasCompletedLesson($lesson) && auth()->user()->id !== $lesson->section->course->user_id){
         if(! auth()->user()->hasCompletedLesson($lesson)){
             auth()->user()->completions()->attach($lesson->id);
         }
@@ -144,7 +143,6 @@ class LessonRepository extends RepositoryAbstract implements ILesson
         $course = $lesson->section->course;
         $user = auth()->user();
         
-        //if(!$user->hasCompletedLesson($lesson) && $user->id !== $course->user_id){
         if(!$user->hasCompletedLesson($lesson)){
             $user->completions()->attach($lesson->id);
             $pcnt_course_complete = $user->percentCompleted($course);
@@ -164,7 +162,6 @@ class LessonRepository extends RepositoryAbstract implements ILesson
             $user->completions()->detach($lesson->id);
         }
         
-        //$percent_completed = $user->percentSectionCompleted($lesson->section);
         
         return response()->json(null, 200);
         

@@ -13,26 +13,10 @@ use Razorpay\Api\Api;
 use App\Payment\PayPalProvider;
 use App\Events\UpdateCourseStats;
 
-// paypal api
-// use PayPal\Api\Amount;
-// use PayPal\Api\Refund as PayPalRefund;
-// use PayPal\Api\RefundRequest;
-// use PayPal\Api\Sale;
-// use PayPal\Api\Payment as PayPalPayment;
-// use PayPal\Rest\ApiContext;
-// use PayPal\Auth\OAuthTokenCredential;
 
 class RefundRepository  extends RepositoryAbstract implements IRefund
 {
-    // private $_api_context;
-
-    // public function __construct()
-    // {
-    //     $paypal_conf = \Config::get('paypal');
-    //     $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
-    //     $this->_api_context->setConfig($paypal_conf['settings']);
-    // }
-
+    
     public function entity()
     {
         return Refund::class;

@@ -19,7 +19,6 @@ class Category extends Model
     
     public function parent()
     {
-        //return $this->belongsTo(self::class, 'parent_id', 'id');
         return $this->hasOne( Category::class, 'id', 'parent_id' );
     }
 

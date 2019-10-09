@@ -35,15 +35,6 @@
                     @else 
                         <span class="badge badge-danger rounded-0">@lang('strings.unable_to_fetch_updates')</span>
                     @endif
-            <!-- <div class="btn-group" role="group" aria-label="Button group">
-                <a class="btn" href="#">
-                    <i class="icon-speech"></i>
-                </a>
-                <a class="btn" href="./">
-                <i class="icon-graph"></i> &nbsp;Dashboard</a>
-                <a class="btn" href="#">
-                <i class="icon-settings"></i> &nbsp;Settings</a>
-            </div> -->
                 </div>
             </base-update-button>
         </li>

@@ -56,15 +56,6 @@ export default {
         this.$bus.$on('language:updated', () => {
             this.fetchLanguages()
         })
-
-        // .$on('create:cancelled', () => {
-        //     this.creating = false
-        //     this.fetchCurrencies()
-        // })
-        // .$on('currency:updated', () => {
-        //     this.creating = false
-        //     this.fetchCurrencies()
-        // })  
     }
 }
 </script>

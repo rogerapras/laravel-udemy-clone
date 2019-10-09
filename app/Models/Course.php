@@ -45,7 +45,6 @@ class Course extends Model implements ViewableContract
         'short_description',
         'is_in_cart',
         'status_code',
-        //'percent_completed',
         'price_discounted'
     ];
 

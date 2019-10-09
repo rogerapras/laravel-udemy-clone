@@ -99,10 +99,6 @@ class QuestionRepository extends RepositoryAbstract implements IQuestion
     public function destroyQuestion($id)
     {
         $question = $this->find($id);
-        
-        //if($question->answers->count()){
-            //$question->answers()->delete();
-        //}
         $question->delete();
     }
 

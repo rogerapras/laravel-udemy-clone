@@ -29,11 +29,6 @@ class PayoutRepository extends RepositoryAbstract implements IPayout
         $builder->where('start_time', '<=', $now->startOfMonth());
         $builder->orderBy($data['sort'], $data['direction']);
         $periods = $builder->with(['payments', 'refunds'])->paginate($data['limit']);
-        //$periods = $builder->with(['payments', 'payments.refunds'])->paginate($data['limit']);
-        // $periods = $builder->with(['payments' => function($payment) {
-        //     //$payment->whereNull('refunded_at');
-        //     $payment->with('refunds');
-        // }])->paginate($data['limit']);
         
         return $periods;
     }
@@ -55,49 +50,14 @@ class PayoutRepository extends RepositoryAbstract implements IPayout
                         ->with(['user', 'coupon', 'course.author'])
                         ->get();
         
-        /*
-        $period = Period::where('uuid', $uuid)->first();
-        $authors = User::has('authored_courses')
-            ->whereHas('sales', function($s) use ($period) {
-                $s->where('period_id', $period->id);
-            })
-            ->with(['sales' => function($q) use ($period){
-                $q->where('period_id', $period->id);
-            }])->get();
-        
-        foreach($authors as $user){
-            $user->total_sales_for_period = (float)$user->sales()->whereNull('refunded_at')->where('period_id', $period->id)->sum('author_earning');
-            $user->total_refunds_for_period = $user->sales()->whereNotNull('refunded_at')->where('period_id', $period->id)->sum('author_earning');
-        }
-        */
         $data = [
             'purchases' => $purchases,
-            //'authors' => $authors
         ];
         
         return $data;
     }
     
-    /*
-    public function getAuthorEarningsForPeriod($uuid)
-    {
-        $period = Period::where('uuid', $uuid)->first();
-        $authors = User::has('courses')->with('sales')->get();
-        
-        //$payments = $period->payments()->whereNull('refunded_at')->get();
-        
-        foreach($authors as $user){
-            $user->total_sales = $user->sales()->->whereNull('refunded_at')->where('period_id', $period->id)->sum('author_earning');
-            /*
-            $courses = $user->authored_courses->pluck('id');
-            $sales = $payments->whereIn('course_id', $courses);
-            $user->sales_for_period = $sales; 
-            $user->earnings_for_period = $sales->sum('author_earning');*/
-        //}
-        
-       // return $authors;
-    //}
-    
+  
     public function closePeriod($uuid)
     {
         $period = Period::where('uuid', $uuid)->first();

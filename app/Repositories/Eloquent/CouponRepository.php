@@ -96,11 +96,7 @@ class CouponRepository  extends RepositoryAbstract implements ICoupon
         }
         
     }
-    
-    // public function getSitewideCoupon()
-    // {
 
-    // }
     
     public function removeCoupon($itemId)
     {
@@ -122,7 +118,6 @@ class CouponRepository  extends RepositoryAbstract implements ICoupon
                   ->orWhere('sitewide', true);
             })->first();
             
-        //$coupon = Coupon::where('code', $code)->first();
         if(!$coupon || ($coupon && !$coupon->active)){
             return 'invalid';
         }

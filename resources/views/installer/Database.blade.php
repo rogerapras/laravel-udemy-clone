@@ -5,17 +5,16 @@
     <form @submit.prevent="submit" v-cloak>
         <div class="card border border-secondary">
             <div class="card-header bg-white py-4">
-                <h2 class="h3 m-0">Database Configuration</h2>
+                <h2 class="h3 m-0">@lang('install.database_config')</h2>
             </div>
             <div class="card-body" style="min-height: 50vh;">
-                <p>This system uses MySQL database.</p>
-                <p>Please enter your MySql Database connection details here.</p>
+                {!! __('install.site_uses_mysql') !!}
                 <hr />
                 <alert-error :form="form" :message="form.errors.get('message')"></alert-error>
                 <alert-success :form="form" message="Connection successful. Click NEXT to proceed"></alert-success>
                 <div class="form-group form-row">
                     <label class="col-form-label col-md-4 text-right">
-                        Database Host
+                    @lang('install.db_bost')
                     </label>
                     <div class="col-md-8">
                         <input v-model="form.db_host" :class="{ 'is-invalid': form.errors.has('db_host') }" 
@@ -25,7 +24,7 @@
                 </div>
                 <div class="form-group form-row">
                     <label class="col-form-label col-md-4 text-right">
-                        Database Name
+                    @lang('install.db_name')
                     </label>
                     <div class="col-md-8">
                         <input v-model="form.db_name" :class="{ 'is-invalid': form.errors.has('db_name') }" 
@@ -35,7 +34,7 @@
                 </div>
                 <div class="form-group form-row">
                     <label class="col-form-label col-md-4 text-right">
-                        Database User
+                    @lang('install.db_user')
                     </label>
                     <div class="col-md-8">
                         <input v-model="form.db_user" :class="{ 'is-invalid': form.errors.has('db_user') }" 
@@ -46,7 +45,7 @@
 
                 <div class="form-group form-row">
                     <label class="col-form-label col-md-4 text-right">
-                        Database Password
+                    @lang('install.db_password')
                     </label>
                     <div class="col-md-8">
                         <input v-model="form.db_password" :class="{ 'is-invalid': form.errors.has('db_password') }" 
@@ -57,7 +56,7 @@
 
                 <div class="form-group form-row">
                     <label class="col-form-label col-md-4 text-right">
-                        Database Port
+                    @lang('install.db_port')
                     </label>
                     <div class="col-md-8">
                         <input v-model="form.db_port" :class="{ 'is-invalid': form.errors.has('db_port') }" 
@@ -67,19 +66,16 @@
                 </div>
             </div>
             <div class="card-footer bg-transparent d-flex justify-content-end">
-                <!-- <a href="{{ route('frontend.installer.requirements') }}" class="btn btn-info btn-sm rounded-0">
-                    Previous
-                </a> -->
                 <a href="{{ route('frontend.installer.settings') }}" class="btn btn-info btn-sm rounded-0" v-if="!form.busy && connection_success">
-                    Next
+                @lang('install.next')
                 </a>
                 <base-button :disabled="form.busy" class="btn btn-danger btn-sm rounded-0" v-else>
                     <span v-if="form.busy">
                         <i class="fa fa-cog fa-spin"></i>
-                        Busy. Please wait...
+                        @lang('install.busy_wait')
                     </span>
                     <span v-else>
-                        Connect to Database
+                        @lang('install.connect_to_database')
                     </span>
                 </base-button>
             </div>

@@ -10,7 +10,6 @@
                 <input class="form-control form-control-sm rounded-0" 
                     v-model="form.slug" :class="{ 'is-invalid': form.errors.has('slug') }"
                     style="height: calc(1em + 0.5rem + 0px);">
-                <!-- <has-error :form="form" field="slug"/> -->
                 <a href="javascript:void(0)" class="text-success ml-1" @click.prevent="save">
                     <i class="fas fa-save" v-if="!form.busy"></i>
                     <i class="fas fa-spinner fa-spin" v-else></i>

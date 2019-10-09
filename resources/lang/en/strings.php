@@ -752,6 +752,10 @@ return [
     "paypal_email_missing" => "This user does not have a PayPal email on file yet, so payment cannot be processed.",
     "send_email_reminder" => "Send email reminder to :user",
     "are_you_sure_to_submit" => "Are you sure you are ready to submit this course for Admin approval?",
-    "confirm_action" => "Confirm action"
+    "confirm_action" => "Confirm action",
+
+    
+
+
     
 ];

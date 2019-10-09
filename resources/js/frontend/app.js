@@ -27,17 +27,15 @@ Vue.use(Upload)
 Vue.use(Progress)
 Vue.use(Button)
 
+
+/* ENABLE STRICT MODE */
+Vue.config.strict = true;
+
 Vue.prototype.$vmessage = Message;
 Vue.prototype.$vconfirm = MessageBox.confirm;
 
-// import { TablePlugin } from 'bootstrap-vue'
-// Vue.use(TablePlugin)
-
-
 // credit: https://medium.com/@serhii.matrunchyk/using-laravel-localization-with-javascript-and-vuejs-23064d0c210e
 //window.$trans = (string) => _.get(window.i18n, string);
-
-// console.log(trans('auth.unknown'))
 // Vue.prototype.trans = string => _.get(window.i18n, string);
 Vue.prototype.trans = (string, args) => {
     let value = _.get(window.i18n, string);

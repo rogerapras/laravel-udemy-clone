@@ -4,7 +4,7 @@
     <base-installer-requirements inline-template>
         <div class="card border border-secondary mb-4" v-cloak>
             <div class="card-header bg-white py-4">
-                <h2 class="h4 m-0">Server Requirements</h2>
+                <h2 class="h4 m-0">@lang('strings.server_requirements')</h2>
             </div>
 
             <div class="card-body p-1 d-flex flex-column align-items-center justify-content-center" 
@@ -13,19 +13,15 @@
                 <template v-if="Object.keys(requirements).length > 0 && errors == 0">
                     <div class="alert alert-success text-center font-13">
                         <p>
-                            Your server seems to meet the minimum requirements to run the application. Click on "NEXT".
+                        @lang('install.requirements_description')
+                            
                         </p>
                     </div>
                 </template>
                 <template v-if="Object.keys(requirements).length > 0 && errors > 0">
                     <div class="alert alert-danger text-center font-13">
-                        <p>Address the following server issues. Please fix them and run the check again</p>
+                        <p>@lang('install.requirements_title')</p>
                     </div>
-                    <!-- <ul class="fa-ul">
-                        <li v-for="item in messages">
-                            <i class="fa-li fa fa-times-circle text-danger"></i>@{{ item }}
-                        </li>
-                    </ul> -->
                 </template>
 
                 <ul class="list-group w-100" style="font-size: 13px;">
@@ -46,15 +42,12 @@
                 </ul>
             </div>
             <div class="card-footer bg-transparent d-flex justify-content-end">
-                <!-- <a href="{{ route('frontend.installer.index') }}" class="btn btn-sm rounded-0 btn-info">
-                    Previous
-                </a> -->
                 <a href="{{ route('frontend.installer.database') }}" class="btn btn-sm rounded-0 btn-info" 
                     v-if="Object.keys(requirements).length > 0 && errors == 0">
-                    Next
+                    @lang('install.next')
                 </a>
                 <button @click.prevent="checkRequirements()" class="btn btn-sm rounded-0 btn-danger" v-else>
-                    Re-run check
+                @lang('install.rerun_check')
                 </button>
             </div>
         </div>

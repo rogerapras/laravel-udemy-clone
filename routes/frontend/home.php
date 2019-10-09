@@ -46,8 +46,6 @@ Route::group(['middleware' => 'is_not_installed'], function(){
     Route::get('page/{slug}', 'PageController@show')->name('page');
 
     Route::get('/', [HomeController::class, 'index'])->name('index');
-    // Route::get('contact', [ContactController::class, 'index'])->name('contact');
-    // Route::post('contact/send', [ContactController::class, 'send'])->name('contact.send');
     
     Route::get('courses/{category}/{subcategory?}', 'CategoryController@index')->name('category');
     Route::get('course/{slug}', 'CourseController@show')->name('course.show');

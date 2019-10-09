@@ -72,7 +72,6 @@ class RevenueRepository  extends RepositoryAbstract implements IRevenue
         }
         
         $res = array(
-            //['name' => 'total sales', 'data' => $total_sales ],
             ['name' => trans('strings.your_promotion'), 'data' => $promo_sales ],
             ['name' => trans('strings.organic_sales'), 'data' => $organic_sales ],
             ['name' => trans('strings.refunds'), 'data' => $refund ]

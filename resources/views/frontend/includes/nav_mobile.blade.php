@@ -18,11 +18,6 @@
                 
                 <div class="search_icon">
                     <div class="d-flex align-items-center justify-content-between">
-                        <!-- <a href="#" role="button" @click.prevent="showSearch=!showSearch">
-                            <i class="fa fa-search font-25" v-if="!showSearch"></i>
-                            <i class="fa fa-times-circle font-25" v-else></i>
-                        </a> -->
-
                         <base-nav-cart inline-template>
                             <a href="/cart" class="gabs__dropdown-toggle gabs__hover_grey" role="button">
                                 <div class="fx pos-r text-center">

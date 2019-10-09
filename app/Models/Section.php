@@ -10,9 +10,7 @@ class Section extends Model
     use Uuid;
     
     protected $fillable=['uuid', 'title', 'objective', 'uuid', 'course_id', 'sortOrder'];
-    
-    //protected $appends=['total_minutes', 'durationHMS'];
-    
+        
     public function course()
     {
         return $this->belongsTo(Course::class);
@@ -22,21 +20,5 @@ class Section extends Model
     {
         return $this->hasMany(Lesson::class)->orderBy('sortOrder');
     }
-    
-    
-    // public function getTotalMinutesAttribute()
-    // {
-    //     $minutes = $this->join('lessons', 'sections.id', '=', 'lessons.section_id')
-    //                     ->where('sections.id', $this->id)
-    //                     ->sum('lessons.duration');
-                        
-    //     return $minutes;
-    // }
-    
-    // public function getDurationHMSAttribute()
-    // {
-    //     return convert_minutes_to_duration($this->total_minutes);
-    // } 
-
     
 }

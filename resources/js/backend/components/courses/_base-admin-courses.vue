@@ -82,7 +82,6 @@
                         'author.full_name': this.trans('strings.instructor'),
                         'category.name': this.trans('strings.category'),
                         'approved': this.trans('strings.status'),
-                        //'average_review': this.trans('strings.average_review'),
                         'price': this.trans('strings.price'),
                         'details': '',
                         'created_at': this.trans('strings.created_at')
@@ -111,10 +110,6 @@
             refreshTable(){
                 this.$refs.datatable.refresh()
             }
-        },
-
-        beforeMount(){
-            //this.fetchSubcategories()
         }
     }
     

@@ -66,6 +66,7 @@ class AuthorContentController extends Controller
     
     public function store(Request $request)
     {
+
         if($request->type=='youtube'){
             $this->validate($request, [
                 'url' => 'required|url|youtube',

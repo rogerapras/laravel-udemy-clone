@@ -91,7 +91,6 @@
                         'expected_payout_date': this.trans('strings.payout_date'),
                         'processed_at': this.trans('strings.date_processed'),
                         'payout_batch_status': this.trans('strings.payout_gateway_status'),
-                        //'comment': this.trans('strings.comment'),
                         'action': ''
                     },
                     filterByColumn:false,
@@ -146,7 +145,7 @@
                 this.form.payout = await id
                 await this.form.post(`/api/admin/send_reminder_for_paypal_email`)
                     .then(response => {
-                        //console.log(response)
+                        
                     })
             }
         }

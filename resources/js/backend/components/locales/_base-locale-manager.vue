@@ -89,7 +89,6 @@ import XEditable from './EditableContent.vue'
 
 export default {
     components: {
-        //XEditable,
         LanguageList
     },
     

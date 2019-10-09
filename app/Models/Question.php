@@ -40,14 +40,7 @@ class Question extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
-    
-    
-    /*
-    public function follows()
-    {
-        return $this->morphMany(Follow::class, 'followable');
-    }
-    */
+
     public function hasBeenAnswered()
     {
         return (bool)$this->comments()->where('marked_as_answer', true)->count();

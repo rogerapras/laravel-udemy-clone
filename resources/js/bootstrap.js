@@ -41,17 +41,20 @@ axios.interceptors.response.use(
     }
 );
 
-$(window).scroll(function(){
-    if ($(this).scrollTop() > 130) {
-        $('.course_details__preview').addClass('fixed');
-        $('.clp-component-render').addClass('d-none');
-        $('.fullwidth__fixed').removeClass('d-none');
-    } else {
-        $('.course_details__preview').removeClass('fixed');
-        $('.clp-component-render').removeClass('d-none');
-        $('.fullwidth__fixed').addClass('d-none');
-    }
-});
+(function($) { 
+    "use strict"; 
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 130) {
+            $('.course_details__preview').addClass('fixed');
+            $('.clp-component-render').addClass('d-none');
+            $('.fullwidth__fixed').removeClass('d-none');
+        } else {
+            $('.course_details__preview').removeClass('fixed');
+            $('.clp-component-render').removeClass('d-none');
+            $('.fullwidth__fixed').addClass('d-none');
+        }
+    });
+})(jQuery);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

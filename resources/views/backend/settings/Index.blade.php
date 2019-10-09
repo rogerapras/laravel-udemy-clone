@@ -27,10 +27,7 @@
                     <i class="fas fa-envelope"></i>
                     @lang('strings.mail_settings')
                 </a>
-                <!-- <a class="list-group-item list-group-item-action" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-language" role="tab" aria-controls="v-pills-language" aria-selected="false">
-                    <i class="fas fa-comments"></i>
-                    @lang('strings.language_settings')
-                </a> -->
+                
                 <a class="list-group-item list-group-item-action" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-license" role="tab" aria-controls="v-pills-license" aria-selected="false">
                     <i class="fas fa-id-card"></i>
                     @lang('strings.license_information')
@@ -59,9 +56,7 @@
                 <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                     <base-mail-settings></base-mail-settings>
                 </div>
-                <!-- <div class="tab-pane fade" id="v-pills-language" role="tabpanel" aria-labelledby="v-pills-language-tab">
-                    <base-language-settings></base-language-settings>
-                </div> -->
+                
                 <div class="tab-pane fade" id="v-pills-license" role="tabpanel" aria-labelledby="v-pills-license-tab">
                     <base-license-information></base-license-information>
                 </div>

@@ -23,11 +23,10 @@ class Lesson extends Model
         'sortOrder'
     ];
     
-    protected $appends=[ //'content_type', 
+    protected $appends=[ 
                             'durationHMS', 
                             'video_provider', 
                             'video_link', 
-                            //'article_body', 
                             'minutes_seconds', 
                             'image',
                             'user_has_completed',

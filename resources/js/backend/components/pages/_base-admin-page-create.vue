@@ -84,7 +84,6 @@ export default {
             await this.form.post(`/api/admin/pages`)
                 .then(response => {
                     window.location.href=`/admin/pages/${response.data.uuid}`
-                    //console.log("Updated")
                 })
         },
 

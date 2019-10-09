@@ -4,21 +4,6 @@
             <div class="col-md-8">
                 <fieldset>
                     <legend class="scheduler-border">{{ trans('strings.site_settings') }}</legend>
-                    <!-- <div class="form-group row mb-1">
-                        <label class="col-md-4 form-control-label">{{ trans('strings.site_mode') }}</label>
-                        <div class="col-md-8">
-                            <div class="form-group rowx mb-1">
-                                <div class="custom-control custom-checkbox mr-sm-2 font-14 fw-300 mb-0">
-                                    <input id="enable_demo_mode" name="enable_demo_mode" :value="true" v-model="form.enable_demo_mode" 
-                                        class="custom-control-input rounded-0" 
-                                        type="checkbox">
-                                    <label class="custom-control-label" for="enable_demo_mode">
-                                        {{ trans('strings.enable_demo_mode') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="form-group row mb-1">
                         <label class="col-md-4 form-control-label">{{ trans('strings.redirect_https') }}</label>
                         <div class="col-md-8 ">
@@ -123,7 +108,6 @@
                         {{ error }}
                     </div>
                     <div class="form-group row mb-1">
-                        <!-- <label class="col-md-4 form-control-label">{{ trans('strings.site_logo') }}</label> -->
                         <div class="col-md-12">
                             <div class="mb-2">
                                 <img :src="form.logo" width="200" class="rounded" />
@@ -148,7 +132,6 @@
                         </div>
                     </div>
                     <div class="form-group row mb-1">
-                        <!-- <label class="col-md-4 form-control-label">{{ trans('strings.site_favicon') }}</label> -->
                         <div class="col-md-12">
                             <div class="mb-2">
                                 <img :src="form.favicon" width="50" class="rounded" />
@@ -174,7 +157,6 @@
                     </div>
 
                     <div class="form-group row mb-1">
-                        <!-- <label class="col-md-4 form-control-label">{{ trans('strings.site_favicon') }}</label> -->
                         <div class="col-md-12">
                             <div class="mb-2">
                                 <img :src="form.homepage_image" width="250" class="rounded" />
@@ -231,7 +213,6 @@ export default {
             isLoading: false,
             site_currencies: [],
             croper_options: {
-                //aspectRatio: 16 / 9,
                 autoCropArea: 1
             },
             form: new Form({
