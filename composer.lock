@@ -67,23 +67,23 @@
         },
         {
             "name": "altek/accountant",
-            "version": "v1.2.2",
+            "version": "v1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/altek/accountant.git",
-                "reference": "fd3ec3a1370c2a543b9b04a535d81e44d6c63722"
+                "reference": "7ac5a347a8f0801e2e7ae45f92d7ff007f9582e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/altek%2Faccountant/repository/archive.zip?sha=fd3ec3a1370c2a543b9b04a535d81e44d6c63722",
-                "reference": "fd3ec3a1370c2a543b9b04a535d81e44d6c63722",
+                "url": "https://gitlab.com/api/v4/projects/altek%2Faccountant/repository/archive.zip?sha=7ac5a347a8f0801e2e7ae45f92d7ff007f9582e0",
+                "reference": "7ac5a347a8f0801e2e7ae45f92d7ff007f9582e0",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "illuminate/console": "^5.2 || 6.0.* || 6.1.*",
-                "illuminate/database": "^5.2 || 6.0.* || 6.1.*",
-                "illuminate/filesystem": "^5.2 || 6.0.* || 6.1.*",
+                "illuminate/console": "^5.2 || ^6.0",
+                "illuminate/database": "^5.2 || ^6.0",
+                "illuminate/filesystem": "^5.2 || ^6.0",
                 "php": "^7.1.3"
             },
             "require-dev": {
@@ -141,24 +141,24 @@
                 "lumen",
                 "record"
             ],
-            "time": "2019-10-07T20:52:26+00:00"
+            "time": "2019-10-09T09:21:47+00:00"
         },
         {
             "name": "altek/eventually",
-            "version": "v1.0.6",
+            "version": "v1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/altek/eventually.git",
-                "reference": "9261b7867c3a26963fab7745d840b08bd7bbd403"
+                "reference": "a1f5a3e21b4a638b5015a3842746391b475be203"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/altek%2Feventually/repository/archive.zip?sha=9261b7867c3a26963fab7745d840b08bd7bbd403",
-                "reference": "9261b7867c3a26963fab7745d840b08bd7bbd403",
+                "url": "https://gitlab.com/api/v4/projects/altek%2Feventually/repository/archive.zip?sha=a1f5a3e21b4a638b5015a3842746391b475be203",
+                "reference": "a1f5a3e21b4a638b5015a3842746391b475be203",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^5.5 || 6.0.* || 6.1.*",
+                "illuminate/database": "^5.5 || ^6.0",
                 "php": "^7.1.3"
             },
             "require-dev": {
@@ -204,7 +204,7 @@
                 "toggle",
                 "update"
             ],
-            "time": "2019-10-07T20:35:16+00:00"
+            "time": "2019-10-09T08:57:21+00:00"
         },
         {
             "name": "arcanedev/log-viewer",
@@ -332,16 +332,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.112.16",
+            "version": "3.112.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "782f304ef4dc2fa73f5ecfbb49fcba46238ed541"
+                "reference": "3f9a88fd8ae93f040d583d19b1b8242604d99080"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/782f304ef4dc2fa73f5ecfbb49fcba46238ed541",
-                "reference": "782f304ef4dc2fa73f5ecfbb49fcba46238ed541",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3f9a88fd8ae93f040d583d19b1b8242604d99080",
+                "reference": "3f9a88fd8ae93f040d583d19b1b8242604d99080",
                 "shasum": ""
             },
             "require": {
@@ -411,7 +411,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-10-07T18:13:37+00:00"
+            "time": "2019-10-08T18:13:19+00:00"
         },
         {
             "name": "barryvdh/laravel-translation-manager",
@@ -2673,9 +2673,9 @@
             "authors": [
                 {
                     "name": "Ben Corlett",
-                    "role": "Developer",
                     "email": "bencorlett@me.com",
-                    "homepage": "http://www.webcomm.com.au"
+                    "homepage": "http://www.webcomm.com.au",
+                    "role": "Developer"
                 }
             ],
             "description": "OAuth 1.0 Client Library",
@@ -8028,8 +8028,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "homepage": "https://github.com/filp",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "homepage": "https://github.com/filp"
                 }
             ],
             "description": "php error handling for cool kids",
@@ -10323,8 +10323,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
