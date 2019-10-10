@@ -8,7 +8,7 @@
                 <h2 class="h3 m-0">@lang('install.database_config')</h2>
             </div>
             <div class="card-body" style="min-height: 50vh;">
-                {!! __('install.site_uses_mysql') !!}
+                {!! clean(__('install.site_uses_mysql')) !!}
                 <hr />
                 <alert-error :form="form" :message="form.errors.get('message')"></alert-error>
                 <alert-success :form="form" message="Connection successful. Click NEXT to proceed"></alert-success>

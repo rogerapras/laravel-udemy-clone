@@ -21,7 +21,7 @@
                             <h3 class="h5 font-weight-light">
                                 {{ app_name() }}
                             </h3>
-                            <p>{!! setting('site.site_address') !!}</p>
+                            <p>{!! clean(setting('site.site_address')) !!}</p>
                         </div>
                         
                         <div>

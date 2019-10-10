@@ -9,68 +9,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('title', app_name())</title>
-        <meta name="description" content="@yield('meta_description', 'Laravel 5 Boilerplate')">
-        <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
+        <meta name="description" content="@yield('meta_description', 'ArcInspire')">
+        <meta name="author" content="@yield('meta_author', 'ArcInspire')">
         @yield('meta')
         {{ style(mix('css/frontend.css')) }}
+        <link href="/css/installer.css" rel="stylesheet">
 
-        <style>
-            body{
-                background: #F4F4F4 !important;
-            }
-            [v-cloak]{
-                display: none;
-            }
-
-            .progressbar {
-                counter-reset: step;
-            }
-            .progressbar li {
-                list-style-type: none;
-                width: 16.66%;
-                float: left;
-                font-size: 12px;
-                position: relative;
-                text-align: center;
-                text-transform: uppercase;
-                color: #adadad;
-            }
-            .progressbar li:before {
-                width: 30px;
-                height: 30px;
-                content: counter(step);
-                counter-increment: step;
-                line-height: 30px;
-                border: 2px solid #7d7d7d;
-                display: block;
-                text-align: center;
-                margin: 0 auto 10px auto;
-                border-radius: 50%;
-                background-color: white;
-            }
-            .progressbar li:after {
-                width: 100%;
-                height: 2px;
-                content: '';
-                position: absolute;
-                background-color: #7d7d7d;
-                top: 15px;
-                left: -50%;
-                z-index: -1;
-            }
-            .progressbar li:first-child:after {
-                content: none;
-            }
-            .progressbar li.active {
-                color: green;
-            }
-            .progressbar li.active:before {
-                border-color: #55b776;
-            }
-            .progressbar li.active + li:after {
-                background-color: #55b776;
-            }
-        </style>
     </head>
     <body class="hold-transition h-100">
         <div id="app">

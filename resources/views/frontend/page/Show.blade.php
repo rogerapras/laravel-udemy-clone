@@ -16,7 +16,7 @@
 
     <section class="py-4">
         <div class="container">
-            {!! $page->body !!}
+            {!! clean($page->body) !!}
         </div>
     </section>
 

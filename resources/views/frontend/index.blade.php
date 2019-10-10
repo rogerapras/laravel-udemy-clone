@@ -4,6 +4,10 @@
 
 @push('after-styles')
     <style>
+        /*
+            This stype has to be in the view file because it is using 
+            a variable from the database
+        */
         .homepage .hero:before {
             content: "";
             position: absolute;
