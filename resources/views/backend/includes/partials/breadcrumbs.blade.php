@@ -20,7 +20,7 @@
                 <div v-cloak>
                     @if($currentVersion['success'] == true)
                         @if($currentVersion['update_required'])
-                            {!! __('strings.version_available', ['version' => $currentVersion['version']])  !!} 
+                            {!! clean(__('strings.version_available', ['version' => $currentVersion['version']]))  !!} 
                             <button :disabled="form.busy" class="badge badge-danger rounded-0" @click.prevent="update()">
                                 <span v-if="form.busy">
                                     <i class="fa fa-cog fa-spin"></i> @lang('strings.running_wait') 

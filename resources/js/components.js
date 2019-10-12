@@ -4,8 +4,6 @@ var App = Object.freeze({
   version: '2.1.4',
   helpers: {
     trans: (string) => _.get(window.i18n, string),
-    // This is a purely functional version of
-    // the $reverseText method we saw earlier
     reverseText: function(text) {
       return text
         .split('')
@@ -14,7 +12,6 @@ var App = Object.freeze({
     }
   }
 })
-//console.log(App.helpers.trans('strings.cancel'));
 
 /******************** */
 import Vue from 'vue'
@@ -34,7 +31,6 @@ import {ServerTable, ClientTable, Event} from 'vue-tables-2'
 
 Vue.use(ClientTable, {
   texts:{
-    //count:"Showing {from} to {to} of {count} records|{count} records|One record",
     count: '',
     first: App.helpers.trans('strings.first'),
     last: App.helpers.trans('strings.last'), //'Last',
@@ -43,9 +39,7 @@ Vue.use(ClientTable, {
     limit: App.helpers.trans('strings.records'), //"Records:",
     page: App.helpers.trans('strings.page'), //"Page:",
     noResults: App.helpers.trans('strings.no_matching_records'), //"No matching entries",
-    //filterBy: App.helpers.trans('strings.filter_by_column'), //"Filter by {column}",
     loading: App.helpers.trans('strings.loading'), //'Loading...',
-    //defaultOption: 'Select {column}',
     columns: App.helpers.trans('strings.columns'), //'Columns'
   },
   filterable: false,
@@ -78,7 +72,6 @@ Vue.use(ClientTable, {
 
 Vue.use(ServerTable, {
   texts:{
-    //count:"Showing {from} to {to} of {count} records|{count} records|One record",
     count: '',
     first: App.helpers.trans('strings.first'),
     last: App.helpers.trans('strings.last'), //'Last',
@@ -87,9 +80,7 @@ Vue.use(ServerTable, {
     limit: App.helpers.trans('strings.records'), //"Records:",
     page: App.helpers.trans('strings.page'), //"Page:",
     noResults: App.helpers.trans('strings.no_matching_records'), //"No matching entries",
-    //filterBy: App.helpers.trans('strings.filter_by_column'), //"Filter by {column}",
     loading: App.helpers.trans('strings.loading'), //'Loading...',
-    //defaultOption: 'Select {column}',
     columns: App.helpers.trans('strings.columns'), //'Columns'
   },
   filterable: false,
@@ -108,7 +99,6 @@ Vue.use(ServerTable, {
   },
   perPage:10,
   perPageValues:[],
-  //perPageValues:[5,10,25,50,100],
   footerHeadings: false,
   columnsDropdown: false,
   skin: 'table table-responsive-sm table-sm table-bordered table-outline',
@@ -209,16 +199,9 @@ Vue.use(wysiwyg, {
     "table": true,
     "link": true
   },
-  // if the image option is not set, images are inserted as base64
-  // image: {
-  //   uploadURL: "/api/myEndpoint",
-  //   dropzoneOptions: {}
-  // },
   forcePlainTextOnPaste: true
 }); // config is optional. more below
 import "vue-wysiwyg/dist/vueWysiwyg.css"
-
-
 
 const bus = {}
 bus.install = function (Vue) {

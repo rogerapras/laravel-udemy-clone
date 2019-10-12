@@ -62,13 +62,13 @@
         <div class="row">
             <div class="col-7">
                 <div class="float-left">
-                    {!! $users->total() !!} {{ trans_choice('labels.backend.access.users.table.total', $users->total()) }}
+                    {!! clean($users->total()) !!} {{ trans_choice('labels.backend.access.users.table.total', $users->total()) }}
                 </div>
             </div><!--col-->
 
             <div class="col-5">
                 <div class="float-right">
-                    {!! $users->render() !!}
+                    {!! clean($users->render()) !!}
                 </div>
             </div><!--col-->
         </div><!--row-->
