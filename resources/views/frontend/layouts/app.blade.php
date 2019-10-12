@@ -14,7 +14,11 @@
 @endphp
 
 <!DOCTYPE html>
+@langrtl
+    <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
+@else
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@endlangrtl
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -39,9 +43,12 @@
         @stack('after-styles')
     </head>
     <body>
+        
+
         @include('includes.partials.read-only')
         
         <div id="app">
+        
             <div id="wrapper">
                 <div class="wrapper-inner" style="min-height: 100%;margin-bottom: -100px;">
                     @include('includes.partials.logged-in-as')
@@ -89,15 +96,15 @@
                                             </li>
                                         @endforeach
                                     </ul>
-                                    <div class="d-flex align-items-center ml-2 justify-content-end">
+                                    <div class="d-flex align-items-center ml-2 mr-2 justify-content-end">
                                         <!-- CURRENCY -->
-                                        <div>
+                                        <div class="ml-2">
                                             <base-currency-switcher></base-currency-switcher>
                                         </div>
 
                                         <!-- LANGUAGE -->
                                         @if(count(active_languages()) > 1)
-                                            <div class="dropup" class="ml-3">
+                                            <div class="dropup ml-3">
                                                 <button class="btn btn-outline-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fas fa-globe"></i>
                                                     <span class="text-uppercase">{{ app()->getLocale() }}</span>

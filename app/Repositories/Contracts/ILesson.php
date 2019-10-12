@@ -11,6 +11,7 @@ interface ILesson extends IRepository
     public function findByUuid($uuid);
     public function markAsComplete($id);
     public function findById($id);
+    public function addAttachment(array $data);
 
 
 }

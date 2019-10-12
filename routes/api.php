@@ -180,7 +180,10 @@ Route::group(['namespace' => 'Api\v1', 'middleware' => ['check_demo', 'XSS']], f
 
     Route::group(['namespace' => 'Author'], function () {
         Route::post('courses/upload-cover-image/{id}', 'AuthorCourseController@uploadCoverImage');
+        Route::get('courses/{id}/attachments', 'AuthorCourseController@getAttachments');
+        Route::delete('attachments/{id}', 'AuthorCourseController@deleteAttachment');
         Route::post('lessons/{id}/video/upload', 'AuthorContentController@uploadVideo');
+        Route::post('lessons/{id}/attachments', 'AuthorContentController@uploadAttachments');
         
         // ******* Authenticated Author Routes ******************
         Route::group(['middleware' => 'web'], function () {

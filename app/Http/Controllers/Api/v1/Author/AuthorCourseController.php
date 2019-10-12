@@ -148,6 +148,16 @@ class AuthorCourseController extends Controller
         return response()->json($send, 200);
         
     }
+
+    public function getAttachments(Request $request)
+    {
+        return $this->courses->getAttachments($request->id);
+    }
+
+    public function deleteAttachment($id)
+    {
+        $this->courses->deleteAttachment($id);
+    }
     
     
     protected function formatImage($file)
@@ -157,4 +167,8 @@ class AuthorCourseController extends Controller
                             $c->aspectRatio();
                         })->encode();
     }
+
+
+
+
 }

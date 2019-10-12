@@ -42,11 +42,11 @@
                                 </div>
                             </div>
 
-                            <div class="mr-3 form-group">
+                            <div class="form-group" v-if="groups.length">
                                 <div class="row">
-                                    <label class="col-md-8 pr-0 text-right">{{ trans('strings.translation_group') }}: </label>
-                                    <div class="col-md-4 pl-0">
-                                        <select class="form-control text-capitalize" v-model="selected_group" @change="fetchTranslationsForLocale()">
+                                    <label class="col-md-6 pr-0 text-right">{{ trans('strings.group') }}: </label>
+                                    <div class="col-md-6 pl-0">
+                                        <select class="form-control w-100 text-capitalize" style="min-width: 200px;" v-model="selected_group" @change="fetchTranslationsForLocale()">
                                             <option v-for="group in groups" :key="group" :value="group">
                                                 {{ group.charAt(0).toUpperCase() + group.slice(1)  }}
                                             </option>

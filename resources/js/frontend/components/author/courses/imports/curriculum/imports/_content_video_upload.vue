@@ -21,33 +21,19 @@
                         :on-progress="uploadProgress"
                         :limit="1"
                         list-type="text">
-                        <el-button slot="trigger" size="small" type="primary" v-if="!fileSelected"><i class="fas fa-cloud-upload-alt"></i> Choose Video File</el-button>
-                        <!-- <el-button size="small" type="warning" @click.prevent="submitUpload" v-if="fileSelected"><i class="fas fa-cloud-upload-alt"></i> Upload</el-button> -->
-                        <div class="el-upload__tip" slot="tip" v-if="!fileSelected">mp4 / mpeg files with a size less than {{window_max_size}}mb</div>
+                        <el-button slot="trigger" size="small" type="primary" v-if="!fileSelected">
+                            <i class="fas fa-cloud-upload-alt"></i> {{ trans('strings.choose_video_file') }}
+                        </el-button>
+                        <div class="el-upload__tip" slot="tip" v-if="!fileSelected">
+                            {{ trans('strings.video_format_explanation', {size: `${window_max_size}mb`}) }}
+                        </div>
                     </el-upload>
                 </div>
 
                 <el-button :disabled="uploading" size="small" type="warning" @click.prevent="submitUpload" v-if="fileSelected">
-                    <i class="fas fa-cloud-upload-alt"></i> Upload
+                    <i class="fas fa-cloud-upload-alt"></i> {{ trans('strings.upload') }}
                 </el-button>
-                <!-- <button :disabled="uploading" type="button" class="btn btn-warning" @click.prevent="submitUpload" v-if="fileSelected"><i class="fas fa-cloud-upload-alt"></i> Upload</button> -->
             </div>
-
-            <!-- <div class="col-md-12">
-                <div class="mb-3">Max video size allowed: {{window_max_size}}MB</div>
-                <div class="text-danger mb-2" v-if="error">{{ error }}</div>
-                <file-upload 
-                    ref="uploader"
-                    :url='url'
-                    :max-size="max_size" 
-                    btn-label=" Select Video (.mp4, .mpeg)"
-                    btn-uploading-label="Uploading..."
-                    :accept="accept"
-                    @error="handleError"
-                    @success="fileSuccess"
-                    @progress="fileProgress"
-                    @change="onFileChange"></file-upload>
-            </div> -->
         </div>
         
         <div class="row mt-4">
@@ -71,11 +57,8 @@
                 uploading: false,
                 fileSelected: false,
                 window_max_size: null,
-                //max_size: 10000000,
                 error: '',
                 url: `/api/lessons/${this.lesson.id}/video/upload`,
-                //headers: {'access-token': '<your-token>'},
-                //filesUploaded: [],
                 accept: '.mp4,.mpeg'
             }
         },
@@ -103,7 +86,7 @@
             },
 
             handleExceed(files, fileList) {
-                this.$vmessage.warning(`The limit is 3, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);
+                this.$vmessage.warning(`The limit is 1, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);
             },
 
             beforeRemove(file, fileList) {
@@ -139,9 +122,7 @@
                 //console.log(value)
             },
             
-            cancel(){
-                this.$bus.$emit('upload:cancelled', this.lesson.id)
-            },
+            
             
             onFileChange(file){
                 this.fileUploaded = file

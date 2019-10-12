@@ -46,5 +46,7 @@ interface ICourse extends IRepository
     public function getAutocomplete($search_term);
 
     public function getFirstVideoLesson($course);
+
+    public function getAttachments($id);
     
 }

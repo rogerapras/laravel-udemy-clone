@@ -26,8 +26,8 @@ class SectionRepository extends RepositoryAbstract implements ISection
     
     public function findByCourse($id)
     {
-        $sections = Section::where('course_id', $id)->orderBy('sortOrder')->get();
-        return SectionResource::collection($sections);
+        $sections = Section::where('course_id', $id)->with('lessons')->orderBy('sortOrder')->get();
+        return $sections;
     }
     
     

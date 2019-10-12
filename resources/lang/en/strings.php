@@ -753,7 +753,15 @@ return [
     "send_email_reminder" => "Send email reminder to :user",
     "are_you_sure_to_submit" => "Are you sure you are ready to submit this course for Admin approval?",
     "confirm_action" => "Confirm action",
-
+    "course_attachments" => "Attach course resources",
+    "max_video_size" => "File size less than :size. Max :number attachments at a time",
+    "choose_attachment" => "Choose Attachment",
+    "no_attachments" => "No Attachments uploaded yet",
+    "select_a_lesson" => "Select a lesson",
+    "choose_video_file" => "Choose video file",
+    "video_format_explanation" => "mp4 / mpeg files with a size less than :size",
+    "attachment_explanation" => "You can upload resources to any lesson here. Please pick a lesson and upload relevant attachments.",
+    "group" => "Group"
     
 
 

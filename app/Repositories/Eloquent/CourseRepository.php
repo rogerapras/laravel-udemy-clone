@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Course;
 use App\Models\Category;
+use App\Models\Attachment;
 use App\Repositories\Contracts\ICourse;
 use App\Http\Resources\CourseResource;
 use Illuminate\Http\Request;
@@ -299,8 +300,25 @@ class CourseRepository  extends RepositoryAbstract implements ICourse
 	    return $data;
     }
 
+    public function getAttachments($id)
+    {
+        $attachments = Attachment::whereHas('lesson', function($q) use ($id) {
+            $q->where('course_id', $id);
+        })
+        ->with('lesson')
+        ->get();
 
+        return $attachments;
+    }
     
+    public function deleteAttachment($id)
+    {
+        $attachment = Attachment::find($id);
+        if(\Storage::disk('server')->exists('attachments/'.$attachment->file_name)){
+            \Storage::disk('server')->delete('attachments/'.$attachment->file_name);
+        }
+        $attachment->delete();
+    }
     
     public function resetProgress($id)
     {

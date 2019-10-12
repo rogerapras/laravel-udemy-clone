@@ -28,6 +28,7 @@ return [
         'none' => 'لا شيء',
         'show' => 'إظاهر',
         'toggle_navigation' => 'تبديل شريط التنقل',
+        'copyright' => 'حقوق النشر'
     ],
 
     'backend' => [

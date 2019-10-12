@@ -33,6 +33,10 @@ class Lesson extends Model
                             'video_links'
                         ];
 
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class);
+    }
     
     public function section()
     {

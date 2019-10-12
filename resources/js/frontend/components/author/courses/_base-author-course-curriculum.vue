@@ -8,17 +8,50 @@
                         {{ trans('strings.lessons') }}
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mr-2">
                     <a class="nav-link border border-secondary" data-toggle="tab" href="#course-sections">
                         {{ trans('strings.sections') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link border border-secondary" data-toggle="tab" href="#course-attachments">
+                        {{ trans('strings.course_attachments') }}
                     </a>
                 </li>
             </ul>
             
 
             <div class="tab-content tc-post-grid-style1 mt-0 p-0 sec-spacer">
+                <!-- SECTIONS -->
+                <div id="course-sections" class="tab-pane in active">
+                    <div class="card card-body border">
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="tc-accordion" id="sectionAccordion">
+                                    <draggable style="min-height: 10px;"
+                                        v-model="sections" 
+                                        :options="{draggable:'.dragme', pull: 'true', ghostClass: 'sortable-ghost'}"
+                                        @change="updateSectionSort">
+                                            <inc-course-section v-for="(section, index) in sections" 
+                                                :key="section.id" 
+                                                :index="index" 
+                                                :section="section"
+                                                v-bind="{ findSectionsByCourse }">
+                                            </inc-course-section>
+                                    </draggable>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-4">
+                                <inc-edit-section-form v-if="editing" v-bind="{ findSectionsByCourse }" :section = "selectedSection"></inc-edit-section-form>
+                                <inc-create-section-form v-else v-bind="{ findSectionsByCourse }" :course_id="course.id"></inc-create-section-form>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/ END SECTIONS -->
+
                 <!-- LESSONS -->
-                <div id="course-lessons" class="tab-pane in active">
+                <div id="course-lessons" class="tab-pane">
                     <div class="row">
                         <div class="col-md-12">
                             <inc-lesson-section v-for="section in sections" :section="section" :key="section.id"></inc-lesson-section>
@@ -49,33 +82,13 @@
                     </div>
                 </div>
                 
-                <!-- SECTIONS -->
-                <div id="course-sections" class="tab-pane">
-                    <div class="card card-body border">
-                        <div class="row">
-                            
-                            <div class="col-md-12">
-                                <div class="tc-accordion" id="sectionAccordion">
-                                    <draggable style="min-height: 10px;"
-                                        v-model="sections" 
-                                        :options="{draggable:'.dragme', pull: 'true', ghostClass: 'sortable-ghost'}"
-                                        @change="updateSectionSort">
-                                            <inc-course-section v-for="(section, index) in sections" 
-                                                :key="section.id" 
-                                                :index="index" 
-                                                :section="section"
-                                                v-bind="{ findSectionsByCourse }">
-                                            </inc-course-section>
-                                    </draggable>
-                                </div>
-                            </div>
-                            <div class="col-md-12 mt-4">
-                                <inc-edit-section-form v-if="editing" v-bind="{ findSectionsByCourse }" :section = "selectedSection"></inc-edit-section-form>
-                                <inc-create-section-form v-else v-bind="{ findSectionsByCourse }" :course_id="course.id"></inc-create-section-form>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--/ END SECTIONS -->
+                
+
+                <!-- ATTACHMENTS -->
+                <div id="course-attachments" class="tab-pane">
+                    <inc-attachments :lessons="lessons" :course_id="course.id"></inc-attachments>
+                </div>
+
             </div>
         </div>
     </div>
@@ -87,6 +100,7 @@
     import IncCreateSectionForm from './imports/curriculum/_create_section_form'
     import IncEditSectionForm from './imports/curriculum/_edit_section_form'
     import IncLessonSection from './imports/curriculum/_lesson_section'
+    import IncAttachments from './imports/curriculum/_attachments'
 
     import { mapGetters, mapState } from 'vuex'
     import axios from 'axios'
@@ -98,7 +112,8 @@
             IncCreateLessonForm,
             IncCreateSectionForm,
             IncEditSectionForm,
-            IncLessonSection
+            IncLessonSection,
+            IncAttachments
         },
         data: () => ({
             creatingLesson: false,
@@ -114,14 +129,11 @@
             })
         }),
         
-        // watch:{
-        //     sections:{
-        //         deep: true,
-        //         handler(section){
-
-        //         }
-        //     }
-        // },
+        computed:{
+            lessons(){
+                return this.sections.map(s => s.lessons).flat();
+            }
+        },
         methods: {
             findSectionsByCourse(){
                 axios.get(`/api/sections/findByCourse/${this.course.id}`)

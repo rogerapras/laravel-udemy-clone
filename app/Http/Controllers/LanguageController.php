@@ -15,7 +15,10 @@ class LanguageController extends Controller
     public function swap($locale)
     {
         \Cache::forget('lang.js');
-        if (array_key_exists($locale, config('locale.languages'))) {
+
+        $language = \App\Models\Language::where('carbon_code', $locale)->first();
+
+        if (! empty($language)) {
             session()->put('locale', $locale);
         }
 

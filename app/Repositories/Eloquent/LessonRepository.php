@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Lesson;
 use App\Models\Section;
+use App\Models\Attachment;
 use App\Repositories\Contracts\ILesson;
 use App\Http\Resources\LessonResource;
 use App\Events\UpdateCourseStats;
@@ -165,6 +166,12 @@ class LessonRepository extends RepositoryAbstract implements ILesson
         
         return response()->json(null, 200);
         
+    }
+
+    public function addAttachment(array $data)
+    {
+        $attachment = Attachment::create($data); 
+        return $attachment;
     }
     
     

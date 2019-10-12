@@ -1,15 +1,15 @@
 <template>
     <tr>
         <td>
-            <input class="form-control form-control-sm" v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" />
+            <input disabled class="form-control form-control-sm" v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" />
             <has-error :form="form" field="name"/>
         </td>
         <td>
-            <input class="form-control form-control-sm" v-model="form.carbon_code" :class="{ 'is-invalid': form.errors.has('carbon_code') }" />
+            <input disabled class="form-control form-control-sm" v-model="form.carbon_code" :class="{ 'is-invalid': form.errors.has('carbon_code') }" />
             <has-error :form="form" field="carbon_code"/>
         </td>
         <td>
-            <input class="form-control form-control-sm" v-model="form.php_code" :class="{ 'is-invalid': form.errors.has('php_code') }"/>
+            <input disabled class="form-control form-control-sm" v-model="form.php_code" :class="{ 'is-invalid': form.errors.has('php_code') }"/>
             <has-error :form="form" field="php_code"/>
         </td>
         <td class="d-flex">

@@ -89,6 +89,14 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link {{active_class(Route::is('admin/locales')) }}" 
+                        href="{{ route('admin.locales.index') }}">
+                        <i class="nav-icon fas fa-globe"></i>
+                        @lang('strings.languages')
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link {{ active_class(Route::is('admin/pages')) }}" 
                         href="{{ route('admin.pages') }}">
                         <i class="nav-icon fas fa-file-alt"></i>

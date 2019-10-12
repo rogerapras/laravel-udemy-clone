@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1\Author;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\ISection;
+use App\Http\Resources\SectionResource;
 
 class AuthorSectionController extends Controller
 {
@@ -28,7 +29,7 @@ class AuthorSectionController extends Controller
     
     public function findByCourse(Request $request)
     {
-        return $this->sections->findByCourse($request->id);
+        return SectionResource::collection($this->sections->findByCourse($request->id));
     }
     
     public function updateDraggable(Request $request)

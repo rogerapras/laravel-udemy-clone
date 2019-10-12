@@ -85,4 +85,26 @@ class AuthorContentController extends Controller
         
     }
 
+    public function uploadAttachments(Request $request)
+    {
+
+        $file = $request->file('file');
+        $extension = $file->extension();
+        $original_filename = $file->getClientOriginalName();
+        $filename = time() . '_' . $original_filename;
+
+
+        if($path = $file->storeAs('attachments', $filename, 'server')){ // folder, filename, disk
+            $attachment = $this->lessons->addAttachment([
+                'lesson_id' => $request->id,
+                'file_name' => $filename,
+                'original_filename' => $original_filename,
+                'extension' => $extension
+            ]);
+            return response()->json($attachment, 200);
+        } else {
+            return response()->json(['message' => 'Unable to upload file'], 422);
+        }
+    }
+
 }
