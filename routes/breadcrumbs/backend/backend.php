@@ -47,9 +47,15 @@ Breadcrumbs::for('admin.settings', function ($trail) {
     $trail->push(__('strings.settings'), route('admin.settings'));
 });
 
-Breadcrumbs::for('admin.locales', function ($trail) {
-    $trail->push(__('strings.locale_manager'), route('admin.locales'));
+
+Breadcrumbs::for('admin.translations.index', function ($trail) {
+    $trail->push(__('strings.translations'), route('admin.translations.index'));
 });
+Breadcrumbs::for('admin.translations.edit', function ($trail, $language) {
+    $trail->parent('admin.translations.index');
+    $trail->push(__('strings.translations'), route('admin.translations.edit', $language));
+});
+
 
 Breadcrumbs::for('admin.pages', function ($trail) {
     $trail->push(__('strings.pages'), route('admin.pages'));

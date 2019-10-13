@@ -320,16 +320,11 @@ Route::group(['namespace' => 'Api\v1', 'middleware' => ['check_demo', 'XSS']], f
         Route::post('settings/upload', 'AdminSettingsController@uploadLogo');
 
 
-        // Translations
-        Route::get('languages', 'AdminLocaleController@fetchAllLanguages');
-        Route::put('languages/{id}', 'AdminLocaleController@updateLanguage');
-
-        Route::get('locales/{group}/{locale}', 'AdminLocaleController@fetchTranslations');
-        Route::get('locale/get_default/{key}', 'AdminLocaleController@getDefaultValue');
-        Route::put('locales/{id}/update', 'AdminLocaleController@updateTranslation');
-        Route::post('locales', 'AdminLocaleController@saveTranslation');
-        Route::post('locale/{group}/publish', 'AdminLocaleController@publish');
-        Route::get('locales/import', 'AdminLocaleController@import');
+        // Translations / languages
+        Route::get('languages', 'AdminTranslationController@fetchAllLanguages');
+        Route::post('languages', 'AdminTranslationController@store');
+        Route::delete('languages/{id}', 'AdminTranslationController@destroy');
+        Route::put('languages/{id}', 'AdminTranslationController@updateLanguage');
 
 
         // Site pages

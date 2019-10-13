@@ -1,17 +1,8 @@
 {
-<<<<<<< HEAD
-    "/js/backend.js": "/js/backend.js?id=e19b32bf460c04c64ce4",
-    "/js/backend.js.map": "/js/backend.js.map?id=1e4777e5e05be47af919",
-    "/js/frontend.js": "/js/frontend.js?id=412cac9e386633482b1f",
+    "/js/backend.js": "/js/backend.js?id=0b57a8aa414f075d1768",
+    "/js/backend.js.map": "/js/backend.js.map?id=228bd3325f92127cb97c",
+    "/js/frontend.js": "/js/frontend.js?id=5436e8ba4eff1e1f29ea",
     "/css/frontend.css": "/css/frontend.css?id=2e7b94233f956f597be0",
     "/css/backend.css": "/css/backend.css?id=d2960afa13ca4f10dcb8",
-    "/js/frontend.js.map": "/js/frontend.js.map?id=a1b30514c429260e2a93"
-=======
-    "/js/backend.js": "/js/backend.js?id=e96492bbf511a33a4ff6",
-    "/js/backend.js.map": "/js/backend.js.map?id=0d0627bbb3212dfaf82d",
-    "/js/frontend.js": "/js/frontend.js?id=63b6f9f2095dbb5f8c55",
-    "/css/frontend.css": "/css/frontend.css?id=2e7b94233f956f597be0",
-    "/css/backend.css": "/css/backend.css?id=d2960afa13ca4f10dcb8",
-    "/js/frontend.js.map": "/js/frontend.js.map?id=974269709e218f71228b"
->>>>>>> 63279ece1868b7ba4e1698c3a35416471557c78d
+    "/js/frontend.js.map": "/js/frontend.js.map?id=14674323012347843400"
 }

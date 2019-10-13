@@ -37,5 +37,23 @@ Vue.prototype.trans = (string, args) => {
 
 const app = new Vue({
     el: '#app',
-    store
+    store,
+
+
+    data: function () {
+        return {
+            showAdvancedOptions: false,
+        }
+    },
+
+    methods: {
+        submitTrans: function(event) {
+            event.target.form.submit();
+        },
+
+        toggleAdvancedOptions(event) {
+            event.preventDefault();
+            this.showAdvancedOptions = !this.showAdvancedOptions;
+        }
+    }
 });

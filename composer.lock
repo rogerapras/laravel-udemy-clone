@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c32e3c38c9e571458760d5674a401e40",
+    "content-hash": "cc4b5d43b13e7d38d0b929a7f6df34a6",
     "packages": [
         {
             "name": "albertcht/invisible-recaptcha",
@@ -2118,6 +2118,51 @@
                 "php crawler detect"
             ],
             "time": "2019-10-05T13:27:35+00:00"
+        },
+        {
+            "name": "joedixon/laravel-translation",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joedixon/laravel-translation.git",
+                "reference": "6b02f53ab5414f3f61ad0bd81adcfb3a896f0361"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joedixon/laravel-translation/zipball/6b02f53ab5414f3f61ad0bd81adcfb3a896f0361",
+                "reference": "6b02f53ab5414f3f61ad0bd81adcfb3a896f0361",
+                "shasum": ""
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0.0",
+                "orchestra/testbench": "^4.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "JoeDixon\\Translation\\TranslationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JoeDixon\\Translation\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joe Dixon",
+                    "email": "hello@joedixon.co.uk"
+                }
+            ],
+            "description": "A tool for managing all of your Laravel translations",
+            "time": "2019-09-09T20:18:37+00:00"
         },
         {
             "name": "lab404/laravel-impersonate",

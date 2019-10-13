@@ -25,6 +25,7 @@
         "htmlmin/htmlmin": "^6.0",
         "intervention/image": "^2.5",
         "james-heinrich/getid3": "^1.9",
+        "joedixon/laravel-translation": "^1.0",
         "lab404/laravel-impersonate": "^1.4",
         "langleyfoxall/laravel-nist-password-rules": "^4.0",
         "laravel/framework": "^6.0",

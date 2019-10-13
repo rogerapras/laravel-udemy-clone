@@ -6,7 +6,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link {{
-                    active_class(Route::is('admin/dashboard'))
+                    active_class(Request::is('admin/dashboard'))
                 }}" href="{{ route('admin.dashboard') }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     @lang('menus.backend.sidebar.dashboard')
@@ -14,7 +14,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{active_class(Route::is('admin/categories')) }}" 
+                <a class="nav-link {{active_class(Request::is('admin/categories*')) }}" 
                     href="{{ route('admin.categories') }}">
                     <i class="nav-icon fas fa-folder"></i>
                     @lang('strings.categories')
@@ -22,7 +22,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{active_class(Route::is('admin/courses*')) }}" 
+                <a class="nav-link {{active_class(Request::is('admin/courses*')) }}" 
                     href="{{ route('admin.courses.all') }}">
                     <i class="nav-icon fas fa-book"></i>
                     @lang('strings.courses')
@@ -30,7 +30,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{active_class(Route::is('admin/coupons')) }}" 
+                <a class="nav-link {{active_class(Request::is('admin/coupons*')) }}" 
                     href="{{ route('admin.coupons') }}">
                     <i class="nav-icon fas fa-tags"></i>
                     @lang('strings.discount_coupons')
@@ -41,21 +41,21 @@
                 @lang('strings.finances')
             </li>
             <li class="nav-item">
-                <a class="nav-link {{active_class(Route::is('admin/transactions')) }}" 
+                <a class="nav-link {{active_class(Request::is('admin/transactions')) }}" 
                     href="{{ route('admin.finances.transactions') }}">
                     <i class="nav-icon fas fa-money-bill-alt"></i>
                     @lang('strings.transactions')
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{active_class(Route::is('admin/payouts*')) }}" 
+                <a class="nav-link {{active_class(Request::is('admin/payouts*')) }}" 
                     href="{{ route('admin.finances.payout.periods') }}">
                     <i class="nav-icon fas fa-credit-card"></i>
                     @lang('strings.payouts')
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{active_class(Route::is('admin/refunds')) }}" 
+                <a class="nav-link {{active_class(Request::is('admin/refunds*')) }}" 
                     href="{{ route('admin.finances.refunds') }}">
                     <i class="nav-icon fas fa-money-check-alt"></i>
                     @lang('strings.refunds')
@@ -70,7 +70,7 @@
 
             @if($logged_in_user->isAdmin())
                 <li class="nav-item">
-                    <a class="nav-link {{active_class(Route::is('admin/auth*')) }}" 
+                    <a class="nav-link {{active_class(Request::is('admin/auth*')) }}" 
                         href="{{ route('admin.auth.user.index') }}">
                         <i class="nav-icon far fa-user"></i>
                         @lang('labels.backend.access.users.management')
@@ -81,7 +81,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{active_class(Route::is('admin/settings')) }}" 
+                    <a class="nav-link {{active_class(Request::is('admin/settings*')) }}" 
                         href="{{ route('admin.settings') }}">
                         <i class="nav-icon fas fa-cogs"></i>
                         @lang('strings.settings')
@@ -89,15 +89,15 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{active_class(Route::is('admin/locales')) }}" 
-                        href="{{ route('admin.locales.index') }}">
+                    <a class="nav-link {{active_class(Request::is('admin/translations*')) }}" 
+                        href="{{ route('admin.translations.index') }}">
                         <i class="nav-icon fas fa-globe"></i>
-                        @lang('strings.languages')
+                        @lang('strings.translations')
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ active_class(Route::is('admin/pages')) }}" 
+                    <a class="nav-link {{ active_class(Request::is('admin/pages*')) }}" 
                         href="{{ route('admin.pages') }}">
                         <i class="nav-icon fas fa-file-alt"></i>
                         @lang('strings.pages')
