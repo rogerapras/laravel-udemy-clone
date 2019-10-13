@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', __('strings.site_settings') . ' | ' . app_name())
+@section('title', __('strings.translations') . ' | ' . app_name())
 
 @push('after-styles')
 <link rel="stylesheet" href="/vendor/translation/css/main.css">
@@ -18,9 +18,9 @@
 
                 <div class="sm:hidden lg:flex items-center">
 
-                @include('backend.translations.forms.select', ['name' => 'group', 'items' => $groups, 'submit' => true, 'selected' => Request::get('group'), 'optional' => true])
-                
-            </div>
+                    @include('backend.translations.forms.select', ['name' => 'group', 'items' => $groups, 'submit' => true, 'selected' => Request::get('group'), 'optional' => true])
+                    
+                </div>
 
             </div>
 
