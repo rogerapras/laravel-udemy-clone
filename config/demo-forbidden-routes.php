@@ -91,10 +91,6 @@ return [
     ['method' => 'POST', 'uri' => 'api/admin/settings/mail'],
     ['method' => 'POST', 'uri' => 'api/admin/settings/upload'],
 
-    ['method' => 'PUT', 'uri' => 'api/admin/languages/{id}'],
-    ['method' => 'PUT', 'uri' => 'api/admin/locales/{id}/update'],
-    ['method' => 'POST', 'uri' => 'api/admin/locales'],
-    ['method' => 'POST', 'uri' => 'api/admin/locale/{group}/publish'],
     ['method' => 'POST', 'uri' => 'api/admin/pages'],
     ['method' => 'POST', 'uri' => 'api/admin/empty_database'],
     
@@ -117,11 +113,10 @@ return [
     ['method' => 'POST', 'uri' => 'admin/auth/role'],
     ['method' => 'PATCH', 'uri' => 'admin/auth/role/{role}'],
     ['method' => 'DELETE', 'uri' => 'admin/auth/role/{role}'],
-    ['method' => 'POST', 'uri' => 'admin/locales/edit/{group?}'],
-    ['method' => 'POST', 'uri' => 'admin/locales/import'],
-    ['method' => 'POST', 'uri' => 'admin/locales/find'],
-    ['method' => 'POST', 'uri' => 'admin/locales/publish/{group}'],
-    ['method' => 'POST', 'uri' => 'admin/locales/add/{group}'],
-    ['method' => 'POST', 'uri' => 'admin/locales/delete/{group}/{key}']
+
+    ['method' => 'PUT', 'uri' => 'api/admin/languages/{id}'],
+    ['method' => 'POST', 'uri' => 'api/admin/languages'],
+    ['method' => 'DELETE', 'uri' => 'api/admin/languages/{id}'],
+    
 
 ];

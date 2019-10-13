@@ -273,7 +273,13 @@ class InitialSettingsSeeder extends Seeder
                 'value' => '1 Some Street<br />
 Cambridge ON<br />
 J9A4SW Canada',
-            )
+            ),
+            43 => 
+            array (
+                'id' => 44,
+                'key' => 'site.site_language',
+                'value' => 'en',
+            ),
         ));
     }
 }

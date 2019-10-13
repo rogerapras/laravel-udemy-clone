@@ -72,7 +72,10 @@
             </div>
 
             <div class="form-group text-center mt-2">
-                <base-button :loading="form.busy">{{ trans('strings.save') }}</base-button>
+                <base-button :loading="form.busy">
+                    <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
+                    {{ trans('strings.save') }}
+                </base-button>
                 <button class="btn btn-danger ml-2" @click.prevent="cancel()">{{ trans('strings.cancel') }}</button>
             </div>
         </form>

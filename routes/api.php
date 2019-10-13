@@ -325,7 +325,7 @@ Route::group(['namespace' => 'Api\v1', 'middleware' => ['check_demo', 'XSS']], f
         Route::post('languages', 'AdminTranslationController@store');
         Route::delete('languages/{id}', 'AdminTranslationController@destroy');
         Route::put('languages/{id}', 'AdminTranslationController@updateLanguage');
-
+        
 
         // Site pages
         Route::get('pages', 'AdminPagesController@fetchAll');

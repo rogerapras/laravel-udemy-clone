@@ -33,6 +33,7 @@
 
             <div class="col-md-12">
                 <base-button :loading="form.busy" class="btn btn-lg rounded-0 btn-success">
+                    <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                     {{ trans('strings.save') }}
                 </base-button>
             </div>

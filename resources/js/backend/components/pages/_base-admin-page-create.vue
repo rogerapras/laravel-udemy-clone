@@ -37,6 +37,7 @@
             
             <div class="form-group text-right">
                 <base-button :loading="form.busy" class="btn rounded-0 btn-lg btn-danger font-16 fw-500">
+                    <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                     {{ trans('strings.create') }}
                 </base-button>
             </div>

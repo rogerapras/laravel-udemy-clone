@@ -53,7 +53,7 @@ Breadcrumbs::for('admin.translations.index', function ($trail) {
 });
 Breadcrumbs::for('admin.translations.edit', function ($trail, $language) {
     $trail->parent('admin.translations.index');
-    $trail->push(__('strings.translations'), route('admin.translations.edit', $language));
+    $trail->push(strToUpper($language), route('admin.translations.edit', $language));
 });
 
 

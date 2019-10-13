@@ -66,7 +66,7 @@ return [
     'override' => [
         'app.name' => 'site.site_name',
         'app.name' => 'site.site_name',
-        'app.read_only' => 'site.enable_demo_mode',
+        //'app.read_only' => 'site.enable_demo_mode',
         'app.locale' => 'site.site_language',
         'mail.driver' => 'mail.diver',
         'mail.host' => 'mail.smtp_host',

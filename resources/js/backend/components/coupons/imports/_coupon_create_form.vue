@@ -65,7 +65,7 @@
                     
                     <div class="card-footer">
                         <base-button :loading="form.busy" class="btn btn-sm btn-primary mr-3">
-                            <i class="fa fa-dot-circle-o"></i> 
+                            <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                             {{ trans('strings.create') }}
                         </base-button>
                         

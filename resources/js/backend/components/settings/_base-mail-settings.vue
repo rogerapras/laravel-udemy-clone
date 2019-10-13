@@ -197,7 +197,8 @@
             <div class="col-md-4"></div>
 
             <div class="col-md-6">
-                <base-button :loading="form.busy" class="btn btn-lg rounded-0 btn-success">
+                <base-button :loading="form.busy" class="btn btn-lg rounded-0 btn-success"> 
+                    <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                     {{ trans('strings.save') }}
                 </base-button>
             </div>

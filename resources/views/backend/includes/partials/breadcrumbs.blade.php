@@ -1,6 +1,9 @@
 @if($breadcrumbs)
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">Home</li>
+        <li class="breadcrumb-item">
+            <i class="fas fa-home"></i>
+            @lang('strings.home')
+        </li>
 
         @foreach($breadcrumbs as $breadcrumb)
             @if($breadcrumb->url && !$loop->last)

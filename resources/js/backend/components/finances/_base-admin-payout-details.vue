@@ -22,6 +22,7 @@
                             </p>
                             <base-button :loading="form.busy" class="btn btn-lg btn-danger rounded-0">
                                 <span v-if="form.busy">
+                                    <i class="fas fa-spinner fa-spin"></i>
                                     {{ trans('strings.processing') }}
                                 </span>
                                 <span v-else>

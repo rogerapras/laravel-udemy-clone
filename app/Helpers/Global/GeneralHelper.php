@@ -237,3 +237,77 @@ if(! function_exists('is_envato')){
     }
     
 }
+
+if(! function_exists('array_diff_assoc_recursive')){
+    function array_diff_assoc_recursive($array1, $array2)
+    {
+        foreach($array1 as $key => $value){
+    
+            if(is_array($value)){
+                if(!isset($array2[$key]))
+                {
+                    $difference[$key] = $value;
+                }
+                elseif(!is_array($array2[$key]))
+                {
+                    $difference[$key] = $value;
+                }
+                else
+                {
+                    $new_diff = array_diff_assoc_recursive($value, $array2[$key]);
+                    if($new_diff != FALSE)
+                    {
+                        $difference[$key] = $new_diff;
+                    }
+                }
+            }
+            elseif((!isset($array2[$key]) || $array2[$key] != $value) && !($array2[$key]===null && $value===null))
+            {
+                $difference[$key] = $value;
+            }
+        }
+        return !isset($difference) ? 0 : $difference;
+    }
+}
+
+if(! function_exists('get_language_strings'))
+{
+    function get_language_strings($lang){
+        if($lang !== 'en'){
+            // Get english strings
+            $english_files   = glob(resource_path('lang/en/*.php'));
+            $strings_en = [];
+            foreach ($english_files as $file) {
+                $name = basename($file, '.php');
+                $strings_en[$name] = require $file;
+            }
+
+            // get selected language strings
+            $files   = glob(resource_path('lang/' . $lang . '/*.php'));
+            $strings = [];
+            foreach ($files as $file) {
+                $name = basename($file, '.php');
+                $strings[$name] = require $file;
+            }
+
+            // get difference between selected and engligh
+            $diff = \Arr::dot(array_diff_assoc_recursive($strings_en, $strings));
+
+            // append difference to selected
+            foreach($diff as $key => $value){
+                data_fill($strings, $key, $value);
+            }
+
+            return $strings;
+
+        } else {
+            $files   = glob(resource_path('lang/' . $lang . '/*.php'));
+            $strings = [];
+            foreach ($files as $file) {
+                $name = basename($file, '.php');
+                $strings[$name] = require $file;
+            }
+            return $strings;
+        }
+    }
+}

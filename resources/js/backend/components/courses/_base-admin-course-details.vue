@@ -46,6 +46,7 @@
                                         </div>
                                         
                                         <base-button :loading="form.busy" class="btn btn-info pull-right" v-if="course.published == true">
+                                            <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                                             {{ trans('strings.submit') }}
                                         </base-button>
                                         <div class="alert alert-danger" v-else>

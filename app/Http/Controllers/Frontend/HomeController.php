@@ -17,10 +17,10 @@ class HomeController extends Controller
         $this->home = $home;
     }
 
+    
 
     public function index()
     {
-        
         $most_viewed = CourseResource::collection($this->home->getMostViewedCourses());
         $top_categories = $this->home->getTopCategories();
         $top_subcategories = CategoryResource::collection($this->home->getTopCategories('subcategory'));

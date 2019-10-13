@@ -69,6 +69,7 @@
                         <has-error :form="form" field="name"/>
                     </div>
                     <base-button :loading="form.busy" class="btn btn-info pull-right">
+                        <i class="fas fa-spinner fa-spin" v-if="form.busy"></i>
                         {{ trans('strings.update') }}
                     </base-button>
 
@@ -99,6 +100,7 @@
                         <has-error :form="createForm" field="name"/>
                     </div>
                     <base-button :loading="createForm.busy" class="btn btn-info pull-right">
+                        <i class="fas fa-spinner fa-spin" v-if="createForm.busy"></i>
                         {{ trans('strings.save') }}
                     </base-button>
 

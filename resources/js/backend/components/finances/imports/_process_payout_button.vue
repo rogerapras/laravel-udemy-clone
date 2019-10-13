@@ -2,6 +2,7 @@
     <form @submit.prevent="submit">
         <base-button :loading="form.busy" class="btn btn-danger btn-sm rounded-0">
             <span v-if="form.busy">
+                <i class="fas fa-spinner fa-spin"></i>
                 {{ trans('strings.processing') }}
             </span>
             <span v-else>
