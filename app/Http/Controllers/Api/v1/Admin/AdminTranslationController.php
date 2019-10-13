@@ -8,17 +8,20 @@ use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 use Illuminate\Filesystem\Filesystem;
 use JoeDixon\Translation\Drivers\Translation;
+use App\Repositories\Contracts\ILanguage;
 
 class AdminTranslationController extends Controller
 {
     
     private $disk;
     private $translation;
+    private $languages;
 
-    public function __construct(Translation $translation, FileSystem $disk)
+    public function __construct(Translation $translation, FileSystem $disk, ILanguage $languages)
     {
         $this->disk = $disk;
         $this->translation = $translation;
+        $this->languages = $languages;
     }
 
     public function fetchAllLanguages(Request $request)
@@ -74,19 +77,20 @@ class AdminTranslationController extends Controller
             'php_code' => 'required|unique:languages,php_code,'.$language->id
         ]);
         
-        if($request->is_default == true){
-            Language::where('is_default', true)->update([
-                'is_default' => false
-            ]);
-        }
         $language->update([
             'name' => $request->name,
             'php_code' => $request->php_code,
             'carbon_code' => $request->carbon_code,
-            'is_active' => $request->is_active,
-            'is_default' => $request->is_default,
-            'is_rtl' => $request->is_rtl
+            'is_rtl' => $request->is_rtl,
+            'is_active' => $request->is_active
         ]);
+
+        if($request->is_default == true){
+            $this->languages->markAsDefault($id);
+            setting(["site.site_language" => $language->carbon_code]);
+            setting()->save();
+        }
+        
         \Cache::forget('locales');
     }
 

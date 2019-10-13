@@ -38,7 +38,7 @@
         <div class="col-md-9">
             <div class="tab-content card-min-height" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                    <base-site-settings></base-site-settings>
+                    <base-site-settings :languages="{{ json_encode(active_languages()) }}"></base-site-settings>
                 </div>
 
                 <div class="tab-pane fade show" id="v-pills-video" role="tabpanel" aria-labelledby="v-pills-video-tab">

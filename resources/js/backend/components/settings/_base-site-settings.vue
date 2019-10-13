@@ -77,6 +77,19 @@
                             <has-error :form="form" field="site_currency"></has-error>
                         </div>
                     </div>
+
+                    <div class="form-group row mb-1">
+                        <label class="col-md-4 form-control-label">{{ trans('strings.default_site_language') }}</label>
+                        <div class="col-md-8 ">
+                            <select v-model="form.site_language" class="form-control" 
+                                :class="{ 'is-invalid': form.errors.has('site_language') }">
+                                <option v-for="site_language in languages" :value="site_language.carbon_code" :key="site_language.carbon_code">
+                                    {{ site_language.name }} 
+                                </option>
+                            </select>
+                            <has-error :form="form" field="site_language"></has-error>
+                        </div>
+                    </div>
                 </fieldset>
 
                 <!-- Sales -->
@@ -203,6 +216,7 @@
 import AvatarCropper from "vue-avatar-cropper"
 import Form from 'vform'
 export default {
+    props: ['languages'],
     components: {
         AvatarCropper
     },
@@ -231,6 +245,7 @@ export default {
                 video_max_size_mb: 20,
                 video_providers: 'both',
                 site_currency: 'USD',
+                site_language: 'en',
                 logo: '',
                 favicon: '',
                 homepage_image: ''

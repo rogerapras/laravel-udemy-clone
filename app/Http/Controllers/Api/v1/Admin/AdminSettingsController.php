@@ -6,15 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\ICurrency;
+use App\Repositories\Contracts\ILanguage;
+
 
 class AdminSettingsController extends Controller
 {
 
     private $currencies;
+    private $languages;
 
-    public function __construct(ICurrency $currencies)
+    public function __construct(ICurrency $currencies, ILanguage $languages)
     {
         $this->currencies = $currencies;
+        $this->languages = $languages;
     }
     
     public function fetchSettings(){
@@ -84,6 +88,15 @@ class AdminSettingsController extends Controller
                 $this->currencies->markAsPrimary($currency->id);
             }
         }
+
+        $lang = $request->site_language;
+        if($lang){
+            $language = $this->languages->findByCode($lang);
+            if(! $language->is_default){
+                $this->languages->markAsDefault($language->id);
+            }
+        }
+        
         if($request->type=='video'){
             $this->validate($request, [
                 's3_access_id' => 'required_if:video_upload_location,s3',
@@ -97,7 +110,9 @@ class AdminSettingsController extends Controller
         $data = $request->all();
 
         collect($data)->each(function ($v, $key) {
-            setting(["site.{$key}" => $v]);
+            if($key !== 'type'){
+                setting(["site.{$key}" => $v]);
+            }
         });
         setting()->save();
         return response()->json(setting()->all(), 200);

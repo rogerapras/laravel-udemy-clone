@@ -14,14 +14,15 @@
         </td>
         <td class="d-flex">
             <div class="custom-control custom-checkbox mr-3 font-14 fw-300">
-                <input :id="`is_default${language.id}`" name="is_default" :value="true" v-model="form.is_default" class="custom-control-input" type="checkbox">
+                <input :id="`is_default${language.id}`" name="is_default" :value="true" @change="update()" v-model="form.is_default" class="custom-control-input" type="checkbox">
                 <label class="custom-control-label" :for="`is_default${language.id}`">
                     {{ trans('strings.is_default') }}
                 </label>
             </div>
 
             <div class="custom-control custom-checkbox mr-3 font-14 fw-300">
-                <input :id="`is_active${language.id}`" name="is_active" :value="true" @change="update()" v-model="form.is_active" class="custom-control-input" type="checkbox">
+                <input :id="`is_active${language.id}`" name="is_active" :disabled="form.is_default==true"
+                    :value="true" @change="update()" v-model="form.is_active" class="custom-control-input" type="checkbox">
                 <label class="custom-control-label" :for="`is_active${language.id}`">
                     {{ trans('strings.is_active') }}
                 </label>

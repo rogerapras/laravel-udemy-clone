@@ -762,7 +762,8 @@ return [
     "video_format_explanation" => "mp4 / mpeg files with a size less than :size",
     "attachment_explanation" => "You can upload resources to any lesson here. Please pick a lesson and upload relevant attachments.",
     "group" => "Group",
-    "add_language" => "Add Language"
+    "add_language" => "Add Language",
+    "default_site_language" => "Default site language"
     
 
 

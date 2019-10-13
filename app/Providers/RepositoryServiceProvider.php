@@ -28,7 +28,8 @@ use App\Repositories\Eloquent\{
     AnnouncementRepository,
     CurrencyRepository,
     PageRepository,
-    HomeRepository
+    HomeRepository,
+    LanguageRepository
 };
 
 use App\Repositories\Contracts\{
@@ -55,7 +56,8 @@ use App\Repositories\Contracts\{
     IAnnouncement,
     ICurrency,
     IPage,
-    IHome
+    IHome,
+    ILanguage
 };
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -88,6 +90,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ICurrency::class, CurrencyRepository::class);
         $this->app->bind(IPage::class, PageRepository::class);
         $this->app->bind(IHome::class, HomeRepository::class);
+        $this->app->bind(ILanguage::class, LanguageRepository::class);
         
     }
 }

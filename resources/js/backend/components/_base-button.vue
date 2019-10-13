@@ -5,7 +5,6 @@
     'btn-lg': large,
     'btn-loading': loading
   }" class="btn">
-    <i class="fa fa-spinner fa-spin" v-if="loading"></i>
     <slot />
   </button>
 </template>
