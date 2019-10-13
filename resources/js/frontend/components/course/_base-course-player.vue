@@ -94,8 +94,22 @@
         <section class="bg-white py-4">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
-                        {{ playing.description }}
+                    <div class="col-md-6">
+                        <h3 class="h5">{{ trans('strings.description') }}</h3>
+                        <p>{{ playing.description }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="h5">{{ trans('strings.downloadable_resources') }}</h3>
+                        <div class="list-group d-flex justify-content-between" v-if="attachments.length > 0">
+                            <div class="list-group-item d-flex justify-content-between"
+                                v-for="attachment in attachments" :key="attachment.uuid">
+                                <span>{{ attachment.original_filename  }}</span>
+                                <a :href="attachment.download_link" target="_blank">{{ trans('strings.download') }}</a>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <p>{{ trans('strings.no_attachments') }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -107,14 +121,8 @@
 
 <script>
     import axios from 'axios'
-    // import VideoPlayer from './imports/_video_player'
     export default {
-        components: {
-            // VideoPlayer
-        },
-
-        props: ['uuid'],
-        //props:['course', 'playing', 'next', 'previous'],
+        props: ['uuid', 'attachments'],
 
         data(){
             return {

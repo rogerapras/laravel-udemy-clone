@@ -316,6 +316,10 @@ Route::group(['namespace' => 'Api\v1', 'middleware' => ['check_demo', 'XSS']], f
         Route::post('settings/mail', 'AdminSettingsController@save_mail_settings');
         Route::get('settings', 'AdminSettingsController@fetchSettings');
 
+        // Theme colors
+        Route::get('settings/theme', 'AdminSettingsController@getStyles');
+        Route::post('settings/theme', 'AdminSettingsController@saveStyles');
+
         // Logos
         Route::post('settings/upload', 'AdminSettingsController@uploadLogo');
 

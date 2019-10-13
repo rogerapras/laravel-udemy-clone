@@ -149,4 +149,21 @@ class AdminSettingsController extends Controller
         return response()->json(setting()->all(), 200);
     }
 
+
+    // Site theme colors
+    public function getStyles()
+    {
+        $styles = file_get_contents(public_path('css/theme.css'));
+        return $styles;
+    }
+    public function saveStyles(Request $request)
+    {
+        $this->validate($request, [
+            'code' => ['required']
+        ]);
+
+        $styles = file_put_contents(public_path('css/theme.css'), $request->code);
+        return $styles;
+    }
+
 }

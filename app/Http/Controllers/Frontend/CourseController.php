@@ -122,7 +122,8 @@ class CourseController extends Controller
                 'course' => new CourseResource($course),
                 'playing' => new LessonResource($data['playing']),
                 'next' => $data['next'] ? new LessonResource($data['next']) : null,
-                'previous' => $data['previous'] ? new LessonResource($data['previous']) : null
+                'previous' => $data['previous'] ? new LessonResource($data['previous']) : null,
+                'attachments' => $data['attachments']
             ]);
     }
     

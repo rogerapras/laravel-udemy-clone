@@ -132,7 +132,8 @@ class LessonRepository extends RepositoryAbstract implements ILesson
             'playing' => $playing,
             'next' => $next,
             'previous' => $previous,
-            'sections' => $sections
+            'sections' => $sections,
+            'attachments' => $playing->attachments
         ];
         return $data;
         

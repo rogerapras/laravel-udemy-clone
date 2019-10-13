@@ -11,6 +11,10 @@
                     <i class="fas fa-cogs"></i>
                     @lang('strings.site_settings')
                 </a>
+                <a class="list-group-item list-group-item-action" id="v-pills-theme-tab" data-toggle="pill" href="#v-pills-theme" role="tab" aria-controls="v-pills-theme" aria-selected="true">
+                    <i class="fas fa-palette"></i>
+                    @lang('strings.theme_editor')
+                </a>
                 <a class="list-group-item list-group-item-action" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-video" role="tab" aria-controls="v-pills-video" aria-selected="false">
                     <i class="fas fa-video"></i>
                     @lang('strings.video_settings')
@@ -41,7 +45,11 @@
                     <base-site-settings :languages="{{ json_encode(active_languages()) }}"></base-site-settings>
                 </div>
 
-                <div class="tab-pane fade show" id="v-pills-video" role="tabpanel" aria-labelledby="v-pills-video-tab">
+                <div class="tab-pane fade" id="v-pills-theme" role="tabpanel" aria-labelledby="v-pills-theme-tab">
+                    <base-site-theme></base-site-theme>
+                </div>
+
+                <div class="tab-pane fade" id="v-pills-video" role="tabpanel" aria-labelledby="v-pills-video-tab">
                     <base-video-settings></base-video-settings>
                 </div>
 

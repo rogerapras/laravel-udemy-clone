@@ -69,5 +69,6 @@ class DatabaseSeeder extends Seeder
         $this->enableForeignKeys();
         
         
+        $this->call(LanguagesTableSeeder::class);
     }
 }

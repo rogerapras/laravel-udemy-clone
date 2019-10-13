@@ -39,6 +39,7 @@
         <!-- Otherwise apply the normal LTR layouts -->
         
         {{ style(mix('css/frontend.css')) }}
+        <link media="all" type="text/css" rel="stylesheet" href="/css/theme.css">
 
         @stack('after-styles')
     </head>
@@ -98,27 +99,30 @@
                                     </ul>
                                     <div class="d-flex align-items-center ml-2 mr-2 justify-content-end">
                                         <!-- CURRENCY -->
-                                        <div class="ml-2">
+                                        <div class="ml-2 mr-2">
                                             <base-currency-switcher></base-currency-switcher>
                                         </div>
 
                                         <!-- LANGUAGE -->
                                         @if(count(active_languages()) > 1)
-                                            <div class="dropup ml-3">
-                                                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <el-dropdown>
+                                                <el-button type="plain">
                                                     <i class="fas fa-globe"></i>
-                                                    <span class="text-uppercase">{{ app()->getLocale() }}</span>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="about-us">
+                                                    <span class="text-uppercase">{{ app()->getLocale() }} </span>
+                                                    <i class="el-icon-arrow-up el-icon--right"></i>
+                                                </el-button>
+                                                <el-dropdown-menu slot="dropdown">
                                                     @foreach(active_languages() as $lang)
                                                         @if($lang->carbon_code != app()->getLocale())
-                                                            <a class="dropdown-item" href="{{ '/lang/'.$lang->carbon_code }}">
-                                                                @lang('menus.language-picker.langs.'.$lang->carbon_code)
-                                                            </a>
+                                                            <el-dropdown-item>
+                                                                <a href="{{ '/lang/'.$lang->carbon_code }}">
+                                                                    @lang('menus.language-picker.langs.'.$lang->carbon_code)
+                                                                </a>
+                                                            </el-dropdown-item>
                                                         @endif
                                                     @endforeach
-                                                </div>
-                                            </div>
+                                                </el-dropdown-menu>
+                                            </el-dropdown>
                                         @endif
                                     </div>
                                 </div>

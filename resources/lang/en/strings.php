@@ -763,8 +763,13 @@ return [
     "attachment_explanation" => "You can upload resources to any lesson here. Please pick a lesson and upload relevant attachments.",
     "group" => "Group",
     "add_language" => "Add Language",
-    "default_site_language" => "Default site language"
-    
+    "default_site_language" => "Default site language",
+    "theme_editor" => "Theme Editor",
+    "theme_editor_explanation" => "You can enter your custom css here.",
+    "downloadable_resources" => "Downloadable resources",
+    "download" => "Download"
+
+
 
 
     

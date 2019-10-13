@@ -303,7 +303,7 @@ class Installer
         Artisan::call('db:seed', ['--class' => \CurrenciesTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \RolesTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \PermissionsTableSeeder::class, '--force' => true]);
-        Artisan::call('db:seed', ['--class' => \LanguageSeeder::class, '--force' => true]);
+        Artisan::call('db:seed', ['--class' => \LanguagesTableSeeder::class, '--force' => true]);
         Artisan::call('db:seed', ['--class' => \InitialSettingsSeeder::class, '--force' => true]);
 
         //Artisan::call('db:seed', ['--class' => 'Database\Seeds\CategoriesTableSeeder', '--force' => true]);

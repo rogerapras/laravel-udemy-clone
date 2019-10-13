@@ -72,6 +72,13 @@ return [
             'url' => '/uploads/videos'
         ],
 
+        'attachments_disk' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/attachments'),
+            'visibility' => 'public',
+            'url' => '/uploads/attachments'
+        ],
+
         'installPath' => [
             'driver' => 'local',
             'root' => storage_path(),

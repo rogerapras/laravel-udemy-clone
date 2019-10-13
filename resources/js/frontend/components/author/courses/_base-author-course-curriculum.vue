@@ -23,7 +23,7 @@
 
             <div class="tab-content tc-post-grid-style1 mt-0 p-0 sec-spacer">
                 <!-- SECTIONS -->
-                <div id="course-sections" class="tab-pane in active">
+                <div id="course-sections" class="tab-pane">
                     <div class="card card-body border">
                         <div class="row">
                             
@@ -51,7 +51,7 @@
                 </div><!--/ END SECTIONS -->
 
                 <!-- LESSONS -->
-                <div id="course-lessons" class="tab-pane">
+                <div id="course-lessons" class="tab-pane in active">
                     <div class="row">
                         <div class="col-md-12">
                             <inc-lesson-section v-for="section in sections" :section="section" :key="section.id"></inc-lesson-section>

@@ -17,8 +17,16 @@ class Attachment extends Model
         'extension'
     ];
 
+    protected $appends = ['download_link'];
+
     public function lesson()
     {
         return $this->belongsTo(Lesson::class);
+    }
+
+    public function getDownloadLinkAttribute()
+    {
+        $file = \Storage::disk('attachments_disk')->url($this->file_name);
+        return $file;
     }
 }

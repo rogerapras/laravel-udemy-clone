@@ -22,6 +22,9 @@
     </section>
     
     <section>
-        <base-course-player uuid="{{ $playing->uuid }}"></base-course-player>
+        <base-course-player 
+            uuid="{{ $playing->uuid }}"
+            :attachments="{{ json_encode($attachments) }}">
+        </base-course-player>
     </section>
 @endsection

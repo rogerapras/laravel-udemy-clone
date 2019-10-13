@@ -12,7 +12,23 @@ window.webuiPopover =  require('webui-popover')
 window.moment = require('moment')
 Vue.prototype.$moment = require('moment')
 
-import { DatePicker, Button, Switch, Checkbox, Select, Option, MessageBox, Message, OptionGroup, Upload, Progress } from 'element-ui'
+import { 
+    DatePicker, 
+    Button, 
+    Switch, 
+    Checkbox, 
+    Select, 
+    Option, 
+    MessageBox, 
+    Message, 
+    OptionGroup, 
+    Upload, 
+    Progress,
+    Dropdown,
+    DropdownMenu,
+    DropdownItem,
+
+} from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
 locale.use(lang)
@@ -26,6 +42,9 @@ Vue.use(OptionGroup)
 Vue.use(Upload)
 Vue.use(Progress)
 Vue.use(Button)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
 
 
 /* ENABLE STRICT MODE */

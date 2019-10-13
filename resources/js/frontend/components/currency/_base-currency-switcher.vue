@@ -1,17 +1,19 @@
 <template>
-    <div>
-        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <el-dropdown>
+        <el-button type="plain">
             <i class="fas fa-money-bill-alt"></i>
-            <span class="text-uppercase">{{ currency }}</span>
-        </button>
-
-        <div class="dropdown-menu" aria-labelledby="about-us">
-            <a class="dropdown-item" v-for="c in selected" :key="c.code"
-                href="#" @click.prevent="switchCurrency(c.code)">
-                {{ c.name }}
-            </a>
-        </div>
-    </div>
+            <span class="text-uppercase">{{ currency }} </span>
+            <i class="el-icon-arrow-up el-icon--right"></i>
+        </el-button>
+            
+        <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item v-for="c in selected" :key="c.code">
+                <a href="javascript:void(0);" class="d-block" @click.prevent="switchCurrency(c.code)">
+                    {{ c.name }}
+                </a>
+            </el-dropdown-item>
+        </el-dropdown-menu>
+    </el-dropdown>
 </template>
 
 <script>
