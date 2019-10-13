@@ -16,8 +16,9 @@
 </template>
 
 <script>
+    import toast from '../../../toast'
     export default {
-        props: ['initialTranslation', 'language', 'group', 'translationKey', 'route'],
+        props: ['initialTranslation', 'language', 'group', 'translationKey', 'route', 'demo_mode'],
         data: function() {
             return {
                 isActive: false,
@@ -35,9 +36,14 @@
             },
             storeTranslation: function() {
                 this.isActive = false;
+                if(this.demo_mode == 1){
+                    toast.error("Editing not allowed in Demo mode");
+                    return;
+                }
                 if(!this.hasChanged) {
                     return;
                 }
+                
                 this.isLoading = true;
                 window.axios.post(`/${this.route}/${this.language}`, {
                     language: this.language,
@@ -70,7 +76,7 @@
             {
                 this.hasChanged = true;
             }
-        },
+        }
         
     }
 </script>

@@ -90,7 +90,8 @@ return [
     ['method' => 'POST', 'uri' => 'api/admin/settings/site'],
     ['method' => 'POST', 'uri' => 'api/admin/settings/mail'],
     ['method' => 'POST', 'uri' => 'api/admin/settings/upload'],
-
+    ['method' => 'POST', 'uri' => 'api/admin/settings/theme'],
+    
     ['method' => 'POST', 'uri' => 'api/admin/pages'],
     ['method' => 'POST', 'uri' => 'api/admin/empty_database'],
     
@@ -116,6 +117,7 @@ return [
 
     ['method' => 'PUT', 'uri' => 'api/admin/languages/{id}'],
     ['method' => 'POST', 'uri' => 'api/admin/languages'],
+    ['method' => 'POST', 'uri' => 'admin/languages/{language}'],
     ['method' => 'DELETE', 'uri' => 'api/admin/languages/{id}'],
     
 

@@ -767,7 +767,8 @@ return [
     "theme_editor" => "Theme Editor",
     "theme_editor_explanation" => "You can enter your custom css here.",
     "downloadable_resources" => "Downloadable resources",
-    "download" => "Download"
+    "download" => "Download",
+    "translation_explanation" => "Click on the Translation field to activate the text box. Once done, press on \"Tab\" to save your translation."
 
 
 

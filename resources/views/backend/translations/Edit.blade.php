@@ -23,15 +23,17 @@
                 </div>
 
             </div>
-
         </div>
 
-        <div class="panel-body">
+        <div class="panel-body px-4">
 
             @if(count($translations))
-
-                <table class="table table-sm">
-
+                <div class="alert alert-info font-13 my-2">
+                    <p>
+                        @lang('strings.translation_explanation')
+                    </p>
+                </div>
+                <table class="table table-sm border border-secondary">
                     <thead>
                         <tr>
                             <th class="w-1/6 uppercase">{{ __('translation::translation.group_single') }}</th>
@@ -59,7 +61,8 @@
                                                     language="{{ $language }}" 
                                                     group="{{ $group }}" 
                                                     translation-key="{{ $key }}" 
-                                                    route="{{ config('translation.ui_url') }}">
+                                                    route="{{ config('translation.ui_url') }}"
+                                                    :demo_mode="{{ (int)setting('site.enable_demo_mode') }}">
                                                 </base-translation-input>
                                             </td>
                                         </tr>
