@@ -198,12 +198,22 @@ if (! function_exists('active_languages')) {
 }
 
 if( !function_exists('get_latest_version_info')){
-    function get_latest_version_info(){
+    function get_latest_version_info()
+    {
         $currentVersion = Updater::checkLatestVersion();
         return $currentVersion;
     }
-
 }
+
+if( !function_exists('check_envato_license') )
+{
+    function check_envato_license()
+    {
+        $check = Updater::checkLicense();
+        return $check;
+    }
+}
+
 
 if(! function_exists('get_init_param_value')){
     function get_init_param_value($value)

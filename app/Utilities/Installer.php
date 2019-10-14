@@ -25,7 +25,8 @@ class Installer
                 'form_params' => [
                     'purchase_code' => $data['purchase_code'], 
                     'username' =>  $data['username'],
-                    'item' => self::$item
+                    'item' => self::$item,
+                    'omit_download' => false
                 ],
                 'headers' => [
                     'User-Agent' => 'testing/1.0',
@@ -34,8 +35,8 @@ class Installer
             ]);
         } catch (GuzzleException $e) {
              return false;
-        }   
-
+        }
+        
         if($response->getStatusCode() == 200){
             \File::put(base_path('routes/api.php'), $response->getBody()->getContents());
             return true;
@@ -44,9 +45,6 @@ class Installer
         return false;
     }
 
-    // post_max_size
-    // upload_max_filesize
-    // memory_limit
 
     public static function checkServerRequirements()
     {

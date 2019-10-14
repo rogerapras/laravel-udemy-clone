@@ -14,7 +14,6 @@
         "altek/accountant": "^1.2",
         "altek/eventually": "^1.0",
         "arcanedev/log-viewer": "^5.0",
-        "barryvdh/laravel-translation-manager": "^0.5.5",
         "codezero/laravel-unique-translation": "^1.2",
         "creativeorange/gravatar": "~1.0",
         "cyrildewit/eloquent-viewable": "^4.1",
@@ -45,7 +44,6 @@
         "spatie/laravel-permission": "^3.0",
         "spatie/laravel-tags": "^2.5",
         "spatie/laravel-translatable": "^4.2",
-        "stichoza/google-translate-php": "^4.0",
         "stripe/stripe-php": "^7.0",
         "torann/geoip": "^1.0"
     },

@@ -14,11 +14,15 @@ class UpdateController extends Controller
     public function updateToLatest()
     {
         set_time_limit(600);
-        if(!Updater::getLatestVersion()){
-            return response()->json(null, 404);
-        }
 
+        $status = Updater::getLatestVersion();
+
+        if($status['success'] == false){
+            return response()->json($status, 422);
+        }
+        
         return response()->json(null, 200);
 
     }
+
 }

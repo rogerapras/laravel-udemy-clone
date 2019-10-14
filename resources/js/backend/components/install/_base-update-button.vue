@@ -1,6 +1,8 @@
 <script>
 import Form from 'vform'
 import { mapGetters } from 'vuex'
+import toast from '../../../toast'
+
 export default {
     data(){
         return {
@@ -14,6 +16,7 @@ export default {
                 .then(response => {
                     window.location.reload();
                 }).catch(e => {
+                    toast.error("Update failed. Please try again.");
                     console.log(r.response)
                 })
         }
