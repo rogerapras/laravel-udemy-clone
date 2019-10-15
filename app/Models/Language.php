@@ -16,4 +16,20 @@ class Language extends Model
         'is_default',
         'is_active'
     ];
+
+
+    public function getIsRtlAttribute($value)
+    {
+        return (int)$value;
+    }
+    
+    public function getIsDefaultAttribute($value)
+    {
+        return (int)$value;
+    }
+    
+    public function getIsActiveAttribute($value)
+    {
+        return (int)$value;
+    }
 }
