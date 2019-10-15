@@ -1,4 +1,8 @@
 - Do not allow users to purchase the same course twice
 - Do not allow users purchase their own course 
 - Remove all json data types in migrations to support all MySQL versions
-- Add get mutators to retrieve all booleans as integers and not strings
+- Add get mutators to retrieve all booleans as integers and not strings -- Done
+- Catch error in registration email. by-pass this in case user has not set their SMTP credentials. -- Done
+- Manual Payments and refunds
+- Affiliate program
+- 

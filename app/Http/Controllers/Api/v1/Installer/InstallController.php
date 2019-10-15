@@ -147,37 +147,6 @@ class InstallController extends Controller
         });
         setting()->save();
 
-        // \Artisan::call('cache:clear');
-        // \Artisan::call('config:clear');
-        // $driver = $request->driver;
-        // if($driver == 'smtp'){
-        //     \Config::set('mail.driver', 'smtp');
-        //     \Config::set('mail.host', $request->smtp_host);
-            
-        //     config(['mail.port' => $request->smtp_port]);
-        //     config(['mail.from.address' => $request->from_address]);
-        //     config(['mail.from.name' => $request->from_name]);
-        //     config(['mail.encryption' => $request->smtp_encryption]);
-        //     config(['mail.username' => $request->smtp_username]);
-        //     config(['mail.password' => $request->smtp_password]);
-
-        // }
-        // if($driver == 'sendmail'){
-        //     \Config::set('mail.sendmail', $request->sendmail_path);
-        // }
-        //try{
-        //      \App\Models\User::find(1)->notify(new EmailSettingsTest());
-        // }catch (\Swift_TransportException $e){
-        //     return response()->json([
-        //         'driver' => 'Unable to connect with these settings.',
-        //         'details' => $e
-        //     ], 422);
-        // }catch(\Exception $e){
-        //     return response()->json([
-        //         'driver' => 'Unable to connect with these settings.',
-        //         'details' => $e->getMessages()
-        //     ], 422);
-        // }
         return response()->json(null, 200);
 
     }

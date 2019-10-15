@@ -43,7 +43,14 @@ class UserConfirmationController extends Controller
             return redirect()->back()->withFlashSuccess(__('exceptions.backend.access.users.already_confirmed'));
         }
 
-        $user->notify(new UserNeedsConfirmation($user->confirmation_code));
+        try{
+            $user->notify(new UserNeedsConfirmation($user->confirmation_code));
+        } catch(\Exception $e){
+            report($e);
+            return false;
+        }
+
+        
 
         return redirect()->back()->withFlashSuccess(__('alerts.backend.users.confirmation_email'));
     }

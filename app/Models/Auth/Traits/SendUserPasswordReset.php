@@ -16,6 +16,11 @@ trait SendUserPasswordReset
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new UserNeedsPasswordReset($token));
+        try{
+            $this->notify(new UserNeedsPasswordReset($token));
+        } catch(\Exception $e){
+            report($e);
+            return false;
+        }
     }
 }
