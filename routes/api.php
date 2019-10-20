@@ -291,7 +291,7 @@ Route::group(['namespace' => 'Api\v1', 'middleware' => ['check_demo', 'XSS']], f
         Route::get('category/{id}', 'AdminCategoryController@findById');
         Route::put('category/{id}', 'AdminCategoryController@update');
         Route::delete('category/{id}', 'AdminCategoryController@destroy');
-        Route::post('update_categories_order', 'AdminCategoryController@orderCategories');
+        Route::put('update_categories_order', 'AdminCategoryController@orderCategories');
 
         // Users
         Route::get('users', 'AdminUserController@index');

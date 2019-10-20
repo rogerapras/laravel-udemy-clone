@@ -5,4 +5,5 @@
 - Catch error in registration email. by-pass this in case user has not set their SMTP credentials. -- Done
 - Manual Payments and refunds
 - Affiliate program
-- 
+- Change route name check in frontend layout blade to \Route::currentRouteName() (line 57)
+- Category Ordering fixed. API routes file changed

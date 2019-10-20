@@ -37,13 +37,12 @@ class CategoryRepository extends RepositoryAbstract implements ICategory
     public function fetchAll()
     {
         $categories = Category::parents()
-                        ->with(['children' => function($children){
-                            $children->ordered();
-                        }])
                         ->with('children.courses')
-                        ->ordered()
+                        ->with(array('children' => function($children){
+                            $children->orderBy('sortOrder', 'asc');
+                        }))
+                        ->orderBy('sortOrder', 'asc')
                         ->get();
-        
         return $categories;
     }
     
@@ -95,32 +94,21 @@ class CategoryRepository extends RepositoryAbstract implements ICategory
 
     public function orderCategories(array $data)
     {
-        $order = 1;
-        foreach($data as $category_level_1):
-            $level1 = Category::find($category_level_1['id']);
-            if($level1->courses->count() > 0):
-                continue;
-            endif;
-                
-            if($level1['id']){
-                $level1->sortOrder = $order;
-                $level1->parent_id = NULL;
-                $level1->save();
-                $order += 1;
+        foreach($data as $category){
+            $parent = Category::find($category['id']);
+            $parent->sortOrder = $category['sortOrder'];
+            $parent->parent_id = null;
+            $parent->save();
+            if(\Arr::exists($category, 'children')){
+                foreach($category['children'] as $subcat){
+                    $child = Category::find($subcat['id']);
+                    $child->update([
+                        'sortOrder' => (int)$subcat['sortOrder'],
+                        'parent_id' => (int)$subcat['parent_id']
+                    ]);
+                }
             }
-            if(isset($category_level_1['children'])):
-                $children_level_1 = $category_level_1['children'];
-                foreach($children_level_1 as $category_level_2):
-                    $level2 = Category::find($category_level_2['id']);
-                    if($level2['id']){
-                        $level2->sortOrder = $order;
-                        $level2->parent_id = $level1['id'];
-                        $level2->save();
-                        $order += 1;
-                    }
-                endforeach;
-            endif;
-        endforeach;
+        }
 
         \Cache::forget('categories');
     }
