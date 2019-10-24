@@ -36,7 +36,8 @@ class AdminPagesController extends Controller
         $this->validate($request, [
             'body' => 'required',
             'slug' => 'required|unique:pages,slug|alpha_dash',
-            'title' => 'required|unique_translation:pages,title'
+            'title' => 'required'
+            //'title' => 'required|unique_translation:pages,title'
         ]);
         $page = $this->pages->store($request->all());
         return response()->json($page, 200);
@@ -54,7 +55,8 @@ class AdminPagesController extends Controller
 
         $this->validate($request, [
             'body' => 'required',
-            'title' => 'required|unique_translation:pages,title,'.$page->id
+            'title' => 'required'
+            //'title' => 'required|unique_translation:pages,title,'.$page->id
         ]);
         
         $page = $this->pages->update($request->all(), $uuid);

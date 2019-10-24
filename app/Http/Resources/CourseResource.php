@@ -22,15 +22,15 @@ class CourseResource extends JsonResource
             'approved' => $this->approved,
             'status_code' => $this->status_code,
             'author' => [
-                'username' => $author->username,
-                'full_name' => $author->full_name,
-                'picture' => $author->picture,
-                'tagline' => $author->tagline,
-                'bio' => $author->bio,
-                'average_review' => $author->average_review,
-                'total_reviews' => $author->total_reviews,
-                'total_courses' => $author->total_courses,
-                'total_students' => $author->total_students
+                'username' => $author ? $author->username : null,
+                'full_name' => $author ? $author->full_name : null,
+                'picture' => $author ? $author->picture : null,
+                'tagline' => $author ? $author->tagline : null,
+                'bio' => $author ? $author->bio : null,
+                'average_review' => $author ? $author->average_review : null,
+                'total_reviews' => $author ? $author->total_reviews : null,
+                'total_courses' => $author ? $author->total_courses : null,
+                'total_students' => $author ? $author->total_students : null
             ],
             'category' => [
                 'name' => $category->name,

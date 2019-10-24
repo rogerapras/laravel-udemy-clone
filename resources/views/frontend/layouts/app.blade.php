@@ -54,7 +54,7 @@
                 <div class="wrapper-inner" style="min-height: 100%;margin-bottom: -100px;">
                     @include('includes.partials.logged-in-as')
 
-                    @if(request()->route()->getName() !== 'frontend.course.play')
+                    @if(\Route::currentRouteName() !== 'frontend.course.play')
                         <section class="desktop__nav d-none d-lg-block">
                             @include('frontend.includes.nav')
                         </section>
