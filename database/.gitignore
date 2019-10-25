@@ -1,3 +1,3 @@
 *.sqlite
 *.sqlite-journal
-/database/seeds/SettingsTableSeeder.php
+seeds/SettingsTableSeeder.php
