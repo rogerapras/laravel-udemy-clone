@@ -15,9 +15,9 @@ class RedirectIfNotInstalled
      */
     public function handle($request, Closure $next)
     {
-        if(!installed()){
-            return redirect('/install');
-        }
+        // if(!installed()){
+        //     return redirect('/install');
+        // }
         return $next($request);
     }
 }

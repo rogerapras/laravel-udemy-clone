@@ -103,7 +103,9 @@ if( ! function_exists('app_version')){
 if( ! function_exists('installed')){
     function installed()
     {
-        return \Storage::disk('installPath')->exists('INSTALL/site_installed.key');
+        // removed installer entirely
+        return true;
+        //return \Storage::disk('installPath')->exists('INSTALL/site_installed.key');
     }
 
 }

@@ -15,9 +15,9 @@ class RedirectIfInstalled
      */
     public function handle($request, Closure $next)
     {
-        if(installed()){
-            return redirect('/');
-        }
+        // if(installed()){
+        //     return redirect('/');
+        // }
         return $next($request);
     }
 }

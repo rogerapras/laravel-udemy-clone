@@ -20,7 +20,7 @@ class LocaleMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(installed()){
+        // if(installed()){
             $locales = \Cache::rememberForever('locales', function(){
                 return \App\Models\Language::where('is_active', true)->get();
             });
@@ -57,7 +57,7 @@ class LocaleMiddleware
                     session()->forget('lang-rtl');
                 }
             }
-        }
+        // }
         return $next($request);
     }
 }
